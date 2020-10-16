@@ -1,0 +1,26 @@
+{
+  "name": "rumble-client",
+  "version": "1.0.0",
+  "description": "Typescript client for Rumble.",
+  "main": "rumble-client.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riberry-tech/rumble-client-js.git"
+  },
+  "keywords": [
+    "rumble",
+    "client"
+  ],
+  "author": "Riberry Tech",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/riberry-tech/rumble-client-js/issues"
+  },
+  "homepage": "https://github.com/riberry-tech/rumble-client-js#readme",
+  "devDependencies": {
+    "axios": "^0.20.0"
+  }
+}
