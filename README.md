@@ -13,6 +13,6 @@ This is the TypeScript client for accessing the Rumble RESTful API.
 2. (Optional) Test the updated file in Riberry by,
     1. updating the line in `packages.json`  to `"rumble-client": "github:riberry-tech/rumble-client-js#master"`
     2. running `npm install` and making sure the updated package work
-3. Update the badges in this `README` file
+3. Bump version in `packages.json` and update README file
 4. Tag the commit and create a new release. Take a note of the tag name.
 5. In Riberry, change the line in `packages.json`  to `"rumble-client": "github:riberry-tech/rumble-client-js#<tag-name>"`
