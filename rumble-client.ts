@@ -19216,6 +19216,287 @@ export class JobTypeClient {
     }
 }
 
+export class LabelClient {
+    private instance: AxiosInstance;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(baseUrl?: string, instance?: AxiosInstance) {
+        this.instance = instance ? instance : axios.create();
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * @param search (optional) 
+     * @param skip (optional) 
+     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
+     */
+    getAllForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfLabel> {
+        let url_ = this.baseUrl + "/v1/Label/Group/{groupId}?";
+        if (groupId === undefined || groupId === null)
+            throw new Error("The parameter 'groupId' must be defined.");
+        url_ = url_.replace("{groupId}", encodeURIComponent("" + groupId));
+        if (search !== undefined && search !== null)
+            url_ += "Search=" + encodeURIComponent("" + search) + "&";
+        if (skip === null)
+            throw new Error("The parameter 'skip' cannot be null.");
+        else if (skip !== undefined)
+            url_ += "Skip=" + encodeURIComponent("" + skip) + "&";
+        if (take === null)
+            throw new Error("The parameter 'take' cannot be null.");
+        else if (take !== undefined)
+            url_ += "Take=" + encodeURIComponent("" + take) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processGetAllForGroup(_response);
+        });
+    }
+
+    protected processGetAllForGroup(response: AxiosResponse): Promise<ListOfLabel> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ListOfLabel.fromJS(resultData200);
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ListOfLabel>(<any>null);
+    }
+
+    get(labelId: string | null , cancelToken?: CancelToken | undefined): Promise<Label> {
+        let url_ = this.baseUrl + "/v1/Label/{labelId}";
+        if (labelId === undefined || labelId === null)
+            throw new Error("The parameter 'labelId' must be defined.");
+        url_ = url_.replace("{labelId}", encodeURIComponent("" + labelId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processGet(_response);
+        });
+    }
+
+    protected processGet(response: AxiosResponse): Promise<Label> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = Label.fromJS(resultData200);
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<Label>(<any>null);
+    }
+
+    update(labelId: string | null, settings: UpdateLabelSettings , cancelToken?: CancelToken | undefined): Promise<FileResponse> {
+        let url_ = this.baseUrl + "/v1/Label/{labelId}";
+        if (labelId === undefined || labelId === null)
+            throw new Error("The parameter 'labelId' must be defined.");
+        url_ = url_.replace("{labelId}", encodeURIComponent("" + labelId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(settings);
+
+        let options_ = <AxiosRequestConfig>{
+            data: content_,
+            responseType: "blob",
+            method: "PUT",
+            url: url_,
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/octet-stream"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processUpdate(_response);
+        });
+    }
+
+    protected processUpdate(response: AxiosResponse): Promise<FileResponse> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers["content-disposition"] : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return Promise.resolve({ fileName: fileName, status: status, data: response.data as Blob, headers: _headers });
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<FileResponse>(<any>null);
+    }
+
+    delete(labelId: string | null , cancelToken?: CancelToken | undefined): Promise<FileResponse> {
+        let url_ = this.baseUrl + "/v1/Label/{labelId}";
+        if (labelId === undefined || labelId === null)
+            throw new Error("The parameter 'labelId' must be defined.");
+        url_ = url_.replace("{labelId}", encodeURIComponent("" + labelId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            responseType: "blob",
+            method: "DELETE",
+            url: url_,
+            headers: {
+                "Accept": "application/octet-stream"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processDelete(_response);
+        });
+    }
+
+    protected processDelete(response: AxiosResponse): Promise<FileResponse> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers["content-disposition"] : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return Promise.resolve({ fileName: fileName, status: status, data: response.data as Blob, headers: _headers });
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<FileResponse>(<any>null);
+    }
+
+    create(settings: CreateLabelSettings , cancelToken?: CancelToken | undefined): Promise<Label> {
+        let url_ = this.baseUrl + "/v1/Label";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(settings);
+
+        let options_ = <AxiosRequestConfig>{
+            data: content_,
+            method: "POST",
+            url: url_,
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processCreate(_response);
+        });
+    }
+
+    protected processCreate(response: AxiosResponse): Promise<Label> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = Label.fromJS(resultData200);
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<Label>(<any>null);
+    }
+}
+
 export class MemberClient {
     private instance: AxiosInstance;
     private baseUrl: string;
@@ -24636,6 +24917,8 @@ export class ScheduledEmail implements IScheduledEmail {
     externalApplicationId?: string | undefined;
     groupId?: string | undefined;
     groupName?: string | undefined;
+    organisationId?: string | undefined;
+    timeZoneId?: string | undefined;
     creatorId?: string | undefined;
     created?: Date;
     recipientIds?: string[] | undefined;
@@ -24659,6 +24942,8 @@ export class ScheduledEmail implements IScheduledEmail {
             this.externalApplicationId = _data["externalApplicationId"];
             this.groupId = _data["groupId"];
             this.groupName = _data["groupName"];
+            this.organisationId = _data["organisationId"];
+            this.timeZoneId = _data["timeZoneId"];
             this.creatorId = _data["creatorId"];
             this.created = _data["created"] ? new Date(_data["created"].toString()) : <any>undefined;
             if (Array.isArray(_data["recipientIds"])) {
@@ -24686,6 +24971,8 @@ export class ScheduledEmail implements IScheduledEmail {
         data["externalApplicationId"] = this.externalApplicationId;
         data["groupId"] = this.groupId;
         data["groupName"] = this.groupName;
+        data["organisationId"] = this.organisationId;
+        data["timeZoneId"] = this.timeZoneId;
         data["creatorId"] = this.creatorId;
         data["created"] = this.created ? this.created.toISOString() : <any>undefined;
         if (Array.isArray(this.recipientIds)) {
@@ -24706,6 +24993,8 @@ export interface IScheduledEmail {
     externalApplicationId?: string | undefined;
     groupId?: string | undefined;
     groupName?: string | undefined;
+    organisationId?: string | undefined;
+    timeZoneId?: string | undefined;
     creatorId?: string | undefined;
     created?: Date;
     recipientIds?: string[] | undefined;
@@ -38867,6 +39156,250 @@ export interface IUpdateJobTypeSettings {
     version?: number;
 }
 
+export class ListOfLabel implements IListOfLabel {
+    totalItemCount?: number;
+    items?: Label[] | undefined;
+
+    constructor(data?: IListOfLabel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.totalItemCount = _data["totalItemCount"];
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(Label.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ListOfLabel {
+        data = typeof data === 'object' ? data : {};
+        let result = new ListOfLabel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["totalItemCount"] = this.totalItemCount;
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IListOfLabel {
+    totalItemCount?: number;
+    items?: Label[] | undefined;
+}
+
+export class Label implements ILabel {
+    id?: string | undefined;
+    version?: number;
+    groupId?: string | undefined;
+    groupType?: string | undefined;
+    groupName?: string | undefined;
+    name?: string | undefined;
+    colour?: Colour;
+
+    constructor(data?: ILabel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.version = _data["version"];
+            this.groupId = _data["groupId"];
+            this.groupType = _data["groupType"];
+            this.groupName = _data["groupName"];
+            this.name = _data["name"];
+            this.colour = _data["colour"] ? Colour.fromJS(_data["colour"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): Label {
+        data = typeof data === 'object' ? data : {};
+        let result = new Label();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["version"] = this.version;
+        data["groupId"] = this.groupId;
+        data["groupType"] = this.groupType;
+        data["groupName"] = this.groupName;
+        data["name"] = this.name;
+        data["colour"] = this.colour ? this.colour.toJSON() : <any>undefined;
+        return data; 
+    }
+}
+
+export interface ILabel {
+    id?: string | undefined;
+    version?: number;
+    groupId?: string | undefined;
+    groupType?: string | undefined;
+    groupName?: string | undefined;
+    name?: string | undefined;
+    colour?: Colour;
+}
+
+export class Colour implements IColour {
+    red?: number;
+    green?: number;
+    blue?: number;
+    alpha?: number;
+
+    constructor(data?: IColour) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.red = _data["red"];
+            this.green = _data["green"];
+            this.blue = _data["blue"];
+            this.alpha = _data["alpha"];
+        }
+    }
+
+    static fromJS(data: any): Colour {
+        data = typeof data === 'object' ? data : {};
+        let result = new Colour();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["red"] = this.red;
+        data["green"] = this.green;
+        data["blue"] = this.blue;
+        data["alpha"] = this.alpha;
+        return data; 
+    }
+}
+
+export interface IColour {
+    red?: number;
+    green?: number;
+    blue?: number;
+    alpha?: number;
+}
+
+export class CreateLabelSettings implements ICreateLabelSettings {
+    groupId!: string;
+    name!: string;
+    colour?: Colour;
+
+    constructor(data?: ICreateLabelSettings) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.groupId = _data["groupId"];
+            this.name = _data["name"];
+            this.colour = _data["colour"] ? Colour.fromJS(_data["colour"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): CreateLabelSettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateLabelSettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["groupId"] = this.groupId;
+        data["name"] = this.name;
+        data["colour"] = this.colour ? this.colour.toJSON() : <any>undefined;
+        return data; 
+    }
+}
+
+export interface ICreateLabelSettings {
+    groupId: string;
+    name: string;
+    colour?: Colour;
+}
+
+export class UpdateLabelSettings implements IUpdateLabelSettings {
+    name!: string;
+    colour?: Colour;
+    version?: number;
+
+    constructor(data?: IUpdateLabelSettings) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            this.colour = _data["colour"] ? Colour.fromJS(_data["colour"]) : <any>undefined;
+            this.version = _data["version"];
+        }
+    }
+
+    static fromJS(data: any): UpdateLabelSettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new UpdateLabelSettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["colour"] = this.colour ? this.colour.toJSON() : <any>undefined;
+        data["version"] = this.version;
+        return data; 
+    }
+}
+
+export interface IUpdateLabelSettings {
+    name: string;
+    colour?: Colour;
+    version?: number;
+}
+
 export class ListOfMember implements IListOfMember {
     totalItemCount?: number;
     items?: Member[] | undefined;
@@ -38940,6 +39473,7 @@ export class Member implements IMember {
     created?: Date;
     modified?: Date;
     joined?: Date;
+    labelIds?: string[] | undefined;
 
     constructor(data?: IMember) {
         if (data) {
@@ -38988,6 +39522,11 @@ export class Member implements IMember {
             this.created = _data["created"] ? new Date(_data["created"].toString()) : <any>undefined;
             this.modified = _data["modified"] ? new Date(_data["modified"].toString()) : <any>undefined;
             this.joined = _data["joined"] ? new Date(_data["joined"].toString()) : <any>undefined;
+            if (Array.isArray(_data["labelIds"])) {
+                this.labelIds = [] as any;
+                for (let item of _data["labelIds"])
+                    this.labelIds!.push(item);
+            }
         }
     }
 
@@ -39036,6 +39575,11 @@ export class Member implements IMember {
         data["created"] = this.created ? this.created.toISOString() : <any>undefined;
         data["modified"] = this.modified ? this.modified.toISOString() : <any>undefined;
         data["joined"] = this.joined ? this.joined.toISOString() : <any>undefined;
+        if (Array.isArray(this.labelIds)) {
+            data["labelIds"] = [];
+            for (let item of this.labelIds)
+                data["labelIds"].push(item);
+        }
         return data; 
     }
 }
@@ -39065,6 +39609,7 @@ export interface IMember {
     created?: Date;
     modified?: Date;
     joined?: Date;
+    labelIds?: string[] | undefined;
 }
 
 export class MemberHistory implements IMemberHistory {
@@ -39182,6 +39727,7 @@ export interface IAddGroupMemberSettings {
 export class UpdateGroupMemberSettings implements IUpdateGroupMemberSettings {
     displayId?: string | undefined;
     additionalRoles?: string[] | undefined;
+    labelIds?: string[] | undefined;
 
     constructor(data?: IUpdateGroupMemberSettings) {
         if (data) {
@@ -39199,6 +39745,11 @@ export class UpdateGroupMemberSettings implements IUpdateGroupMemberSettings {
                 this.additionalRoles = [] as any;
                 for (let item of _data["additionalRoles"])
                     this.additionalRoles!.push(item);
+            }
+            if (Array.isArray(_data["labelIds"])) {
+                this.labelIds = [] as any;
+                for (let item of _data["labelIds"])
+                    this.labelIds!.push(item);
             }
         }
     }
@@ -39218,6 +39769,11 @@ export class UpdateGroupMemberSettings implements IUpdateGroupMemberSettings {
             for (let item of this.additionalRoles)
                 data["additionalRoles"].push(item);
         }
+        if (Array.isArray(this.labelIds)) {
+            data["labelIds"] = [];
+            for (let item of this.labelIds)
+                data["labelIds"].push(item);
+        }
         return data; 
     }
 }
@@ -39225,6 +39781,7 @@ export class UpdateGroupMemberSettings implements IUpdateGroupMemberSettings {
 export interface IUpdateGroupMemberSettings {
     displayId?: string | undefined;
     additionalRoles?: string[] | undefined;
+    labelIds?: string[] | undefined;
 }
 
 export class ListOfOrganisationAccessToken implements IListOfOrganisationAccessToken {
@@ -39570,54 +40127,6 @@ export interface IOrganisation {
     registrationWhitelist?: string[] | undefined;
     publishingApproved?: boolean;
     shifts?: Shift[] | undefined;
-}
-
-export class Colour implements IColour {
-    red?: number;
-    green?: number;
-    blue?: number;
-    alpha?: number;
-
-    constructor(data?: IColour) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.red = _data["red"];
-            this.green = _data["green"];
-            this.blue = _data["blue"];
-            this.alpha = _data["alpha"];
-        }
-    }
-
-    static fromJS(data: any): Colour {
-        data = typeof data === 'object' ? data : {};
-        let result = new Colour();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["red"] = this.red;
-        data["green"] = this.green;
-        data["blue"] = this.blue;
-        data["alpha"] = this.alpha;
-        return data; 
-    }
-}
-
-export interface IColour {
-    red?: number;
-    green?: number;
-    blue?: number;
-    alpha?: number;
 }
 
 export class Shift implements IShift {
