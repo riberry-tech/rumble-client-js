@@ -27817,6 +27817,7 @@ export class SurveyQuestionTypes implements ISurveyQuestionTypes {
     binaryQuestion?: BinaryQuestion | undefined;
     timeOfDayQuestion?: TimeOfDayQuestion | undefined;
     emailQuestion?: EmailQuestion | undefined;
+    labelQuestion?: LabelQuestion | undefined;
 
     constructor(data?: ISurveyQuestionTypes) {
         if (data) {
@@ -27844,6 +27845,7 @@ export class SurveyQuestionTypes implements ISurveyQuestionTypes {
             this.binaryQuestion = _data["binaryQuestion"] ? BinaryQuestion.fromJS(_data["binaryQuestion"]) : <any>undefined;
             this.timeOfDayQuestion = _data["timeOfDayQuestion"] ? TimeOfDayQuestion.fromJS(_data["timeOfDayQuestion"]) : <any>undefined;
             this.emailQuestion = _data["emailQuestion"] ? EmailQuestion.fromJS(_data["emailQuestion"]) : <any>undefined;
+            this.labelQuestion = _data["labelQuestion"] ? LabelQuestion.fromJS(_data["labelQuestion"]) : <any>undefined;
         }
     }
 
@@ -27871,6 +27873,7 @@ export class SurveyQuestionTypes implements ISurveyQuestionTypes {
         data["binaryQuestion"] = this.binaryQuestion ? this.binaryQuestion.toJSON() : <any>undefined;
         data["timeOfDayQuestion"] = this.timeOfDayQuestion ? this.timeOfDayQuestion.toJSON() : <any>undefined;
         data["emailQuestion"] = this.emailQuestion ? this.emailQuestion.toJSON() : <any>undefined;
+        data["labelQuestion"] = this.labelQuestion ? this.labelQuestion.toJSON() : <any>undefined;
         return data; 
     }
 }
@@ -27891,6 +27894,7 @@ export interface ISurveyQuestionTypes {
     binaryQuestion?: BinaryQuestion | undefined;
     timeOfDayQuestion?: TimeOfDayQuestion | undefined;
     emailQuestion?: EmailQuestion | undefined;
+    labelQuestion?: LabelQuestion | undefined;
 }
 
 export abstract class QuestionBase implements IQuestionBase {
@@ -28599,6 +28603,43 @@ export enum DomainConstraintType {
     White = 1,
 }
 
+export class LabelQuestion extends QuestionBase implements ILabelQuestion {
+    minimumResponses?: number | undefined;
+    maximumResponses?: number | undefined;
+
+    constructor(data?: ILabelQuestion) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.minimumResponses = _data["minimumResponses"];
+            this.maximumResponses = _data["maximumResponses"];
+        }
+    }
+
+    static fromJS(data: any): LabelQuestion {
+        data = typeof data === 'object' ? data : {};
+        let result = new LabelQuestion();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["minimumResponses"] = this.minimumResponses;
+        data["maximumResponses"] = this.maximumResponses;
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface ILabelQuestion extends IQuestionBase {
+    minimumResponses?: number | undefined;
+    maximumResponses?: number | undefined;
+}
+
 export class SurveyAnswerTypes implements ISurveyAnswerTypes {
     listAnswer?: ListAnswer | undefined;
     compositeAnswer?: CompositeAnswer | undefined;
@@ -28615,6 +28656,7 @@ export class SurveyAnswerTypes implements ISurveyAnswerTypes {
     binaryAnswer?: BinaryAnswer | undefined;
     timeOfDayAnswer?: TimeOfDayAnswer | undefined;
     emailAnswer?: EmailAnswer | undefined;
+    labelAnswer?: LabelAnswer | undefined;
 
     constructor(data?: ISurveyAnswerTypes) {
         if (data) {
@@ -28642,6 +28684,7 @@ export class SurveyAnswerTypes implements ISurveyAnswerTypes {
             this.binaryAnswer = _data["binaryAnswer"] ? BinaryAnswer.fromJS(_data["binaryAnswer"]) : <any>undefined;
             this.timeOfDayAnswer = _data["timeOfDayAnswer"] ? TimeOfDayAnswer.fromJS(_data["timeOfDayAnswer"]) : <any>undefined;
             this.emailAnswer = _data["emailAnswer"] ? EmailAnswer.fromJS(_data["emailAnswer"]) : <any>undefined;
+            this.labelAnswer = _data["labelAnswer"] ? LabelAnswer.fromJS(_data["labelAnswer"]) : <any>undefined;
         }
     }
 
@@ -28669,6 +28712,7 @@ export class SurveyAnswerTypes implements ISurveyAnswerTypes {
         data["binaryAnswer"] = this.binaryAnswer ? this.binaryAnswer.toJSON() : <any>undefined;
         data["timeOfDayAnswer"] = this.timeOfDayAnswer ? this.timeOfDayAnswer.toJSON() : <any>undefined;
         data["emailAnswer"] = this.emailAnswer ? this.emailAnswer.toJSON() : <any>undefined;
+        data["labelAnswer"] = this.labelAnswer ? this.labelAnswer.toJSON() : <any>undefined;
         return data; 
     }
 }
@@ -28689,6 +28733,7 @@ export interface ISurveyAnswerTypes {
     binaryAnswer?: BinaryAnswer | undefined;
     timeOfDayAnswer?: TimeOfDayAnswer | undefined;
     emailAnswer?: EmailAnswer | undefined;
+    labelAnswer?: LabelAnswer | undefined;
 }
 
 export abstract class AnswerBase implements IAnswerBase {
@@ -29256,6 +29301,47 @@ export class EmailAnswer extends AnswerBase implements IEmailAnswer {
 
 export interface IEmailAnswer extends IAnswerBase {
     value?: string | undefined;
+}
+
+export class LabelAnswer extends AnswerBase implements ILabelAnswer {
+    answers?: string[] | undefined;
+
+    constructor(data?: ILabelAnswer) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            if (Array.isArray(_data["answers"])) {
+                this.answers = [] as any;
+                for (let item of _data["answers"])
+                    this.answers!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): LabelAnswer {
+        data = typeof data === 'object' ? data : {};
+        let result = new LabelAnswer();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.answers)) {
+            data["answers"] = [];
+            for (let item of this.answers)
+                data["answers"].push(item);
+        }
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface ILabelAnswer extends IAnswerBase {
+    answers?: string[] | undefined;
 }
 
 export class SurveySettings implements ISurveySettings {
