@@ -226,78 +226,6 @@ export class EmailClient {
     }
 }
 
-export class EmailSubscriptionClient {
-    private instance: AxiosInstance;
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(baseUrl?: string, instance?: AxiosInstance) {
-        this.instance = instance ? instance : axios.create();
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
-    }
-
-    unsubscribe(token: string | null , cancelToken?: CancelToken | undefined): Promise<void> {
-        let url_ = this.baseUrl + "/v1/EmailSubscription/Unsubscribe/{token}";
-        if (token === undefined || token === null)
-            throw new Error("The parameter 'token' must be defined.");
-        url_ = url_.replace("{token}", encodeURIComponent("" + token));
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ = <AxiosRequestConfig>{
-            method: "GET",
-            url: url_,
-            headers: {
-            },
-            cancelToken
-        };
-
-        return this.instance.request(options_).catch((_error: any) => {
-            if (isAxiosError(_error) && _error.response) {
-                return _error.response;
-            } else {
-                throw _error;
-            }
-        }).then((_response: AxiosResponse) => {
-            return this.processUnsubscribe(_response);
-        });
-    }
-
-    protected processUnsubscribe(response: AxiosResponse): Promise<void> {
-        const status = response.status;
-        let _headers: any = {};
-        if (response.headers && typeof response.headers === "object") {
-            for (let k in response.headers) {
-                if (response.headers.hasOwnProperty(k)) {
-                    _headers[k] = response.headers[k];
-                }
-            }
-        }
-        if (status === 204) {
-            const _responseText = response.data;
-            return Promise.resolve<void>(<any>null);
-        } else if (status === 401) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-        } else if (status === 403) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-        } else if (status === 404) {
-            const _responseText = response.data;
-            return throwException("This resource could not be found.", status, _responseText, _headers);
-        } else if (status === 503) {
-            const _responseText = response.data;
-            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
-        } else if (status === 504) {
-            const _responseText = response.data;
-            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
-        } else if (status !== 200 && status !== 204) {
-            const _responseText = response.data;
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-        }
-        return Promise.resolve<void>(<any>null);
-    }
-}
-
 export class GroupAttendanceClient {
     private instance: AxiosInstance;
     private baseUrl: string;
@@ -23339,6 +23267,134 @@ export class CommunicationPreferencesClient {
         }
         return Promise.resolve<void>(<any>null);
     }
+
+    unsubscribe(token: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<UnsubscribeToken> {
+        let url_ = this.baseUrl + "/v1/CommunicationPreferences/Unsubscribe?";
+        if (token !== undefined && token !== null)
+            url_ += "token=" + encodeURIComponent("" + token) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processUnsubscribe(_response);
+        });
+    }
+
+    protected processUnsubscribe(response: AxiosResponse): Promise<UnsubscribeToken> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = UnsubscribeToken.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<UnsubscribeToken>(<any>null);
+    }
+
+    unsubscribe2(token: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<UnsubscribeToken> {
+        let url_ = this.baseUrl + "/v1/CommunicationPreferences/Unsubscribe?";
+        if (token !== undefined && token !== null)
+            url_ += "token=" + encodeURIComponent("" + token) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "POST",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processUnsubscribe2(_response);
+        });
+    }
+
+    protected processUnsubscribe2(response: AxiosResponse): Promise<UnsubscribeToken> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = UnsubscribeToken.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<UnsubscribeToken>(<any>null);
+    }
 }
 
 export class EmailRegistrationClient {
@@ -45255,6 +45311,46 @@ export class UpdateCommunicationPreferencesSettings implements IUpdateCommunicat
 export interface IUpdateCommunicationPreferencesSettings {
     emails?: EmailPreference2[] | undefined;
     version?: number;
+}
+
+export class UnsubscribeToken implements IUnsubscribeToken {
+    userId?: string | undefined;
+    emailType?: string | undefined;
+
+    constructor(data?: IUnsubscribeToken) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.userId = _data["userId"];
+            this.emailType = _data["emailType"];
+        }
+    }
+
+    static fromJS(data: any): UnsubscribeToken {
+        data = typeof data === 'object' ? data : {};
+        let result = new UnsubscribeToken();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["userId"] = this.userId;
+        data["emailType"] = this.emailType;
+        return data; 
+    }
+}
+
+export interface IUnsubscribeToken {
+    userId?: string | undefined;
+    emailType?: string | undefined;
 }
 
 export class EmailSettings implements IEmailSettings {
