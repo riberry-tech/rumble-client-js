@@ -8778,6 +8778,181 @@ export class ProgramClient {
         return Promise.resolve<ListOfProgram>(<any>null);
     }
 
+    /**
+     * @param search (optional) 
+     * @param skip (optional) 
+     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
+     * @param publisherId (optional) 
+     * @param programId (optional) 
+     * @param countryCode (optional) 
+     */
+    getAllPublished(search: string | null | undefined, skip: number | undefined, take: number | undefined, publisherId: string | null | undefined, programId: string | null | undefined, countryCode: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfProgram> {
+        let url_ = this.baseUrl + "/v1/Program/Published?";
+        if (search !== undefined && search !== null)
+            url_ += "Search=" + encodeURIComponent("" + search) + "&";
+        if (skip === null)
+            throw new Error("The parameter 'skip' cannot be null.");
+        else if (skip !== undefined)
+            url_ += "Skip=" + encodeURIComponent("" + skip) + "&";
+        if (take === null)
+            throw new Error("The parameter 'take' cannot be null.");
+        else if (take !== undefined)
+            url_ += "Take=" + encodeURIComponent("" + take) + "&";
+        if (publisherId !== undefined && publisherId !== null)
+            url_ += "publisherId=" + encodeURIComponent("" + publisherId) + "&";
+        if (programId !== undefined && programId !== null)
+            url_ += "programId=" + encodeURIComponent("" + programId) + "&";
+        if (countryCode !== undefined && countryCode !== null)
+            url_ += "countryCode=" + encodeURIComponent("" + countryCode) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processGetAllPublished(_response);
+        });
+    }
+
+    protected processGetAllPublished(response: AxiosResponse): Promise<ListOfProgram> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ListOfProgram.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ListOfProgram>(<any>null);
+    }
+
+    /**
+     * @param search (optional) 
+     * @param skip (optional) 
+     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
+     * @param consumerId (optional) 
+     * @param publisherId (optional) 
+     * @param itemId (optional) 
+     * @param activated (optional) 
+     */
+    getAllByActivation(search: string | null | undefined, skip: number | undefined, take: number | undefined, consumerId: string | null | undefined, publisherId: string | null | undefined, itemId: string | null | undefined, activated: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfProgram> {
+        let url_ = this.baseUrl + "/v1/Program?";
+        if (search !== undefined && search !== null)
+            url_ += "Search=" + encodeURIComponent("" + search) + "&";
+        if (skip === null)
+            throw new Error("The parameter 'skip' cannot be null.");
+        else if (skip !== undefined)
+            url_ += "Skip=" + encodeURIComponent("" + skip) + "&";
+        if (take === null)
+            throw new Error("The parameter 'take' cannot be null.");
+        else if (take !== undefined)
+            url_ += "Take=" + encodeURIComponent("" + take) + "&";
+        if (consumerId !== undefined && consumerId !== null)
+            url_ += "consumerId=" + encodeURIComponent("" + consumerId) + "&";
+        if (publisherId !== undefined && publisherId !== null)
+            url_ += "publisherId=" + encodeURIComponent("" + publisherId) + "&";
+        if (itemId !== undefined && itemId !== null)
+            url_ += "itemId=" + encodeURIComponent("" + itemId) + "&";
+        if (activated !== undefined && activated !== null)
+            url_ += "activated=" + encodeURIComponent("" + activated) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processGetAllByActivation(_response);
+        });
+    }
+
+    protected processGetAllByActivation(response: AxiosResponse): Promise<ListOfProgram> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ListOfProgram.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ListOfProgram>(<any>null);
+    }
+
     create(settings: CreateProgramSettings , cancelToken?: CancelToken | undefined): Promise<Program> {
         let url_ = this.baseUrl + "/v1/Program";
         url_ = url_.replace(/[?&]$/, "");
@@ -8844,38 +9019,11 @@ export class ProgramClient {
         return Promise.resolve<Program>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param consumerId (optional) 
-     * @param publisherId (optional) 
-     * @param programId (optional) 
-     * @param itemId (optional) 
-     * @param activated (optional) 
-     */
-    getAllByActivation(search: string | null | undefined, skip: number | undefined, take: number | undefined, consumerId: string | null | undefined, publisherId: string | null | undefined, programId: string | null | undefined, itemId: string | null | undefined, activated: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfProgram> {
-        let url_ = this.baseUrl + "/v1/Program?";
-        if (search !== undefined && search !== null)
-            url_ += "Search=" + encodeURIComponent("" + search) + "&";
-        if (skip === null)
-            throw new Error("The parameter 'skip' cannot be null.");
-        else if (skip !== undefined)
-            url_ += "Skip=" + encodeURIComponent("" + skip) + "&";
-        if (take === null)
-            throw new Error("The parameter 'take' cannot be null.");
-        else if (take !== undefined)
-            url_ += "Take=" + encodeURIComponent("" + take) + "&";
-        if (consumerId !== undefined && consumerId !== null)
-            url_ += "consumerId=" + encodeURIComponent("" + consumerId) + "&";
-        if (publisherId !== undefined && publisherId !== null)
-            url_ += "publisherId=" + encodeURIComponent("" + publisherId) + "&";
-        if (programId !== undefined && programId !== null)
-            url_ += "programId=" + encodeURIComponent("" + programId) + "&";
-        if (itemId !== undefined && itemId !== null)
-            url_ += "itemId=" + encodeURIComponent("" + itemId) + "&";
-        if (activated !== undefined && activated !== null)
-            url_ += "activated=" + encodeURIComponent("" + activated) + "&";
+    get(id: string | null , cancelToken?: CancelToken | undefined): Promise<Program> {
+        let url_ = this.baseUrl + "/v1/Program/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <AxiosRequestConfig>{
@@ -8894,11 +9042,11 @@ export class ProgramClient {
                 throw _error;
             }
         }).then((_response: AxiosResponse) => {
-            return this.processGetAllByActivation(_response);
+            return this.processGet(_response);
         });
     }
 
-    protected processGetAllByActivation(response: AxiosResponse): Promise<ListOfProgram> {
+    protected processGet(response: AxiosResponse): Promise<Program> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -8912,7 +9060,7 @@ export class ProgramClient {
             const _responseText = response.data;
             let result200: any = null;
             let resultData200  = _responseText;
-            result200 = ListOfProgram.fromJS(resultData200);
+            result200 = Program.fromJS(resultData200);
             return result200;
         } else if (status === 401) {
             const _responseText = response.data;
@@ -8933,7 +9081,7 @@ export class ProgramClient {
             const _responseText = response.data;
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         }
-        return Promise.resolve<ListOfProgram>(<any>null);
+        return Promise.resolve<Program>(<any>null);
     }
 
     update(programId: string | null, settings: UpdateProgramSettings , cancelToken?: CancelToken | undefined): Promise<void> {
@@ -9060,157 +9208,6 @@ export class ProgramClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         }
         return Promise.resolve<void>(<any>null);
-    }
-
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param publisherId (optional) 
-     * @param programId (optional) 
-     * @param countryCode (optional) 
-     */
-    getAllPublished(search: string | null | undefined, skip: number | undefined, take: number | undefined, publisherId: string | null | undefined, programId: string | null | undefined, countryCode: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfProgram> {
-        let url_ = this.baseUrl + "/v1/Program/Published?";
-        if (search !== undefined && search !== null)
-            url_ += "Search=" + encodeURIComponent("" + search) + "&";
-        if (skip === null)
-            throw new Error("The parameter 'skip' cannot be null.");
-        else if (skip !== undefined)
-            url_ += "Skip=" + encodeURIComponent("" + skip) + "&";
-        if (take === null)
-            throw new Error("The parameter 'take' cannot be null.");
-        else if (take !== undefined)
-            url_ += "Take=" + encodeURIComponent("" + take) + "&";
-        if (publisherId !== undefined && publisherId !== null)
-            url_ += "publisherId=" + encodeURIComponent("" + publisherId) + "&";
-        if (programId !== undefined && programId !== null)
-            url_ += "programId=" + encodeURIComponent("" + programId) + "&";
-        if (countryCode !== undefined && countryCode !== null)
-            url_ += "countryCode=" + encodeURIComponent("" + countryCode) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ = <AxiosRequestConfig>{
-            method: "GET",
-            url: url_,
-            headers: {
-                "Accept": "application/json"
-            },
-            cancelToken
-        };
-
-        return this.instance.request(options_).catch((_error: any) => {
-            if (isAxiosError(_error) && _error.response) {
-                return _error.response;
-            } else {
-                throw _error;
-            }
-        }).then((_response: AxiosResponse) => {
-            return this.processGetAllPublished(_response);
-        });
-    }
-
-    protected processGetAllPublished(response: AxiosResponse): Promise<ListOfProgram> {
-        const status = response.status;
-        let _headers: any = {};
-        if (response.headers && typeof response.headers === "object") {
-            for (let k in response.headers) {
-                if (response.headers.hasOwnProperty(k)) {
-                    _headers[k] = response.headers[k];
-                }
-            }
-        }
-        if (status === 200) {
-            const _responseText = response.data;
-            let result200: any = null;
-            let resultData200  = _responseText;
-            result200 = ListOfProgram.fromJS(resultData200);
-            return result200;
-        } else if (status === 401) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-        } else if (status === 403) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-        } else if (status === 404) {
-            const _responseText = response.data;
-            return throwException("This resource could not be found.", status, _responseText, _headers);
-        } else if (status === 503) {
-            const _responseText = response.data;
-            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
-        } else if (status === 504) {
-            const _responseText = response.data;
-            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
-        } else if (status !== 200 && status !== 204) {
-            const _responseText = response.data;
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-        }
-        return Promise.resolve<ListOfProgram>(<any>null);
-    }
-
-    get(id: string | null , cancelToken?: CancelToken | undefined): Promise<Program> {
-        let url_ = this.baseUrl + "/v1/Program/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ = <AxiosRequestConfig>{
-            method: "GET",
-            url: url_,
-            headers: {
-                "Accept": "application/json"
-            },
-            cancelToken
-        };
-
-        return this.instance.request(options_).catch((_error: any) => {
-            if (isAxiosError(_error) && _error.response) {
-                return _error.response;
-            } else {
-                throw _error;
-            }
-        }).then((_response: AxiosResponse) => {
-            return this.processGet(_response);
-        });
-    }
-
-    protected processGet(response: AxiosResponse): Promise<Program> {
-        const status = response.status;
-        let _headers: any = {};
-        if (response.headers && typeof response.headers === "object") {
-            for (let k in response.headers) {
-                if (response.headers.hasOwnProperty(k)) {
-                    _headers[k] = response.headers[k];
-                }
-            }
-        }
-        if (status === 200) {
-            const _responseText = response.data;
-            let result200: any = null;
-            let resultData200  = _responseText;
-            result200 = Program.fromJS(resultData200);
-            return result200;
-        } else if (status === 401) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-        } else if (status === 403) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-        } else if (status === 404) {
-            const _responseText = response.data;
-            return throwException("This resource could not be found.", status, _responseText, _headers);
-        } else if (status === 503) {
-            const _responseText = response.data;
-            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
-        } else if (status === 504) {
-            const _responseText = response.data;
-            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
-        } else if (status !== 200 && status !== 204) {
-            const _responseText = response.data;
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-        }
-        return Promise.resolve<Program>(<any>null);
     }
 }
 
