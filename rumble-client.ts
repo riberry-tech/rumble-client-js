@@ -4701,7 +4701,9 @@ export class ObservationDefinitionClient {
      * @param search (optional) 
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param programId (optional) 
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
      */
     getAllForPublisher(publisherId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, programId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfObservationDefinition> {
         let url_ = this.baseUrl + "/v1/ObservationDefinition/Publisher/{publisherId}?";
@@ -4852,7 +4854,9 @@ export class ObservationDefinitionClient {
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param consumerId (optional) 
      * @param publisherId (optional) 
-     * @param programId (optional) 
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
      * @param itemId (optional) 
      * @param activated (optional) 
      */
@@ -5069,7 +5073,9 @@ export class ObservationDefinitionClient {
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param publisherId (optional) 
-     * @param programId (optional) 
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
      * @param countryCode (optional) 
      */
     getAllPublished(search: string | null | undefined, skip: number | undefined, take: number | undefined, publisherId: string | null | undefined, programId: string | null | undefined, countryCode: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfObservationDefinition> {
@@ -8318,7 +8324,9 @@ export class ItemActivationClient {
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param itemType (optional) 
-     * @param programId (optional) 
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
      * @param consumerId (optional) 
      */
     getAllForPublisher(publisherId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, itemType: string | null | undefined, programId: string | null | undefined, consumerId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfItemActivation> {
@@ -8406,15 +8414,16 @@ export class ItemActivationClient {
      * @param search (optional) 
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
+     * @param consumerId (optional) 
      * @param itemType (optional) 
-     * @param programId (optional) 
+     * @param itemId (optional) 
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
      * @param publisherId (optional) 
      */
-    getAllForConsumer(consumerId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, itemType: string | null | undefined, programId: string | null | undefined, publisherId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfItemActivation> {
-        let url_ = this.baseUrl + "/v1/ItemActivation/Consumer/{consumerId}?";
-        if (consumerId === undefined || consumerId === null)
-            throw new Error("The parameter 'consumerId' must be defined.");
-        url_ = url_.replace("{consumerId}", encodeURIComponent("" + consumerId));
+    getAllByActivation(search: string | null | undefined, skip: number | undefined, take: number | undefined, consumerId: string | null | undefined, itemType: string | null | undefined, itemId: string | null | undefined, programId: string | null | undefined, publisherId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfItemActivation> {
+        let url_ = this.baseUrl + "/v1/ItemActivation?";
         if (search !== undefined && search !== null)
             url_ += "Search=" + encodeURIComponent("" + search) + "&";
         if (skip === null)
@@ -8425,8 +8434,12 @@ export class ItemActivationClient {
             throw new Error("The parameter 'take' cannot be null.");
         else if (take !== undefined)
             url_ += "Take=" + encodeURIComponent("" + take) + "&";
+        if (consumerId !== undefined && consumerId !== null)
+            url_ += "consumerId=" + encodeURIComponent("" + consumerId) + "&";
         if (itemType !== undefined && itemType !== null)
             url_ += "itemType=" + encodeURIComponent("" + itemType) + "&";
+        if (itemId !== undefined && itemId !== null)
+            url_ += "itemId=" + encodeURIComponent("" + itemId) + "&";
         if (programId !== undefined && programId !== null)
             url_ += "programId=" + encodeURIComponent("" + programId) + "&";
         if (publisherId !== undefined && publisherId !== null)
@@ -8449,11 +8462,11 @@ export class ItemActivationClient {
                 throw _error;
             }
         }).then((_response: AxiosResponse) => {
-            return this.processGetAllForConsumer(_response);
+            return this.processGetAllByActivation(_response);
         });
     }
 
-    protected processGetAllForConsumer(response: AxiosResponse): Promise<ListOfItemActivation> {
+    protected processGetAllByActivation(response: AxiosResponse): Promise<ListOfItemActivation> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -8489,6 +8502,72 @@ export class ItemActivationClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         }
         return Promise.resolve<ListOfItemActivation>(<any>null);
+    }
+
+    create(consumerId: string | null | undefined, itemId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ItemActivation> {
+        let url_ = this.baseUrl + "/v1/ItemActivation?";
+        if (consumerId !== undefined && consumerId !== null)
+            url_ += "consumerId=" + encodeURIComponent("" + consumerId) + "&";
+        if (itemId !== undefined && itemId !== null)
+            url_ += "itemId=" + encodeURIComponent("" + itemId) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "POST",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processCreate(_response);
+        });
+    }
+
+    protected processCreate(response: AxiosResponse): Promise<ItemActivation> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ItemActivation.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ItemActivation>(<any>null);
     }
 
     get(itemActivationId: string | null , cancelToken?: CancelToken | undefined): Promise<ItemActivation> {
@@ -8620,72 +8699,6 @@ export class ItemActivationClient {
         }
         return Promise.resolve<void>(<any>null);
     }
-
-    create(consumerId: string | null | undefined, itemId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ItemActivation> {
-        let url_ = this.baseUrl + "/v1/ItemActivation?";
-        if (consumerId !== undefined && consumerId !== null)
-            url_ += "consumerId=" + encodeURIComponent("" + consumerId) + "&";
-        if (itemId !== undefined && itemId !== null)
-            url_ += "itemId=" + encodeURIComponent("" + itemId) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ = <AxiosRequestConfig>{
-            method: "POST",
-            url: url_,
-            headers: {
-                "Accept": "application/json"
-            },
-            cancelToken
-        };
-
-        return this.instance.request(options_).catch((_error: any) => {
-            if (isAxiosError(_error) && _error.response) {
-                return _error.response;
-            } else {
-                throw _error;
-            }
-        }).then((_response: AxiosResponse) => {
-            return this.processCreate(_response);
-        });
-    }
-
-    protected processCreate(response: AxiosResponse): Promise<ItemActivation> {
-        const status = response.status;
-        let _headers: any = {};
-        if (response.headers && typeof response.headers === "object") {
-            for (let k in response.headers) {
-                if (response.headers.hasOwnProperty(k)) {
-                    _headers[k] = response.headers[k];
-                }
-            }
-        }
-        if (status === 200) {
-            const _responseText = response.data;
-            let result200: any = null;
-            let resultData200  = _responseText;
-            result200 = ItemActivation.fromJS(resultData200);
-            return result200;
-        } else if (status === 401) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-        } else if (status === 403) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-        } else if (status === 404) {
-            const _responseText = response.data;
-            return throwException("This resource could not be found.", status, _responseText, _headers);
-        } else if (status === 503) {
-            const _responseText = response.data;
-            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
-        } else if (status === 504) {
-            const _responseText = response.data;
-            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
-        } else if (status !== 200 && status !== 204) {
-            const _responseText = response.data;
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-        }
-        return Promise.resolve<ItemActivation>(<any>null);
-    }
 }
 
 export class ProgramClient {
@@ -8783,7 +8796,8 @@ export class ProgramClient {
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param publisherId (optional) 
-     * @param programId (optional) 
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
      * @param countryCode (optional) 
      */
     getAllPublished(search: string | null | undefined, skip: number | undefined, take: number | undefined, publisherId: string | null | undefined, programId: string | null | undefined, countryCode: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfProgram> {
@@ -11119,7 +11133,9 @@ export class SurveyClient {
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param consumerId (optional) 
      * @param publisherId (optional) 
-     * @param programId (optional) 
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
      * @param itemId (optional) 
      * @param activated (optional) 
      */
@@ -11203,6 +11219,71 @@ export class SurveyClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         }
         return Promise.resolve<ListOfSurvey>(<any>null);
+    }
+
+    get(id: string | null , cancelToken?: CancelToken | undefined): Promise<Survey> {
+        let url_ = this.baseUrl + "/v1/Survey/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processGet(_response);
+        });
+    }
+
+    protected processGet(response: AxiosResponse): Promise<Survey> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = Survey.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<Survey>(<any>null);
     }
 
     update(surveyId: string | null, settings: UpdateSurveySettings , cancelToken?: CancelToken | undefined): Promise<void> {
@@ -11336,7 +11417,9 @@ export class SurveyClient {
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param publisherId (optional) 
-     * @param programId (optional) 
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
      * @param countryCode (optional) 
      */
     getAllPublished(search: string | null | undefined, skip: number | undefined, take: number | undefined, publisherId: string | null | undefined, programId: string | null | undefined, countryCode: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfSurvey> {
@@ -11415,71 +11498,6 @@ export class SurveyClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         }
         return Promise.resolve<ListOfSurvey>(<any>null);
-    }
-
-    get(id: string | null , cancelToken?: CancelToken | undefined): Promise<Survey> {
-        let url_ = this.baseUrl + "/v1/Survey/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ = <AxiosRequestConfig>{
-            method: "GET",
-            url: url_,
-            headers: {
-                "Accept": "application/json"
-            },
-            cancelToken
-        };
-
-        return this.instance.request(options_).catch((_error: any) => {
-            if (isAxiosError(_error) && _error.response) {
-                return _error.response;
-            } else {
-                throw _error;
-            }
-        }).then((_response: AxiosResponse) => {
-            return this.processGet(_response);
-        });
-    }
-
-    protected processGet(response: AxiosResponse): Promise<Survey> {
-        const status = response.status;
-        let _headers: any = {};
-        if (response.headers && typeof response.headers === "object") {
-            for (let k in response.headers) {
-                if (response.headers.hasOwnProperty(k)) {
-                    _headers[k] = response.headers[k];
-                }
-            }
-        }
-        if (status === 200) {
-            const _responseText = response.data;
-            let result200: any = null;
-            let resultData200  = _responseText;
-            result200 = Survey.fromJS(resultData200);
-            return result200;
-        } else if (status === 401) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-        } else if (status === 403) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-        } else if (status === 404) {
-            const _responseText = response.data;
-            return throwException("This resource could not be found.", status, _responseText, _headers);
-        } else if (status === 503) {
-            const _responseText = response.data;
-            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
-        } else if (status === 504) {
-            const _responseText = response.data;
-            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
-        } else if (status !== 200 && status !== 204) {
-            const _responseText = response.data;
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-        }
-        return Promise.resolve<Survey>(<any>null);
     }
 }
 
@@ -14379,7 +14397,9 @@ export class ClassClient {
      * @param teamId (optional) Optional team id filter
      * @param publisherId (optional) Optional publisher id filter
      * @param courseId (optional) Optional course id filter
-     * @param programId (optional) Optional program id filter
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
      * @param activated (optional) Optional filter by class activation state
      */
     getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, organisationId: string | null | undefined, teamId: string | null | undefined, publisherId: string | null | undefined, courseId: string | null | undefined, programId: string | null | undefined, activated: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfClass> {
@@ -14806,7 +14826,9 @@ export class CourseClient {
      * @param search (optional) 
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param programId (optional) 
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
      */
     getAllForPublisher(publisherId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, programId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfCourse> {
         let url_ = this.baseUrl + "/v1/Course/Publisher/{publisherId}?";
@@ -14957,7 +14979,9 @@ export class CourseClient {
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param consumerId (optional) 
      * @param publisherId (optional) 
-     * @param programId (optional) 
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
      * @param itemId (optional) 
      * @param activated (optional) 
      */
@@ -15174,7 +15198,9 @@ export class CourseClient {
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param publisherId (optional) 
-     * @param programId (optional) 
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
      * @param countryCode (optional) 
      */
     getAllPublished(search: string | null | undefined, skip: number | undefined, take: number | undefined, publisherId: string | null | undefined, programId: string | null | undefined, countryCode: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfCourse> {
@@ -15336,7 +15362,9 @@ export class EnrolmentClient {
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param activated (optional) 
-     * @param programId (optional) 
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
      */
     getAllForTrainee(traineeId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, activated: boolean | null | undefined, programId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfEnrolment> {
         let url_ = this.baseUrl + "/v1/Enrolment/Trainee/{traineeId}?";
