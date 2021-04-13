@@ -4701,7 +4701,9 @@ export class ObservationDefinitionClient {
      * @param search (optional) 
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param programId (optional) 
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
      */
     getAllForPublisher(publisherId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, programId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfObservationDefinition> {
         let url_ = this.baseUrl + "/v1/ObservationDefinition/Publisher/{publisherId}?";
@@ -4852,7 +4854,9 @@ export class ObservationDefinitionClient {
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param consumerId (optional) 
      * @param publisherId (optional) 
-     * @param programId (optional) 
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
      * @param itemId (optional) 
      * @param activated (optional) 
      */
@@ -5069,7 +5073,9 @@ export class ObservationDefinitionClient {
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param publisherId (optional) 
-     * @param programId (optional) 
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
      * @param countryCode (optional) 
      */
     getAllPublished(search: string | null | undefined, skip: number | undefined, take: number | undefined, publisherId: string | null | undefined, programId: string | null | undefined, countryCode: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfObservationDefinition> {
@@ -8318,7 +8324,9 @@ export class ItemActivationClient {
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param itemType (optional) 
-     * @param programId (optional) 
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
      * @param consumerId (optional) 
      */
     getAllForPublisher(publisherId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, itemType: string | null | undefined, programId: string | null | undefined, consumerId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfItemActivation> {
@@ -8406,15 +8414,16 @@ export class ItemActivationClient {
      * @param search (optional) 
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
+     * @param consumerId (optional) 
      * @param itemType (optional) 
-     * @param programId (optional) 
+     * @param itemId (optional) 
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
      * @param publisherId (optional) 
      */
-    getAllForConsumer(consumerId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, itemType: string | null | undefined, programId: string | null | undefined, publisherId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfItemActivation> {
-        let url_ = this.baseUrl + "/v1/ItemActivation/Consumer/{consumerId}?";
-        if (consumerId === undefined || consumerId === null)
-            throw new Error("The parameter 'consumerId' must be defined.");
-        url_ = url_.replace("{consumerId}", encodeURIComponent("" + consumerId));
+    getAllByActivation(search: string | null | undefined, skip: number | undefined, take: number | undefined, consumerId: string | null | undefined, itemType: string | null | undefined, itemId: string | null | undefined, programId: string | null | undefined, publisherId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfItemActivation> {
+        let url_ = this.baseUrl + "/v1/ItemActivation?";
         if (search !== undefined && search !== null)
             url_ += "Search=" + encodeURIComponent("" + search) + "&";
         if (skip === null)
@@ -8425,8 +8434,12 @@ export class ItemActivationClient {
             throw new Error("The parameter 'take' cannot be null.");
         else if (take !== undefined)
             url_ += "Take=" + encodeURIComponent("" + take) + "&";
+        if (consumerId !== undefined && consumerId !== null)
+            url_ += "consumerId=" + encodeURIComponent("" + consumerId) + "&";
         if (itemType !== undefined && itemType !== null)
             url_ += "itemType=" + encodeURIComponent("" + itemType) + "&";
+        if (itemId !== undefined && itemId !== null)
+            url_ += "itemId=" + encodeURIComponent("" + itemId) + "&";
         if (programId !== undefined && programId !== null)
             url_ += "programId=" + encodeURIComponent("" + programId) + "&";
         if (publisherId !== undefined && publisherId !== null)
@@ -8449,11 +8462,11 @@ export class ItemActivationClient {
                 throw _error;
             }
         }).then((_response: AxiosResponse) => {
-            return this.processGetAllForConsumer(_response);
+            return this.processGetAllByActivation(_response);
         });
     }
 
-    protected processGetAllForConsumer(response: AxiosResponse): Promise<ListOfItemActivation> {
+    protected processGetAllByActivation(response: AxiosResponse): Promise<ListOfItemActivation> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -8489,6 +8502,72 @@ export class ItemActivationClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         }
         return Promise.resolve<ListOfItemActivation>(<any>null);
+    }
+
+    create(consumerId: string | null | undefined, itemId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ItemActivation> {
+        let url_ = this.baseUrl + "/v1/ItemActivation?";
+        if (consumerId !== undefined && consumerId !== null)
+            url_ += "consumerId=" + encodeURIComponent("" + consumerId) + "&";
+        if (itemId !== undefined && itemId !== null)
+            url_ += "itemId=" + encodeURIComponent("" + itemId) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "POST",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processCreate(_response);
+        });
+    }
+
+    protected processCreate(response: AxiosResponse): Promise<ItemActivation> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ItemActivation.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ItemActivation>(<any>null);
     }
 
     get(itemActivationId: string | null , cancelToken?: CancelToken | undefined): Promise<ItemActivation> {
@@ -8620,72 +8699,6 @@ export class ItemActivationClient {
         }
         return Promise.resolve<void>(<any>null);
     }
-
-    create(consumerId: string | null | undefined, itemId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ItemActivation> {
-        let url_ = this.baseUrl + "/v1/ItemActivation?";
-        if (consumerId !== undefined && consumerId !== null)
-            url_ += "consumerId=" + encodeURIComponent("" + consumerId) + "&";
-        if (itemId !== undefined && itemId !== null)
-            url_ += "itemId=" + encodeURIComponent("" + itemId) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ = <AxiosRequestConfig>{
-            method: "POST",
-            url: url_,
-            headers: {
-                "Accept": "application/json"
-            },
-            cancelToken
-        };
-
-        return this.instance.request(options_).catch((_error: any) => {
-            if (isAxiosError(_error) && _error.response) {
-                return _error.response;
-            } else {
-                throw _error;
-            }
-        }).then((_response: AxiosResponse) => {
-            return this.processCreate(_response);
-        });
-    }
-
-    protected processCreate(response: AxiosResponse): Promise<ItemActivation> {
-        const status = response.status;
-        let _headers: any = {};
-        if (response.headers && typeof response.headers === "object") {
-            for (let k in response.headers) {
-                if (response.headers.hasOwnProperty(k)) {
-                    _headers[k] = response.headers[k];
-                }
-            }
-        }
-        if (status === 200) {
-            const _responseText = response.data;
-            let result200: any = null;
-            let resultData200  = _responseText;
-            result200 = ItemActivation.fromJS(resultData200);
-            return result200;
-        } else if (status === 401) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-        } else if (status === 403) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-        } else if (status === 404) {
-            const _responseText = response.data;
-            return throwException("This resource could not be found.", status, _responseText, _headers);
-        } else if (status === 503) {
-            const _responseText = response.data;
-            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
-        } else if (status === 504) {
-            const _responseText = response.data;
-            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
-        } else if (status !== 200 && status !== 204) {
-            const _responseText = response.data;
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-        }
-        return Promise.resolve<ItemActivation>(<any>null);
-    }
 }
 
 export class ProgramClient {
@@ -8783,7 +8796,8 @@ export class ProgramClient {
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param publisherId (optional) 
-     * @param programId (optional) 
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
      * @param countryCode (optional) 
      */
     getAllPublished(search: string | null | undefined, skip: number | undefined, take: number | undefined, publisherId: string | null | undefined, programId: string | null | undefined, countryCode: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfProgram> {
@@ -11119,7 +11133,9 @@ export class SurveyClient {
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param consumerId (optional) 
      * @param publisherId (optional) 
-     * @param programId (optional) 
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
      * @param itemId (optional) 
      * @param activated (optional) 
      */
@@ -11203,6 +11219,71 @@ export class SurveyClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         }
         return Promise.resolve<ListOfSurvey>(<any>null);
+    }
+
+    get(id: string | null , cancelToken?: CancelToken | undefined): Promise<Survey> {
+        let url_ = this.baseUrl + "/v1/Survey/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processGet(_response);
+        });
+    }
+
+    protected processGet(response: AxiosResponse): Promise<Survey> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = Survey.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<Survey>(<any>null);
     }
 
     update(surveyId: string | null, settings: UpdateSurveySettings , cancelToken?: CancelToken | undefined): Promise<void> {
@@ -11336,7 +11417,9 @@ export class SurveyClient {
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param publisherId (optional) 
-     * @param programId (optional) 
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
      * @param countryCode (optional) 
      */
     getAllPublished(search: string | null | undefined, skip: number | undefined, take: number | undefined, publisherId: string | null | undefined, programId: string | null | undefined, countryCode: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfSurvey> {
@@ -11415,71 +11498,6 @@ export class SurveyClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         }
         return Promise.resolve<ListOfSurvey>(<any>null);
-    }
-
-    get(id: string | null , cancelToken?: CancelToken | undefined): Promise<Survey> {
-        let url_ = this.baseUrl + "/v1/Survey/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ = <AxiosRequestConfig>{
-            method: "GET",
-            url: url_,
-            headers: {
-                "Accept": "application/json"
-            },
-            cancelToken
-        };
-
-        return this.instance.request(options_).catch((_error: any) => {
-            if (isAxiosError(_error) && _error.response) {
-                return _error.response;
-            } else {
-                throw _error;
-            }
-        }).then((_response: AxiosResponse) => {
-            return this.processGet(_response);
-        });
-    }
-
-    protected processGet(response: AxiosResponse): Promise<Survey> {
-        const status = response.status;
-        let _headers: any = {};
-        if (response.headers && typeof response.headers === "object") {
-            for (let k in response.headers) {
-                if (response.headers.hasOwnProperty(k)) {
-                    _headers[k] = response.headers[k];
-                }
-            }
-        }
-        if (status === 200) {
-            const _responseText = response.data;
-            let result200: any = null;
-            let resultData200  = _responseText;
-            result200 = Survey.fromJS(resultData200);
-            return result200;
-        } else if (status === 401) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-        } else if (status === 403) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-        } else if (status === 404) {
-            const _responseText = response.data;
-            return throwException("This resource could not be found.", status, _responseText, _headers);
-        } else if (status === 503) {
-            const _responseText = response.data;
-            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
-        } else if (status === 504) {
-            const _responseText = response.data;
-            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
-        } else if (status !== 200 && status !== 204) {
-            const _responseText = response.data;
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-        }
-        return Promise.resolve<Survey>(<any>null);
     }
 }
 
@@ -13228,6 +13246,145 @@ export class BookContentClient {
         return Promise.resolve<void>(<any>null);
     }
 
+    createFromZip(moduleId: string | null, file: FileParameter | null | undefined , cancelToken?: CancelToken | undefined): Promise<ModuleContentOfBookSettings> {
+        let url_ = this.baseUrl + "/v1/BookContent/{moduleId}/Content/FromZip";
+        if (moduleId === undefined || moduleId === null)
+            throw new Error("The parameter 'moduleId' must be defined.");
+        url_ = url_.replace("{moduleId}", encodeURIComponent("" + moduleId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = new FormData();
+        if (file !== null && file !== undefined)
+            content_.append("file", file.data, file.fileName ? file.fileName : "file");
+
+        let options_ = <AxiosRequestConfig>{
+            data: content_,
+            method: "POST",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processCreateFromZip(_response);
+        });
+    }
+
+    protected processCreateFromZip(response: AxiosResponse): Promise<ModuleContentOfBookSettings> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ModuleContentOfBookSettings.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ModuleContentOfBookSettings>(<any>null);
+    }
+
+    updateFromZip(moduleId: string | null, contentId: string | null, file: FileParameter | null | undefined , cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/v1/BookContent/{moduleId}/Content/{contentId}/FromZip";
+        if (moduleId === undefined || moduleId === null)
+            throw new Error("The parameter 'moduleId' must be defined.");
+        url_ = url_.replace("{moduleId}", encodeURIComponent("" + moduleId));
+        if (contentId === undefined || contentId === null)
+            throw new Error("The parameter 'contentId' must be defined.");
+        url_ = url_.replace("{contentId}", encodeURIComponent("" + contentId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = new FormData();
+        if (file !== null && file !== undefined)
+            content_.append("file", file.data, file.fileName ? file.fileName : "file");
+
+        let options_ = <AxiosRequestConfig>{
+            data: content_,
+            method: "PUT",
+            url: url_,
+            headers: {
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processUpdateFromZip(_response);
+        });
+    }
+
+    protected processUpdateFromZip(response: AxiosResponse): Promise<void> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 204) {
+            const _responseText = response.data;
+            return Promise.resolve<void>(<any>null);
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<void>(<any>null);
+    }
+
     publish(moduleId: string | null, contentId: string | null , cancelToken?: CancelToken | undefined): Promise<void> {
         let url_ = this.baseUrl + "/v1/BookContent/{moduleId}/Content/{contentId}/Publish";
         if (moduleId === undefined || moduleId === null)
@@ -14379,7 +14536,9 @@ export class ClassClient {
      * @param teamId (optional) Optional team id filter
      * @param publisherId (optional) Optional publisher id filter
      * @param courseId (optional) Optional course id filter
-     * @param programId (optional) Optional program id filter
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
      * @param activated (optional) Optional filter by class activation state
      */
     getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, organisationId: string | null | undefined, teamId: string | null | undefined, publisherId: string | null | undefined, courseId: string | null | undefined, programId: string | null | undefined, activated: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfClass> {
@@ -14806,7 +14965,9 @@ export class CourseClient {
      * @param search (optional) 
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param programId (optional) 
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
      */
     getAllForPublisher(publisherId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, programId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfCourse> {
         let url_ = this.baseUrl + "/v1/Course/Publisher/{publisherId}?";
@@ -14957,7 +15118,9 @@ export class CourseClient {
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param consumerId (optional) 
      * @param publisherId (optional) 
-     * @param programId (optional) 
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
      * @param itemId (optional) 
      * @param activated (optional) 
      */
@@ -15174,7 +15337,9 @@ export class CourseClient {
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param publisherId (optional) 
-     * @param programId (optional) 
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
      * @param countryCode (optional) 
      */
     getAllPublished(search: string | null | undefined, skip: number | undefined, take: number | undefined, publisherId: string | null | undefined, programId: string | null | undefined, countryCode: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfCourse> {
@@ -15336,7 +15501,9 @@ export class EnrolmentClient {
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param activated (optional) 
-     * @param programId (optional) 
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
      */
     getAllForTrainee(traineeId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, activated: boolean | null | undefined, programId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfEnrolment> {
         let url_ = this.baseUrl + "/v1/Enrolment/Trainee/{traineeId}?";
@@ -17850,6 +18017,145 @@ export class QuizContentClient {
         return Promise.resolve<void>(<any>null);
     }
 
+    createFromZip(moduleId: string | null, file: FileParameter | null | undefined , cancelToken?: CancelToken | undefined): Promise<ModuleContentOfQuizSettings> {
+        let url_ = this.baseUrl + "/v1/QuizContent/{moduleId}/Content/FromZip";
+        if (moduleId === undefined || moduleId === null)
+            throw new Error("The parameter 'moduleId' must be defined.");
+        url_ = url_.replace("{moduleId}", encodeURIComponent("" + moduleId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = new FormData();
+        if (file !== null && file !== undefined)
+            content_.append("file", file.data, file.fileName ? file.fileName : "file");
+
+        let options_ = <AxiosRequestConfig>{
+            data: content_,
+            method: "POST",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processCreateFromZip(_response);
+        });
+    }
+
+    protected processCreateFromZip(response: AxiosResponse): Promise<ModuleContentOfQuizSettings> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ModuleContentOfQuizSettings.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ModuleContentOfQuizSettings>(<any>null);
+    }
+
+    updateFromZip(moduleId: string | null, contentId: string | null, file: FileParameter | null | undefined , cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/v1/QuizContent/{moduleId}/Content/{contentId}/FromZip";
+        if (moduleId === undefined || moduleId === null)
+            throw new Error("The parameter 'moduleId' must be defined.");
+        url_ = url_.replace("{moduleId}", encodeURIComponent("" + moduleId));
+        if (contentId === undefined || contentId === null)
+            throw new Error("The parameter 'contentId' must be defined.");
+        url_ = url_.replace("{contentId}", encodeURIComponent("" + contentId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = new FormData();
+        if (file !== null && file !== undefined)
+            content_.append("file", file.data, file.fileName ? file.fileName : "file");
+
+        let options_ = <AxiosRequestConfig>{
+            data: content_,
+            method: "PUT",
+            url: url_,
+            headers: {
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processUpdateFromZip(_response);
+        });
+    }
+
+    protected processUpdateFromZip(response: AxiosResponse): Promise<void> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 204) {
+            const _responseText = response.data;
+            return Promise.resolve<void>(<any>null);
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<void>(<any>null);
+    }
+
     publish(moduleId: string | null, contentId: string | null , cancelToken?: CancelToken | undefined): Promise<void> {
         let url_ = this.baseUrl + "/v1/QuizContent/{moduleId}/Content/{contentId}/Publish";
         if (moduleId === undefined || moduleId === null)
@@ -19011,6 +19317,145 @@ export class RevisionContentClient {
     }
 
     protected processDelete(response: AxiosResponse): Promise<void> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 204) {
+            const _responseText = response.data;
+            return Promise.resolve<void>(<any>null);
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<void>(<any>null);
+    }
+
+    createFromZip(moduleId: string | null, file: FileParameter | null | undefined , cancelToken?: CancelToken | undefined): Promise<ModuleContentOfRevisionSettings> {
+        let url_ = this.baseUrl + "/v1/RevisionContent/{moduleId}/Content/FromZip";
+        if (moduleId === undefined || moduleId === null)
+            throw new Error("The parameter 'moduleId' must be defined.");
+        url_ = url_.replace("{moduleId}", encodeURIComponent("" + moduleId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = new FormData();
+        if (file !== null && file !== undefined)
+            content_.append("file", file.data, file.fileName ? file.fileName : "file");
+
+        let options_ = <AxiosRequestConfig>{
+            data: content_,
+            method: "POST",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processCreateFromZip(_response);
+        });
+    }
+
+    protected processCreateFromZip(response: AxiosResponse): Promise<ModuleContentOfRevisionSettings> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ModuleContentOfRevisionSettings.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ModuleContentOfRevisionSettings>(<any>null);
+    }
+
+    updateFromZip(moduleId: string | null, contentId: string | null, file: FileParameter | null | undefined , cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/v1/RevisionContent/{moduleId}/Content/{contentId}/FromZip";
+        if (moduleId === undefined || moduleId === null)
+            throw new Error("The parameter 'moduleId' must be defined.");
+        url_ = url_.replace("{moduleId}", encodeURIComponent("" + moduleId));
+        if (contentId === undefined || contentId === null)
+            throw new Error("The parameter 'contentId' must be defined.");
+        url_ = url_.replace("{contentId}", encodeURIComponent("" + contentId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = new FormData();
+        if (file !== null && file !== undefined)
+            content_.append("file", file.data, file.fileName ? file.fileName : "file");
+
+        let options_ = <AxiosRequestConfig>{
+            data: content_,
+            method: "PUT",
+            url: url_,
+            headers: {
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processUpdateFromZip(_response);
+        });
+    }
+
+    protected processUpdateFromZip(response: AxiosResponse): Promise<void> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -20594,6 +21039,145 @@ export class VideoContentClient {
         return Promise.resolve<void>(<any>null);
     }
 
+    createFromZip(moduleId: string | null, file: FileParameter | null | undefined , cancelToken?: CancelToken | undefined): Promise<ModuleContentOfVideoSettings> {
+        let url_ = this.baseUrl + "/v1/VideoContent/{moduleId}/Content/FromZip";
+        if (moduleId === undefined || moduleId === null)
+            throw new Error("The parameter 'moduleId' must be defined.");
+        url_ = url_.replace("{moduleId}", encodeURIComponent("" + moduleId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = new FormData();
+        if (file !== null && file !== undefined)
+            content_.append("file", file.data, file.fileName ? file.fileName : "file");
+
+        let options_ = <AxiosRequestConfig>{
+            data: content_,
+            method: "POST",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processCreateFromZip(_response);
+        });
+    }
+
+    protected processCreateFromZip(response: AxiosResponse): Promise<ModuleContentOfVideoSettings> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ModuleContentOfVideoSettings.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ModuleContentOfVideoSettings>(<any>null);
+    }
+
+    updateFromZip(moduleId: string | null, contentId: string | null, file: FileParameter | null | undefined , cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/v1/VideoContent/{moduleId}/Content/{contentId}/FromZip";
+        if (moduleId === undefined || moduleId === null)
+            throw new Error("The parameter 'moduleId' must be defined.");
+        url_ = url_.replace("{moduleId}", encodeURIComponent("" + moduleId));
+        if (contentId === undefined || contentId === null)
+            throw new Error("The parameter 'contentId' must be defined.");
+        url_ = url_.replace("{contentId}", encodeURIComponent("" + contentId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = new FormData();
+        if (file !== null && file !== undefined)
+            content_.append("file", file.data, file.fileName ? file.fileName : "file");
+
+        let options_ = <AxiosRequestConfig>{
+            data: content_,
+            method: "PUT",
+            url: url_,
+            headers: {
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processUpdateFromZip(_response);
+        });
+    }
+
+    protected processUpdateFromZip(response: AxiosResponse): Promise<void> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 204) {
+            const _responseText = response.data;
+            return Promise.resolve<void>(<any>null);
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<void>(<any>null);
+    }
+
     publish(moduleId: string | null, contentId: string | null , cancelToken?: CancelToken | undefined): Promise<void> {
         let url_ = this.baseUrl + "/v1/VideoContent/{moduleId}/Content/{contentId}/Publish";
         if (moduleId === undefined || moduleId === null)
@@ -21755,6 +22339,145 @@ export class AssessmentContentClient {
     }
 
     protected processDelete(response: AxiosResponse): Promise<void> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 204) {
+            const _responseText = response.data;
+            return Promise.resolve<void>(<any>null);
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<void>(<any>null);
+    }
+
+    createFromZip(moduleId: string | null, file: FileParameter | null | undefined , cancelToken?: CancelToken | undefined): Promise<ModuleContentOfAssessmentSettings> {
+        let url_ = this.baseUrl + "/v1/AssessmentContent/{moduleId}/Content/FromZip";
+        if (moduleId === undefined || moduleId === null)
+            throw new Error("The parameter 'moduleId' must be defined.");
+        url_ = url_.replace("{moduleId}", encodeURIComponent("" + moduleId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = new FormData();
+        if (file !== null && file !== undefined)
+            content_.append("file", file.data, file.fileName ? file.fileName : "file");
+
+        let options_ = <AxiosRequestConfig>{
+            data: content_,
+            method: "POST",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processCreateFromZip(_response);
+        });
+    }
+
+    protected processCreateFromZip(response: AxiosResponse): Promise<ModuleContentOfAssessmentSettings> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ModuleContentOfAssessmentSettings.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ModuleContentOfAssessmentSettings>(<any>null);
+    }
+
+    updateFromZip(moduleId: string | null, contentId: string | null, file: FileParameter | null | undefined , cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/v1/AssessmentContent/{moduleId}/Content/{contentId}/FromZip";
+        if (moduleId === undefined || moduleId === null)
+            throw new Error("The parameter 'moduleId' must be defined.");
+        url_ = url_.replace("{moduleId}", encodeURIComponent("" + moduleId));
+        if (contentId === undefined || contentId === null)
+            throw new Error("The parameter 'contentId' must be defined.");
+        url_ = url_.replace("{contentId}", encodeURIComponent("" + contentId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = new FormData();
+        if (file !== null && file !== undefined)
+            content_.append("file", file.data, file.fileName ? file.fileName : "file");
+
+        let options_ = <AxiosRequestConfig>{
+            data: content_,
+            method: "PUT",
+            url: url_,
+            headers: {
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processUpdateFromZip(_response);
+        });
+    }
+
+    protected processUpdateFromZip(response: AxiosResponse): Promise<void> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -38979,12 +39702,11 @@ export interface IChapter {
     slides?: string[] | undefined;
 }
 
-export class CreateModuleContentSettingsOfBookSettings implements ICreateModuleContentSettingsOfBookSettings {
+export class ModuleContentSettingsOfBookSettings implements IModuleContentSettingsOfBookSettings {
     settings!: BookSettings;
     files?: ModuleContentFileSettings[] | undefined;
-    published?: boolean;
 
-    constructor(data?: ICreateModuleContentSettingsOfBookSettings) {
+    constructor(data?: IModuleContentSettingsOfBookSettings) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -39004,6 +39726,43 @@ export class CreateModuleContentSettingsOfBookSettings implements ICreateModuleC
                 for (let item of _data["files"])
                     this.files!.push(ModuleContentFileSettings.fromJS(item));
             }
+        }
+    }
+
+    static fromJS(data: any): ModuleContentSettingsOfBookSettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new ModuleContentSettingsOfBookSettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["settings"] = this.settings ? this.settings.toJSON() : <any>undefined;
+        if (Array.isArray(this.files)) {
+            data["files"] = [];
+            for (let item of this.files)
+                data["files"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IModuleContentSettingsOfBookSettings {
+    settings: BookSettings;
+    files?: ModuleContentFileSettings[] | undefined;
+}
+
+export class CreateModuleContentSettingsOfBookSettings extends ModuleContentSettingsOfBookSettings implements ICreateModuleContentSettingsOfBookSettings {
+    published?: boolean;
+
+    constructor(data?: ICreateModuleContentSettingsOfBookSettings) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
             this.published = _data["published"];
         }
     }
@@ -39017,20 +39776,13 @@ export class CreateModuleContentSettingsOfBookSettings implements ICreateModuleC
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["settings"] = this.settings ? this.settings.toJSON() : <any>undefined;
-        if (Array.isArray(this.files)) {
-            data["files"] = [];
-            for (let item of this.files)
-                data["files"].push(item.toJSON());
-        }
         data["published"] = this.published;
+        super.toJSON(data);
         return data; 
     }
 }
 
-export interface ICreateModuleContentSettingsOfBookSettings {
-    settings: BookSettings;
-    files?: ModuleContentFileSettings[] | undefined;
+export interface ICreateModuleContentSettingsOfBookSettings extends IModuleContentSettingsOfBookSettings {
     published?: boolean;
 }
 
@@ -39074,31 +39826,16 @@ export interface IModuleContentFileSettings {
     dataUri: string;
 }
 
-export class UpdateModuleContentSettingsOfBookSettings implements IUpdateModuleContentSettingsOfBookSettings {
-    settings!: BookSettings;
-    files?: ModuleContentFileSettings[] | undefined;
+export class UpdateModuleContentSettingsOfBookSettings extends ModuleContentSettingsOfBookSettings implements IUpdateModuleContentSettingsOfBookSettings {
     version?: number;
 
     constructor(data?: IUpdateModuleContentSettingsOfBookSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.settings = new BookSettings();
-        }
+        super(data);
     }
 
     init(_data?: any) {
+        super.init(_data);
         if (_data) {
-            this.settings = _data["settings"] ? BookSettings.fromJS(_data["settings"]) : new BookSettings();
-            if (Array.isArray(_data["files"])) {
-                this.files = [] as any;
-                for (let item of _data["files"])
-                    this.files!.push(ModuleContentFileSettings.fromJS(item));
-            }
             this.version = _data["version"];
         }
     }
@@ -39112,20 +39849,13 @@ export class UpdateModuleContentSettingsOfBookSettings implements IUpdateModuleC
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["settings"] = this.settings ? this.settings.toJSON() : <any>undefined;
-        if (Array.isArray(this.files)) {
-            data["files"] = [];
-            for (let item of this.files)
-                data["files"].push(item.toJSON());
-        }
         data["version"] = this.version;
+        super.toJSON(data);
         return data; 
     }
 }
 
-export interface IUpdateModuleContentSettingsOfBookSettings {
-    settings: BookSettings;
-    files?: ModuleContentFileSettings[] | undefined;
+export interface IUpdateModuleContentSettingsOfBookSettings extends IModuleContentSettingsOfBookSettings {
     version?: number;
 }
 
@@ -42401,12 +43131,11 @@ export interface IQuizAnswer {
     correct?: boolean;
 }
 
-export class CreateModuleContentSettingsOfQuizSettings implements ICreateModuleContentSettingsOfQuizSettings {
+export class ModuleContentSettingsOfQuizSettings implements IModuleContentSettingsOfQuizSettings {
     settings!: QuizSettings;
     files?: ModuleContentFileSettings[] | undefined;
-    published?: boolean;
 
-    constructor(data?: ICreateModuleContentSettingsOfQuizSettings) {
+    constructor(data?: IModuleContentSettingsOfQuizSettings) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -42426,6 +43155,43 @@ export class CreateModuleContentSettingsOfQuizSettings implements ICreateModuleC
                 for (let item of _data["files"])
                     this.files!.push(ModuleContentFileSettings.fromJS(item));
             }
+        }
+    }
+
+    static fromJS(data: any): ModuleContentSettingsOfQuizSettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new ModuleContentSettingsOfQuizSettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["settings"] = this.settings ? this.settings.toJSON() : <any>undefined;
+        if (Array.isArray(this.files)) {
+            data["files"] = [];
+            for (let item of this.files)
+                data["files"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IModuleContentSettingsOfQuizSettings {
+    settings: QuizSettings;
+    files?: ModuleContentFileSettings[] | undefined;
+}
+
+export class CreateModuleContentSettingsOfQuizSettings extends ModuleContentSettingsOfQuizSettings implements ICreateModuleContentSettingsOfQuizSettings {
+    published?: boolean;
+
+    constructor(data?: ICreateModuleContentSettingsOfQuizSettings) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
             this.published = _data["published"];
         }
     }
@@ -42439,48 +43205,26 @@ export class CreateModuleContentSettingsOfQuizSettings implements ICreateModuleC
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["settings"] = this.settings ? this.settings.toJSON() : <any>undefined;
-        if (Array.isArray(this.files)) {
-            data["files"] = [];
-            for (let item of this.files)
-                data["files"].push(item.toJSON());
-        }
         data["published"] = this.published;
+        super.toJSON(data);
         return data; 
     }
 }
 
-export interface ICreateModuleContentSettingsOfQuizSettings {
-    settings: QuizSettings;
-    files?: ModuleContentFileSettings[] | undefined;
+export interface ICreateModuleContentSettingsOfQuizSettings extends IModuleContentSettingsOfQuizSettings {
     published?: boolean;
 }
 
-export class UpdateModuleContentSettingsOfQuizSettings implements IUpdateModuleContentSettingsOfQuizSettings {
-    settings!: QuizSettings;
-    files?: ModuleContentFileSettings[] | undefined;
+export class UpdateModuleContentSettingsOfQuizSettings extends ModuleContentSettingsOfQuizSettings implements IUpdateModuleContentSettingsOfQuizSettings {
     version?: number;
 
     constructor(data?: IUpdateModuleContentSettingsOfQuizSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.settings = new QuizSettings();
-        }
+        super(data);
     }
 
     init(_data?: any) {
+        super.init(_data);
         if (_data) {
-            this.settings = _data["settings"] ? QuizSettings.fromJS(_data["settings"]) : new QuizSettings();
-            if (Array.isArray(_data["files"])) {
-                this.files = [] as any;
-                for (let item of _data["files"])
-                    this.files!.push(ModuleContentFileSettings.fromJS(item));
-            }
             this.version = _data["version"];
         }
     }
@@ -42494,20 +43238,13 @@ export class UpdateModuleContentSettingsOfQuizSettings implements IUpdateModuleC
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["settings"] = this.settings ? this.settings.toJSON() : <any>undefined;
-        if (Array.isArray(this.files)) {
-            data["files"] = [];
-            for (let item of this.files)
-                data["files"].push(item.toJSON());
-        }
         data["version"] = this.version;
+        super.toJSON(data);
         return data; 
     }
 }
 
-export interface IUpdateModuleContentSettingsOfQuizSettings {
-    settings: QuizSettings;
-    files?: ModuleContentFileSettings[] | undefined;
+export interface IUpdateModuleContentSettingsOfQuizSettings extends IModuleContentSettingsOfQuizSettings {
     version?: number;
 }
 
@@ -42998,12 +43735,11 @@ export interface ITopic {
     hint?: string | undefined;
 }
 
-export class CreateModuleContentSettingsOfRevisionSettings implements ICreateModuleContentSettingsOfRevisionSettings {
+export class ModuleContentSettingsOfRevisionSettings implements IModuleContentSettingsOfRevisionSettings {
     settings!: RevisionSettings;
     files?: ModuleContentFileSettings[] | undefined;
-    published?: boolean;
 
-    constructor(data?: ICreateModuleContentSettingsOfRevisionSettings) {
+    constructor(data?: IModuleContentSettingsOfRevisionSettings) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -43023,6 +43759,43 @@ export class CreateModuleContentSettingsOfRevisionSettings implements ICreateMod
                 for (let item of _data["files"])
                     this.files!.push(ModuleContentFileSettings.fromJS(item));
             }
+        }
+    }
+
+    static fromJS(data: any): ModuleContentSettingsOfRevisionSettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new ModuleContentSettingsOfRevisionSettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["settings"] = this.settings ? this.settings.toJSON() : <any>undefined;
+        if (Array.isArray(this.files)) {
+            data["files"] = [];
+            for (let item of this.files)
+                data["files"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IModuleContentSettingsOfRevisionSettings {
+    settings: RevisionSettings;
+    files?: ModuleContentFileSettings[] | undefined;
+}
+
+export class CreateModuleContentSettingsOfRevisionSettings extends ModuleContentSettingsOfRevisionSettings implements ICreateModuleContentSettingsOfRevisionSettings {
+    published?: boolean;
+
+    constructor(data?: ICreateModuleContentSettingsOfRevisionSettings) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
             this.published = _data["published"];
         }
     }
@@ -43036,48 +43809,26 @@ export class CreateModuleContentSettingsOfRevisionSettings implements ICreateMod
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["settings"] = this.settings ? this.settings.toJSON() : <any>undefined;
-        if (Array.isArray(this.files)) {
-            data["files"] = [];
-            for (let item of this.files)
-                data["files"].push(item.toJSON());
-        }
         data["published"] = this.published;
+        super.toJSON(data);
         return data; 
     }
 }
 
-export interface ICreateModuleContentSettingsOfRevisionSettings {
-    settings: RevisionSettings;
-    files?: ModuleContentFileSettings[] | undefined;
+export interface ICreateModuleContentSettingsOfRevisionSettings extends IModuleContentSettingsOfRevisionSettings {
     published?: boolean;
 }
 
-export class UpdateModuleContentSettingsOfRevisionSettings implements IUpdateModuleContentSettingsOfRevisionSettings {
-    settings!: RevisionSettings;
-    files?: ModuleContentFileSettings[] | undefined;
+export class UpdateModuleContentSettingsOfRevisionSettings extends ModuleContentSettingsOfRevisionSettings implements IUpdateModuleContentSettingsOfRevisionSettings {
     version?: number;
 
     constructor(data?: IUpdateModuleContentSettingsOfRevisionSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.settings = new RevisionSettings();
-        }
+        super(data);
     }
 
     init(_data?: any) {
+        super.init(_data);
         if (_data) {
-            this.settings = _data["settings"] ? RevisionSettings.fromJS(_data["settings"]) : new RevisionSettings();
-            if (Array.isArray(_data["files"])) {
-                this.files = [] as any;
-                for (let item of _data["files"])
-                    this.files!.push(ModuleContentFileSettings.fromJS(item));
-            }
             this.version = _data["version"];
         }
     }
@@ -43091,20 +43842,13 @@ export class UpdateModuleContentSettingsOfRevisionSettings implements IUpdateMod
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["settings"] = this.settings ? this.settings.toJSON() : <any>undefined;
-        if (Array.isArray(this.files)) {
-            data["files"] = [];
-            for (let item of this.files)
-                data["files"].push(item.toJSON());
-        }
         data["version"] = this.version;
+        super.toJSON(data);
         return data; 
     }
 }
 
-export interface IUpdateModuleContentSettingsOfRevisionSettings {
-    settings: RevisionSettings;
-    files?: ModuleContentFileSettings[] | undefined;
+export interface IUpdateModuleContentSettingsOfRevisionSettings extends IModuleContentSettingsOfRevisionSettings {
     version?: number;
 }
 
@@ -43829,12 +44573,11 @@ export enum VideoType {
     Wistia = 4,
 }
 
-export class CreateModuleContentSettingsOfVideoSettings implements ICreateModuleContentSettingsOfVideoSettings {
+export class ModuleContentSettingsOfVideoSettings implements IModuleContentSettingsOfVideoSettings {
     settings!: VideoSettings;
     files?: ModuleContentFileSettings[] | undefined;
-    published?: boolean;
 
-    constructor(data?: ICreateModuleContentSettingsOfVideoSettings) {
+    constructor(data?: IModuleContentSettingsOfVideoSettings) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -43854,6 +44597,43 @@ export class CreateModuleContentSettingsOfVideoSettings implements ICreateModule
                 for (let item of _data["files"])
                     this.files!.push(ModuleContentFileSettings.fromJS(item));
             }
+        }
+    }
+
+    static fromJS(data: any): ModuleContentSettingsOfVideoSettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new ModuleContentSettingsOfVideoSettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["settings"] = this.settings ? this.settings.toJSON() : <any>undefined;
+        if (Array.isArray(this.files)) {
+            data["files"] = [];
+            for (let item of this.files)
+                data["files"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IModuleContentSettingsOfVideoSettings {
+    settings: VideoSettings;
+    files?: ModuleContentFileSettings[] | undefined;
+}
+
+export class CreateModuleContentSettingsOfVideoSettings extends ModuleContentSettingsOfVideoSettings implements ICreateModuleContentSettingsOfVideoSettings {
+    published?: boolean;
+
+    constructor(data?: ICreateModuleContentSettingsOfVideoSettings) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
             this.published = _data["published"];
         }
     }
@@ -43867,48 +44647,26 @@ export class CreateModuleContentSettingsOfVideoSettings implements ICreateModule
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["settings"] = this.settings ? this.settings.toJSON() : <any>undefined;
-        if (Array.isArray(this.files)) {
-            data["files"] = [];
-            for (let item of this.files)
-                data["files"].push(item.toJSON());
-        }
         data["published"] = this.published;
+        super.toJSON(data);
         return data; 
     }
 }
 
-export interface ICreateModuleContentSettingsOfVideoSettings {
-    settings: VideoSettings;
-    files?: ModuleContentFileSettings[] | undefined;
+export interface ICreateModuleContentSettingsOfVideoSettings extends IModuleContentSettingsOfVideoSettings {
     published?: boolean;
 }
 
-export class UpdateModuleContentSettingsOfVideoSettings implements IUpdateModuleContentSettingsOfVideoSettings {
-    settings!: VideoSettings;
-    files?: ModuleContentFileSettings[] | undefined;
+export class UpdateModuleContentSettingsOfVideoSettings extends ModuleContentSettingsOfVideoSettings implements IUpdateModuleContentSettingsOfVideoSettings {
     version?: number;
 
     constructor(data?: IUpdateModuleContentSettingsOfVideoSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.settings = new VideoSettings();
-        }
+        super(data);
     }
 
     init(_data?: any) {
+        super.init(_data);
         if (_data) {
-            this.settings = _data["settings"] ? VideoSettings.fromJS(_data["settings"]) : new VideoSettings();
-            if (Array.isArray(_data["files"])) {
-                this.files = [] as any;
-                for (let item of _data["files"])
-                    this.files!.push(ModuleContentFileSettings.fromJS(item));
-            }
             this.version = _data["version"];
         }
     }
@@ -43922,20 +44680,13 @@ export class UpdateModuleContentSettingsOfVideoSettings implements IUpdateModule
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["settings"] = this.settings ? this.settings.toJSON() : <any>undefined;
-        if (Array.isArray(this.files)) {
-            data["files"] = [];
-            for (let item of this.files)
-                data["files"].push(item.toJSON());
-        }
         data["version"] = this.version;
+        super.toJSON(data);
         return data; 
     }
 }
 
-export interface IUpdateModuleContentSettingsOfVideoSettings {
-    settings: VideoSettings;
-    files?: ModuleContentFileSettings[] | undefined;
+export interface IUpdateModuleContentSettingsOfVideoSettings extends IModuleContentSettingsOfVideoSettings {
     version?: number;
 }
 
@@ -44491,12 +45242,11 @@ export interface ICriterion {
     body: string;
 }
 
-export class CreateModuleContentSettingsOfAssessmentSettings implements ICreateModuleContentSettingsOfAssessmentSettings {
+export class ModuleContentSettingsOfAssessmentSettings implements IModuleContentSettingsOfAssessmentSettings {
     settings!: AssessmentSettings;
     files?: ModuleContentFileSettings[] | undefined;
-    published?: boolean;
 
-    constructor(data?: ICreateModuleContentSettingsOfAssessmentSettings) {
+    constructor(data?: IModuleContentSettingsOfAssessmentSettings) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -44516,6 +45266,43 @@ export class CreateModuleContentSettingsOfAssessmentSettings implements ICreateM
                 for (let item of _data["files"])
                     this.files!.push(ModuleContentFileSettings.fromJS(item));
             }
+        }
+    }
+
+    static fromJS(data: any): ModuleContentSettingsOfAssessmentSettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new ModuleContentSettingsOfAssessmentSettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["settings"] = this.settings ? this.settings.toJSON() : <any>undefined;
+        if (Array.isArray(this.files)) {
+            data["files"] = [];
+            for (let item of this.files)
+                data["files"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IModuleContentSettingsOfAssessmentSettings {
+    settings: AssessmentSettings;
+    files?: ModuleContentFileSettings[] | undefined;
+}
+
+export class CreateModuleContentSettingsOfAssessmentSettings extends ModuleContentSettingsOfAssessmentSettings implements ICreateModuleContentSettingsOfAssessmentSettings {
+    published?: boolean;
+
+    constructor(data?: ICreateModuleContentSettingsOfAssessmentSettings) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
             this.published = _data["published"];
         }
     }
@@ -44529,48 +45316,26 @@ export class CreateModuleContentSettingsOfAssessmentSettings implements ICreateM
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["settings"] = this.settings ? this.settings.toJSON() : <any>undefined;
-        if (Array.isArray(this.files)) {
-            data["files"] = [];
-            for (let item of this.files)
-                data["files"].push(item.toJSON());
-        }
         data["published"] = this.published;
+        super.toJSON(data);
         return data; 
     }
 }
 
-export interface ICreateModuleContentSettingsOfAssessmentSettings {
-    settings: AssessmentSettings;
-    files?: ModuleContentFileSettings[] | undefined;
+export interface ICreateModuleContentSettingsOfAssessmentSettings extends IModuleContentSettingsOfAssessmentSettings {
     published?: boolean;
 }
 
-export class UpdateModuleContentSettingsOfAssessmentSettings implements IUpdateModuleContentSettingsOfAssessmentSettings {
-    settings!: AssessmentSettings;
-    files?: ModuleContentFileSettings[] | undefined;
+export class UpdateModuleContentSettingsOfAssessmentSettings extends ModuleContentSettingsOfAssessmentSettings implements IUpdateModuleContentSettingsOfAssessmentSettings {
     version?: number;
 
     constructor(data?: IUpdateModuleContentSettingsOfAssessmentSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.settings = new AssessmentSettings();
-        }
+        super(data);
     }
 
     init(_data?: any) {
+        super.init(_data);
         if (_data) {
-            this.settings = _data["settings"] ? AssessmentSettings.fromJS(_data["settings"]) : new AssessmentSettings();
-            if (Array.isArray(_data["files"])) {
-                this.files = [] as any;
-                for (let item of _data["files"])
-                    this.files!.push(ModuleContentFileSettings.fromJS(item));
-            }
             this.version = _data["version"];
         }
     }
@@ -44584,20 +45349,13 @@ export class UpdateModuleContentSettingsOfAssessmentSettings implements IUpdateM
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["settings"] = this.settings ? this.settings.toJSON() : <any>undefined;
-        if (Array.isArray(this.files)) {
-            data["files"] = [];
-            for (let item of this.files)
-                data["files"].push(item.toJSON());
-        }
         data["version"] = this.version;
+        super.toJSON(data);
         return data; 
     }
 }
 
-export interface IUpdateModuleContentSettingsOfAssessmentSettings {
-    settings: AssessmentSettings;
-    files?: ModuleContentFileSettings[] | undefined;
+export interface IUpdateModuleContentSettingsOfAssessmentSettings extends IModuleContentSettingsOfAssessmentSettings {
     version?: number;
 }
 
@@ -44786,7 +45544,6 @@ export interface IAssessmentSubAttempt {
 }
 
 export class CreateAssessmentSubAttemptSettings implements ICreateAssessmentSubAttemptSettings {
-    /** Id of the actor of ActorType being assessed */
     actorId!: string;
     assessorId!: string;
     moduleId!: string;
@@ -44848,7 +45605,6 @@ export class CreateAssessmentSubAttemptSettings implements ICreateAssessmentSubA
 }
 
 export interface ICreateAssessmentSubAttemptSettings {
-    /** Id of the actor of ActorType being assessed */
     actorId: string;
     assessorId: string;
     moduleId: string;
@@ -48189,6 +48945,11 @@ export class UpdateUserPhoneNumberSettings implements IUpdateUserPhoneNumberSett
 export interface IUpdateUserPhoneNumberSettings {
     userVersion?: number;
     phoneNumber?: string | undefined;
+}
+
+export interface FileParameter {
+    data: any;
+    fileName: string;
 }
 
 export interface FileResponse {
