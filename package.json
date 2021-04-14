@@ -22,6 +22,6 @@
   },
   "homepage": "https://github.com/riberry-tech/rumble-client-js#readme",
   "devDependencies": {
-    "axios": "*"
+    "axios": "^0.21.1"
   }
 }
