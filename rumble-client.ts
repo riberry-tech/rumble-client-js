@@ -8701,6 +8701,367 @@ export class ItemActivationClient {
     }
 }
 
+export class ProgramActivationClient {
+    private instance: AxiosInstance;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(baseUrl?: string, instance?: AxiosInstance) {
+        this.instance = instance ? instance : axios.create();
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * @param search (optional) 
+     * @param skip (optional) 
+     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
+     * @param programId (optional) 
+     * @param consumerId (optional) 
+     */
+    getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, programId: string | null | undefined, consumerId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfProgramActivation> {
+        let url_ = this.baseUrl + "/v1/ProgramActivation?";
+        if (search !== undefined && search !== null)
+            url_ += "Search=" + encodeURIComponent("" + search) + "&";
+        if (skip === null)
+            throw new Error("The parameter 'skip' cannot be null.");
+        else if (skip !== undefined)
+            url_ += "Skip=" + encodeURIComponent("" + skip) + "&";
+        if (take === null)
+            throw new Error("The parameter 'take' cannot be null.");
+        else if (take !== undefined)
+            url_ += "Take=" + encodeURIComponent("" + take) + "&";
+        if (programId !== undefined && programId !== null)
+            url_ += "programId=" + encodeURIComponent("" + programId) + "&";
+        if (consumerId !== undefined && consumerId !== null)
+            url_ += "consumerId=" + encodeURIComponent("" + consumerId) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processGetAll(_response);
+        });
+    }
+
+    protected processGetAll(response: AxiosResponse): Promise<ListOfProgramActivation> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ListOfProgramActivation.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ListOfProgramActivation>(<any>null);
+    }
+
+    get(id: string | null , cancelToken?: CancelToken | undefined): Promise<ProgramActivation> {
+        let url_ = this.baseUrl + "/v1/ProgramActivation/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processGet(_response);
+        });
+    }
+
+    protected processGet(response: AxiosResponse): Promise<ProgramActivation> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ProgramActivation.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ProgramActivation>(<any>null);
+    }
+
+    createByPhase(settings: ActivateProgramPhaseSettings , cancelToken?: CancelToken | undefined): Promise<ProgramActivation> {
+        let url_ = this.baseUrl + "/v1/ProgramActivation/ProgramPhase";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(settings);
+
+        let options_ = <AxiosRequestConfig>{
+            data: content_,
+            method: "POST",
+            url: url_,
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processCreateByPhase(_response);
+        });
+    }
+
+    protected processCreateByPhase(response: AxiosResponse): Promise<ProgramActivation> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ProgramActivation.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ProgramActivation>(<any>null);
+    }
+
+    setCurrentPhase(programActivationId: string | null, programPhaseId: string | null , cancelToken?: CancelToken | undefined): Promise<ProgramActivation> {
+        let url_ = this.baseUrl + "/v1/ProgramActivation/{programActivationId}/ProgramPhase/{programPhaseId}/SetCurrent";
+        if (programActivationId === undefined || programActivationId === null)
+            throw new Error("The parameter 'programActivationId' must be defined.");
+        url_ = url_.replace("{programActivationId}", encodeURIComponent("" + programActivationId));
+        if (programPhaseId === undefined || programPhaseId === null)
+            throw new Error("The parameter 'programPhaseId' must be defined.");
+        url_ = url_.replace("{programPhaseId}", encodeURIComponent("" + programPhaseId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "POST",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processSetCurrentPhase(_response);
+        });
+    }
+
+    protected processSetCurrentPhase(response: AxiosResponse): Promise<ProgramActivation> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ProgramActivation.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ProgramActivation>(<any>null);
+    }
+
+    deactivate(programActivationId: string | null, programPhaseId: string | null , cancelToken?: CancelToken | undefined): Promise<ProgramActivation> {
+        let url_ = this.baseUrl + "/v1/ProgramActivation/{programActivationId}/ProgramPhase/{programPhaseId}/Deactivate";
+        if (programActivationId === undefined || programActivationId === null)
+            throw new Error("The parameter 'programActivationId' must be defined.");
+        url_ = url_.replace("{programActivationId}", encodeURIComponent("" + programActivationId));
+        if (programPhaseId === undefined || programPhaseId === null)
+            throw new Error("The parameter 'programPhaseId' must be defined.");
+        url_ = url_.replace("{programPhaseId}", encodeURIComponent("" + programPhaseId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "POST",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processDeactivate(_response);
+        });
+    }
+
+    protected processDeactivate(response: AxiosResponse): Promise<ProgramActivation> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ProgramActivation.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ProgramActivation>(<any>null);
+    }
+}
+
 export class ProgramClient {
     private instance: AxiosInstance;
     private baseUrl: string;
@@ -9168,6 +9529,274 @@ export class ProgramClient {
         if (programId === undefined || programId === null)
             throw new Error("The parameter 'programId' must be defined.");
         url_ = url_.replace("{programId}", encodeURIComponent("" + programId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "DELETE",
+            url: url_,
+            headers: {
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processDelete(_response);
+        });
+    }
+
+    protected processDelete(response: AxiosResponse): Promise<void> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 204) {
+            const _responseText = response.data;
+            return Promise.resolve<void>(<any>null);
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<void>(<any>null);
+    }
+}
+
+export class ProgramPhaseClient {
+    private instance: AxiosInstance;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(baseUrl?: string, instance?: AxiosInstance) {
+        this.instance = instance ? instance : axios.create();
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    get(id: string | null , cancelToken?: CancelToken | undefined): Promise<ProgramPhase> {
+        let url_ = this.baseUrl + "/v1/ProgramPhase/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processGet(_response);
+        });
+    }
+
+    protected processGet(response: AxiosResponse): Promise<ProgramPhase> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ProgramPhase.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ProgramPhase>(<any>null);
+    }
+
+    create(settings: CreateProgramPhaseSettings , cancelToken?: CancelToken | undefined): Promise<ProgramPhase> {
+        let url_ = this.baseUrl + "/v1/ProgramPhase";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(settings);
+
+        let options_ = <AxiosRequestConfig>{
+            data: content_,
+            method: "POST",
+            url: url_,
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processCreate(_response);
+        });
+    }
+
+    protected processCreate(response: AxiosResponse): Promise<ProgramPhase> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ProgramPhase.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ProgramPhase>(<any>null);
+    }
+
+    update(programPhaseId: string | null, settings: UpdateProgramPhaseSettings , cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/v1/ProgramPhase/{programPhaseId}";
+        if (programPhaseId === undefined || programPhaseId === null)
+            throw new Error("The parameter 'programPhaseId' must be defined.");
+        url_ = url_.replace("{programPhaseId}", encodeURIComponent("" + programPhaseId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(settings);
+
+        let options_ = <AxiosRequestConfig>{
+            data: content_,
+            method: "PUT",
+            url: url_,
+            headers: {
+                "Content-Type": "application/json",
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processUpdate(_response);
+        });
+    }
+
+    protected processUpdate(response: AxiosResponse): Promise<void> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 204) {
+            const _responseText = response.data;
+            return Promise.resolve<void>(<any>null);
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<void>(<any>null);
+    }
+
+    delete(programPhaseId: string | null , cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/v1/ProgramPhase/{programPhaseId}";
+        if (programPhaseId === undefined || programPhaseId === null)
+            throw new Error("The parameter 'programPhaseId' must be defined.");
+        url_ = url_.replace("{programPhaseId}", encodeURIComponent("" + programPhaseId));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <AxiosRequestConfig>{
@@ -35530,6 +36159,218 @@ export interface IProgramInItemActivation {
     name?: string | undefined;
 }
 
+export class ListOfProgramActivation implements IListOfProgramActivation {
+    totalItemCount?: number;
+    items?: ProgramActivation[] | undefined;
+
+    constructor(data?: IListOfProgramActivation) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.totalItemCount = _data["totalItemCount"];
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(ProgramActivation.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ListOfProgramActivation {
+        data = typeof data === 'object' ? data : {};
+        let result = new ListOfProgramActivation();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["totalItemCount"] = this.totalItemCount;
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IListOfProgramActivation {
+    totalItemCount?: number;
+    items?: ProgramActivation[] | undefined;
+}
+
+export class ProgramActivation implements IProgramActivation {
+    id?: string | undefined;
+    programId?: string | undefined;
+    consumerId?: string | undefined;
+    launchedAt?: Date;
+    sponsor?: string | undefined;
+    currentPhaseId?: string | undefined;
+    phaseActivations?: PhaseActivationInProgramActivation[] | undefined;
+    version?: number;
+
+    constructor(data?: IProgramActivation) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.programId = _data["programId"];
+            this.consumerId = _data["consumerId"];
+            this.launchedAt = _data["launchedAt"] ? new Date(_data["launchedAt"].toString()) : <any>undefined;
+            this.sponsor = _data["sponsor"];
+            this.currentPhaseId = _data["currentPhaseId"];
+            if (Array.isArray(_data["phaseActivations"])) {
+                this.phaseActivations = [] as any;
+                for (let item of _data["phaseActivations"])
+                    this.phaseActivations!.push(PhaseActivationInProgramActivation.fromJS(item));
+            }
+            this.version = _data["version"];
+        }
+    }
+
+    static fromJS(data: any): ProgramActivation {
+        data = typeof data === 'object' ? data : {};
+        let result = new ProgramActivation();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["programId"] = this.programId;
+        data["consumerId"] = this.consumerId;
+        data["launchedAt"] = this.launchedAt ? this.launchedAt.toISOString() : <any>undefined;
+        data["sponsor"] = this.sponsor;
+        data["currentPhaseId"] = this.currentPhaseId;
+        if (Array.isArray(this.phaseActivations)) {
+            data["phaseActivations"] = [];
+            for (let item of this.phaseActivations)
+                data["phaseActivations"].push(item.toJSON());
+        }
+        data["version"] = this.version;
+        return data; 
+    }
+}
+
+export interface IProgramActivation {
+    id?: string | undefined;
+    programId?: string | undefined;
+    consumerId?: string | undefined;
+    launchedAt?: Date;
+    sponsor?: string | undefined;
+    currentPhaseId?: string | undefined;
+    phaseActivations?: PhaseActivationInProgramActivation[] | undefined;
+    version?: number;
+}
+
+export class PhaseActivationInProgramActivation implements IPhaseActivationInProgramActivation {
+    id?: string | undefined;
+    status?: ProgramPhaseActivationStatus;
+
+    constructor(data?: IPhaseActivationInProgramActivation) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.status = _data["status"];
+        }
+    }
+
+    static fromJS(data: any): PhaseActivationInProgramActivation {
+        data = typeof data === 'object' ? data : {};
+        let result = new PhaseActivationInProgramActivation();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["status"] = this.status;
+        return data; 
+    }
+}
+
+export interface IPhaseActivationInProgramActivation {
+    id?: string | undefined;
+    status?: ProgramPhaseActivationStatus;
+}
+
+/** 0 = NotActivated 1 = Requested 2 = Activated 3 = Deactivated */
+export enum ProgramPhaseActivationStatus {
+    NotActivated = 0,
+    Requested = 1,
+    Activated = 2,
+    Deactivated = 3,
+}
+
+export class ActivateProgramPhaseSettings implements IActivateProgramPhaseSettings {
+    consumerId!: string;
+    programPhaseId!: string;
+    sponsor!: string;
+
+    constructor(data?: IActivateProgramPhaseSettings) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.consumerId = _data["consumerId"];
+            this.programPhaseId = _data["programPhaseId"];
+            this.sponsor = _data["sponsor"];
+        }
+    }
+
+    static fromJS(data: any): ActivateProgramPhaseSettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new ActivateProgramPhaseSettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["consumerId"] = this.consumerId;
+        data["programPhaseId"] = this.programPhaseId;
+        data["sponsor"] = this.sponsor;
+        return data; 
+    }
+}
+
+export interface IActivateProgramPhaseSettings {
+    consumerId: string;
+    programPhaseId: string;
+    sponsor: string;
+}
+
 export class ListOfProgram implements IListOfProgram {
     totalItemCount?: number;
     items?: Program[] | undefined;
@@ -35587,6 +36428,7 @@ export class Program implements IProgram {
     publisherName?: string | undefined;
     publisherLogoUri?: string | undefined;
     resources?: ProgramResource[] | undefined;
+    phases?: ProgramPhaseInProgram[] | undefined;
     version?: number;
 
     constructor(data?: IProgram) {
@@ -35611,6 +36453,11 @@ export class Program implements IProgram {
                 this.resources = [] as any;
                 for (let item of _data["resources"])
                     this.resources!.push(ProgramResource.fromJS(item));
+            }
+            if (Array.isArray(_data["phases"])) {
+                this.phases = [] as any;
+                for (let item of _data["phases"])
+                    this.phases!.push(ProgramPhaseInProgram.fromJS(item));
             }
             this.version = _data["version"];
         }
@@ -35637,6 +36484,11 @@ export class Program implements IProgram {
             for (let item of this.resources)
                 data["resources"].push(item.toJSON());
         }
+        if (Array.isArray(this.phases)) {
+            data["phases"] = [];
+            for (let item of this.phases)
+                data["phases"].push(item.toJSON());
+        }
         data["version"] = this.version;
         return data; 
     }
@@ -35651,6 +36503,7 @@ export interface IProgram {
     publisherName?: string | undefined;
     publisherLogoUri?: string | undefined;
     resources?: ProgramResource[] | undefined;
+    phases?: ProgramPhaseInProgram[] | undefined;
     version?: number;
 }
 
@@ -35700,6 +36553,54 @@ export enum ProgramResourceType {
     ObservationDefinition = 1,
     Survey = 2,
     Implementation = 3,
+}
+
+export class ProgramPhaseInProgram implements IProgramPhaseInProgram {
+    id?: string | undefined;
+    resources?: ProgramResource[] | undefined;
+
+    constructor(data?: IProgramPhaseInProgram) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            if (Array.isArray(_data["resources"])) {
+                this.resources = [] as any;
+                for (let item of _data["resources"])
+                    this.resources!.push(ProgramResource.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ProgramPhaseInProgram {
+        data = typeof data === 'object' ? data : {};
+        let result = new ProgramPhaseInProgram();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        if (Array.isArray(this.resources)) {
+            data["resources"] = [];
+            for (let item of this.resources)
+                data["resources"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IProgramPhaseInProgram {
+    id?: string | undefined;
+    resources?: ProgramResource[] | undefined;
 }
 
 export class CreateProgramSettings implements ICreateProgramSettings {
@@ -35818,6 +36719,206 @@ export interface IUpdateProgramSettings {
     name: string;
     bannerUri?: string | undefined;
     logoUri?: string | undefined;
+    resources?: ProgramResource[] | undefined;
+    version?: number;
+}
+
+export class ProgramPhase implements IProgramPhase {
+    id?: string | undefined;
+    publisherId?: string | undefined;
+    publisherName?: string | undefined;
+    publisherLogoUri?: string | undefined;
+    programId?: string | undefined;
+    programName?: string | undefined;
+    programLogoUri?: string | undefined;
+    programBannerUri?: string | undefined;
+    name?: string | undefined;
+    description?: string | undefined;
+    resources?: ProgramResource[] | undefined;
+    version?: number;
+
+    constructor(data?: IProgramPhase) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.publisherId = _data["publisherId"];
+            this.publisherName = _data["publisherName"];
+            this.publisherLogoUri = _data["publisherLogoUri"];
+            this.programId = _data["programId"];
+            this.programName = _data["programName"];
+            this.programLogoUri = _data["programLogoUri"];
+            this.programBannerUri = _data["programBannerUri"];
+            this.name = _data["name"];
+            this.description = _data["description"];
+            if (Array.isArray(_data["resources"])) {
+                this.resources = [] as any;
+                for (let item of _data["resources"])
+                    this.resources!.push(ProgramResource.fromJS(item));
+            }
+            this.version = _data["version"];
+        }
+    }
+
+    static fromJS(data: any): ProgramPhase {
+        data = typeof data === 'object' ? data : {};
+        let result = new ProgramPhase();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["publisherId"] = this.publisherId;
+        data["publisherName"] = this.publisherName;
+        data["publisherLogoUri"] = this.publisherLogoUri;
+        data["programId"] = this.programId;
+        data["programName"] = this.programName;
+        data["programLogoUri"] = this.programLogoUri;
+        data["programBannerUri"] = this.programBannerUri;
+        data["name"] = this.name;
+        data["description"] = this.description;
+        if (Array.isArray(this.resources)) {
+            data["resources"] = [];
+            for (let item of this.resources)
+                data["resources"].push(item.toJSON());
+        }
+        data["version"] = this.version;
+        return data; 
+    }
+}
+
+export interface IProgramPhase {
+    id?: string | undefined;
+    publisherId?: string | undefined;
+    publisherName?: string | undefined;
+    publisherLogoUri?: string | undefined;
+    programId?: string | undefined;
+    programName?: string | undefined;
+    programLogoUri?: string | undefined;
+    programBannerUri?: string | undefined;
+    name?: string | undefined;
+    description?: string | undefined;
+    resources?: ProgramResource[] | undefined;
+    version?: number;
+}
+
+export class CreateProgramPhaseSettings implements ICreateProgramPhaseSettings {
+    programId!: string;
+    name?: string | undefined;
+    description?: string | undefined;
+    resources?: ProgramResource[] | undefined;
+
+    constructor(data?: ICreateProgramPhaseSettings) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.programId = _data["programId"];
+            this.name = _data["name"];
+            this.description = _data["description"];
+            if (Array.isArray(_data["resources"])) {
+                this.resources = [] as any;
+                for (let item of _data["resources"])
+                    this.resources!.push(ProgramResource.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateProgramPhaseSettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateProgramPhaseSettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["programId"] = this.programId;
+        data["name"] = this.name;
+        data["description"] = this.description;
+        if (Array.isArray(this.resources)) {
+            data["resources"] = [];
+            for (let item of this.resources)
+                data["resources"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface ICreateProgramPhaseSettings {
+    programId: string;
+    name?: string | undefined;
+    description?: string | undefined;
+    resources?: ProgramResource[] | undefined;
+}
+
+export class UpdateProgramPhaseSettings implements IUpdateProgramPhaseSettings {
+    name!: string;
+    description?: string | undefined;
+    resources?: ProgramResource[] | undefined;
+    version?: number;
+
+    constructor(data?: IUpdateProgramPhaseSettings) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            this.description = _data["description"];
+            if (Array.isArray(_data["resources"])) {
+                this.resources = [] as any;
+                for (let item of _data["resources"])
+                    this.resources!.push(ProgramResource.fromJS(item));
+            }
+            this.version = _data["version"];
+        }
+    }
+
+    static fromJS(data: any): UpdateProgramPhaseSettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new UpdateProgramPhaseSettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["description"] = this.description;
+        if (Array.isArray(this.resources)) {
+            data["resources"] = [];
+            for (let item of this.resources)
+                data["resources"].push(item.toJSON());
+        }
+        data["version"] = this.version;
+        return data; 
+    }
+}
+
+export interface IUpdateProgramPhaseSettings {
+    name: string;
+    description?: string | undefined;
     resources?: ProgramResource[] | undefined;
     version?: number;
 }
