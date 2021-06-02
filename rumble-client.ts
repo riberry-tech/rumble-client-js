@@ -30501,7 +30501,7 @@ export class UserPhoneNumberClient {
         return Promise.resolve<void>(<any>null);
     }
 
-    sendVerification(userId: string | null , cancelToken?: CancelToken | undefined): Promise<void> {
+    sendVerification(userId: string | null , cancelToken?: CancelToken | undefined): Promise<VerificationResult> {
         let url_ = this.baseUrl + "/v1/UserPhoneNumber/{userId}/SendVerification";
         if (userId === undefined || userId === null)
             throw new Error("The parameter 'userId' must be defined.");
@@ -30512,6 +30512,7 @@ export class UserPhoneNumberClient {
             method: "POST",
             url: url_,
             headers: {
+                "Accept": "application/json"
             },
             cancelToken
         };
@@ -30527,7 +30528,7 @@ export class UserPhoneNumberClient {
         });
     }
 
-    protected processSendVerification(response: AxiosResponse): Promise<void> {
+    protected processSendVerification(response: AxiosResponse): Promise<VerificationResult> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -30537,9 +30538,12 @@ export class UserPhoneNumberClient {
                 }
             }
         }
-        if (status === 204) {
+        if (status === 200) {
             const _responseText = response.data;
-            return Promise.resolve<void>(<any>null);
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = VerificationResult.fromJS(resultData200);
+            return result200;
         } else if (status === 401) {
             const _responseText = response.data;
             return throwException("You are not permitted to view this.", status, _responseText, _headers);
@@ -30559,7 +30563,7 @@ export class UserPhoneNumberClient {
             const _responseText = response.data;
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         }
-        return Promise.resolve<void>(<any>null);
+        return Promise.resolve<VerificationResult>(<any>null);
     }
 
     verify(verificationCode: string | null , cancelToken?: CancelToken | undefined): Promise<void> {
@@ -50291,6 +50295,46 @@ export class UpdateUserPhoneNumberSettings implements IUpdateUserPhoneNumberSett
 export interface IUpdateUserPhoneNumberSettings {
     userVersion?: number;
     phoneNumber?: string | undefined;
+}
+
+export class VerificationResult implements IVerificationResult {
+    sent?: boolean;
+    waitSeconds?: number;
+
+    constructor(data?: IVerificationResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.sent = _data["sent"];
+            this.waitSeconds = _data["waitSeconds"];
+        }
+    }
+
+    static fromJS(data: any): VerificationResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new VerificationResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["sent"] = this.sent;
+        data["waitSeconds"] = this.waitSeconds;
+        return data; 
+    }
+}
+
+export interface IVerificationResult {
+    sent?: boolean;
+    waitSeconds?: number;
 }
 
 export interface FileParameter {
