@@ -2599,133 +2599,6 @@ export class ProjectionClient {
         }
         return Promise.resolve<Projection>(<any>null);
     }
-
-    build(projectionId: string | null, settings: BuildProjectionSettings , cancelToken?: CancelToken | undefined): Promise<void> {
-        let url_ = this.baseUrl + "/v1/Projection/Build/{projectionId}";
-        if (projectionId === undefined || projectionId === null)
-            throw new Error("The parameter 'projectionId' must be defined.");
-        url_ = url_.replace("{projectionId}", encodeURIComponent("" + projectionId));
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(settings);
-
-        let options_ = <AxiosRequestConfig>{
-            data: content_,
-            method: "POST",
-            url: url_,
-            headers: {
-                "Content-Type": "application/json",
-            },
-            cancelToken
-        };
-
-        return this.instance.request(options_).catch((_error: any) => {
-            if (isAxiosError(_error) && _error.response) {
-                return _error.response;
-            } else {
-                throw _error;
-            }
-        }).then((_response: AxiosResponse) => {
-            return this.processBuild(_response);
-        });
-    }
-
-    protected processBuild(response: AxiosResponse): Promise<void> {
-        const status = response.status;
-        let _headers: any = {};
-        if (response.headers && typeof response.headers === "object") {
-            for (let k in response.headers) {
-                if (response.headers.hasOwnProperty(k)) {
-                    _headers[k] = response.headers[k];
-                }
-            }
-        }
-        if (status === 204) {
-            const _responseText = response.data;
-            return Promise.resolve<void>(<any>null);
-        } else if (status === 401) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-        } else if (status === 403) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-        } else if (status === 404) {
-            const _responseText = response.data;
-            return throwException("This resource could not be found.", status, _responseText, _headers);
-        } else if (status === 503) {
-            const _responseText = response.data;
-            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
-        } else if (status === 504) {
-            const _responseText = response.data;
-            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
-        } else if (status !== 200 && status !== 204) {
-            const _responseText = response.data;
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-        }
-        return Promise.resolve<void>(<any>null);
-    }
-
-    buildAll(settings: BuildProjectionSettings , cancelToken?: CancelToken | undefined): Promise<void> {
-        let url_ = this.baseUrl + "/v1/Projection/BuildAll";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(settings);
-
-        let options_ = <AxiosRequestConfig>{
-            data: content_,
-            method: "POST",
-            url: url_,
-            headers: {
-                "Content-Type": "application/json",
-            },
-            cancelToken
-        };
-
-        return this.instance.request(options_).catch((_error: any) => {
-            if (isAxiosError(_error) && _error.response) {
-                return _error.response;
-            } else {
-                throw _error;
-            }
-        }).then((_response: AxiosResponse) => {
-            return this.processBuildAll(_response);
-        });
-    }
-
-    protected processBuildAll(response: AxiosResponse): Promise<void> {
-        const status = response.status;
-        let _headers: any = {};
-        if (response.headers && typeof response.headers === "object") {
-            for (let k in response.headers) {
-                if (response.headers.hasOwnProperty(k)) {
-                    _headers[k] = response.headers[k];
-                }
-            }
-        }
-        if (status === 204) {
-            const _responseText = response.data;
-            return Promise.resolve<void>(<any>null);
-        } else if (status === 401) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-        } else if (status === 403) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-        } else if (status === 404) {
-            const _responseText = response.data;
-            return throwException("This resource could not be found.", status, _responseText, _headers);
-        } else if (status === 503) {
-            const _responseText = response.data;
-            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
-        } else if (status === 504) {
-            const _responseText = response.data;
-            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
-        } else if (status !== 200 && status !== 204) {
-            const _responseText = response.data;
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-        }
-        return Promise.resolve<void>(<any>null);
-    }
 }
 
 export class NotificationClient {
@@ -14782,6 +14655,7 @@ export class CertificationClient {
 
     /**
      * Gets the certifications for a trainee at the given time.
+     * @param traineeId The user id of the trainee.
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param at (optional) The UTC time at which to get certificates. If not specified, the current time is used.
@@ -30501,7 +30375,7 @@ export class UserPhoneNumberClient {
         return Promise.resolve<void>(<any>null);
     }
 
-    sendVerification(userId: string | null , cancelToken?: CancelToken | undefined): Promise<VerificationResult> {
+    sendVerification(userId: string | null , cancelToken?: CancelToken | undefined): Promise<VerificationRequestResult> {
         let url_ = this.baseUrl + "/v1/UserPhoneNumber/{userId}/SendVerification";
         if (userId === undefined || userId === null)
             throw new Error("The parameter 'userId' must be defined.");
@@ -30528,7 +30402,7 @@ export class UserPhoneNumberClient {
         });
     }
 
-    protected processSendVerification(response: AxiosResponse): Promise<VerificationResult> {
+    protected processSendVerification(response: AxiosResponse): Promise<VerificationRequestResult> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -30542,7 +30416,7 @@ export class UserPhoneNumberClient {
             const _responseText = response.data;
             let result200: any = null;
             let resultData200  = _responseText;
-            result200 = VerificationResult.fromJS(resultData200);
+            result200 = VerificationRequestResult.fromJS(resultData200);
             return result200;
         } else if (status === 401) {
             const _responseText = response.data;
@@ -30563,7 +30437,7 @@ export class UserPhoneNumberClient {
             const _responseText = response.data;
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         }
-        return Promise.resolve<VerificationResult>(<any>null);
+        return Promise.resolve<VerificationRequestResult>(<any>null);
     }
 
     verify(verificationCode: string | null , cancelToken?: CancelToken | undefined): Promise<void> {
@@ -32473,46 +32347,6 @@ export interface IProjectionBuild {
     eventsProcessed?: number;
     estimatedTotalEvents?: number;
     error?: string | undefined;
-}
-
-export class BuildProjectionSettings implements IBuildProjectionSettings {
-    email!: string;
-    password!: string;
-
-    constructor(data?: IBuildProjectionSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.email = _data["email"];
-            this.password = _data["password"];
-        }
-    }
-
-    static fromJS(data: any): BuildProjectionSettings {
-        data = typeof data === 'object' ? data : {};
-        let result = new BuildProjectionSettings();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["email"] = this.email;
-        data["password"] = this.password;
-        return data; 
-    }
-}
-
-export interface IBuildProjectionSettings {
-    email: string;
-    password: string;
 }
 
 export class ListOfNotification implements IListOfNotification {
@@ -36817,7 +36651,7 @@ export interface IProgramPhase {
 
 export class CreateProgramPhaseSettings implements ICreateProgramPhaseSettings {
     programId!: string;
-    name?: string | undefined;
+    name!: string;
     description?: string | undefined;
     resources?: ProgramResource[] | undefined;
 
@@ -36866,7 +36700,7 @@ export class CreateProgramPhaseSettings implements ICreateProgramPhaseSettings {
 
 export interface ICreateProgramPhaseSettings {
     programId: string;
-    name?: string | undefined;
+    name: string;
     description?: string | undefined;
     resources?: ProgramResource[] | undefined;
 }
@@ -47198,6 +47032,7 @@ export class IdentityGroup implements IIdentityGroup {
     groupType?: string | undefined;
     parentGroups?: GroupIdAndType[] | undefined;
     displayId?: string | undefined;
+    labelIds?: string[] | undefined;
     roles?: string[] | undefined;
 
     constructor(data?: IIdentityGroup) {
@@ -47219,6 +47054,11 @@ export class IdentityGroup implements IIdentityGroup {
                     this.parentGroups!.push(GroupIdAndType.fromJS(item));
             }
             this.displayId = _data["displayId"];
+            if (Array.isArray(_data["labelIds"])) {
+                this.labelIds = [] as any;
+                for (let item of _data["labelIds"])
+                    this.labelIds!.push(item);
+            }
             if (Array.isArray(_data["roles"])) {
                 this.roles = [] as any;
                 for (let item of _data["roles"])
@@ -47244,6 +47084,11 @@ export class IdentityGroup implements IIdentityGroup {
                 data["parentGroups"].push(item.toJSON());
         }
         data["displayId"] = this.displayId;
+        if (Array.isArray(this.labelIds)) {
+            data["labelIds"] = [];
+            for (let item of this.labelIds)
+                data["labelIds"].push(item);
+        }
         if (Array.isArray(this.roles)) {
             data["roles"] = [];
             for (let item of this.roles)
@@ -47258,6 +47103,7 @@ export interface IIdentityGroup {
     groupType?: string | undefined;
     parentGroups?: GroupIdAndType[] | undefined;
     displayId?: string | undefined;
+    labelIds?: string[] | undefined;
     roles?: string[] | undefined;
 }
 
@@ -50297,11 +50143,11 @@ export interface IUpdateUserPhoneNumberSettings {
     phoneNumber?: string | undefined;
 }
 
-export class VerificationResult implements IVerificationResult {
+export class VerificationRequestResult implements IVerificationRequestResult {
     sent?: boolean;
     waitSeconds?: number;
 
-    constructor(data?: IVerificationResult) {
+    constructor(data?: IVerificationRequestResult) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -50317,9 +50163,9 @@ export class VerificationResult implements IVerificationResult {
         }
     }
 
-    static fromJS(data: any): VerificationResult {
+    static fromJS(data: any): VerificationRequestResult {
         data = typeof data === 'object' ? data : {};
-        let result = new VerificationResult();
+        let result = new VerificationRequestResult();
         result.init(data);
         return result;
     }
@@ -50332,7 +50178,7 @@ export class VerificationResult implements IVerificationResult {
     }
 }
 
-export interface IVerificationResult {
+export interface IVerificationRequestResult {
     sent?: boolean;
     waitSeconds?: number;
 }
