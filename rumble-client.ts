@@ -8201,8 +8201,9 @@ export class ItemActivationClient {
     - program ID to filter to specific program
     - "none" to filter to items not in any program
      * @param consumerId (optional) 
+     * @param includeDeactivated (optional) 
      */
-    getAllForPublisher(publisherId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, itemType: string | null | undefined, programId: string | null | undefined, consumerId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfItemActivation> {
+    getAllForPublisher(publisherId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, itemType: string | null | undefined, programId: string | null | undefined, consumerId: string | null | undefined, includeDeactivated: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfItemActivation> {
         let url_ = this.baseUrl + "/v1/ItemActivation/Publisher/{publisherId}?";
         if (publisherId === undefined || publisherId === null)
             throw new Error("The parameter 'publisherId' must be defined.");
@@ -8223,6 +8224,8 @@ export class ItemActivationClient {
             url_ += "programId=" + encodeURIComponent("" + programId) + "&";
         if (consumerId !== undefined && consumerId !== null)
             url_ += "consumerId=" + encodeURIComponent("" + consumerId) + "&";
+        if (includeDeactivated !== undefined && includeDeactivated !== null)
+            url_ += "includeDeactivated=" + encodeURIComponent("" + includeDeactivated) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <AxiosRequestConfig>{
@@ -8571,6 +8574,74 @@ export class ItemActivationClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         }
         return Promise.resolve<void>(<any>null);
+    }
+
+    get2(itemId: string | null, consumerId: string | null , cancelToken?: CancelToken | undefined): Promise<ItemActivation> {
+        let url_ = this.baseUrl + "/v1/ItemActivation/Item/{itemId}/Consumer/{consumerId}";
+        if (itemId === undefined || itemId === null)
+            throw new Error("The parameter 'itemId' must be defined.");
+        url_ = url_.replace("{itemId}", encodeURIComponent("" + itemId));
+        if (consumerId === undefined || consumerId === null)
+            throw new Error("The parameter 'consumerId' must be defined.");
+        url_ = url_.replace("{consumerId}", encodeURIComponent("" + consumerId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processGet2(_response);
+        });
+    }
+
+    protected processGet2(response: AxiosResponse): Promise<ItemActivation> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ItemActivation.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ItemActivation>(<any>null);
     }
 }
 
@@ -35870,6 +35941,7 @@ export class ItemActivation implements IItemActivation {
     publisherId?: string | undefined;
     publisherName?: string | undefined;
     consumerOrganisationId?: string | undefined;
+    consumerType?: string | undefined;
     consumerId?: string | undefined;
     consumerName?: string | undefined;
     activated?: boolean;
@@ -35900,6 +35972,7 @@ export class ItemActivation implements IItemActivation {
             this.publisherId = _data["publisherId"];
             this.publisherName = _data["publisherName"];
             this.consumerOrganisationId = _data["consumerOrganisationId"];
+            this.consumerType = _data["consumerType"];
             this.consumerId = _data["consumerId"];
             this.consumerName = _data["consumerName"];
             this.activated = _data["activated"];
@@ -35930,6 +36003,7 @@ export class ItemActivation implements IItemActivation {
         data["publisherId"] = this.publisherId;
         data["publisherName"] = this.publisherName;
         data["consumerOrganisationId"] = this.consumerOrganisationId;
+        data["consumerType"] = this.consumerType;
         data["consumerId"] = this.consumerId;
         data["consumerName"] = this.consumerName;
         data["activated"] = this.activated;
@@ -35949,6 +36023,7 @@ export interface IItemActivation {
     publisherId?: string | undefined;
     publisherName?: string | undefined;
     consumerOrganisationId?: string | undefined;
+    consumerType?: string | undefined;
     consumerId?: string | undefined;
     consumerName?: string | undefined;
     activated?: boolean;
