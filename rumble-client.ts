@@ -8738,6 +8738,89 @@ export class ProgramActivationClient {
         return Promise.resolve<ListOfProgramActivation>(<any>null);
     }
 
+    /**
+     * @param search (optional) 
+     * @param skip (optional) 
+     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
+     * @param programId (optional) 
+     */
+    getAllForPublisher(publisherId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, programId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfProgramActivation> {
+        let url_ = this.baseUrl + "/v1/ProgramActivation/Publisher/{publisherId}?";
+        if (publisherId === undefined || publisherId === null)
+            throw new Error("The parameter 'publisherId' must be defined.");
+        url_ = url_.replace("{publisherId}", encodeURIComponent("" + publisherId));
+        if (search !== undefined && search !== null)
+            url_ += "Search=" + encodeURIComponent("" + search) + "&";
+        if (skip === null)
+            throw new Error("The parameter 'skip' cannot be null.");
+        else if (skip !== undefined)
+            url_ += "Skip=" + encodeURIComponent("" + skip) + "&";
+        if (take === null)
+            throw new Error("The parameter 'take' cannot be null.");
+        else if (take !== undefined)
+            url_ += "Take=" + encodeURIComponent("" + take) + "&";
+        if (programId !== undefined && programId !== null)
+            url_ += "programId=" + encodeURIComponent("" + programId) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processGetAllForPublisher(_response);
+        });
+    }
+
+    protected processGetAllForPublisher(response: AxiosResponse): Promise<ListOfProgramActivation> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ListOfProgramActivation.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ListOfProgramActivation>(<any>null);
+    }
+
     get(id: string | null , cancelToken?: CancelToken | undefined): Promise<ProgramActivation> {
         let url_ = this.baseUrl + "/v1/ProgramActivation/{id}";
         if (id === undefined || id === null)
@@ -8766,6 +8849,74 @@ export class ProgramActivationClient {
     }
 
     protected processGet(response: AxiosResponse): Promise<ProgramActivation> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ProgramActivation.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ProgramActivation>(<any>null);
+    }
+
+    get2(programId: string | null, consumerId: string | null , cancelToken?: CancelToken | undefined): Promise<ProgramActivation> {
+        let url_ = this.baseUrl + "/v1/ProgramActivation/Program/{programId}/Consumer/{consumerId}";
+        if (programId === undefined || programId === null)
+            throw new Error("The parameter 'programId' must be defined.");
+        url_ = url_.replace("{programId}", encodeURIComponent("" + programId));
+        if (consumerId === undefined || consumerId === null)
+            throw new Error("The parameter 'consumerId' must be defined.");
+        url_ = url_.replace("{consumerId}", encodeURIComponent("" + consumerId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processGet2(_response);
+        });
+    }
+
+    protected processGet2(response: AxiosResponse): Promise<ProgramActivation> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -30574,8 +30725,8 @@ export class UserPhoneNumberClient {
 }
 
 export class ListOfEmail implements IListOfEmail {
-    totalItemCount?: number;
-    items?: Email[] | undefined;
+    totalItemCount!: number;
+    items!: Email[];
 
     constructor(data?: IListOfEmail) {
         if (data) {
@@ -30583,6 +30734,9 @@ export class ListOfEmail implements IListOfEmail {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -30617,8 +30771,8 @@ export class ListOfEmail implements IListOfEmail {
 }
 
 export interface IListOfEmail {
-    totalItemCount?: number;
-    items?: Email[] | undefined;
+    totalItemCount: number;
+    items: Email[];
 }
 
 export class Email implements IEmail {
@@ -30753,8 +30907,8 @@ export enum EmailStatus {
 }
 
 export class ListOfUserAttendance implements IListOfUserAttendance {
-    totalItemCount?: number;
-    items?: UserAttendance[] | undefined;
+    totalItemCount!: number;
+    items!: UserAttendance[];
 
     constructor(data?: IListOfUserAttendance) {
         if (data) {
@@ -30762,6 +30916,9 @@ export class ListOfUserAttendance implements IListOfUserAttendance {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -30796,8 +30953,8 @@ export class ListOfUserAttendance implements IListOfUserAttendance {
 }
 
 export interface IListOfUserAttendance {
-    totalItemCount?: number;
-    items?: UserAttendance[] | undefined;
+    totalItemCount: number;
+    items: UserAttendance[];
 }
 
 export class Attendance implements IAttendance {
@@ -30962,8 +31119,8 @@ export interface IUpdateAttendanceSettings {
 }
 
 export class ListOfMeeting implements IListOfMeeting {
-    totalItemCount?: number;
-    items?: Meeting[] | undefined;
+    totalItemCount!: number;
+    items!: Meeting[];
 
     constructor(data?: IListOfMeeting) {
         if (data) {
@@ -30971,6 +31128,9 @@ export class ListOfMeeting implements IListOfMeeting {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -31005,8 +31165,8 @@ export class ListOfMeeting implements IListOfMeeting {
 }
 
 export interface IListOfMeeting {
-    totalItemCount?: number;
-    items?: Meeting[] | undefined;
+    totalItemCount: number;
+    items: Meeting[];
 }
 
 export class Meeting implements IMeeting {
@@ -31374,8 +31534,8 @@ export interface IUpdateMeetingSettings {
 }
 
 export class ListOfFile implements IListOfFile {
-    totalItemCount?: number;
-    items?: File[] | undefined;
+    totalItemCount!: number;
+    items!: File[];
 
     constructor(data?: IListOfFile) {
         if (data) {
@@ -31383,6 +31543,9 @@ export class ListOfFile implements IListOfFile {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -31417,8 +31580,8 @@ export class ListOfFile implements IListOfFile {
 }
 
 export interface IListOfFile {
-    totalItemCount?: number;
-    items?: File[] | undefined;
+    totalItemCount: number;
+    items: File[];
 }
 
 export class File implements IFile {
@@ -31550,8 +31713,8 @@ export interface IUpdateFileSettings {
 }
 
 export class ListOfGroupAttendance implements IListOfGroupAttendance {
-    totalItemCount?: number;
-    items?: GroupAttendance[] | undefined;
+    totalItemCount!: number;
+    items!: GroupAttendance[];
 
     constructor(data?: IListOfGroupAttendance) {
         if (data) {
@@ -31559,6 +31722,9 @@ export class ListOfGroupAttendance implements IListOfGroupAttendance {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -31593,8 +31759,8 @@ export class ListOfGroupAttendance implements IListOfGroupAttendance {
 }
 
 export interface IListOfGroupAttendance {
-    totalItemCount?: number;
-    items?: GroupAttendance[] | undefined;
+    totalItemCount: number;
+    items: GroupAttendance[];
 }
 
 export class GroupAttendance extends Attendance implements IGroupAttendance {
@@ -31631,8 +31797,8 @@ export interface IGroupAttendance extends IAttendance {
 }
 
 export class ListOfBackup implements IListOfBackup {
-    totalItemCount?: number;
-    items?: Backup[] | undefined;
+    totalItemCount!: number;
+    items!: Backup[];
 
     constructor(data?: IListOfBackup) {
         if (data) {
@@ -31640,6 +31806,9 @@ export class ListOfBackup implements IListOfBackup {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -31674,8 +31843,8 @@ export class ListOfBackup implements IListOfBackup {
 }
 
 export interface IListOfBackup {
-    totalItemCount?: number;
-    items?: Backup[] | undefined;
+    totalItemCount: number;
+    items: Backup[];
 }
 
 export class Backup implements IBackup {
@@ -31738,8 +31907,8 @@ export enum BackupStatus {
 }
 
 export class ListOfExternalApplication implements IListOfExternalApplication {
-    totalItemCount?: number;
-    items?: ExternalApplication[] | undefined;
+    totalItemCount!: number;
+    items!: ExternalApplication[];
 
     constructor(data?: IListOfExternalApplication) {
         if (data) {
@@ -31747,6 +31916,9 @@ export class ListOfExternalApplication implements IListOfExternalApplication {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -31781,8 +31953,8 @@ export class ListOfExternalApplication implements IListOfExternalApplication {
 }
 
 export interface IListOfExternalApplication {
-    totalItemCount?: number;
-    items?: ExternalApplication[] | undefined;
+    totalItemCount: number;
+    items: ExternalApplication[];
 }
 
 export class ExternalApplication implements IExternalApplication {
@@ -31986,8 +32158,8 @@ export interface IResizedImage {
 }
 
 export class ListOfLog implements IListOfLog {
-    totalItemCount?: number;
-    items?: Log[] | undefined;
+    totalItemCount!: number;
+    items!: Log[];
 
     constructor(data?: IListOfLog) {
         if (data) {
@@ -31995,6 +32167,9 @@ export class ListOfLog implements IListOfLog {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -32029,8 +32204,8 @@ export class ListOfLog implements IListOfLog {
 }
 
 export interface IListOfLog {
-    totalItemCount?: number;
-    items?: Log[] | undefined;
+    totalItemCount: number;
+    items: Log[];
 }
 
 export class Log implements ILog {
@@ -32421,8 +32596,8 @@ export interface IProjectionBuild {
 }
 
 export class ListOfNotification implements IListOfNotification {
-    totalItemCount?: number;
-    items?: Notification[] | undefined;
+    totalItemCount!: number;
+    items!: Notification[];
 
     constructor(data?: IListOfNotification) {
         if (data) {
@@ -32430,6 +32605,9 @@ export class ListOfNotification implements IListOfNotification {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -32464,8 +32642,8 @@ export class ListOfNotification implements IListOfNotification {
 }
 
 export interface IListOfNotification {
-    totalItemCount?: number;
-    items?: Notification[] | undefined;
+    totalItemCount: number;
+    items: Notification[];
 }
 
 export class Notification implements INotification {
@@ -32585,8 +32763,8 @@ export interface IUpdateNotificationSettings {
 }
 
 export class ListOfScheduledEmail implements IListOfScheduledEmail {
-    totalItemCount?: number;
-    items?: ScheduledEmail[] | undefined;
+    totalItemCount!: number;
+    items!: ScheduledEmail[];
 
     constructor(data?: IListOfScheduledEmail) {
         if (data) {
@@ -32594,6 +32772,9 @@ export class ListOfScheduledEmail implements IListOfScheduledEmail {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -32628,8 +32809,8 @@ export class ListOfScheduledEmail implements IListOfScheduledEmail {
 }
 
 export interface IListOfScheduledEmail {
-    totalItemCount?: number;
-    items?: ScheduledEmail[] | undefined;
+    totalItemCount: number;
+    items: ScheduledEmail[];
 }
 
 export class ScheduledEmail implements IScheduledEmail {
@@ -32896,8 +33077,8 @@ export interface IUpdateScheduledEmailSettings {
 }
 
 export class ListOfObservationContent implements IListOfObservationContent {
-    totalItemCount?: number;
-    items?: ObservationContent[] | undefined;
+    totalItemCount!: number;
+    items!: ObservationContent[];
 
     constructor(data?: IListOfObservationContent) {
         if (data) {
@@ -32905,6 +33086,9 @@ export class ListOfObservationContent implements IListOfObservationContent {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -32939,8 +33123,8 @@ export class ListOfObservationContent implements IListOfObservationContent {
 }
 
 export interface IListOfObservationContent {
-    totalItemCount?: number;
-    items?: ObservationContent[] | undefined;
+    totalItemCount: number;
+    items: ObservationContent[];
 }
 
 export class ObservationContent implements IObservationContent {
@@ -33122,8 +33306,8 @@ export interface IUpdateObservationContentSettings {
 }
 
 export class ListOfLocatableObservation implements IListOfLocatableObservation {
-    totalItemCount?: number;
-    items?: LocatableObservation[] | undefined;
+    totalItemCount!: number;
+    items!: LocatableObservation[];
 
     constructor(data?: IListOfLocatableObservation) {
         if (data) {
@@ -33131,6 +33315,9 @@ export class ListOfLocatableObservation implements IListOfLocatableObservation {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -33165,8 +33352,8 @@ export class ListOfLocatableObservation implements IListOfLocatableObservation {
 }
 
 export interface IListOfLocatableObservation {
-    totalItemCount?: number;
-    items?: LocatableObservation[] | undefined;
+    totalItemCount: number;
+    items: LocatableObservation[];
 }
 
 export class Observation implements IObservation {
@@ -33426,8 +33613,8 @@ export interface ICoordinatesBuilder {
 }
 
 export class ListOfObservation implements IListOfObservation {
-    totalItemCount?: number;
-    items?: Observation[] | undefined;
+    totalItemCount!: number;
+    items!: Observation[];
 
     constructor(data?: IListOfObservation) {
         if (data) {
@@ -33435,6 +33622,9 @@ export class ListOfObservation implements IListOfObservation {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -33469,8 +33659,8 @@ export class ListOfObservation implements IListOfObservation {
 }
 
 export interface IListOfObservation {
-    totalItemCount?: number;
-    items?: Observation[] | undefined;
+    totalItemCount: number;
+    items: Observation[];
 }
 
 export class CreateObservationSettings implements ICreateObservationSettings {
@@ -33626,8 +33816,8 @@ export interface IPredictObservationSettings {
 }
 
 export class ListOfObservationDefinition implements IListOfObservationDefinition {
-    totalItemCount?: number;
-    items?: ObservationDefinition[] | undefined;
+    totalItemCount!: number;
+    items!: ObservationDefinition[];
 
     constructor(data?: IListOfObservationDefinition) {
         if (data) {
@@ -33635,6 +33825,9 @@ export class ListOfObservationDefinition implements IListOfObservationDefinition
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -33669,8 +33862,8 @@ export class ListOfObservationDefinition implements IListOfObservationDefinition
 }
 
 export interface IListOfObservationDefinition {
-    totalItemCount?: number;
-    items?: ObservationDefinition[] | undefined;
+    totalItemCount: number;
+    items: ObservationDefinition[];
 }
 
 export class ObservationDefinition implements IObservationDefinition {
@@ -33878,8 +34071,8 @@ export interface IUpdateObservationDefinitionSettings {
 }
 
 export class ListOfObservationForm implements IListOfObservationForm {
-    totalItemCount?: number;
-    items?: ObservationForm[] | undefined;
+    totalItemCount!: number;
+    items!: ObservationForm[];
 
     constructor(data?: IListOfObservationForm) {
         if (data) {
@@ -33887,6 +34080,9 @@ export class ListOfObservationForm implements IListOfObservationForm {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -33921,8 +34117,8 @@ export class ListOfObservationForm implements IListOfObservationForm {
 }
 
 export interface IListOfObservationForm {
-    totalItemCount?: number;
-    items?: ObservationForm[] | undefined;
+    totalItemCount: number;
+    items: ObservationForm[];
 }
 
 export class ObservationForm implements IObservationForm {
@@ -34102,8 +34298,8 @@ export interface IUpdateObservationFormSettings {
 }
 
 export class ListOfObservationSettings implements IListOfObservationSettings {
-    totalItemCount?: number;
-    items?: ObservationSettings[] | undefined;
+    totalItemCount!: number;
+    items!: ObservationSettings[];
 
     constructor(data?: IListOfObservationSettings) {
         if (data) {
@@ -34111,6 +34307,9 @@ export class ListOfObservationSettings implements IListOfObservationSettings {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -34145,8 +34344,8 @@ export class ListOfObservationSettings implements IListOfObservationSettings {
 }
 
 export interface IListOfObservationSettings {
-    totalItemCount?: number;
-    items?: ObservationSettings[] | undefined;
+    totalItemCount: number;
+    items: ObservationSettings[];
 }
 
 export class ObservationSettings implements IObservationSettings {
@@ -34902,8 +35101,8 @@ export interface IUpdateProductSettings {
 }
 
 export class ListOfPublisher implements IListOfPublisher {
-    totalItemCount?: number;
-    items?: Publisher[] | undefined;
+    totalItemCount!: number;
+    items!: Publisher[];
 
     constructor(data?: IListOfPublisher) {
         if (data) {
@@ -34911,6 +35110,9 @@ export class ListOfPublisher implements IListOfPublisher {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -34945,8 +35147,8 @@ export class ListOfPublisher implements IListOfPublisher {
 }
 
 export interface IListOfPublisher {
-    totalItemCount?: number;
-    items?: Publisher[] | undefined;
+    totalItemCount: number;
+    items: Publisher[];
 }
 
 export class Publisher implements IPublisher {
@@ -35140,8 +35342,8 @@ export interface IApprovePublisherSettings {
 }
 
 export class ListOfImplementation implements IListOfImplementation {
-    totalItemCount?: number;
-    items?: Implementation[] | undefined;
+    totalItemCount!: number;
+    items!: Implementation[];
 
     constructor(data?: IListOfImplementation) {
         if (data) {
@@ -35149,6 +35351,9 @@ export class ListOfImplementation implements IListOfImplementation {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -35183,8 +35388,8 @@ export class ListOfImplementation implements IListOfImplementation {
 }
 
 export interface IListOfImplementation {
-    totalItemCount?: number;
-    items?: Implementation[] | undefined;
+    totalItemCount: number;
+    items: Implementation[];
 }
 
 export class Implementation implements IImplementation {
@@ -35405,8 +35610,8 @@ export enum TaskStatus {
 }
 
 export class ListOfTask implements IListOfTask {
-    totalItemCount?: number;
-    items?: Task[] | undefined;
+    totalItemCount!: number;
+    items!: Task[];
 
     constructor(data?: IListOfTask) {
         if (data) {
@@ -35414,6 +35619,9 @@ export class ListOfTask implements IListOfTask {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -35448,8 +35656,8 @@ export class ListOfTask implements IListOfTask {
 }
 
 export interface IListOfTask {
-    totalItemCount?: number;
-    items?: Task[] | undefined;
+    totalItemCount: number;
+    items: Task[];
 }
 
 export class Task implements ITask {
@@ -35885,8 +36093,8 @@ export interface IUpdateImplementationSettings {
 }
 
 export class ListOfItemActivation implements IListOfItemActivation {
-    totalItemCount?: number;
-    items?: ItemActivation[] | undefined;
+    totalItemCount!: number;
+    items!: ItemActivation[];
 
     constructor(data?: IListOfItemActivation) {
         if (data) {
@@ -35894,6 +36102,9 @@ export class ListOfItemActivation implements IListOfItemActivation {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -35928,8 +36139,8 @@ export class ListOfItemActivation implements IListOfItemActivation {
 }
 
 export interface IListOfItemActivation {
-    totalItemCount?: number;
-    items?: ItemActivation[] | undefined;
+    totalItemCount: number;
+    items: ItemActivation[];
 }
 
 export class ItemActivation implements IItemActivation {
@@ -36073,8 +36284,8 @@ export interface IProgramInItemActivation {
 }
 
 export class ListOfProgramActivation implements IListOfProgramActivation {
-    totalItemCount?: number;
-    items?: ProgramActivation[] | undefined;
+    totalItemCount!: number;
+    items!: ProgramActivation[];
 
     constructor(data?: IListOfProgramActivation) {
         if (data) {
@@ -36082,6 +36293,9 @@ export class ListOfProgramActivation implements IListOfProgramActivation {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -36116,14 +36330,16 @@ export class ListOfProgramActivation implements IListOfProgramActivation {
 }
 
 export interface IListOfProgramActivation {
-    totalItemCount?: number;
-    items?: ProgramActivation[] | undefined;
+    totalItemCount: number;
+    items: ProgramActivation[];
 }
 
 export class ProgramActivation implements IProgramActivation {
     id?: string | undefined;
     programId?: string | undefined;
+    consumerType?: string | undefined;
     consumerId?: string | undefined;
+    consumerName?: string | undefined;
     launchedAt?: Date;
     sponsor?: string | undefined;
     currentPhaseId?: string | undefined;
@@ -36143,7 +36359,9 @@ export class ProgramActivation implements IProgramActivation {
         if (_data) {
             this.id = _data["id"];
             this.programId = _data["programId"];
+            this.consumerType = _data["consumerType"];
             this.consumerId = _data["consumerId"];
+            this.consumerName = _data["consumerName"];
             this.launchedAt = _data["launchedAt"] ? new Date(_data["launchedAt"].toString()) : <any>undefined;
             this.sponsor = _data["sponsor"];
             this.currentPhaseId = _data["currentPhaseId"];
@@ -36167,7 +36385,9 @@ export class ProgramActivation implements IProgramActivation {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["programId"] = this.programId;
+        data["consumerType"] = this.consumerType;
         data["consumerId"] = this.consumerId;
+        data["consumerName"] = this.consumerName;
         data["launchedAt"] = this.launchedAt ? this.launchedAt.toISOString() : <any>undefined;
         data["sponsor"] = this.sponsor;
         data["currentPhaseId"] = this.currentPhaseId;
@@ -36184,7 +36404,9 @@ export class ProgramActivation implements IProgramActivation {
 export interface IProgramActivation {
     id?: string | undefined;
     programId?: string | undefined;
+    consumerType?: string | undefined;
     consumerId?: string | undefined;
+    consumerName?: string | undefined;
     launchedAt?: Date;
     sponsor?: string | undefined;
     currentPhaseId?: string | undefined;
@@ -36243,7 +36465,7 @@ export enum ProgramPhaseActivationStatus {
 export class ActivateProgramPhaseSettings implements IActivateProgramPhaseSettings {
     consumerId!: string;
     programPhaseId!: string;
-    sponsor!: string;
+    sponsor?: string | undefined;
 
     constructor(data?: IActivateProgramPhaseSettings) {
         if (data) {
@@ -36281,12 +36503,12 @@ export class ActivateProgramPhaseSettings implements IActivateProgramPhaseSettin
 export interface IActivateProgramPhaseSettings {
     consumerId: string;
     programPhaseId: string;
-    sponsor: string;
+    sponsor?: string | undefined;
 }
 
 export class ListOfProgram implements IListOfProgram {
-    totalItemCount?: number;
-    items?: Program[] | undefined;
+    totalItemCount!: number;
+    items!: Program[];
 
     constructor(data?: IListOfProgram) {
         if (data) {
@@ -36294,6 +36516,9 @@ export class ListOfProgram implements IListOfProgram {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -36328,8 +36553,8 @@ export class ListOfProgram implements IListOfProgram {
 }
 
 export interface IListOfProgram {
-    totalItemCount?: number;
-    items?: Program[] | undefined;
+    totalItemCount: number;
+    items: Program[];
 }
 
 export class Program implements IProgram {
@@ -36837,8 +37062,8 @@ export interface IUpdateProgramPhaseSettings {
 }
 
 export class ListOfComment implements IListOfComment {
-    totalItemCount?: number;
-    items?: Comment[] | undefined;
+    totalItemCount!: number;
+    items!: Comment[];
 
     constructor(data?: IListOfComment) {
         if (data) {
@@ -36846,6 +37071,9 @@ export class ListOfComment implements IListOfComment {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -36880,8 +37108,8 @@ export class ListOfComment implements IListOfComment {
 }
 
 export interface IListOfComment {
-    totalItemCount?: number;
-    items?: Comment[] | undefined;
+    totalItemCount: number;
+    items: Comment[];
 }
 
 export class Comment implements IComment {
@@ -37257,8 +37485,8 @@ export interface IUpdateTaskSettings {
 }
 
 export class ListOfTicket implements IListOfTicket {
-    totalItemCount?: number;
-    items?: Ticket[] | undefined;
+    totalItemCount!: number;
+    items!: Ticket[];
 
     constructor(data?: IListOfTicket) {
         if (data) {
@@ -37266,6 +37494,9 @@ export class ListOfTicket implements IListOfTicket {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -37300,8 +37531,8 @@ export class ListOfTicket implements IListOfTicket {
 }
 
 export interface IListOfTicket {
-    totalItemCount?: number;
-    items?: Ticket[] | undefined;
+    totalItemCount: number;
+    items: Ticket[];
 }
 
 export class Ticket implements ITicket {
@@ -37486,8 +37717,8 @@ export interface IUpdateTicketSettings {
 }
 
 export class ListOfSurveyContent implements IListOfSurveyContent {
-    totalItemCount?: number;
-    items?: SurveyContent[] | undefined;
+    totalItemCount!: number;
+    items!: SurveyContent[];
 
     constructor(data?: IListOfSurveyContent) {
         if (data) {
@@ -37495,6 +37726,9 @@ export class ListOfSurveyContent implements IListOfSurveyContent {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -37529,8 +37763,8 @@ export class ListOfSurveyContent implements IListOfSurveyContent {
 }
 
 export interface IListOfSurveyContent {
-    totalItemCount?: number;
-    items?: SurveyContent[] | undefined;
+    totalItemCount: number;
+    items: SurveyContent[];
 }
 
 export class SurveyContent implements ISurveyContent {
@@ -38310,7 +38544,8 @@ export enum TimeSpanConstraintType {
 }
 
 export class UserQuestion extends QuestionBase implements IUserQuestion {
-    jobTypeId?: string | undefined;
+    jobTypeCategories?: string[] | undefined;
+    jobTypeIds?: string[] | undefined;
 
     constructor(data?: IUserQuestion) {
         super(data);
@@ -38319,7 +38554,16 @@ export class UserQuestion extends QuestionBase implements IUserQuestion {
     init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.jobTypeId = _data["jobTypeId"];
+            if (Array.isArray(_data["jobTypeCategories"])) {
+                this.jobTypeCategories = [] as any;
+                for (let item of _data["jobTypeCategories"])
+                    this.jobTypeCategories!.push(item);
+            }
+            if (Array.isArray(_data["jobTypeIds"])) {
+                this.jobTypeIds = [] as any;
+                for (let item of _data["jobTypeIds"])
+                    this.jobTypeIds!.push(item);
+            }
         }
     }
 
@@ -38332,14 +38576,24 @@ export class UserQuestion extends QuestionBase implements IUserQuestion {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["jobTypeId"] = this.jobTypeId;
+        if (Array.isArray(this.jobTypeCategories)) {
+            data["jobTypeCategories"] = [];
+            for (let item of this.jobTypeCategories)
+                data["jobTypeCategories"].push(item);
+        }
+        if (Array.isArray(this.jobTypeIds)) {
+            data["jobTypeIds"] = [];
+            for (let item of this.jobTypeIds)
+                data["jobTypeIds"].push(item);
+        }
         super.toJSON(data);
         return data; 
     }
 }
 
 export interface IUserQuestion extends IQuestionBase {
-    jobTypeId?: string | undefined;
+    jobTypeCategories?: string[] | undefined;
+    jobTypeIds?: string[] | undefined;
 }
 
 export class GroupQuestion extends QuestionBase implements IGroupQuestion {
@@ -39343,8 +39597,8 @@ export interface ISurveySettings {
 }
 
 export class ListOfSurvey implements IListOfSurvey {
-    totalItemCount?: number;
-    items?: Survey[] | undefined;
+    totalItemCount!: number;
+    items!: Survey[];
 
     constructor(data?: IListOfSurvey) {
         if (data) {
@@ -39352,6 +39606,9 @@ export class ListOfSurvey implements IListOfSurvey {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -39386,8 +39643,8 @@ export class ListOfSurvey implements IListOfSurvey {
 }
 
 export interface IListOfSurvey {
-    totalItemCount?: number;
-    items?: Survey[] | undefined;
+    totalItemCount: number;
+    items: Survey[];
 }
 
 export class Survey implements ISurvey {
@@ -39551,8 +39808,8 @@ export interface IUpdateSurveySettings {
 }
 
 export class ListOfSurveyRequest implements IListOfSurveyRequest {
-    totalItemCount?: number;
-    items?: SurveyRequest[] | undefined;
+    totalItemCount!: number;
+    items!: SurveyRequest[];
 
     constructor(data?: IListOfSurveyRequest) {
         if (data) {
@@ -39560,6 +39817,9 @@ export class ListOfSurveyRequest implements IListOfSurveyRequest {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -39594,8 +39854,8 @@ export class ListOfSurveyRequest implements IListOfSurveyRequest {
 }
 
 export interface IListOfSurveyRequest {
-    totalItemCount?: number;
-    items?: SurveyRequest[] | undefined;
+    totalItemCount: number;
+    items: SurveyRequest[];
 }
 
 export class SurveyRequest implements ISurveyRequest {
@@ -39763,8 +40023,8 @@ export interface ICreateSurveyRequestSettings {
 }
 
 export class ListOfSurveyResponse implements IListOfSurveyResponse {
-    totalItemCount?: number;
-    items?: SurveyResponse[] | undefined;
+    totalItemCount!: number;
+    items!: SurveyResponse[];
 
     constructor(data?: IListOfSurveyResponse) {
         if (data) {
@@ -39772,6 +40032,9 @@ export class ListOfSurveyResponse implements IListOfSurveyResponse {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -39806,8 +40069,8 @@ export class ListOfSurveyResponse implements IListOfSurveyResponse {
 }
 
 export interface IListOfSurveyResponse {
-    totalItemCount?: number;
-    items?: SurveyResponse[] | undefined;
+    totalItemCount: number;
+    items: SurveyResponse[];
 }
 
 export class SurveyResponse implements ISurveyResponse {
@@ -40143,8 +40406,8 @@ export enum ActorType {
 }
 
 export class ListOfModuleAttemptOfBookResult implements IListOfModuleAttemptOfBookResult {
-    totalItemCount?: number;
-    items?: ModuleAttemptOfBookResult[] | undefined;
+    totalItemCount!: number;
+    items!: ModuleAttemptOfBookResult[];
 
     constructor(data?: IListOfModuleAttemptOfBookResult) {
         if (data) {
@@ -40152,6 +40415,9 @@ export class ListOfModuleAttemptOfBookResult implements IListOfModuleAttemptOfBo
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -40186,8 +40452,8 @@ export class ListOfModuleAttemptOfBookResult implements IListOfModuleAttemptOfBo
 }
 
 export interface IListOfModuleAttemptOfBookResult {
-    totalItemCount?: number;
-    items?: ModuleAttemptOfBookResult[] | undefined;
+    totalItemCount: number;
+    items: ModuleAttemptOfBookResult[];
 }
 
 export class ModuleAttempt implements IModuleAttempt {
@@ -40568,8 +40834,8 @@ export interface IUpdateModuleAttemptSettingsOfBookResult {
 }
 
 export class ListOfModuleContentOfBookSettings implements IListOfModuleContentOfBookSettings {
-    totalItemCount?: number;
-    items?: ModuleContentOfBookSettings[] | undefined;
+    totalItemCount!: number;
+    items!: ModuleContentOfBookSettings[];
 
     constructor(data?: IListOfModuleContentOfBookSettings) {
         if (data) {
@@ -40577,6 +40843,9 @@ export class ListOfModuleContentOfBookSettings implements IListOfModuleContentOf
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -40611,8 +40880,8 @@ export class ListOfModuleContentOfBookSettings implements IListOfModuleContentOf
 }
 
 export interface IListOfModuleContentOfBookSettings {
-    totalItemCount?: number;
-    items?: ModuleContentOfBookSettings[] | undefined;
+    totalItemCount: number;
+    items: ModuleContentOfBookSettings[];
 }
 
 export class ModuleContent implements IModuleContent {
@@ -40973,8 +41242,8 @@ export interface IUpdateModuleContentSettingsOfBookSettings extends IModuleConte
 }
 
 export class ListOfCertificate implements IListOfCertificate {
-    totalItemCount?: number;
-    items?: Certificate[] | undefined;
+    totalItemCount!: number;
+    items!: Certificate[];
 
     constructor(data?: IListOfCertificate) {
         if (data) {
@@ -40982,6 +41251,9 @@ export class ListOfCertificate implements IListOfCertificate {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -41016,8 +41288,8 @@ export class ListOfCertificate implements IListOfCertificate {
 }
 
 export interface IListOfCertificate {
-    totalItemCount?: number;
-    items?: Certificate[] | undefined;
+    totalItemCount: number;
+    items: Certificate[];
 }
 
 export class Certificate implements ICertificate {
@@ -41193,8 +41465,8 @@ export interface IUpdateCertificateSettings {
 }
 
 export class ListOfCertification implements IListOfCertification {
-    totalItemCount?: number;
-    items?: Certification[] | undefined;
+    totalItemCount!: number;
+    items!: Certification[];
 
     constructor(data?: IListOfCertification) {
         if (data) {
@@ -41202,6 +41474,9 @@ export class ListOfCertification implements IListOfCertification {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -41236,8 +41511,8 @@ export class ListOfCertification implements IListOfCertification {
 }
 
 export interface IListOfCertification {
-    totalItemCount?: number;
-    items?: Certification[] | undefined;
+    totalItemCount: number;
+    items: Certification[];
 }
 
 export class Certification implements ICertification {
@@ -41313,8 +41588,8 @@ export interface ICertification {
 }
 
 export class ListOfCertificationFact implements IListOfCertificationFact {
-    totalItemCount?: number;
-    items?: CertificationFact[] | undefined;
+    totalItemCount!: number;
+    items!: CertificationFact[];
 
     constructor(data?: IListOfCertificationFact) {
         if (data) {
@@ -41322,6 +41597,9 @@ export class ListOfCertificationFact implements IListOfCertificationFact {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -41356,8 +41634,8 @@ export class ListOfCertificationFact implements IListOfCertificationFact {
 }
 
 export interface IListOfCertificationFact {
-    totalItemCount?: number;
-    items?: CertificationFact[] | undefined;
+    totalItemCount: number;
+    items: CertificationFact[];
 }
 
 export class CertificationFact implements ICertificationFact {
@@ -41434,8 +41712,8 @@ export enum MemberStatus {
 }
 
 export class ListOfClass implements IListOfClass {
-    totalItemCount?: number;
-    items?: Class[] | undefined;
+    totalItemCount!: number;
+    items!: Class[];
 
     constructor(data?: IListOfClass) {
         if (data) {
@@ -41443,6 +41721,9 @@ export class ListOfClass implements IListOfClass {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -41477,8 +41758,8 @@ export class ListOfClass implements IListOfClass {
 }
 
 export interface IListOfClass {
-    totalItemCount?: number;
-    items?: Class[] | undefined;
+    totalItemCount: number;
+    items: Class[];
 }
 
 export class Class implements IClass {
@@ -41810,8 +42091,8 @@ export interface INotifyAssessorsSettings {
 }
 
 export class ListOfCourse implements IListOfCourse {
-    totalItemCount?: number;
-    items?: Course[] | undefined;
+    totalItemCount!: number;
+    items!: Course[];
 
     constructor(data?: IListOfCourse) {
         if (data) {
@@ -41819,6 +42100,9 @@ export class ListOfCourse implements IListOfCourse {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -41853,8 +42137,8 @@ export class ListOfCourse implements IListOfCourse {
 }
 
 export interface IListOfCourse {
-    totalItemCount?: number;
-    items?: Course[] | undefined;
+    totalItemCount: number;
+    items: Course[];
 }
 
 export class Course implements ICourse {
@@ -42670,8 +42954,8 @@ export interface IUpdateCourseSettings {
 }
 
 export class ListOfEnrolment implements IListOfEnrolment {
-    totalItemCount?: number;
-    items?: Enrolment[] | undefined;
+    totalItemCount!: number;
+    items!: Enrolment[];
 
     constructor(data?: IListOfEnrolment) {
         if (data) {
@@ -42679,6 +42963,9 @@ export class ListOfEnrolment implements IListOfEnrolment {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -42713,8 +43000,8 @@ export class ListOfEnrolment implements IListOfEnrolment {
 }
 
 export interface IListOfEnrolment {
-    totalItemCount?: number;
-    items?: Enrolment[] | undefined;
+    totalItemCount: number;
+    items: Enrolment[];
 }
 
 export class Enrolment2 implements IEnrolment2 {
@@ -43239,8 +43526,8 @@ export interface IClassInEnrolment {
 }
 
 export class ListOfModuleAttempt implements IListOfModuleAttempt {
-    totalItemCount?: number;
-    items?: ModuleAttempt[] | undefined;
+    totalItemCount!: number;
+    items!: ModuleAttempt[];
 
     constructor(data?: IListOfModuleAttempt) {
         if (data) {
@@ -43248,6 +43535,9 @@ export class ListOfModuleAttempt implements IListOfModuleAttempt {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -43282,13 +43572,13 @@ export class ListOfModuleAttempt implements IListOfModuleAttempt {
 }
 
 export interface IListOfModuleAttempt {
-    totalItemCount?: number;
-    items?: ModuleAttempt[] | undefined;
+    totalItemCount: number;
+    items: ModuleAttempt[];
 }
 
 export class ListOfModule implements IListOfModule {
-    totalItemCount?: number;
-    items?: Module[] | undefined;
+    totalItemCount!: number;
+    items!: Module[];
 
     constructor(data?: IListOfModule) {
         if (data) {
@@ -43296,6 +43586,9 @@ export class ListOfModule implements IListOfModule {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -43330,8 +43623,8 @@ export class ListOfModule implements IListOfModule {
 }
 
 export interface IListOfModule {
-    totalItemCount?: number;
-    items?: Module[] | undefined;
+    totalItemCount: number;
+    items: Module[];
 }
 
 export class Module implements IModule {
@@ -43523,8 +43816,8 @@ export interface IUpdateModuleSettings {
 }
 
 export class ListOfModuleNps implements IListOfModuleNps {
-    totalItemCount?: number;
-    items?: ModuleNps[] | undefined;
+    totalItemCount!: number;
+    items!: ModuleNps[];
 
     constructor(data?: IListOfModuleNps) {
         if (data) {
@@ -43532,6 +43825,9 @@ export class ListOfModuleNps implements IListOfModuleNps {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -43566,8 +43862,8 @@ export class ListOfModuleNps implements IListOfModuleNps {
 }
 
 export interface IListOfModuleNps {
-    totalItemCount?: number;
-    items?: ModuleNps[] | undefined;
+    totalItemCount: number;
+    items: ModuleNps[];
 }
 
 export class ModuleNps implements IModuleNps {
@@ -43779,8 +44075,8 @@ export interface ICreateNpsSettings {
 }
 
 export class ListOfModuleAttemptOfQuizResult implements IListOfModuleAttemptOfQuizResult {
-    totalItemCount?: number;
-    items?: ModuleAttemptOfQuizResult[] | undefined;
+    totalItemCount!: number;
+    items!: ModuleAttemptOfQuizResult[];
 
     constructor(data?: IListOfModuleAttemptOfQuizResult) {
         if (data) {
@@ -43788,6 +44084,9 @@ export class ListOfModuleAttemptOfQuizResult implements IListOfModuleAttemptOfQu
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -43822,8 +44121,8 @@ export class ListOfModuleAttemptOfQuizResult implements IListOfModuleAttemptOfQu
 }
 
 export interface IListOfModuleAttemptOfQuizResult {
-    totalItemCount?: number;
-    items?: ModuleAttemptOfQuizResult[] | undefined;
+    totalItemCount: number;
+    items: ModuleAttemptOfQuizResult[];
 }
 
 export class ModuleAttemptOfQuizResult extends ModuleAttempt implements IModuleAttemptOfQuizResult {
@@ -44096,8 +44395,8 @@ export interface IUpdateModuleAttemptSettingsOfQuizResult {
 }
 
 export class ListOfModuleContentOfQuizSettings implements IListOfModuleContentOfQuizSettings {
-    totalItemCount?: number;
-    items?: ModuleContentOfQuizSettings[] | undefined;
+    totalItemCount!: number;
+    items!: ModuleContentOfQuizSettings[];
 
     constructor(data?: IListOfModuleContentOfQuizSettings) {
         if (data) {
@@ -44105,6 +44404,9 @@ export class ListOfModuleContentOfQuizSettings implements IListOfModuleContentOf
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -44139,8 +44441,8 @@ export class ListOfModuleContentOfQuizSettings implements IListOfModuleContentOf
 }
 
 export interface IListOfModuleContentOfQuizSettings {
-    totalItemCount?: number;
-    items?: ModuleContentOfQuizSettings[] | undefined;
+    totalItemCount: number;
+    items: ModuleContentOfQuizSettings[];
 }
 
 export class ModuleContentOfQuizSettings extends ModuleContent implements IModuleContentOfQuizSettings {
@@ -44497,8 +44799,8 @@ export interface IUpdateModuleContentSettingsOfQuizSettings extends IModuleConte
 }
 
 export class ListOfModuleAttemptOfRevisionResult implements IListOfModuleAttemptOfRevisionResult {
-    totalItemCount?: number;
-    items?: ModuleAttemptOfRevisionResult[] | undefined;
+    totalItemCount!: number;
+    items!: ModuleAttemptOfRevisionResult[];
 
     constructor(data?: IListOfModuleAttemptOfRevisionResult) {
         if (data) {
@@ -44506,6 +44808,9 @@ export class ListOfModuleAttemptOfRevisionResult implements IListOfModuleAttempt
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -44540,8 +44845,8 @@ export class ListOfModuleAttemptOfRevisionResult implements IListOfModuleAttempt
 }
 
 export interface IListOfModuleAttemptOfRevisionResult {
-    totalItemCount?: number;
-    items?: ModuleAttemptOfRevisionResult[] | undefined;
+    totalItemCount: number;
+    items: ModuleAttemptOfRevisionResult[];
 }
 
 export class ModuleAttemptOfRevisionResult extends ModuleAttempt implements IModuleAttemptOfRevisionResult {
@@ -44809,8 +45114,8 @@ export interface IUpdateModuleAttemptSettingsOfRevisionResult {
 }
 
 export class ListOfModuleContentOfRevisionSettings implements IListOfModuleContentOfRevisionSettings {
-    totalItemCount?: number;
-    items?: ModuleContentOfRevisionSettings[] | undefined;
+    totalItemCount!: number;
+    items!: ModuleContentOfRevisionSettings[];
 
     constructor(data?: IListOfModuleContentOfRevisionSettings) {
         if (data) {
@@ -44818,6 +45123,9 @@ export class ListOfModuleContentOfRevisionSettings implements IListOfModuleConte
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -44852,8 +45160,8 @@ export class ListOfModuleContentOfRevisionSettings implements IListOfModuleConte
 }
 
 export interface IListOfModuleContentOfRevisionSettings {
-    totalItemCount?: number;
-    items?: ModuleContentOfRevisionSettings[] | undefined;
+    totalItemCount: number;
+    items: ModuleContentOfRevisionSettings[];
 }
 
 export class ModuleContentOfRevisionSettings extends ModuleContent implements IModuleContentOfRevisionSettings {
@@ -45104,8 +45412,8 @@ export interface IUpdateModuleContentSettingsOfRevisionSettings extends IModuleC
 }
 
 export class ListOfTrainingSession implements IListOfTrainingSession {
-    totalItemCount?: number;
-    items?: TrainingSession[] | undefined;
+    totalItemCount!: number;
+    items!: TrainingSession[];
 
     constructor(data?: IListOfTrainingSession) {
         if (data) {
@@ -45113,6 +45421,9 @@ export class ListOfTrainingSession implements IListOfTrainingSession {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -45147,8 +45458,8 @@ export class ListOfTrainingSession implements IListOfTrainingSession {
 }
 
 export interface IListOfTrainingSession {
-    totalItemCount?: number;
-    items?: TrainingSession[] | undefined;
+    totalItemCount: number;
+    items: TrainingSession[];
 }
 
 export class TrainingSession implements ITrainingSession {
@@ -45470,8 +45781,8 @@ export interface IUpdateTrainingSessionSettings {
 }
 
 export class ListOfModuleAttemptOfVideoResult implements IListOfModuleAttemptOfVideoResult {
-    totalItemCount?: number;
-    items?: ModuleAttemptOfVideoResult[] | undefined;
+    totalItemCount!: number;
+    items!: ModuleAttemptOfVideoResult[];
 
     constructor(data?: IListOfModuleAttemptOfVideoResult) {
         if (data) {
@@ -45479,6 +45790,9 @@ export class ListOfModuleAttemptOfVideoResult implements IListOfModuleAttemptOfV
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -45513,8 +45827,8 @@ export class ListOfModuleAttemptOfVideoResult implements IListOfModuleAttemptOfV
 }
 
 export interface IListOfModuleAttemptOfVideoResult {
-    totalItemCount?: number;
-    items?: ModuleAttemptOfVideoResult[] | undefined;
+    totalItemCount: number;
+    items: ModuleAttemptOfVideoResult[];
 }
 
 export class ModuleAttemptOfVideoResult extends ModuleAttempt implements IModuleAttemptOfVideoResult {
@@ -45687,8 +46001,8 @@ export interface IUpdateModuleAttemptSettingsOfVideoResult {
 }
 
 export class ListOfModuleContentOfVideoSettings implements IListOfModuleContentOfVideoSettings {
-    totalItemCount?: number;
-    items?: ModuleContentOfVideoSettings[] | undefined;
+    totalItemCount!: number;
+    items!: ModuleContentOfVideoSettings[];
 
     constructor(data?: IListOfModuleContentOfVideoSettings) {
         if (data) {
@@ -45696,6 +46010,9 @@ export class ListOfModuleContentOfVideoSettings implements IListOfModuleContentO
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -45730,8 +46047,8 @@ export class ListOfModuleContentOfVideoSettings implements IListOfModuleContentO
 }
 
 export interface IListOfModuleContentOfVideoSettings {
-    totalItemCount?: number;
-    items?: ModuleContentOfVideoSettings[] | undefined;
+    totalItemCount: number;
+    items: ModuleContentOfVideoSettings[];
 }
 
 export class ModuleContentOfVideoSettings extends ModuleContent implements IModuleContentOfVideoSettings {
@@ -45942,8 +46259,8 @@ export interface IUpdateModuleContentSettingsOfVideoSettings extends IModuleCont
 }
 
 export class ListOfModuleAttemptOfAssessmentResult implements IListOfModuleAttemptOfAssessmentResult {
-    totalItemCount?: number;
-    items?: ModuleAttemptOfAssessmentResult[] | undefined;
+    totalItemCount!: number;
+    items!: ModuleAttemptOfAssessmentResult[];
 
     constructor(data?: IListOfModuleAttemptOfAssessmentResult) {
         if (data) {
@@ -45951,6 +46268,9 @@ export class ListOfModuleAttemptOfAssessmentResult implements IListOfModuleAttem
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -45985,8 +46305,8 @@ export class ListOfModuleAttemptOfAssessmentResult implements IListOfModuleAttem
 }
 
 export interface IListOfModuleAttemptOfAssessmentResult {
-    totalItemCount?: number;
-    items?: ModuleAttemptOfAssessmentResult[] | undefined;
+    totalItemCount: number;
+    items: ModuleAttemptOfAssessmentResult[];
 }
 
 export class ModuleAttemptOfAssessmentResult extends ModuleAttempt implements IModuleAttemptOfAssessmentResult {
@@ -46267,8 +46587,8 @@ export interface IUpdateModuleAttemptSettingsOfAssessmentResult {
 }
 
 export class ListOfModuleContentOfAssessmentSettings implements IListOfModuleContentOfAssessmentSettings {
-    totalItemCount?: number;
-    items?: ModuleContentOfAssessmentSettings[] | undefined;
+    totalItemCount!: number;
+    items!: ModuleContentOfAssessmentSettings[];
 
     constructor(data?: IListOfModuleContentOfAssessmentSettings) {
         if (data) {
@@ -46276,6 +46596,9 @@ export class ListOfModuleContentOfAssessmentSettings implements IListOfModuleCon
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -46310,8 +46633,8 @@ export class ListOfModuleContentOfAssessmentSettings implements IListOfModuleCon
 }
 
 export interface IListOfModuleContentOfAssessmentSettings {
-    totalItemCount?: number;
-    items?: ModuleContentOfAssessmentSettings[] | undefined;
+    totalItemCount: number;
+    items: ModuleContentOfAssessmentSettings[];
 }
 
 export class ModuleContentOfAssessmentSettings extends ModuleContent implements IModuleContentOfAssessmentSettings {
@@ -46617,8 +46940,8 @@ export interface IUpdateModuleContentSettingsOfAssessmentSettings extends IModul
 }
 
 export class ListOfAssessmentSubAttempt implements IListOfAssessmentSubAttempt {
-    totalItemCount?: number;
-    items?: AssessmentSubAttempt[] | undefined;
+    totalItemCount!: number;
+    items!: AssessmentSubAttempt[];
 
     constructor(data?: IListOfAssessmentSubAttempt) {
         if (data) {
@@ -46626,6 +46949,9 @@ export class ListOfAssessmentSubAttempt implements IListOfAssessmentSubAttempt {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -46660,8 +46986,8 @@ export class ListOfAssessmentSubAttempt implements IListOfAssessmentSubAttempt {
 }
 
 export interface IListOfAssessmentSubAttempt {
-    totalItemCount?: number;
-    items?: AssessmentSubAttempt[] | undefined;
+    totalItemCount: number;
+    items: AssessmentSubAttempt[];
 }
 
 export class AssessmentSubAttempt implements IAssessmentSubAttempt {
@@ -47476,8 +47802,8 @@ export interface IEmailSettings {
 }
 
 export class ListOfGroupComment implements IListOfGroupComment {
-    totalItemCount?: number;
-    items?: GroupComment[] | undefined;
+    totalItemCount!: number;
+    items!: GroupComment[];
 
     constructor(data?: IListOfGroupComment) {
         if (data) {
@@ -47485,6 +47811,9 @@ export class ListOfGroupComment implements IListOfGroupComment {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -47519,8 +47848,8 @@ export class ListOfGroupComment implements IListOfGroupComment {
 }
 
 export interface IListOfGroupComment {
-    totalItemCount?: number;
-    items?: GroupComment[] | undefined;
+    totalItemCount: number;
+    items: GroupComment[];
 }
 
 export class GroupComment extends Comment implements IGroupComment {
@@ -47613,8 +47942,8 @@ export interface IGroup {
 }
 
 export class ListOfGroupFile implements IListOfGroupFile {
-    totalItemCount?: number;
-    items?: GroupFile[] | undefined;
+    totalItemCount!: number;
+    items!: GroupFile[];
 
     constructor(data?: IListOfGroupFile) {
         if (data) {
@@ -47622,6 +47951,9 @@ export class ListOfGroupFile implements IListOfGroupFile {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -47656,8 +47988,8 @@ export class ListOfGroupFile implements IListOfGroupFile {
 }
 
 export interface IListOfGroupFile {
-    totalItemCount?: number;
-    items?: GroupFile[] | undefined;
+    totalItemCount: number;
+    items: GroupFile[];
 }
 
 export class GroupFile extends File implements IGroupFile {
@@ -47694,8 +48026,8 @@ export interface IGroupFile extends IFile {
 }
 
 export class ListOfJobType implements IListOfJobType {
-    totalItemCount?: number;
-    items?: JobType[] | undefined;
+    totalItemCount!: number;
+    items!: JobType[];
 
     constructor(data?: IListOfJobType) {
         if (data) {
@@ -47703,6 +48035,9 @@ export class ListOfJobType implements IListOfJobType {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -47737,8 +48072,8 @@ export class ListOfJobType implements IListOfJobType {
 }
 
 export interface IListOfJobType {
-    totalItemCount?: number;
-    items?: JobType[] | undefined;
+    totalItemCount: number;
+    items: JobType[];
 }
 
 export class JobType implements IJobType {
@@ -47874,8 +48209,8 @@ export interface IUpdateJobTypeSettings {
 }
 
 export class ListOfLabel implements IListOfLabel {
-    totalItemCount?: number;
-    items?: Label[] | undefined;
+    totalItemCount!: number;
+    items!: Label[];
 
     constructor(data?: IListOfLabel) {
         if (data) {
@@ -47883,6 +48218,9 @@ export class ListOfLabel implements IListOfLabel {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -47917,8 +48255,8 @@ export class ListOfLabel implements IListOfLabel {
 }
 
 export interface IListOfLabel {
-    totalItemCount?: number;
-    items?: Label[] | undefined;
+    totalItemCount: number;
+    items: Label[];
 }
 
 export class Label implements ILabel {
@@ -48118,8 +48456,8 @@ export interface IUpdateLabelSettings {
 }
 
 export class ListOfMember implements IListOfMember {
-    totalItemCount?: number;
-    items?: Member[] | undefined;
+    totalItemCount!: number;
+    items!: Member[];
 
     constructor(data?: IListOfMember) {
         if (data) {
@@ -48127,6 +48465,9 @@ export class ListOfMember implements IListOfMember {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -48161,8 +48502,8 @@ export class ListOfMember implements IListOfMember {
 }
 
 export interface IListOfMember {
-    totalItemCount?: number;
-    items?: Member[] | undefined;
+    totalItemCount: number;
+    items: Member[];
 }
 
 export class Member implements IMember {
@@ -48502,8 +48843,8 @@ export interface IUpdateGroupMemberSettings {
 }
 
 export class ListOfOrganisationAccessToken implements IListOfOrganisationAccessToken {
-    totalItemCount?: number;
-    items?: OrganisationAccessToken[] | undefined;
+    totalItemCount!: number;
+    items!: OrganisationAccessToken[];
 
     constructor(data?: IListOfOrganisationAccessToken) {
         if (data) {
@@ -48511,6 +48852,9 @@ export class ListOfOrganisationAccessToken implements IListOfOrganisationAccessT
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -48545,8 +48889,8 @@ export class ListOfOrganisationAccessToken implements IListOfOrganisationAccessT
 }
 
 export interface IListOfOrganisationAccessToken {
-    totalItemCount?: number;
-    items?: OrganisationAccessToken[] | undefined;
+    totalItemCount: number;
+    items: OrganisationAccessToken[];
 }
 
 export class OrganisationAccessToken implements IOrganisationAccessToken {
@@ -48683,8 +49027,8 @@ export interface ICreateOrganisationAccessTokenSettings {
 }
 
 export class ListOfOrganisation implements IListOfOrganisation {
-    totalItemCount?: number;
-    items?: Organisation[] | undefined;
+    totalItemCount!: number;
+    items!: Organisation[];
 
     constructor(data?: IListOfOrganisation) {
         if (data) {
@@ -48692,6 +49036,9 @@ export class ListOfOrganisation implements IListOfOrganisation {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -48726,8 +49073,8 @@ export class ListOfOrganisation implements IListOfOrganisation {
 }
 
 export interface IListOfOrganisation {
-    totalItemCount?: number;
-    items?: Organisation[] | undefined;
+    totalItemCount: number;
+    items: Organisation[];
 }
 
 export class Organisation implements IOrganisation {
@@ -49299,8 +49646,8 @@ export interface IResetPasswordSettings {
 }
 
 export class ListOfRole implements IListOfRole {
-    totalItemCount?: number;
-    items?: Role[] | undefined;
+    totalItemCount!: number;
+    items!: Role[];
 
     constructor(data?: IListOfRole) {
         if (data) {
@@ -49308,6 +49655,9 @@ export class ListOfRole implements IListOfRole {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -49342,8 +49692,8 @@ export class ListOfRole implements IListOfRole {
 }
 
 export interface IListOfRole {
-    totalItemCount?: number;
-    items?: Role[] | undefined;
+    totalItemCount: number;
+    items: Role[];
 }
 
 export class Role implements IRole {
@@ -49403,8 +49753,8 @@ export interface IRole {
 }
 
 export class ListOfTeam implements IListOfTeam {
-    totalItemCount?: number;
-    items?: Team[] | undefined;
+    totalItemCount!: number;
+    items!: Team[];
 
     constructor(data?: IListOfTeam) {
         if (data) {
@@ -49412,6 +49762,9 @@ export class ListOfTeam implements IListOfTeam {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -49446,8 +49799,8 @@ export class ListOfTeam implements IListOfTeam {
 }
 
 export interface IListOfTeam {
-    totalItemCount?: number;
-    items?: Team[] | undefined;
+    totalItemCount: number;
+    items: Team[];
 }
 
 export class Team implements ITeam {
@@ -49663,8 +50016,8 @@ export interface IUpdateTeamSettings {
 }
 
 export class ListOfUser implements IListOfUser {
-    totalItemCount?: number;
-    items?: User[] | undefined;
+    totalItemCount!: number;
+    items!: User[];
 
     constructor(data?: IListOfUser) {
         if (data) {
@@ -49672,6 +50025,9 @@ export class ListOfUser implements IListOfUser {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.items = [];
         }
     }
 
@@ -49706,8 +50062,8 @@ export class ListOfUser implements IListOfUser {
 }
 
 export interface IListOfUser {
-    totalItemCount?: number;
-    items?: User[] | undefined;
+    totalItemCount: number;
+    items: User[];
 }
 
 export class User implements IUser {
