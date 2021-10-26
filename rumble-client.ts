@@ -29232,8 +29232,9 @@ export class UserActivityClient {
      * @param search (optional) 
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
+     * @param moduleType (optional) 
      */
-    getAllForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfUserActivity> {
+    getAllForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, moduleType: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfUserActivity> {
         let url_ = this.baseUrl + "/v1/UserActivity/Group/{groupId}?";
         if (groupId === undefined || groupId === null)
             throw new Error("The parameter 'groupId' must be defined.");
@@ -29248,6 +29249,8 @@ export class UserActivityClient {
             throw new Error("The parameter 'take' cannot be null.");
         else if (take !== undefined)
             url_ += "Take=" + encodeURIComponent("" + take) + "&";
+        if (moduleType !== undefined && moduleType !== null)
+            url_ += "moduleType=" + encodeURIComponent("" + moduleType) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <AxiosRequestConfig>{
