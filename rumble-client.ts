@@ -29233,8 +29233,11 @@ export class UserActivityClient {
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param moduleType (optional) 
+     * @param programId (optional) 
+     * @param from (optional) 
+     * @param to (optional) 
      */
-    getAllForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, moduleType: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfUserActivity> {
+    getAllForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, moduleType: string | null | undefined, programId: string | null | undefined, from: Date | null | undefined, to: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfUserActivity> {
         let url_ = this.baseUrl + "/v1/UserActivity/Group/{groupId}?";
         if (groupId === undefined || groupId === null)
             throw new Error("The parameter 'groupId' must be defined.");
@@ -29251,6 +29254,12 @@ export class UserActivityClient {
             url_ += "Take=" + encodeURIComponent("" + take) + "&";
         if (moduleType !== undefined && moduleType !== null)
             url_ += "moduleType=" + encodeURIComponent("" + moduleType) + "&";
+        if (programId !== undefined && programId !== null)
+            url_ += "programId=" + encodeURIComponent("" + programId) + "&";
+        if (from !== undefined && from !== null)
+            url_ += "from=" + encodeURIComponent(from ? "" + from.toJSON() : "") + "&";
+        if (to !== undefined && to !== null)
+            url_ += "to=" + encodeURIComponent(to ? "" + to.toJSON() : "") + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <AxiosRequestConfig>{
@@ -29274,6 +29283,98 @@ export class UserActivityClient {
     }
 
     protected processGetAllForGroup(response: AxiosResponse): Promise<ListOfUserActivity> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ListOfUserActivity.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ListOfUserActivity>(<any>null);
+    }
+
+    /**
+     * @param search (optional) 
+     * @param skip (optional) 
+     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
+     * @param moduleType (optional) 
+     * @param programId (optional) 
+     * @param from (optional) 
+     * @param to (optional) 
+     */
+    getAllForPublisher(publisherId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, moduleType: string | null | undefined, programId: string | null | undefined, from: Date | null | undefined, to: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfUserActivity> {
+        let url_ = this.baseUrl + "/v1/UserActivity/Publisher/{publisherId}?";
+        if (publisherId === undefined || publisherId === null)
+            throw new Error("The parameter 'publisherId' must be defined.");
+        url_ = url_.replace("{publisherId}", encodeURIComponent("" + publisherId));
+        if (search !== undefined && search !== null)
+            url_ += "Search=" + encodeURIComponent("" + search) + "&";
+        if (skip === null)
+            throw new Error("The parameter 'skip' cannot be null.");
+        else if (skip !== undefined)
+            url_ += "Skip=" + encodeURIComponent("" + skip) + "&";
+        if (take === null)
+            throw new Error("The parameter 'take' cannot be null.");
+        else if (take !== undefined)
+            url_ += "Take=" + encodeURIComponent("" + take) + "&";
+        if (moduleType !== undefined && moduleType !== null)
+            url_ += "moduleType=" + encodeURIComponent("" + moduleType) + "&";
+        if (programId !== undefined && programId !== null)
+            url_ += "programId=" + encodeURIComponent("" + programId) + "&";
+        if (from !== undefined && from !== null)
+            url_ += "from=" + encodeURIComponent(from ? "" + from.toJSON() : "") + "&";
+        if (to !== undefined && to !== null)
+            url_ += "to=" + encodeURIComponent(to ? "" + to.toJSON() : "") + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processGetAllForPublisher(_response);
+        });
+    }
+
+    protected processGetAllForPublisher(response: AxiosResponse): Promise<ListOfUserActivity> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
