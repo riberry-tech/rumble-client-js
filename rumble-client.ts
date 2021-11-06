@@ -5095,6 +5095,82 @@ export class ObservationDefinitionClient {
     }
 }
 
+export class ObservationDefinitionMigrationClient {
+    private instance: AxiosInstance;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(baseUrl?: string, instance?: AxiosInstance) {
+        this.instance = instance ? instance : axios.create();
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    migrateDefinition(observationDefinitionId: string | null, settings: MigrateObservationDefinitionSettings , cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/v1/ObservationDefinition/{observationDefinitionId}/Migrate";
+        if (observationDefinitionId === undefined || observationDefinitionId === null)
+            throw new Error("The parameter 'observationDefinitionId' must be defined.");
+        url_ = url_.replace("{observationDefinitionId}", encodeURIComponent("" + observationDefinitionId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(settings);
+
+        let options_ = <AxiosRequestConfig>{
+            data: content_,
+            method: "PUT",
+            url: url_,
+            headers: {
+                "Content-Type": "application/json",
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processMigrateDefinition(_response);
+        });
+    }
+
+    protected processMigrateDefinition(response: AxiosResponse): Promise<void> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 204) {
+            const _responseText = response.data;
+            return Promise.resolve<void>(<any>null);
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<void>(<any>null);
+    }
+}
+
 export class ObservationFormClient {
     private instance: AxiosInstance;
     private baseUrl: string;
@@ -24915,7 +24991,7 @@ export class EmailRegistrationClient {
     }
 
     /**
-     * Check if the email is registered in the system
+     * Check if the given email is registered in the system.
      * @return 200 OK if the email is found, else a 404
      */
     get(settings: EmailSettings , cancelToken?: CancelToken | undefined): Promise<FileResponse> {
@@ -29139,6 +29215,201 @@ export class TeamClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         }
         return Promise.resolve<void>(<any>null);
+    }
+}
+
+export class UserActivityClient {
+    private instance: AxiosInstance;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(baseUrl?: string, instance?: AxiosInstance) {
+        this.instance = instance ? instance : axios.create();
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * @param search (optional) 
+     * @param skip (optional) 
+     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
+     * @param moduleType (optional) 
+     * @param programId (optional) 
+     * @param from (optional) 
+     * @param to (optional) 
+     */
+    getAllForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, moduleType: string | null | undefined, programId: string | null | undefined, from: Date | null | undefined, to: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfUserActivity> {
+        let url_ = this.baseUrl + "/v1/UserActivity/Group/{groupId}?";
+        if (groupId === undefined || groupId === null)
+            throw new Error("The parameter 'groupId' must be defined.");
+        url_ = url_.replace("{groupId}", encodeURIComponent("" + groupId));
+        if (search !== undefined && search !== null)
+            url_ += "Search=" + encodeURIComponent("" + search) + "&";
+        if (skip === null)
+            throw new Error("The parameter 'skip' cannot be null.");
+        else if (skip !== undefined)
+            url_ += "Skip=" + encodeURIComponent("" + skip) + "&";
+        if (take === null)
+            throw new Error("The parameter 'take' cannot be null.");
+        else if (take !== undefined)
+            url_ += "Take=" + encodeURIComponent("" + take) + "&";
+        if (moduleType !== undefined && moduleType !== null)
+            url_ += "moduleType=" + encodeURIComponent("" + moduleType) + "&";
+        if (programId !== undefined && programId !== null)
+            url_ += "programId=" + encodeURIComponent("" + programId) + "&";
+        if (from !== undefined && from !== null)
+            url_ += "from=" + encodeURIComponent(from ? "" + from.toJSON() : "") + "&";
+        if (to !== undefined && to !== null)
+            url_ += "to=" + encodeURIComponent(to ? "" + to.toJSON() : "") + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processGetAllForGroup(_response);
+        });
+    }
+
+    protected processGetAllForGroup(response: AxiosResponse): Promise<ListOfUserActivity> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ListOfUserActivity.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ListOfUserActivity>(<any>null);
+    }
+
+    /**
+     * @param search (optional) 
+     * @param skip (optional) 
+     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
+     * @param moduleType (optional) 
+     * @param programId (optional) 
+     * @param from (optional) 
+     * @param to (optional) 
+     */
+    getAllForPublisher(publisherId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, moduleType: string | null | undefined, programId: string | null | undefined, from: Date | null | undefined, to: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfUserActivity> {
+        let url_ = this.baseUrl + "/v1/UserActivity/Publisher/{publisherId}?";
+        if (publisherId === undefined || publisherId === null)
+            throw new Error("The parameter 'publisherId' must be defined.");
+        url_ = url_.replace("{publisherId}", encodeURIComponent("" + publisherId));
+        if (search !== undefined && search !== null)
+            url_ += "Search=" + encodeURIComponent("" + search) + "&";
+        if (skip === null)
+            throw new Error("The parameter 'skip' cannot be null.");
+        else if (skip !== undefined)
+            url_ += "Skip=" + encodeURIComponent("" + skip) + "&";
+        if (take === null)
+            throw new Error("The parameter 'take' cannot be null.");
+        else if (take !== undefined)
+            url_ += "Take=" + encodeURIComponent("" + take) + "&";
+        if (moduleType !== undefined && moduleType !== null)
+            url_ += "moduleType=" + encodeURIComponent("" + moduleType) + "&";
+        if (programId !== undefined && programId !== null)
+            url_ += "programId=" + encodeURIComponent("" + programId) + "&";
+        if (from !== undefined && from !== null)
+            url_ += "from=" + encodeURIComponent(from ? "" + from.toJSON() : "") + "&";
+        if (to !== undefined && to !== null)
+            url_ += "to=" + encodeURIComponent(to ? "" + to.toJSON() : "") + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processGetAllForPublisher(_response);
+        });
+    }
+
+    protected processGetAllForPublisher(response: AxiosResponse): Promise<ListOfUserActivity> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ListOfUserActivity.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ListOfUserActivity>(<any>null);
     }
 }
 
@@ -34067,6 +34338,46 @@ export class UpdateObservationDefinitionSettings implements IUpdateObservationDe
 export interface IUpdateObservationDefinitionSettings {
     name: string;
     description: string;
+    version: number;
+}
+
+export class MigrateObservationDefinitionSettings implements IMigrateObservationDefinitionSettings {
+    publisherId!: string;
+    version!: number;
+
+    constructor(data?: IMigrateObservationDefinitionSettings) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.publisherId = _data["publisherId"];
+            this.version = _data["version"];
+        }
+    }
+
+    static fromJS(data: any): MigrateObservationDefinitionSettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new MigrateObservationDefinitionSettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["publisherId"] = this.publisherId;
+        data["version"] = this.version;
+        return data; 
+    }
+}
+
+export interface IMigrateObservationDefinitionSettings {
+    publisherId: string;
     version: number;
 }
 
@@ -50013,6 +50324,136 @@ export interface IUpdateTeamSettings {
     privacy?: PrivacyLevel;
     tags?: string[] | undefined;
     version?: number;
+}
+
+export class ListOfUserActivity implements IListOfUserActivity {
+    totalItemCount!: number;
+    items!: UserActivity[];
+
+    constructor(data?: IListOfUserActivity) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.items = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.totalItemCount = _data["totalItemCount"];
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(UserActivity.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ListOfUserActivity {
+        data = typeof data === 'object' ? data : {};
+        let result = new ListOfUserActivity();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["totalItemCount"] = this.totalItemCount;
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IListOfUserActivity {
+    totalItemCount: number;
+    items: UserActivity[];
+}
+
+export class UserActivity implements IUserActivity {
+    id?: string | undefined;
+    trackId?: string | undefined;
+    activityType?: UserActivityType;
+    userId?: string | undefined;
+    creatorId?: string | undefined;
+    creatorType?: IdentityType;
+    payload?: any | undefined;
+    created?: Date;
+    modified?: Date;
+
+    constructor(data?: IUserActivity) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.trackId = _data["trackId"];
+            this.activityType = _data["activityType"];
+            this.userId = _data["userId"];
+            this.creatorId = _data["creatorId"];
+            this.creatorType = _data["creatorType"];
+            this.payload = _data["payload"];
+            this.created = _data["created"] ? new Date(_data["created"].toString()) : <any>undefined;
+            this.modified = _data["modified"] ? new Date(_data["modified"].toString()) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): UserActivity {
+        data = typeof data === 'object' ? data : {};
+        let result = new UserActivity();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["trackId"] = this.trackId;
+        data["activityType"] = this.activityType;
+        data["userId"] = this.userId;
+        data["creatorId"] = this.creatorId;
+        data["creatorType"] = this.creatorType;
+        data["payload"] = this.payload;
+        data["created"] = this.created ? this.created.toISOString() : <any>undefined;
+        data["modified"] = this.modified ? this.modified.toISOString() : <any>undefined;
+        return data; 
+    }
+}
+
+export interface IUserActivity {
+    id?: string | undefined;
+    trackId?: string | undefined;
+    activityType?: UserActivityType;
+    userId?: string | undefined;
+    creatorId?: string | undefined;
+    creatorType?: IdentityType;
+    payload?: any | undefined;
+    created?: Date;
+    modified?: Date;
+}
+
+export enum UserActivityType {
+    Unknown = "Unknown",
+    Joined = "Joined",
+    Left = "Left",
+    Banned = "Banned",
+    RolesAdded = "RolesAdded",
+    RolesRemoved = "RolesRemoved",
+    ModuleAttempt = "ModuleAttempt",
+    SurveyResponse = "SurveyResponse",
 }
 
 export class ListOfUser implements IListOfUser {
