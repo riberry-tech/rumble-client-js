@@ -10826,11 +10826,11 @@ export class SharingClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    get(name: string | null , cancelToken?: CancelToken | undefined): Promise<Sharing> {
-        let url_ = this.baseUrl + "/v1/Sharing/{name}";
-        if (name === undefined || name === null)
-            throw new Error("The parameter 'name' must be defined.");
-        url_ = url_.replace("{name}", encodeURIComponent("" + name));
+    getByName(sharingName: string | null , cancelToken?: CancelToken | undefined): Promise<Sharing> {
+        let url_ = this.baseUrl + "/v1/Sharing/Name/{sharingName}";
+        if (sharingName === undefined || sharingName === null)
+            throw new Error("The parameter 'sharingName' must be defined.");
+        url_ = url_.replace("{sharingName}", encodeURIComponent("" + sharingName));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <AxiosRequestConfig>{
@@ -10849,11 +10849,11 @@ export class SharingClient {
                 throw _error;
             }
         }).then((_response: AxiosResponse) => {
-            return this.processGet(_response);
+            return this.processGetByName(_response);
         });
     }
 
-    protected processGet(response: AxiosResponse): Promise<Sharing> {
+    protected processGetByName(response: AxiosResponse): Promise<Sharing> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -10889,6 +10889,147 @@ export class SharingClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         }
         return Promise.resolve<Sharing>(<any>null);
+    }
+
+    delete(sharingId: string | null , cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/v1/Sharing/{sharingId}";
+        if (sharingId === undefined || sharingId === null)
+            throw new Error("The parameter 'sharingId' must be defined.");
+        url_ = url_.replace("{sharingId}", encodeURIComponent("" + sharingId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "DELETE",
+            url: url_,
+            headers: {
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processDelete(_response);
+        });
+    }
+
+    protected processDelete(response: AxiosResponse): Promise<void> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 204) {
+            const _responseText = response.data;
+            return Promise.resolve<void>(<any>null);
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<void>(<any>null);
+    }
+
+    /**
+     * @param search (optional) 
+     * @param skip (optional) 
+     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
+     */
+    getAllGroupInvitationsForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfSharing> {
+        let url_ = this.baseUrl + "/v1/Sharing/GroupInvitation/Group/{groupId}?";
+        if (groupId === undefined || groupId === null)
+            throw new Error("The parameter 'groupId' must be defined.");
+        url_ = url_.replace("{groupId}", encodeURIComponent("" + groupId));
+        if (search !== undefined && search !== null)
+            url_ += "Search=" + encodeURIComponent("" + search) + "&";
+        if (skip === null)
+            throw new Error("The parameter 'skip' cannot be null.");
+        else if (skip !== undefined)
+            url_ += "Skip=" + encodeURIComponent("" + skip) + "&";
+        if (take === null)
+            throw new Error("The parameter 'take' cannot be null.");
+        else if (take !== undefined)
+            url_ += "Take=" + encodeURIComponent("" + take) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processGetAllGroupInvitationsForGroup(_response);
+        });
+    }
+
+    protected processGetAllGroupInvitationsForGroup(response: AxiosResponse): Promise<ListOfSharing> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ListOfSharing.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ListOfSharing>(<any>null);
     }
 
     createForGroupInvitation(settings: CreateGroupInvitationSharingSettings , cancelToken?: CancelToken | undefined): Promise<Sharing> {
@@ -27434,67 +27575,6 @@ export class MemberClient {
         return Promise.resolve<Member>(<any>null);
     }
 
-    joinBySharing(name: string | null , cancelToken?: CancelToken | undefined): Promise<void> {
-        let url_ = this.baseUrl + "/v1/Member/JoinBySharing/{name}";
-        if (name === undefined || name === null)
-            throw new Error("The parameter 'name' must be defined.");
-        url_ = url_.replace("{name}", encodeURIComponent("" + name));
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ = <AxiosRequestConfig>{
-            method: "POST",
-            url: url_,
-            headers: {
-            },
-            cancelToken
-        };
-
-        return this.instance.request(options_).catch((_error: any) => {
-            if (isAxiosError(_error) && _error.response) {
-                return _error.response;
-            } else {
-                throw _error;
-            }
-        }).then((_response: AxiosResponse) => {
-            return this.processJoinBySharing(_response);
-        });
-    }
-
-    protected processJoinBySharing(response: AxiosResponse): Promise<void> {
-        const status = response.status;
-        let _headers: any = {};
-        if (response.headers && typeof response.headers === "object") {
-            for (let k in response.headers) {
-                if (response.headers.hasOwnProperty(k)) {
-                    _headers[k] = response.headers[k];
-                }
-            }
-        }
-        if (status === 204) {
-            const _responseText = response.data;
-            return Promise.resolve<void>(<any>null);
-        } else if (status === 401) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-        } else if (status === 403) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-        } else if (status === 404) {
-            const _responseText = response.data;
-            return throwException("This resource could not be found.", status, _responseText, _headers);
-        } else if (status === 503) {
-            const _responseText = response.data;
-            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
-        } else if (status === 504) {
-            const _responseText = response.data;
-            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
-        } else if (status !== 200 && status !== 204) {
-            const _responseText = response.data;
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-        }
-        return Promise.resolve<void>(<any>null);
-    }
-
     update(groupId: string | null, userId: string | null, settings: UpdateGroupMemberSettings , cancelToken?: CancelToken | undefined): Promise<void> {
         let url_ = this.baseUrl + "/v1/Member/Group/{groupId}/User/{userId}/Update";
         if (groupId === undefined || groupId === null)
@@ -27752,6 +27832,71 @@ export class MemberClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         }
         return Promise.resolve<void>(<any>null);
+    }
+
+    acceptGroupInvitation(name: string | null , cancelToken?: CancelToken | undefined): Promise<Member> {
+        let url_ = this.baseUrl + "/v1/Member/GroupInvitation/{name}/Accept";
+        if (name === undefined || name === null)
+            throw new Error("The parameter 'name' must be defined.");
+        url_ = url_.replace("{name}", encodeURIComponent("" + name));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "PUT",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processAcceptGroupInvitation(_response);
+        });
+    }
+
+    protected processAcceptGroupInvitation(response: AxiosResponse): Promise<Member> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = Member.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<Member>(<any>null);
     }
 
     emailAll(groupId: string | null | undefined, message: string | null | undefined, role: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<void> {
@@ -38008,6 +38153,7 @@ export class Sharing implements ISharing {
     creatorType?: IdentityType;
     created?: Date;
     expires?: Date;
+    disabled?: boolean;
 
     constructor(data?: ISharing) {
         if (data) {
@@ -38029,6 +38175,7 @@ export class Sharing implements ISharing {
             this.creatorType = _data["creatorType"];
             this.created = _data["created"] ? new Date(_data["created"].toString()) : <any>undefined;
             this.expires = _data["expires"] ? new Date(_data["expires"].toString()) : <any>undefined;
+            this.disabled = _data["disabled"];
         }
     }
 
@@ -38050,6 +38197,7 @@ export class Sharing implements ISharing {
         data["creatorType"] = this.creatorType;
         data["created"] = this.created ? this.created.toISOString() : <any>undefined;
         data["expires"] = this.expires ? this.expires.toISOString() : <any>undefined;
+        data["disabled"] = this.disabled;
         return data; 
     }
 }
@@ -38064,6 +38212,7 @@ export interface ISharing {
     creatorType?: IdentityType;
     created?: Date;
     expires?: Date;
+    disabled?: boolean;
 }
 
 export enum SharingType {
@@ -38075,6 +38224,57 @@ export enum IdentityType {
     None = 0,
     User = 1,
     Organisation = 2,
+}
+
+export class ListOfSharing implements IListOfSharing {
+    totalItemCount!: number;
+    items!: Sharing[];
+
+    constructor(data?: IListOfSharing) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.items = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.totalItemCount = _data["totalItemCount"];
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(Sharing.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ListOfSharing {
+        data = typeof data === 'object' ? data : {};
+        let result = new ListOfSharing();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["totalItemCount"] = this.totalItemCount;
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IListOfSharing {
+    totalItemCount: number;
+    items: Sharing[];
 }
 
 export class CreateSharingSettingsBase implements ICreateSharingSettingsBase {
