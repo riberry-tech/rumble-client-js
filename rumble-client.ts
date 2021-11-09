@@ -10826,11 +10826,11 @@ export class SharingClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    getByName(sharingName: string | null , cancelToken?: CancelToken | undefined): Promise<Sharing> {
-        let url_ = this.baseUrl + "/v1/Sharing/Name/{sharingName}";
-        if (sharingName === undefined || sharingName === null)
-            throw new Error("The parameter 'sharingName' must be defined.");
-        url_ = url_.replace("{sharingName}", encodeURIComponent("" + sharingName));
+    getByAlias(aliasId: string | null , cancelToken?: CancelToken | undefined): Promise<Sharing> {
+        let url_ = this.baseUrl + "/v1/Sharing/Alias/{aliasId}";
+        if (aliasId === undefined || aliasId === null)
+            throw new Error("The parameter 'aliasId' must be defined.");
+        url_ = url_.replace("{aliasId}", encodeURIComponent("" + aliasId));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <AxiosRequestConfig>{
@@ -10849,11 +10849,11 @@ export class SharingClient {
                 throw _error;
             }
         }).then((_response: AxiosResponse) => {
-            return this.processGetByName(_response);
+            return this.processGetByAlias(_response);
         });
     }
 
-    protected processGetByName(response: AxiosResponse): Promise<Sharing> {
+    protected processGetByAlias(response: AxiosResponse): Promise<Sharing> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -15235,11 +15235,9 @@ export class CertificationClient {
     }
 
     /**
-     * Gets the certifications for a trainee at the given time.
-     * @param traineeId The user id of the trainee.
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param at (optional) The UTC time at which to get certificates. If not specified, the current time is used.
+     * @param at (optional) 
      */
     getAllHistoryForTrainee(traineeId: string | null, skip: number | undefined, take: number | undefined, at: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfCertificationFact> {
         let url_ = this.baseUrl + "/v1/Certification/Trainee/{traineeId}/History?";
@@ -15317,13 +15315,12 @@ export class CertificationClient {
     }
 
     /**
-     * Gets the list of users with a certificate in a group at a specified time, optionally filtered by their status and roles in the group.
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param certificateId (optional) 
      * @param memberStatus (optional) 
      * @param role (optional) 
-     * @param at (optional) The UTC time at which to get certificates. If not specified, the current time is used.
+     * @param at (optional) 
      */
     getAllHistoryForGroup(groupId: string | null, skip: number | undefined, take: number | undefined, certificateId: string | null | undefined, memberStatus: MemberStatus | null | undefined, role: string | null | undefined, at: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfCertificationFact> {
         let url_ = this.baseUrl + "/v1/Certification/Group/{groupId}/History?";
@@ -15612,18 +15609,15 @@ export class ClassClient {
     }
 
     /**
-     * Get a list of all classes
      * @param search (optional) 
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param organisationId (optional) Optional organisation id filter
-     * @param teamId (optional) Optional team id filter
-     * @param publisherId (optional) Optional publisher id filter
-     * @param courseId (optional) Optional course id filter
-     * @param programId (optional) - null/empty to show all
-    - program ID to filter to specific program
-    - "none" to filter to items not in any program
-     * @param activated (optional) Optional filter by class activation state
+     * @param organisationId (optional) 
+     * @param teamId (optional) 
+     * @param publisherId (optional) 
+     * @param courseId (optional) 
+     * @param programId (optional) 
+     * @param activated (optional) 
      */
     getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, organisationId: string | null | undefined, teamId: string | null | undefined, publisherId: string | null | undefined, courseId: string | null | undefined, programId: string | null | undefined, activated: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfClass> {
         let url_ = this.baseUrl + "/v1/Class?";
@@ -15966,9 +15960,6 @@ export class ClassClient {
         return Promise.resolve<void>(<any>null);
     }
 
-    /**
-     * Send assessment requested notification to trainers
-     */
     notifyAssessors(classId: string | null, settings: NotifyAssessorsSettings , cancelToken?: CancelToken | undefined): Promise<void> {
         let url_ = this.baseUrl + "/v1/Class/{classId}/NotifyAssessors";
         if (classId === undefined || classId === null)
@@ -16049,9 +16040,7 @@ export class CourseClient {
      * @param search (optional) 
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param programId (optional) - null/empty to show all
-    - program ID to filter to specific program
-    - "none" to filter to items not in any program
+     * @param programId (optional) 
      */
     getAllForPublisher(publisherId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, programId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfCourse> {
         let url_ = this.baseUrl + "/v1/Course/Publisher/{publisherId}?";
@@ -16585,9 +16574,7 @@ export class EnrolmentClient {
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param activated (optional) 
-     * @param programId (optional) - null/empty to show all
-    - program ID to filter to specific program
-    - "none" to filter to items not in any program
+     * @param programId (optional) 
      */
     getAllForTrainee(traineeId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, activated: boolean | null | undefined, programId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfEnrolment> {
         let url_ = this.baseUrl + "/v1/Enrolment/Trainee/{traineeId}?";
@@ -16908,15 +16895,13 @@ export class ModuleAttemptClient {
     }
 
     /**
-     * Gets all module attempts within the given group.
-     * @param groupId The group to get module attempts from
      * @param search (optional) 
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param moduleId (optional) Filter the results by module id
-     * @param actorType (optional) Filter the results by actor type i.e. User, TrainingSession or Team. If left null, all actor types will be searched for.
-     * @param from (optional) Start time of the module attempts
-     * @param to (optional) End time of the module attempts
+     * @param moduleId (optional) 
+     * @param actorType (optional) 
+     * @param from (optional) 
+     * @param to (optional) 
      */
     getAllForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, moduleId: string | null | undefined, actorType: ActorType | null | undefined, from: Date | null | undefined, to: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfModuleAttempt> {
         let url_ = this.baseUrl + "/v1/ModuleAttempt/Group/{groupId}?";
@@ -17221,10 +17206,6 @@ export class ModuleClient {
         return Promise.resolve<ListOfModule>(<any>null);
     }
 
-    /**
-     * Creates a module using the given data
-     * @param settings The data used to create the module
-     */
     create(settings: CreateModuleSettings , cancelToken?: CancelToken | undefined): Promise<Module> {
         let url_ = this.baseUrl + "/v1/Module";
         url_ = url_.replace(/[?&]$/, "");
@@ -17547,12 +17528,6 @@ export class ModuleClient {
         return Promise.resolve<ListOfFile>(<any>null);
     }
 
-    /**
-     * Creates a file and attaches it to the module
-     * @param moduleId Id of the module to attach the file to
-     * @param settings Data used to create the file
-     * @return Information about the created file
-     */
     createFile(moduleId: string | null, settings: CreateFileSettings , cancelToken?: CancelToken | undefined): Promise<File> {
         let url_ = this.baseUrl + "/v1/Module/{moduleId}/File";
         if (moduleId === undefined || moduleId === null)
@@ -24377,9 +24352,6 @@ export class AuthenticationClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * Set authentication cookie
-     */
     signIn(settings: AuthenticationSettings , cancelToken?: CancelToken | undefined): Promise<FileResponse> {
         let url_ = this.baseUrl + "/v1/Authentication/SignIn";
         url_ = url_.replace(/[?&]$/, "");
@@ -24446,9 +24418,6 @@ export class AuthenticationClient {
         return Promise.resolve<FileResponse>(<any>null);
     }
 
-    /**
-     * Clear authentication cookie
-     */
     signOut(  cancelToken?: CancelToken | undefined): Promise<void> {
         let url_ = this.baseUrl + "/v1/Authentication/SignOut";
         url_ = url_.replace(/[?&]$/, "");
@@ -24507,9 +24476,6 @@ export class AuthenticationClient {
         return Promise.resolve<void>(<any>null);
     }
 
-    /**
-     * Generate a TokenModel
-     */
     token(settings: AuthenticationSettings , cancelToken?: CancelToken | undefined): Promise<ChallengeToken> {
         let url_ = this.baseUrl + "/v1/Authentication/Token";
         url_ = url_.replace(/[?&]$/, "");
@@ -24638,9 +24604,6 @@ export class AuthenticationClient {
         return Promise.resolve<Token>(<any>null);
     }
 
-    /**
-     * Generate a TokenModel on behalf of userId
-     */
     impersonate(userId: string | null , cancelToken?: CancelToken | undefined): Promise<Token> {
         let url_ = this.baseUrl + "/v1/Authentication/Impersonate/{userId}";
         if (userId === undefined || userId === null)
@@ -24706,10 +24669,6 @@ export class AuthenticationClient {
         return Promise.resolve<Token>(<any>null);
     }
 
-    /**
-     * Revert the supplied TokenModel to one with no
-    impersonating data
-     */
     unimpersonate(  cancelToken?: CancelToken | undefined): Promise<Token> {
         let url_ = this.baseUrl + "/v1/Authentication/Unimpersonate";
         url_ = url_.replace(/[?&]$/, "");
@@ -24772,9 +24731,6 @@ export class AuthenticationClient {
         return Promise.resolve<Token>(<any>null);
     }
 
-    /**
-     * Gets the Identity
-     */
     identity(  cancelToken?: CancelToken | undefined): Promise<Identity> {
         let url_ = this.baseUrl + "/v1/Authentication/Identity";
         url_ = url_.replace(/[?&]$/, "");
@@ -24838,14 +24794,9 @@ export class AuthenticationClient {
     }
 
     /**
-     * Checks if the authenticated Identity has the given permission
-     * @param permission (optional) The required permission
-     * @param groupId (optional) The GroupId. If this is null or empty, all the current identity's
-    groups will be searched.
-     * @param orChildren (optional) If groupId is provided and orChildren
-    is true, all child groups of groupId
-    will also be checked
-     * @return Returns true if the current identity is permitted
+     * @param permission (optional) 
+     * @param groupId (optional) 
+     * @param orChildren (optional) 
      * @deprecated
      */
     permitted(permission: string | null | undefined, groupId: string | null | undefined, orChildren: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<boolean> {
@@ -24916,10 +24867,6 @@ export class AuthenticationClient {
         return Promise.resolve<boolean>(<any>null);
     }
 
-    /**
-     * @param permission The required permission
-     * @return Returns true if the current identity is permitted
-     */
     permittedAll(permission: string | null, groupIds: string[] , cancelToken?: CancelToken | undefined): Promise<string[]> {
         let url_ = this.baseUrl + "/v1/Authentication/Permitted/{permission}";
         if (permission === undefined || permission === null)
@@ -25273,10 +25220,6 @@ export class EmailRegistrationClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * Check if the given email is registered in the system.
-     * @return 200 OK if the email is found, else a 404
-     */
     get(settings: EmailSettings , cancelToken?: CancelToken | undefined): Promise<FileResponse> {
         let url_ = this.baseUrl + "/v1/EmailRegistration";
         url_ = url_.replace(/[?&]$/, "");
@@ -27287,14 +27230,6 @@ export class MemberClient {
         return Promise.resolve<ListOfMember>(<any>null);
     }
 
-    /**
-     * Gets the list of users in a group at the given time.
-     * @param groupId Id of the group to get the users from.
-     * @param at (optional) The UTC time at which to get users. If not specified, the current time is used.
-     * @param status (optional) The status used to filter the result.
-     * @param role (optional) The role used to filter the result
-     * @return The list of users with their membership status and roles within the group at the given time.
-     */
     getAllGroupHistory(groupId: string | null, at: Date | null | undefined, status: MemberStatus | null | undefined, role: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<MemberHistory[]> {
         let url_ = this.baseUrl + "/v1/Member/Group/{groupId}/History?";
         if (groupId === undefined || groupId === null)
@@ -27834,11 +27769,11 @@ export class MemberClient {
         return Promise.resolve<void>(<any>null);
     }
 
-    acceptGroupInvitation(name: string | null , cancelToken?: CancelToken | undefined): Promise<Member> {
-        let url_ = this.baseUrl + "/v1/Member/GroupInvitation/{name}/Accept";
-        if (name === undefined || name === null)
-            throw new Error("The parameter 'name' must be defined.");
-        url_ = url_.replace("{name}", encodeURIComponent("" + name));
+    acceptGroupInvitation(invitationId: string | null , cancelToken?: CancelToken | undefined): Promise<Member> {
+        let url_ = this.baseUrl + "/v1/Member/GroupInvitation/{invitationId}/Accept";
+        if (invitationId === undefined || invitationId === null)
+            throw new Error("The parameter 'invitationId' must be defined.");
+        url_ = url_.replace("{invitationId}", encodeURIComponent("" + invitationId));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <AxiosRequestConfig>{
@@ -29005,10 +28940,6 @@ export class PhoneNumberRegistrationClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * Check if the phoneNumber is registered in the system
-     * @return 200 OK if the phoneNumber is found, else a 404
-     */
     get(phoneNumber: string | null , cancelToken?: CancelToken | undefined): Promise<FileResponse> {
         let url_ = this.baseUrl + "/v1/PhoneNumberRegistration/{phoneNumber}";
         if (phoneNumber === undefined || phoneNumber === null)
@@ -38145,7 +38076,7 @@ export interface IUpdateTaskSettings {
 
 export class Sharing implements ISharing {
     id?: string | undefined;
-    name?: string | undefined;
+    aliasId?: string | undefined;
     note?: string | undefined;
     type?: SharingType;
     payload?: any | undefined;
@@ -38167,7 +38098,7 @@ export class Sharing implements ISharing {
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
-            this.name = _data["name"];
+            this.aliasId = _data["aliasId"];
             this.note = _data["note"];
             this.type = _data["type"];
             this.payload = _data["payload"];
@@ -38189,7 +38120,7 @@ export class Sharing implements ISharing {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-        data["name"] = this.name;
+        data["aliasId"] = this.aliasId;
         data["note"] = this.note;
         data["type"] = this.type;
         data["payload"] = this.payload;
@@ -38204,7 +38135,7 @@ export class Sharing implements ISharing {
 
 export interface ISharing {
     id?: string | undefined;
-    name?: string | undefined;
+    aliasId?: string | undefined;
     note?: string | undefined;
     type?: SharingType;
     payload?: any | undefined;
@@ -38278,7 +38209,7 @@ export interface IListOfSharing {
 }
 
 export class CreateSharingSettingsBase implements ICreateSharingSettingsBase {
-    name?: string | undefined;
+    aliasId?: string | undefined;
     note?: string | undefined;
     duration?: string | undefined;
 
@@ -38293,7 +38224,7 @@ export class CreateSharingSettingsBase implements ICreateSharingSettingsBase {
 
     init(_data?: any) {
         if (_data) {
-            this.name = _data["name"];
+            this.aliasId = _data["aliasId"];
             this.note = _data["note"];
             this.duration = _data["duration"];
         }
@@ -38308,7 +38239,7 @@ export class CreateSharingSettingsBase implements ICreateSharingSettingsBase {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["name"] = this.name;
+        data["aliasId"] = this.aliasId;
         data["note"] = this.note;
         data["duration"] = this.duration;
         return data; 
@@ -38316,7 +38247,7 @@ export class CreateSharingSettingsBase implements ICreateSharingSettingsBase {
 }
 
 export interface ICreateSharingSettingsBase {
-    name?: string | undefined;
+    aliasId?: string | undefined;
     note?: string | undefined;
     duration?: string | undefined;
 }
@@ -41624,7 +41555,6 @@ export interface ICalculatedModuleResult {
 }
 
 export class CreateModuleAttemptSettingsOfBookResult implements ICreateModuleAttemptSettingsOfBookResult {
-    /** Id of the actor of ActorType being assessed */
     actorId!: string;
     moduleContentId!: string;
     result!: BookResult;
@@ -41666,7 +41596,6 @@ export class CreateModuleAttemptSettingsOfBookResult implements ICreateModuleAtt
 }
 
 export interface ICreateModuleAttemptSettingsOfBookResult {
-    /** Id of the actor of ActorType being assessed */
     actorId: string;
     moduleContentId: string;
     result: BookResult;
@@ -43462,16 +43391,8 @@ export interface ISurveyInCourse {
 export class CreateCourseSettings implements ICreateCourseSettings {
     publisherId!: string;
     name!: string;
-    /** A base64 encoded image or a URL of existing image
-             */
     bannerUri?: string | undefined;
-    /** A base64 encoded image or a URL of existing image
-             */
     logoUri?: string | undefined;
-    /** A list of promotional medias. Elements can be: 
-    - base64 encoded image
-    - uri of image
-    - url of video (i.e. video has to be hosted elsewhere, at least for now) */
     mediaUris?: string[] | undefined;
     description?: string | undefined;
     sections?: CourseSection[] | undefined;
@@ -43564,16 +43485,8 @@ export class CreateCourseSettings implements ICreateCourseSettings {
 export interface ICreateCourseSettings {
     publisherId: string;
     name: string;
-    /** A base64 encoded image or a URL of existing image
-             */
     bannerUri?: string | undefined;
-    /** A base64 encoded image or a URL of existing image
-             */
     logoUri?: string | undefined;
-    /** A list of promotional medias. Elements can be: 
-    - base64 encoded image
-    - uri of image
-    - url of video (i.e. video has to be hosted elsewhere, at least for now) */
     mediaUris?: string[] | undefined;
     description?: string | undefined;
     sections?: CourseSection[] | undefined;
@@ -45185,7 +45098,6 @@ export interface IQuizQuestionResult {
 }
 
 export class CreateModuleAttemptSettingsOfQuizResult implements ICreateModuleAttemptSettingsOfQuizResult {
-    /** Id of the actor of ActorType being assessed */
     actorId!: string;
     moduleContentId!: string;
     result!: QuizResult;
@@ -45227,7 +45139,6 @@ export class CreateModuleAttemptSettingsOfQuizResult implements ICreateModuleAtt
 }
 
 export interface ICreateModuleAttemptSettingsOfQuizResult {
-    /** Id of the actor of ActorType being assessed */
     actorId: string;
     moduleContentId: string;
     result: QuizResult;
@@ -45904,7 +45815,6 @@ export enum TopicForm {
 }
 
 export class CreateModuleAttemptSettingsOfRevisionResult implements ICreateModuleAttemptSettingsOfRevisionResult {
-    /** Id of the actor of ActorType being assessed */
     actorId!: string;
     moduleContentId!: string;
     result!: RevisionResult;
@@ -45946,7 +45856,6 @@ export class CreateModuleAttemptSettingsOfRevisionResult implements ICreateModul
 }
 
 export interface ICreateModuleAttemptSettingsOfRevisionResult {
-    /** Id of the actor of ActorType being assessed */
     actorId: string;
     moduleContentId: string;
     result: RevisionResult;
@@ -46485,7 +46394,6 @@ export enum TrainingSessionStatus {
 }
 
 export class CreateTrainingSessionSettings implements ICreateTrainingSessionSettings {
-    /** The organisation or team id of the training session */
     groupId!: string;
     name!: string;
     description?: string | undefined;
@@ -46544,7 +46452,6 @@ export class CreateTrainingSessionSettings implements ICreateTrainingSessionSett
 }
 
 export interface ICreateTrainingSessionSettings {
-    /** The organisation or team id of the training session */
     groupId: string;
     name: string;
     description?: string | undefined;
@@ -46791,7 +46698,6 @@ export interface IVideoResult {
 }
 
 export class CreateModuleAttemptSettingsOfVideoResult implements ICreateModuleAttemptSettingsOfVideoResult {
-    /** Id of the actor of ActorType being assessed */
     actorId!: string;
     moduleContentId!: string;
     result!: VideoResult;
@@ -46833,7 +46739,6 @@ export class CreateModuleAttemptSettingsOfVideoResult implements ICreateModuleAt
 }
 
 export interface ICreateModuleAttemptSettingsOfVideoResult {
-    /** Id of the actor of ActorType being assessed */
     actorId: string;
     moduleContentId: string;
     result: VideoResult;
@@ -47377,7 +47282,6 @@ export interface IAssessmentSectionResult {
 }
 
 export class CreateModuleAttemptSettingsOfAssessmentResult implements ICreateModuleAttemptSettingsOfAssessmentResult {
-    /** Id of the actor of ActorType being assessed */
     actorId!: string;
     moduleContentId!: string;
     result!: AssessmentResult;
@@ -47419,7 +47323,6 @@ export class CreateModuleAttemptSettingsOfAssessmentResult implements ICreateMod
 }
 
 export interface ICreateModuleAttemptSettingsOfAssessmentResult {
-    /** Id of the actor of ActorType being assessed */
     actorId: string;
     moduleContentId: string;
     result: AssessmentResult;
@@ -48009,7 +47912,6 @@ export interface IAssessmentSubAttempt {
 }
 
 export class CreateAssessmentSubAttemptSettings implements ICreateAssessmentSubAttemptSettings {
-    /** Id of the actor of ActorType being assessed */
     actorId!: string;
     assessorId!: string;
     moduleId!: string;
@@ -48071,7 +47973,6 @@ export class CreateAssessmentSubAttemptSettings implements ICreateAssessmentSubA
 }
 
 export interface ICreateAssessmentSubAttemptSettings {
-    /** Id of the actor of ActorType being assessed */
     actorId: string;
     assessorId: string;
     moduleId: string;
@@ -49777,7 +49678,6 @@ export class OrganisationAccessToken implements IOrganisationAccessToken {
     creatorId?: string | undefined;
     creatorName?: string | undefined;
     lastUsed?: Date | undefined;
-    /** Only available at time of creation */
     token?: string | undefined;
 
     constructor(data?: IOrganisationAccessToken) {
@@ -49842,7 +49742,6 @@ export interface IOrganisationAccessToken {
     creatorId?: string | undefined;
     creatorName?: string | undefined;
     lastUsed?: Date | undefined;
-    /** Only available at time of creation */
     token?: string | undefined;
 }
 
