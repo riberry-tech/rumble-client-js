@@ -10816,6 +10816,289 @@ export class TaskClient {
     }
 }
 
+export class SharingClient {
+    private instance: AxiosInstance;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(baseUrl?: string, instance?: AxiosInstance) {
+        this.instance = instance ? instance : axios.create();
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    getByAlias(aliasId: string | null , cancelToken?: CancelToken | undefined): Promise<Sharing> {
+        let url_ = this.baseUrl + "/v1/Sharing/Alias/{aliasId}";
+        if (aliasId === undefined || aliasId === null)
+            throw new Error("The parameter 'aliasId' must be defined.");
+        url_ = url_.replace("{aliasId}", encodeURIComponent("" + aliasId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processGetByAlias(_response);
+        });
+    }
+
+    protected processGetByAlias(response: AxiosResponse): Promise<Sharing> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = Sharing.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<Sharing>(<any>null);
+    }
+
+    delete(sharingId: string | null , cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/v1/Sharing/{sharingId}";
+        if (sharingId === undefined || sharingId === null)
+            throw new Error("The parameter 'sharingId' must be defined.");
+        url_ = url_.replace("{sharingId}", encodeURIComponent("" + sharingId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "DELETE",
+            url: url_,
+            headers: {
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processDelete(_response);
+        });
+    }
+
+    protected processDelete(response: AxiosResponse): Promise<void> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 204) {
+            const _responseText = response.data;
+            return Promise.resolve<void>(<any>null);
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<void>(<any>null);
+    }
+
+    /**
+     * @param search (optional) 
+     * @param skip (optional) 
+     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
+     */
+    getAllGroupInvitationsForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfSharing> {
+        let url_ = this.baseUrl + "/v1/Sharing/GroupInvitation/Group/{groupId}?";
+        if (groupId === undefined || groupId === null)
+            throw new Error("The parameter 'groupId' must be defined.");
+        url_ = url_.replace("{groupId}", encodeURIComponent("" + groupId));
+        if (search !== undefined && search !== null)
+            url_ += "Search=" + encodeURIComponent("" + search) + "&";
+        if (skip === null)
+            throw new Error("The parameter 'skip' cannot be null.");
+        else if (skip !== undefined)
+            url_ += "Skip=" + encodeURIComponent("" + skip) + "&";
+        if (take === null)
+            throw new Error("The parameter 'take' cannot be null.");
+        else if (take !== undefined)
+            url_ += "Take=" + encodeURIComponent("" + take) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processGetAllGroupInvitationsForGroup(_response);
+        });
+    }
+
+    protected processGetAllGroupInvitationsForGroup(response: AxiosResponse): Promise<ListOfSharing> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ListOfSharing.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ListOfSharing>(<any>null);
+    }
+
+    createForGroupInvitation(settings: CreateGroupInvitationSharingSettings , cancelToken?: CancelToken | undefined): Promise<Sharing> {
+        let url_ = this.baseUrl + "/v1/Sharing/GroupInvitation";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(settings);
+
+        let options_ = <AxiosRequestConfig>{
+            data: content_,
+            method: "PUT",
+            url: url_,
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processCreateForGroupInvitation(_response);
+        });
+    }
+
+    protected processCreateForGroupInvitation(response: AxiosResponse): Promise<Sharing> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = Sharing.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<Sharing>(<any>null);
+    }
+}
+
 export class TicketClient {
     private instance: AxiosInstance;
     private baseUrl: string;
@@ -14952,11 +15235,9 @@ export class CertificationClient {
     }
 
     /**
-     * Gets the certifications for a trainee at the given time.
-     * @param traineeId The user id of the trainee.
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param at (optional) The UTC time at which to get certificates. If not specified, the current time is used.
+     * @param at (optional) 
      */
     getAllHistoryForTrainee(traineeId: string | null, skip: number | undefined, take: number | undefined, at: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfCertificationFact> {
         let url_ = this.baseUrl + "/v1/Certification/Trainee/{traineeId}/History?";
@@ -15034,13 +15315,12 @@ export class CertificationClient {
     }
 
     /**
-     * Gets the list of users with a certificate in a group at a specified time, optionally filtered by their status and roles in the group.
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param certificateId (optional) 
      * @param memberStatus (optional) 
      * @param role (optional) 
-     * @param at (optional) The UTC time at which to get certificates. If not specified, the current time is used.
+     * @param at (optional) 
      */
     getAllHistoryForGroup(groupId: string | null, skip: number | undefined, take: number | undefined, certificateId: string | null | undefined, memberStatus: MemberStatus | null | undefined, role: string | null | undefined, at: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfCertificationFact> {
         let url_ = this.baseUrl + "/v1/Certification/Group/{groupId}/History?";
@@ -15329,18 +15609,15 @@ export class ClassClient {
     }
 
     /**
-     * Get a list of all classes
      * @param search (optional) 
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param organisationId (optional) Optional organisation id filter
-     * @param teamId (optional) Optional team id filter
-     * @param publisherId (optional) Optional publisher id filter
-     * @param courseId (optional) Optional course id filter
-     * @param programId (optional) - null/empty to show all
-    - program ID to filter to specific program
-    - "none" to filter to items not in any program
-     * @param activated (optional) Optional filter by class activation state
+     * @param organisationId (optional) 
+     * @param teamId (optional) 
+     * @param publisherId (optional) 
+     * @param courseId (optional) 
+     * @param programId (optional) 
+     * @param activated (optional) 
      */
     getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, organisationId: string | null | undefined, teamId: string | null | undefined, publisherId: string | null | undefined, courseId: string | null | undefined, programId: string | null | undefined, activated: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfClass> {
         let url_ = this.baseUrl + "/v1/Class?";
@@ -15683,9 +15960,6 @@ export class ClassClient {
         return Promise.resolve<void>(<any>null);
     }
 
-    /**
-     * Send assessment requested notification to trainers
-     */
     notifyAssessors(classId: string | null, settings: NotifyAssessorsSettings , cancelToken?: CancelToken | undefined): Promise<void> {
         let url_ = this.baseUrl + "/v1/Class/{classId}/NotifyAssessors";
         if (classId === undefined || classId === null)
@@ -15766,9 +16040,7 @@ export class CourseClient {
      * @param search (optional) 
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param programId (optional) - null/empty to show all
-    - program ID to filter to specific program
-    - "none" to filter to items not in any program
+     * @param programId (optional) 
      */
     getAllForPublisher(publisherId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, programId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfCourse> {
         let url_ = this.baseUrl + "/v1/Course/Publisher/{publisherId}?";
@@ -16302,9 +16574,7 @@ export class EnrolmentClient {
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param activated (optional) 
-     * @param programId (optional) - null/empty to show all
-    - program ID to filter to specific program
-    - "none" to filter to items not in any program
+     * @param programId (optional) 
      */
     getAllForTrainee(traineeId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, activated: boolean | null | undefined, programId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfEnrolment> {
         let url_ = this.baseUrl + "/v1/Enrolment/Trainee/{traineeId}?";
@@ -16625,15 +16895,13 @@ export class ModuleAttemptClient {
     }
 
     /**
-     * Gets all module attempts within the given group.
-     * @param groupId The group to get module attempts from
      * @param search (optional) 
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param moduleId (optional) Filter the results by module id
-     * @param actorType (optional) Filter the results by actor type i.e. User, TrainingSession or Team. If left null, all actor types will be searched for.
-     * @param from (optional) Start time of the module attempts
-     * @param to (optional) End time of the module attempts
+     * @param moduleId (optional) 
+     * @param actorType (optional) 
+     * @param from (optional) 
+     * @param to (optional) 
      */
     getAllForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, moduleId: string | null | undefined, actorType: ActorType | null | undefined, from: Date | null | undefined, to: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfModuleAttempt> {
         let url_ = this.baseUrl + "/v1/ModuleAttempt/Group/{groupId}?";
@@ -16938,10 +17206,6 @@ export class ModuleClient {
         return Promise.resolve<ListOfModule>(<any>null);
     }
 
-    /**
-     * Creates a module using the given data
-     * @param settings The data used to create the module
-     */
     create(settings: CreateModuleSettings , cancelToken?: CancelToken | undefined): Promise<Module> {
         let url_ = this.baseUrl + "/v1/Module";
         url_ = url_.replace(/[?&]$/, "");
@@ -17264,12 +17528,6 @@ export class ModuleClient {
         return Promise.resolve<ListOfFile>(<any>null);
     }
 
-    /**
-     * Creates a file and attaches it to the module
-     * @param moduleId Id of the module to attach the file to
-     * @param settings Data used to create the file
-     * @return Information about the created file
-     */
     createFile(moduleId: string | null, settings: CreateFileSettings , cancelToken?: CancelToken | undefined): Promise<File> {
         let url_ = this.baseUrl + "/v1/Module/{moduleId}/File";
         if (moduleId === undefined || moduleId === null)
@@ -24094,9 +24352,6 @@ export class AuthenticationClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * Set authentication cookie
-     */
     signIn(settings: AuthenticationSettings , cancelToken?: CancelToken | undefined): Promise<FileResponse> {
         let url_ = this.baseUrl + "/v1/Authentication/SignIn";
         url_ = url_.replace(/[?&]$/, "");
@@ -24163,9 +24418,6 @@ export class AuthenticationClient {
         return Promise.resolve<FileResponse>(<any>null);
     }
 
-    /**
-     * Clear authentication cookie
-     */
     signOut(  cancelToken?: CancelToken | undefined): Promise<void> {
         let url_ = this.baseUrl + "/v1/Authentication/SignOut";
         url_ = url_.replace(/[?&]$/, "");
@@ -24224,9 +24476,6 @@ export class AuthenticationClient {
         return Promise.resolve<void>(<any>null);
     }
 
-    /**
-     * Generate a TokenModel
-     */
     token(settings: AuthenticationSettings , cancelToken?: CancelToken | undefined): Promise<ChallengeToken> {
         let url_ = this.baseUrl + "/v1/Authentication/Token";
         url_ = url_.replace(/[?&]$/, "");
@@ -24355,9 +24604,6 @@ export class AuthenticationClient {
         return Promise.resolve<Token>(<any>null);
     }
 
-    /**
-     * Generate a TokenModel on behalf of userId
-     */
     impersonate(userId: string | null , cancelToken?: CancelToken | undefined): Promise<Token> {
         let url_ = this.baseUrl + "/v1/Authentication/Impersonate/{userId}";
         if (userId === undefined || userId === null)
@@ -24423,10 +24669,6 @@ export class AuthenticationClient {
         return Promise.resolve<Token>(<any>null);
     }
 
-    /**
-     * Revert the supplied TokenModel to one with no
-    impersonating data
-     */
     unimpersonate(  cancelToken?: CancelToken | undefined): Promise<Token> {
         let url_ = this.baseUrl + "/v1/Authentication/Unimpersonate";
         url_ = url_.replace(/[?&]$/, "");
@@ -24489,9 +24731,6 @@ export class AuthenticationClient {
         return Promise.resolve<Token>(<any>null);
     }
 
-    /**
-     * Gets the Identity
-     */
     identity(  cancelToken?: CancelToken | undefined): Promise<Identity> {
         let url_ = this.baseUrl + "/v1/Authentication/Identity";
         url_ = url_.replace(/[?&]$/, "");
@@ -24555,14 +24794,9 @@ export class AuthenticationClient {
     }
 
     /**
-     * Checks if the authenticated Identity has the given permission
-     * @param permission (optional) The required permission
-     * @param groupId (optional) The GroupId. If this is null or empty, all the current identity's
-    groups will be searched.
-     * @param orChildren (optional) If groupId is provided and orChildren
-    is true, all child groups of groupId
-    will also be checked
-     * @return Returns true if the current identity is permitted
+     * @param permission (optional) 
+     * @param groupId (optional) 
+     * @param orChildren (optional) 
      * @deprecated
      */
     permitted(permission: string | null | undefined, groupId: string | null | undefined, orChildren: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<boolean> {
@@ -24633,10 +24867,6 @@ export class AuthenticationClient {
         return Promise.resolve<boolean>(<any>null);
     }
 
-    /**
-     * @param permission The required permission
-     * @return Returns true if the current identity is permitted
-     */
     permittedAll(permission: string | null, groupIds: string[] , cancelToken?: CancelToken | undefined): Promise<string[]> {
         let url_ = this.baseUrl + "/v1/Authentication/Permitted/{permission}";
         if (permission === undefined || permission === null)
@@ -24990,10 +25220,6 @@ export class EmailRegistrationClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * Check if the given email is registered in the system.
-     * @return 200 OK if the email is found, else a 404
-     */
     get(settings: EmailSettings , cancelToken?: CancelToken | undefined): Promise<FileResponse> {
         let url_ = this.baseUrl + "/v1/EmailRegistration";
         url_ = url_.replace(/[?&]$/, "");
@@ -27004,14 +27230,6 @@ export class MemberClient {
         return Promise.resolve<ListOfMember>(<any>null);
     }
 
-    /**
-     * Gets the list of users in a group at the given time.
-     * @param groupId Id of the group to get the users from.
-     * @param at (optional) The UTC time at which to get users. If not specified, the current time is used.
-     * @param status (optional) The status used to filter the result.
-     * @param role (optional) The role used to filter the result
-     * @return The list of users with their membership status and roles within the group at the given time.
-     */
     getAllGroupHistory(groupId: string | null, at: Date | null | undefined, status: MemberStatus | null | undefined, role: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<MemberHistory[]> {
         let url_ = this.baseUrl + "/v1/Member/Group/{groupId}/History?";
         if (groupId === undefined || groupId === null)
@@ -27549,6 +27767,71 @@ export class MemberClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         }
         return Promise.resolve<void>(<any>null);
+    }
+
+    acceptGroupInvitation(invitationId: string | null , cancelToken?: CancelToken | undefined): Promise<Member> {
+        let url_ = this.baseUrl + "/v1/Member/GroupInvitation/{invitationId}/Accept";
+        if (invitationId === undefined || invitationId === null)
+            throw new Error("The parameter 'invitationId' must be defined.");
+        url_ = url_.replace("{invitationId}", encodeURIComponent("" + invitationId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "PUT",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processAcceptGroupInvitation(_response);
+        });
+    }
+
+    protected processAcceptGroupInvitation(response: AxiosResponse): Promise<Member> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = Member.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<Member>(<any>null);
     }
 
     emailAll(groupId: string | null | undefined, message: string | null | undefined, role: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<void> {
@@ -28657,10 +28940,6 @@ export class PhoneNumberRegistrationClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * Check if the phoneNumber is registered in the system
-     * @return 200 OK if the phoneNumber is found, else a 404
-     */
     get(phoneNumber: string | null , cancelToken?: CancelToken | undefined): Promise<FileResponse> {
         let url_ = this.baseUrl + "/v1/PhoneNumberRegistration/{phoneNumber}";
         if (phoneNumber === undefined || phoneNumber === null)
@@ -37795,6 +38074,229 @@ export interface IUpdateTaskSettings {
     version?: number;
 }
 
+export class Sharing implements ISharing {
+    id?: string | undefined;
+    aliasId?: string | undefined;
+    note?: string | undefined;
+    type?: SharingType;
+    payload?: any | undefined;
+    creatorId?: string | undefined;
+    creatorType?: IdentityType;
+    created?: Date;
+    expires?: Date;
+    disabled?: boolean;
+
+    constructor(data?: ISharing) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.aliasId = _data["aliasId"];
+            this.note = _data["note"];
+            this.type = _data["type"];
+            this.payload = _data["payload"];
+            this.creatorId = _data["creatorId"];
+            this.creatorType = _data["creatorType"];
+            this.created = _data["created"] ? new Date(_data["created"].toString()) : <any>undefined;
+            this.expires = _data["expires"] ? new Date(_data["expires"].toString()) : <any>undefined;
+            this.disabled = _data["disabled"];
+        }
+    }
+
+    static fromJS(data: any): Sharing {
+        data = typeof data === 'object' ? data : {};
+        let result = new Sharing();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["aliasId"] = this.aliasId;
+        data["note"] = this.note;
+        data["type"] = this.type;
+        data["payload"] = this.payload;
+        data["creatorId"] = this.creatorId;
+        data["creatorType"] = this.creatorType;
+        data["created"] = this.created ? this.created.toISOString() : <any>undefined;
+        data["expires"] = this.expires ? this.expires.toISOString() : <any>undefined;
+        data["disabled"] = this.disabled;
+        return data; 
+    }
+}
+
+export interface ISharing {
+    id?: string | undefined;
+    aliasId?: string | undefined;
+    note?: string | undefined;
+    type?: SharingType;
+    payload?: any | undefined;
+    creatorId?: string | undefined;
+    creatorType?: IdentityType;
+    created?: Date;
+    expires?: Date;
+    disabled?: boolean;
+}
+
+export enum SharingType {
+    GroupInvitation = "GroupInvitation",
+}
+
+/** 0 = None 1 = User 2 = Organisation */
+export enum IdentityType {
+    None = 0,
+    User = 1,
+    Organisation = 2,
+}
+
+export class ListOfSharing implements IListOfSharing {
+    totalItemCount!: number;
+    items!: Sharing[];
+
+    constructor(data?: IListOfSharing) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.items = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.totalItemCount = _data["totalItemCount"];
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(Sharing.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ListOfSharing {
+        data = typeof data === 'object' ? data : {};
+        let result = new ListOfSharing();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["totalItemCount"] = this.totalItemCount;
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IListOfSharing {
+    totalItemCount: number;
+    items: Sharing[];
+}
+
+export class CreateSharingSettingsBase implements ICreateSharingSettingsBase {
+    aliasId?: string | undefined;
+    note?: string | undefined;
+    duration?: string | undefined;
+
+    constructor(data?: ICreateSharingSettingsBase) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.aliasId = _data["aliasId"];
+            this.note = _data["note"];
+            this.duration = _data["duration"];
+        }
+    }
+
+    static fromJS(data: any): CreateSharingSettingsBase {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateSharingSettingsBase();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["aliasId"] = this.aliasId;
+        data["note"] = this.note;
+        data["duration"] = this.duration;
+        return data; 
+    }
+}
+
+export interface ICreateSharingSettingsBase {
+    aliasId?: string | undefined;
+    note?: string | undefined;
+    duration?: string | undefined;
+}
+
+export class CreateGroupInvitationSharingSettings extends CreateSharingSettingsBase implements ICreateGroupInvitationSharingSettings {
+    groupId!: string;
+    roles?: string[] | undefined;
+
+    constructor(data?: ICreateGroupInvitationSharingSettings) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.groupId = _data["groupId"];
+            if (Array.isArray(_data["roles"])) {
+                this.roles = [] as any;
+                for (let item of _data["roles"])
+                    this.roles!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateGroupInvitationSharingSettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateGroupInvitationSharingSettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["groupId"] = this.groupId;
+        if (Array.isArray(this.roles)) {
+            data["roles"] = [];
+            for (let item of this.roles)
+                data["roles"].push(item);
+        }
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface ICreateGroupInvitationSharingSettings extends ICreateSharingSettingsBase {
+    groupId: string;
+    roles?: string[] | undefined;
+}
+
 export class ListOfTicket implements IListOfTicket {
     totalItemCount!: number;
     items!: Ticket[];
@@ -41053,7 +41555,6 @@ export interface ICalculatedModuleResult {
 }
 
 export class CreateModuleAttemptSettingsOfBookResult implements ICreateModuleAttemptSettingsOfBookResult {
-    /** Id of the actor of ActorType being assessed */
     actorId!: string;
     moduleContentId!: string;
     result!: BookResult;
@@ -41095,7 +41596,6 @@ export class CreateModuleAttemptSettingsOfBookResult implements ICreateModuleAtt
 }
 
 export interface ICreateModuleAttemptSettingsOfBookResult {
-    /** Id of the actor of ActorType being assessed */
     actorId: string;
     moduleContentId: string;
     result: BookResult;
@@ -42891,16 +43391,8 @@ export interface ISurveyInCourse {
 export class CreateCourseSettings implements ICreateCourseSettings {
     publisherId!: string;
     name!: string;
-    /** A base64 encoded image or a URL of existing image
-             */
     bannerUri?: string | undefined;
-    /** A base64 encoded image or a URL of existing image
-             */
     logoUri?: string | undefined;
-    /** A list of promotional medias. Elements can be: 
-    - base64 encoded image
-    - uri of image
-    - url of video (i.e. video has to be hosted elsewhere, at least for now) */
     mediaUris?: string[] | undefined;
     description?: string | undefined;
     sections?: CourseSection[] | undefined;
@@ -42993,16 +43485,8 @@ export class CreateCourseSettings implements ICreateCourseSettings {
 export interface ICreateCourseSettings {
     publisherId: string;
     name: string;
-    /** A base64 encoded image or a URL of existing image
-             */
     bannerUri?: string | undefined;
-    /** A base64 encoded image or a URL of existing image
-             */
     logoUri?: string | undefined;
-    /** A list of promotional medias. Elements can be: 
-    - base64 encoded image
-    - uri of image
-    - url of video (i.e. video has to be hosted elsewhere, at least for now) */
     mediaUris?: string[] | undefined;
     description?: string | undefined;
     sections?: CourseSection[] | undefined;
@@ -44614,7 +45098,6 @@ export interface IQuizQuestionResult {
 }
 
 export class CreateModuleAttemptSettingsOfQuizResult implements ICreateModuleAttemptSettingsOfQuizResult {
-    /** Id of the actor of ActorType being assessed */
     actorId!: string;
     moduleContentId!: string;
     result!: QuizResult;
@@ -44656,7 +45139,6 @@ export class CreateModuleAttemptSettingsOfQuizResult implements ICreateModuleAtt
 }
 
 export interface ICreateModuleAttemptSettingsOfQuizResult {
-    /** Id of the actor of ActorType being assessed */
     actorId: string;
     moduleContentId: string;
     result: QuizResult;
@@ -45333,7 +45815,6 @@ export enum TopicForm {
 }
 
 export class CreateModuleAttemptSettingsOfRevisionResult implements ICreateModuleAttemptSettingsOfRevisionResult {
-    /** Id of the actor of ActorType being assessed */
     actorId!: string;
     moduleContentId!: string;
     result!: RevisionResult;
@@ -45375,7 +45856,6 @@ export class CreateModuleAttemptSettingsOfRevisionResult implements ICreateModul
 }
 
 export interface ICreateModuleAttemptSettingsOfRevisionResult {
-    /** Id of the actor of ActorType being assessed */
     actorId: string;
     moduleContentId: string;
     result: RevisionResult;
@@ -45914,7 +46394,6 @@ export enum TrainingSessionStatus {
 }
 
 export class CreateTrainingSessionSettings implements ICreateTrainingSessionSettings {
-    /** The organisation or team id of the training session */
     groupId!: string;
     name!: string;
     description?: string | undefined;
@@ -45973,7 +46452,6 @@ export class CreateTrainingSessionSettings implements ICreateTrainingSessionSett
 }
 
 export interface ICreateTrainingSessionSettings {
-    /** The organisation or team id of the training session */
     groupId: string;
     name: string;
     description?: string | undefined;
@@ -46220,7 +46698,6 @@ export interface IVideoResult {
 }
 
 export class CreateModuleAttemptSettingsOfVideoResult implements ICreateModuleAttemptSettingsOfVideoResult {
-    /** Id of the actor of ActorType being assessed */
     actorId!: string;
     moduleContentId!: string;
     result!: VideoResult;
@@ -46262,7 +46739,6 @@ export class CreateModuleAttemptSettingsOfVideoResult implements ICreateModuleAt
 }
 
 export interface ICreateModuleAttemptSettingsOfVideoResult {
-    /** Id of the actor of ActorType being assessed */
     actorId: string;
     moduleContentId: string;
     result: VideoResult;
@@ -46806,7 +47282,6 @@ export interface IAssessmentSectionResult {
 }
 
 export class CreateModuleAttemptSettingsOfAssessmentResult implements ICreateModuleAttemptSettingsOfAssessmentResult {
-    /** Id of the actor of ActorType being assessed */
     actorId!: string;
     moduleContentId!: string;
     result!: AssessmentResult;
@@ -46848,7 +47323,6 @@ export class CreateModuleAttemptSettingsOfAssessmentResult implements ICreateMod
 }
 
 export interface ICreateModuleAttemptSettingsOfAssessmentResult {
-    /** Id of the actor of ActorType being assessed */
     actorId: string;
     moduleContentId: string;
     result: AssessmentResult;
@@ -47438,7 +47912,6 @@ export interface IAssessmentSubAttempt {
 }
 
 export class CreateAssessmentSubAttemptSettings implements ICreateAssessmentSubAttemptSettings {
-    /** Id of the actor of ActorType being assessed */
     actorId!: string;
     assessorId!: string;
     moduleId!: string;
@@ -47500,7 +47973,6 @@ export class CreateAssessmentSubAttemptSettings implements ICreateAssessmentSubA
 }
 
 export interface ICreateAssessmentSubAttemptSettings {
-    /** Id of the actor of ActorType being assessed */
     actorId: string;
     assessorId: string;
     moduleId: string;
@@ -47730,13 +48202,6 @@ export interface IIdentity {
     imageUri?: string | undefined;
     groups?: IdentityGroup[] | undefined;
     impersonatorId?: string | undefined;
-}
-
-/** 0 = None 1 = User 2 = Organisation */
-export enum IdentityType {
-    None = 0,
-    User = 1,
-    Organisation = 2,
 }
 
 export class IdentityGroup implements IIdentityGroup {
@@ -49213,7 +49678,6 @@ export class OrganisationAccessToken implements IOrganisationAccessToken {
     creatorId?: string | undefined;
     creatorName?: string | undefined;
     lastUsed?: Date | undefined;
-    /** Only available at time of creation */
     token?: string | undefined;
 
     constructor(data?: IOrganisationAccessToken) {
@@ -49278,7 +49742,6 @@ export interface IOrganisationAccessToken {
     creatorId?: string | undefined;
     creatorName?: string | undefined;
     lastUsed?: Date | undefined;
-    /** Only available at time of creation */
     token?: string | undefined;
 }
 
@@ -50580,6 +51043,7 @@ export class CreateUserSettings implements ICreateUserSettings {
     email!: string;
     password!: string;
     reCaptchaResponse?: string | undefined;
+    redirect?: string | undefined;
 
     constructor(data?: ICreateUserSettings) {
         if (data) {
@@ -50596,6 +51060,7 @@ export class CreateUserSettings implements ICreateUserSettings {
             this.email = _data["email"];
             this.password = _data["password"];
             this.reCaptchaResponse = _data["reCaptchaResponse"];
+            this.redirect = _data["redirect"];
         }
     }
 
@@ -50612,6 +51077,7 @@ export class CreateUserSettings implements ICreateUserSettings {
         data["email"] = this.email;
         data["password"] = this.password;
         data["reCaptchaResponse"] = this.reCaptchaResponse;
+        data["redirect"] = this.redirect;
         return data; 
     }
 }
@@ -50621,6 +51087,7 @@ export interface ICreateUserSettings {
     email: string;
     password: string;
     reCaptchaResponse?: string | undefined;
+    redirect?: string | undefined;
 }
 
 export class OnboardUserSettings implements IOnboardUserSettings {
