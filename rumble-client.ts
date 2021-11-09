@@ -51144,6 +51144,7 @@ export class CreateUserSettings implements ICreateUserSettings {
     email!: string;
     password!: string;
     reCaptchaResponse?: string | undefined;
+    redirect?: string | undefined;
 
     constructor(data?: ICreateUserSettings) {
         if (data) {
@@ -51160,6 +51161,7 @@ export class CreateUserSettings implements ICreateUserSettings {
             this.email = _data["email"];
             this.password = _data["password"];
             this.reCaptchaResponse = _data["reCaptchaResponse"];
+            this.redirect = _data["redirect"];
         }
     }
 
@@ -51176,6 +51178,7 @@ export class CreateUserSettings implements ICreateUserSettings {
         data["email"] = this.email;
         data["password"] = this.password;
         data["reCaptchaResponse"] = this.reCaptchaResponse;
+        data["redirect"] = this.redirect;
         return data; 
     }
 }
@@ -51185,6 +51188,7 @@ export interface ICreateUserSettings {
     email: string;
     password: string;
     reCaptchaResponse?: string | undefined;
+    redirect?: string | undefined;
 }
 
 export class OnboardUserSettings implements IOnboardUserSettings {
