@@ -3984,8 +3984,9 @@ export class ObservationClient {
      * @param from (optional) 
      * @param to (optional) 
      * @param friendly (optional) 
+     * @param anonymousUser (optional) 
      */
-    getAllForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, definitionId: string | null | undefined, from: Date | null | undefined, to: Date | null | undefined, friendly: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfObservation> {
+    getAllForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, definitionId: string | null | undefined, from: Date | null | undefined, to: Date | null | undefined, friendly: boolean | null | undefined, anonymousUser: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfObservation> {
         let url_ = this.baseUrl + "/v1/Observation/Group/{groupId}?";
         if (groupId === undefined || groupId === null)
             throw new Error("The parameter 'groupId' must be defined.");
@@ -4008,6 +4009,8 @@ export class ObservationClient {
             url_ += "to=" + encodeURIComponent(to ? "" + to.toJSON() : "") + "&";
         if (friendly !== undefined && friendly !== null)
             url_ += "friendly=" + encodeURIComponent("" + friendly) + "&";
+        if (anonymousUser !== undefined && anonymousUser !== null)
+            url_ += "anonymousUser=" + encodeURIComponent("" + anonymousUser) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <AxiosRequestConfig>{
@@ -5095,82 +5098,6 @@ export class ObservationDefinitionClient {
     }
 }
 
-export class ObservationDefinitionMigrationClient {
-    private instance: AxiosInstance;
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(baseUrl?: string, instance?: AxiosInstance) {
-        this.instance = instance ? instance : axios.create();
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
-    }
-
-    migrateDefinition(observationDefinitionId: string | null, settings: MigrateObservationDefinitionSettings , cancelToken?: CancelToken | undefined): Promise<void> {
-        let url_ = this.baseUrl + "/v1/ObservationDefinition/{observationDefinitionId}/Migrate";
-        if (observationDefinitionId === undefined || observationDefinitionId === null)
-            throw new Error("The parameter 'observationDefinitionId' must be defined.");
-        url_ = url_.replace("{observationDefinitionId}", encodeURIComponent("" + observationDefinitionId));
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(settings);
-
-        let options_ = <AxiosRequestConfig>{
-            data: content_,
-            method: "PUT",
-            url: url_,
-            headers: {
-                "Content-Type": "application/json",
-            },
-            cancelToken
-        };
-
-        return this.instance.request(options_).catch((_error: any) => {
-            if (isAxiosError(_error) && _error.response) {
-                return _error.response;
-            } else {
-                throw _error;
-            }
-        }).then((_response: AxiosResponse) => {
-            return this.processMigrateDefinition(_response);
-        });
-    }
-
-    protected processMigrateDefinition(response: AxiosResponse): Promise<void> {
-        const status = response.status;
-        let _headers: any = {};
-        if (response.headers && typeof response.headers === "object") {
-            for (let k in response.headers) {
-                if (response.headers.hasOwnProperty(k)) {
-                    _headers[k] = response.headers[k];
-                }
-            }
-        }
-        if (status === 204) {
-            const _responseText = response.data;
-            return Promise.resolve<void>(<any>null);
-        } else if (status === 401) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-        } else if (status === 403) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-        } else if (status === 404) {
-            const _responseText = response.data;
-            return throwException("This resource could not be found.", status, _responseText, _headers);
-        } else if (status === 503) {
-            const _responseText = response.data;
-            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
-        } else if (status === 504) {
-            const _responseText = response.data;
-            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
-        } else if (status !== 200 && status !== 204) {
-            const _responseText = response.data;
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-        }
-        return Promise.resolve<void>(<any>null);
-    }
-}
-
 export class ObservationFormClient {
     private instance: AxiosInstance;
     private baseUrl: string;
@@ -5185,7 +5112,7 @@ export class ObservationFormClient {
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      */
-    getAll(contentId: string | null, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfObservationForm> {
+    getAllForObservationContent(contentId: string | null, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfObservationForm> {
         let url_ = this.baseUrl + "/v1/ObservationContent/{contentId}/Form?";
         if (contentId === undefined || contentId === null)
             throw new Error("The parameter 'contentId' must be defined.");
@@ -5216,11 +5143,11 @@ export class ObservationFormClient {
                 throw _error;
             }
         }).then((_response: AxiosResponse) => {
-            return this.processGetAll(_response);
+            return this.processGetAllForObservationContent(_response);
         });
     }
 
-    protected processGetAll(response: AxiosResponse): Promise<ListOfObservationForm> {
+    protected processGetAllForObservationContent(response: AxiosResponse): Promise<ListOfObservationForm> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -5258,11 +5185,11 @@ export class ObservationFormClient {
         return Promise.resolve<ListOfObservationForm>(<any>null);
     }
 
-    get(formId: string | null , cancelToken?: CancelToken | undefined): Promise<ObservationForm> {
-        let url_ = this.baseUrl + "/v1/ObservationForm/{formId}";
-        if (formId === undefined || formId === null)
-            throw new Error("The parameter 'formId' must be defined.");
-        url_ = url_.replace("{formId}", encodeURIComponent("" + formId));
+    get(observationFormId: string | null , cancelToken?: CancelToken | undefined): Promise<ObservationForm> {
+        let url_ = this.baseUrl + "/v1/ObservationForm/{observationFormId}";
+        if (observationFormId === undefined || observationFormId === null)
+            throw new Error("The parameter 'observationFormId' must be defined.");
+        url_ = url_.replace("{observationFormId}", encodeURIComponent("" + observationFormId));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <AxiosRequestConfig>{
@@ -5323,11 +5250,134 @@ export class ObservationFormClient {
         return Promise.resolve<ObservationForm>(<any>null);
     }
 
-    create(formId: string | null, settings: CreateObservationFormSettings , cancelToken?: CancelToken | undefined): Promise<ObservationForm> {
-        let url_ = this.baseUrl + "/v1/ObservationForm/{formId}";
-        if (formId === undefined || formId === null)
-            throw new Error("The parameter 'formId' must be defined.");
-        url_ = url_.replace("{formId}", encodeURIComponent("" + formId));
+    update(observationFormId: string | null, settings: UpdateObservationFormSettings , cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/v1/ObservationForm/{observationFormId}";
+        if (observationFormId === undefined || observationFormId === null)
+            throw new Error("The parameter 'observationFormId' must be defined.");
+        url_ = url_.replace("{observationFormId}", encodeURIComponent("" + observationFormId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(settings);
+
+        let options_ = <AxiosRequestConfig>{
+            data: content_,
+            method: "PUT",
+            url: url_,
+            headers: {
+                "Content-Type": "application/json",
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processUpdate(_response);
+        });
+    }
+
+    protected processUpdate(response: AxiosResponse): Promise<void> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 204) {
+            const _responseText = response.data;
+            return Promise.resolve<void>(<any>null);
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<void>(<any>null);
+    }
+
+    delete(observationFormId: string | null , cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/v1/ObservationForm/{observationFormId}";
+        if (observationFormId === undefined || observationFormId === null)
+            throw new Error("The parameter 'observationFormId' must be defined.");
+        url_ = url_.replace("{observationFormId}", encodeURIComponent("" + observationFormId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "DELETE",
+            url: url_,
+            headers: {
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processDelete(_response);
+        });
+    }
+
+    protected processDelete(response: AxiosResponse): Promise<void> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 204) {
+            const _responseText = response.data;
+            return Promise.resolve<void>(<any>null);
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<void>(<any>null);
+    }
+
+    create(settings: CreateObservationFormSettings , cancelToken?: CancelToken | undefined): Promise<ObservationForm> {
+        let url_ = this.baseUrl + "/v1/ObservationForm";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(settings);
@@ -5391,12 +5441,27 @@ export class ObservationFormClient {
         }
         return Promise.resolve<ObservationForm>(<any>null);
     }
+}
 
-    update(formId: string | null, settings: UpdateObservationFormSettings , cancelToken?: CancelToken | undefined): Promise<void> {
-        let url_ = this.baseUrl + "/v1/ObservationForm/{formId}";
-        if (formId === undefined || formId === null)
-            throw new Error("The parameter 'formId' must be defined.");
-        url_ = url_.replace("{formId}", encodeURIComponent("" + formId));
+export class ObservationMigrationClient {
+    private instance: AxiosInstance;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(baseUrl?: string, instance?: AxiosInstance) {
+        this.instance = instance ? instance : axios.create();
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * Change the ownership (publisher) of an given observation definition, all related data including 
+    activations and observation will be transferred to the new publisher as well.
+     */
+    migrateObservationDefinition(observationDefinitionId: string | null, settings: MigrateObservationDefinitionSettings , cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/v1/ObservationDefinition/{observationDefinitionId}/Migrate";
+        if (observationDefinitionId === undefined || observationDefinitionId === null)
+            throw new Error("The parameter 'observationDefinitionId' must be defined.");
+        url_ = url_.replace("{observationDefinitionId}", encodeURIComponent("" + observationDefinitionId));
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(settings);
@@ -5418,11 +5483,11 @@ export class ObservationFormClient {
                 throw _error;
             }
         }).then((_response: AxiosResponse) => {
-            return this.processUpdate(_response);
+            return this.processMigrateObservationDefinition(_response);
         });
     }
 
-    protected processUpdate(response: AxiosResponse): Promise<void> {
+    protected processMigrateObservationDefinition(response: AxiosResponse): Promise<void> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -5457,17 +5522,29 @@ export class ObservationFormClient {
         return Promise.resolve<void>(<any>null);
     }
 
-    delete(formId: string | null , cancelToken?: CancelToken | undefined): Promise<void> {
-        let url_ = this.baseUrl + "/v1/ObservationForm/{formId}";
-        if (formId === undefined || formId === null)
-            throw new Error("The parameter 'formId' must be defined.");
-        url_ = url_.replace("{formId}", encodeURIComponent("" + formId));
+    /**
+     * Create a duplicate copy of an observation definition under the same publisher.
+                
+    NOTE: this might run for a while if there are a lot of observations need to be migrated, when tested
+    locally, 2400 observations took about 3 minutes to finish, as such, the command would be timeout but it
+    will finish eventually, check the logs for progress.
+     */
+    duplicateObservationDefinition(observationDefinitionId: string | null, settings: DuplicateObservationDefinitionSettings , cancelToken?: CancelToken | undefined): Promise<ObservationDefinition> {
+        let url_ = this.baseUrl + "/v1/ObservationDefinition/{observationDefinitionId}/Duplicate";
+        if (observationDefinitionId === undefined || observationDefinitionId === null)
+            throw new Error("The parameter 'observationDefinitionId' must be defined.");
+        url_ = url_.replace("{observationDefinitionId}", encodeURIComponent("" + observationDefinitionId));
         url_ = url_.replace(/[?&]$/, "");
 
+        const content_ = JSON.stringify(settings);
+
         let options_ = <AxiosRequestConfig>{
-            method: "DELETE",
+            data: content_,
+            method: "PUT",
             url: url_,
             headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
             },
             cancelToken
         };
@@ -5479,11 +5556,154 @@ export class ObservationFormClient {
                 throw _error;
             }
         }).then((_response: AxiosResponse) => {
-            return this.processDelete(_response);
+            return this.processDuplicateObservationDefinition(_response);
         });
     }
 
-    protected processDelete(response: AxiosResponse): Promise<void> {
+    protected processDuplicateObservationDefinition(response: AxiosResponse): Promise<ObservationDefinition> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ObservationDefinition.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ObservationDefinition>(<any>null);
+    }
+
+    /**
+     * @param definitionId (optional) 
+     * @param groupId (optional) 
+     * @deprecated
+     */
+    getObservationAnonymousUsers(definitionId: string | null | undefined, groupId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<string[]> {
+        let url_ = this.baseUrl + "/v1/Observation/AnonymousUser?";
+        if (definitionId !== undefined && definitionId !== null)
+            url_ += "definitionId=" + encodeURIComponent("" + definitionId) + "&";
+        if (groupId !== undefined && groupId !== null)
+            url_ += "groupId=" + encodeURIComponent("" + groupId) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processGetObservationAnonymousUsers(_response);
+        });
+    }
+
+    protected processGetObservationAnonymousUsers(response: AxiosResponse): Promise<string[]> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(item);
+            }
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<string[]>(<any>null);
+    }
+
+    /**
+     * @deprecated
+     */
+    batchMergeObservationAnonymousUsers(settings: BatchMergeObservationAnonymousUsersSettings , cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/v1/Observation/AnonymousUser/BatchMerge";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(settings);
+
+        let options_ = <AxiosRequestConfig>{
+            data: content_,
+            method: "PUT",
+            url: url_,
+            headers: {
+                "Content-Type": "application/json",
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processBatchMergeObservationAnonymousUsers(_response);
+        });
+    }
+
+    protected processBatchMergeObservationAnonymousUsers(response: AxiosResponse): Promise<void> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -15235,9 +15455,11 @@ export class CertificationClient {
     }
 
     /**
+     * Gets the certifications for a trainee at the given time.
+     * @param traineeId The user id of the trainee.
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param at (optional) 
+     * @param at (optional) The UTC time at which to get certificates. If not specified, the current time is used.
      */
     getAllHistoryForTrainee(traineeId: string | null, skip: number | undefined, take: number | undefined, at: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfCertificationFact> {
         let url_ = this.baseUrl + "/v1/Certification/Trainee/{traineeId}/History?";
@@ -15315,12 +15537,13 @@ export class CertificationClient {
     }
 
     /**
+     * Gets the list of users with a certificate in a group at a specified time, optionally filtered by their status and roles in the group.
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param certificateId (optional) 
      * @param memberStatus (optional) 
      * @param role (optional) 
-     * @param at (optional) 
+     * @param at (optional) The UTC time at which to get certificates. If not specified, the current time is used.
      */
     getAllHistoryForGroup(groupId: string | null, skip: number | undefined, take: number | undefined, certificateId: string | null | undefined, memberStatus: MemberStatus | null | undefined, role: string | null | undefined, at: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfCertificationFact> {
         let url_ = this.baseUrl + "/v1/Certification/Group/{groupId}/History?";
@@ -15609,15 +15832,18 @@ export class ClassClient {
     }
 
     /**
+     * Get a list of all classes
      * @param search (optional) 
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param organisationId (optional) 
-     * @param teamId (optional) 
-     * @param publisherId (optional) 
-     * @param courseId (optional) 
-     * @param programId (optional) 
-     * @param activated (optional) 
+     * @param organisationId (optional) Optional organisation id filter
+     * @param teamId (optional) Optional team id filter
+     * @param publisherId (optional) Optional publisher id filter
+     * @param courseId (optional) Optional course id filter
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
+     * @param activated (optional) Optional filter by class activation state
      */
     getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, organisationId: string | null | undefined, teamId: string | null | undefined, publisherId: string | null | undefined, courseId: string | null | undefined, programId: string | null | undefined, activated: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfClass> {
         let url_ = this.baseUrl + "/v1/Class?";
@@ -15960,6 +16186,9 @@ export class ClassClient {
         return Promise.resolve<void>(<any>null);
     }
 
+    /**
+     * Send assessment requested notification to trainers
+     */
     notifyAssessors(classId: string | null, settings: NotifyAssessorsSettings , cancelToken?: CancelToken | undefined): Promise<void> {
         let url_ = this.baseUrl + "/v1/Class/{classId}/NotifyAssessors";
         if (classId === undefined || classId === null)
@@ -16040,7 +16269,9 @@ export class CourseClient {
      * @param search (optional) 
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param programId (optional) 
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
      */
     getAllForPublisher(publisherId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, programId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfCourse> {
         let url_ = this.baseUrl + "/v1/Course/Publisher/{publisherId}?";
@@ -16574,7 +16805,9 @@ export class EnrolmentClient {
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param activated (optional) 
-     * @param programId (optional) 
+     * @param programId (optional) - null/empty to show all
+    - program ID to filter to specific program
+    - "none" to filter to items not in any program
      */
     getAllForTrainee(traineeId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, activated: boolean | null | undefined, programId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfEnrolment> {
         let url_ = this.baseUrl + "/v1/Enrolment/Trainee/{traineeId}?";
@@ -16895,13 +17128,15 @@ export class ModuleAttemptClient {
     }
 
     /**
+     * Gets all module attempts within the given group.
+     * @param groupId The group to get module attempts from
      * @param search (optional) 
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param moduleId (optional) 
-     * @param actorType (optional) 
-     * @param from (optional) 
-     * @param to (optional) 
+     * @param moduleId (optional) Filter the results by module id
+     * @param actorType (optional) Filter the results by actor type i.e. User, TrainingSession or Team. If left null, all actor types will be searched for.
+     * @param from (optional) Start time of the module attempts
+     * @param to (optional) End time of the module attempts
      */
     getAllForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, moduleId: string | null | undefined, actorType: ActorType | null | undefined, from: Date | null | undefined, to: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfModuleAttempt> {
         let url_ = this.baseUrl + "/v1/ModuleAttempt/Group/{groupId}?";
@@ -17206,6 +17441,10 @@ export class ModuleClient {
         return Promise.resolve<ListOfModule>(<any>null);
     }
 
+    /**
+     * Creates a module using the given data
+     * @param settings The data used to create the module
+     */
     create(settings: CreateModuleSettings , cancelToken?: CancelToken | undefined): Promise<Module> {
         let url_ = this.baseUrl + "/v1/Module";
         url_ = url_.replace(/[?&]$/, "");
@@ -17528,6 +17767,12 @@ export class ModuleClient {
         return Promise.resolve<ListOfFile>(<any>null);
     }
 
+    /**
+     * Creates a file and attaches it to the module
+     * @param moduleId Id of the module to attach the file to
+     * @param settings Data used to create the file
+     * @return Information about the created file
+     */
     createFile(moduleId: string | null, settings: CreateFileSettings , cancelToken?: CancelToken | undefined): Promise<File> {
         let url_ = this.baseUrl + "/v1/Module/{moduleId}/File";
         if (moduleId === undefined || moduleId === null)
@@ -24352,6 +24597,9 @@ export class AuthenticationClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
+    /**
+     * Set authentication cookie
+     */
     signIn(settings: AuthenticationSettings , cancelToken?: CancelToken | undefined): Promise<FileResponse> {
         let url_ = this.baseUrl + "/v1/Authentication/SignIn";
         url_ = url_.replace(/[?&]$/, "");
@@ -24418,6 +24666,9 @@ export class AuthenticationClient {
         return Promise.resolve<FileResponse>(<any>null);
     }
 
+    /**
+     * Clear authentication cookie
+     */
     signOut(  cancelToken?: CancelToken | undefined): Promise<void> {
         let url_ = this.baseUrl + "/v1/Authentication/SignOut";
         url_ = url_.replace(/[?&]$/, "");
@@ -24476,6 +24727,9 @@ export class AuthenticationClient {
         return Promise.resolve<void>(<any>null);
     }
 
+    /**
+     * Generate a TokenModel
+     */
     token(settings: AuthenticationSettings , cancelToken?: CancelToken | undefined): Promise<ChallengeToken> {
         let url_ = this.baseUrl + "/v1/Authentication/Token";
         url_ = url_.replace(/[?&]$/, "");
@@ -24604,6 +24858,9 @@ export class AuthenticationClient {
         return Promise.resolve<Token>(<any>null);
     }
 
+    /**
+     * Generate a TokenModel on behalf of userId
+     */
     impersonate(userId: string | null , cancelToken?: CancelToken | undefined): Promise<Token> {
         let url_ = this.baseUrl + "/v1/Authentication/Impersonate/{userId}";
         if (userId === undefined || userId === null)
@@ -24669,6 +24926,10 @@ export class AuthenticationClient {
         return Promise.resolve<Token>(<any>null);
     }
 
+    /**
+     * Revert the supplied TokenModel to one with no
+    impersonating data
+     */
     unimpersonate(  cancelToken?: CancelToken | undefined): Promise<Token> {
         let url_ = this.baseUrl + "/v1/Authentication/Unimpersonate";
         url_ = url_.replace(/[?&]$/, "");
@@ -24731,6 +24992,9 @@ export class AuthenticationClient {
         return Promise.resolve<Token>(<any>null);
     }
 
+    /**
+     * Gets the Identity
+     */
     identity(  cancelToken?: CancelToken | undefined): Promise<Identity> {
         let url_ = this.baseUrl + "/v1/Authentication/Identity";
         url_ = url_.replace(/[?&]$/, "");
@@ -24794,9 +25058,14 @@ export class AuthenticationClient {
     }
 
     /**
-     * @param permission (optional) 
-     * @param groupId (optional) 
-     * @param orChildren (optional) 
+     * Checks if the authenticated Identity has the given permission
+     * @param permission (optional) The required permission
+     * @param groupId (optional) The GroupId. If this is null or empty, all the current identity's
+    groups will be searched.
+     * @param orChildren (optional) If groupId is provided and orChildren
+    is true, all child groups of groupId
+    will also be checked
+     * @return Returns true if the current identity is permitted
      * @deprecated
      */
     permitted(permission: string | null | undefined, groupId: string | null | undefined, orChildren: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<boolean> {
@@ -24867,6 +25136,10 @@ export class AuthenticationClient {
         return Promise.resolve<boolean>(<any>null);
     }
 
+    /**
+     * @param permission The required permission
+     * @return Returns true if the current identity is permitted
+     */
     permittedAll(permission: string | null, groupIds: string[] , cancelToken?: CancelToken | undefined): Promise<string[]> {
         let url_ = this.baseUrl + "/v1/Authentication/Permitted/{permission}";
         if (permission === undefined || permission === null)
@@ -25220,6 +25493,10 @@ export class EmailRegistrationClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
+    /**
+     * Check if the given email is registered in the system.
+     * @return 200 OK if the email is found, else a 404
+     */
     get(settings: EmailSettings , cancelToken?: CancelToken | undefined): Promise<FileResponse> {
         let url_ = this.baseUrl + "/v1/EmailRegistration";
         url_ = url_.replace(/[?&]$/, "");
@@ -27230,6 +27507,14 @@ export class MemberClient {
         return Promise.resolve<ListOfMember>(<any>null);
     }
 
+    /**
+     * Gets the list of users in a group at the given time.
+     * @param groupId Id of the group to get the users from.
+     * @param at (optional) The UTC time at which to get users. If not specified, the current time is used.
+     * @param status (optional) The status used to filter the result.
+     * @param role (optional) The role used to filter the result
+     * @return The list of users with their membership status and roles within the group at the given time.
+     */
     getAllGroupHistory(groupId: string | null, at: Date | null | undefined, status: MemberStatus | null | undefined, role: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<MemberHistory[]> {
         let url_ = this.baseUrl + "/v1/Member/Group/{groupId}/History?";
         if (groupId === undefined || groupId === null)
@@ -28940,6 +29225,10 @@ export class PhoneNumberRegistrationClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
+    /**
+     * Check if the phoneNumber is registered in the system
+     * @return 200 OK if the phoneNumber is found, else a 404
+     */
     get(phoneNumber: string | null , cancelToken?: CancelToken | undefined): Promise<FileResponse> {
         let url_ = this.baseUrl + "/v1/PhoneNumberRegistration/{phoneNumber}";
         if (phoneNumber === undefined || phoneNumber === null)
@@ -33086,11 +33375,12 @@ export interface IProjection {
     lastBuild?: ProjectionBuild | undefined;
 }
 
-/** 0 = Built 1 = Building 2 = Failed */
+/** 0 = Built 1 = Building 2 = Maintenance -1 = Failed */
 export enum ProjectionStatus {
     Built = 0,
     Building = 1,
-    Failed = 2,
+    Maintenance = 2,
+    Failed = -1,
 }
 
 export class ProjectionBuild implements IProjectionBuild {
@@ -34620,46 +34910,6 @@ export interface IUpdateObservationDefinitionSettings {
     version: number;
 }
 
-export class MigrateObservationDefinitionSettings implements IMigrateObservationDefinitionSettings {
-    publisherId!: string;
-    version!: number;
-
-    constructor(data?: IMigrateObservationDefinitionSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.publisherId = _data["publisherId"];
-            this.version = _data["version"];
-        }
-    }
-
-    static fromJS(data: any): MigrateObservationDefinitionSettings {
-        data = typeof data === 'object' ? data : {};
-        let result = new MigrateObservationDefinitionSettings();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["publisherId"] = this.publisherId;
-        data["version"] = this.version;
-        return data; 
-    }
-}
-
-export interface IMigrateObservationDefinitionSettings {
-    publisherId: string;
-    version: number;
-}
-
 export class ListOfObservationForm implements IListOfObservationForm {
     totalItemCount!: number;
     items!: ObservationForm[];
@@ -34717,7 +34967,8 @@ export class ObservationForm implements IObservationForm {
     definitionId?: string | undefined;
     contentId?: string | undefined;
     fileQuestionIndex?: number | undefined;
-    formVersion?: string | undefined;
+    modelId?: string | undefined;
+    modelVersion?: string | undefined;
     widthMillimetres?: number;
     heightMillimetres?: number;
     modified?: Date;
@@ -34739,7 +34990,8 @@ export class ObservationForm implements IObservationForm {
             this.definitionId = _data["definitionId"];
             this.contentId = _data["contentId"];
             this.fileQuestionIndex = _data["fileQuestionIndex"];
-            this.formVersion = _data["formVersion"];
+            this.modelId = _data["modelId"];
+            this.modelVersion = _data["modelVersion"];
             this.widthMillimetres = _data["widthMillimetres"];
             this.heightMillimetres = _data["heightMillimetres"];
             this.modified = _data["modified"] ? new Date(_data["modified"].toString()) : <any>undefined;
@@ -34761,7 +35013,8 @@ export class ObservationForm implements IObservationForm {
         data["definitionId"] = this.definitionId;
         data["contentId"] = this.contentId;
         data["fileQuestionIndex"] = this.fileQuestionIndex;
-        data["formVersion"] = this.formVersion;
+        data["modelId"] = this.modelId;
+        data["modelVersion"] = this.modelVersion;
         data["widthMillimetres"] = this.widthMillimetres;
         data["heightMillimetres"] = this.heightMillimetres;
         data["modified"] = this.modified ? this.modified.toISOString() : <any>undefined;
@@ -34776,7 +35029,8 @@ export interface IObservationForm {
     definitionId?: string | undefined;
     contentId?: string | undefined;
     fileQuestionIndex?: number | undefined;
-    formVersion?: string | undefined;
+    modelId?: string | undefined;
+    modelVersion?: string | undefined;
     widthMillimetres?: number;
     heightMillimetres?: number;
     modified?: Date;
@@ -34785,8 +35039,13 @@ export interface IObservationForm {
 
 export class CreateObservationFormSettings implements ICreateObservationFormSettings {
     contentId!: string;
-    formVersion!: string;
+    /** The index of the file question in the target observation content
+that will be used to store the OCR image. */
     fileQuestionIndex?: number | undefined;
+    /** ID of the ML training model. */
+    modelId!: string;
+    /** Version of the ML training model. */
+    modelVersion!: string;
     widthMillimetres?: number;
     heightMillimetres?: number;
 
@@ -34802,8 +35061,9 @@ export class CreateObservationFormSettings implements ICreateObservationFormSett
     init(_data?: any) {
         if (_data) {
             this.contentId = _data["contentId"];
-            this.formVersion = _data["formVersion"];
             this.fileQuestionIndex = _data["fileQuestionIndex"];
+            this.modelId = _data["modelId"];
+            this.modelVersion = _data["modelVersion"];
             this.widthMillimetres = _data["widthMillimetres"];
             this.heightMillimetres = _data["heightMillimetres"];
         }
@@ -34819,8 +35079,9 @@ export class CreateObservationFormSettings implements ICreateObservationFormSett
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["contentId"] = this.contentId;
-        data["formVersion"] = this.formVersion;
         data["fileQuestionIndex"] = this.fileQuestionIndex;
+        data["modelId"] = this.modelId;
+        data["modelVersion"] = this.modelVersion;
         data["widthMillimetres"] = this.widthMillimetres;
         data["heightMillimetres"] = this.heightMillimetres;
         return data; 
@@ -34829,18 +35090,24 @@ export class CreateObservationFormSettings implements ICreateObservationFormSett
 
 export interface ICreateObservationFormSettings {
     contentId: string;
-    formVersion: string;
+    /** The index of the file question in the target observation content
+that will be used to store the OCR image. */
     fileQuestionIndex?: number | undefined;
+    /** ID of the ML training model. */
+    modelId: string;
+    /** Version of the ML training model. */
+    modelVersion: string;
     widthMillimetres?: number;
     heightMillimetres?: number;
 }
 
 export class UpdateObservationFormSettings implements IUpdateObservationFormSettings {
-    formVersion!: string;
     fileQuestionIndex?: number | undefined;
+    modelId!: string;
+    modelVersion!: string;
     widthMillimetres?: number;
     heightMillimetres?: number;
-    version!: number;
+    version?: number;
 
     constructor(data?: IUpdateObservationFormSettings) {
         if (data) {
@@ -34853,8 +35120,9 @@ export class UpdateObservationFormSettings implements IUpdateObservationFormSett
 
     init(_data?: any) {
         if (_data) {
-            this.formVersion = _data["formVersion"];
             this.fileQuestionIndex = _data["fileQuestionIndex"];
+            this.modelId = _data["modelId"];
+            this.modelVersion = _data["modelVersion"];
             this.widthMillimetres = _data["widthMillimetres"];
             this.heightMillimetres = _data["heightMillimetres"];
             this.version = _data["version"];
@@ -34870,8 +35138,9 @@ export class UpdateObservationFormSettings implements IUpdateObservationFormSett
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["formVersion"] = this.formVersion;
         data["fileQuestionIndex"] = this.fileQuestionIndex;
+        data["modelId"] = this.modelId;
+        data["modelVersion"] = this.modelVersion;
         data["widthMillimetres"] = this.widthMillimetres;
         data["heightMillimetres"] = this.heightMillimetres;
         data["version"] = this.version;
@@ -34880,11 +35149,172 @@ export class UpdateObservationFormSettings implements IUpdateObservationFormSett
 }
 
 export interface IUpdateObservationFormSettings {
-    formVersion: string;
     fileQuestionIndex?: number | undefined;
+    modelId: string;
+    modelVersion: string;
     widthMillimetres?: number;
     heightMillimetres?: number;
+    version?: number;
+}
+
+export class MigrateObservationDefinitionSettings implements IMigrateObservationDefinitionSettings {
+    publisherId!: string;
+    version!: number;
+
+    constructor(data?: IMigrateObservationDefinitionSettings) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.publisherId = _data["publisherId"];
+            this.version = _data["version"];
+        }
+    }
+
+    static fromJS(data: any): MigrateObservationDefinitionSettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new MigrateObservationDefinitionSettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["publisherId"] = this.publisherId;
+        data["version"] = this.version;
+        return data; 
+    }
+}
+
+export interface IMigrateObservationDefinitionSettings {
+    publisherId: string;
     version: number;
+}
+
+export class DuplicateObservationDefinitionSettings implements IDuplicateObservationDefinitionSettings {
+    name!: string;
+    description!: string;
+    /** List of consumers to be migrated with the new observation definition. */
+    consumerIds!: string[];
+    dryRun?: boolean;
+
+    constructor(data?: IDuplicateObservationDefinitionSettings) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.consumerIds = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            this.description = _data["description"];
+            if (Array.isArray(_data["consumerIds"])) {
+                this.consumerIds = [] as any;
+                for (let item of _data["consumerIds"])
+                    this.consumerIds!.push(item);
+            }
+            this.dryRun = _data["dryRun"];
+        }
+    }
+
+    static fromJS(data: any): DuplicateObservationDefinitionSettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new DuplicateObservationDefinitionSettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["description"] = this.description;
+        if (Array.isArray(this.consumerIds)) {
+            data["consumerIds"] = [];
+            for (let item of this.consumerIds)
+                data["consumerIds"].push(item);
+        }
+        data["dryRun"] = this.dryRun;
+        return data; 
+    }
+}
+
+export interface IDuplicateObservationDefinitionSettings {
+    name: string;
+    description: string;
+    /** List of consumers to be migrated with the new observation definition. */
+    consumerIds: string[];
+    dryRun?: boolean;
+}
+
+export class BatchMergeObservationAnonymousUsersSettings implements IBatchMergeObservationAnonymousUsersSettings {
+    definitionId!: string;
+    groupId!: string;
+    anonymousUsers!: string[];
+    userId!: string;
+
+    constructor(data?: IBatchMergeObservationAnonymousUsersSettings) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.anonymousUsers = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.definitionId = _data["definitionId"];
+            this.groupId = _data["groupId"];
+            if (Array.isArray(_data["anonymousUsers"])) {
+                this.anonymousUsers = [] as any;
+                for (let item of _data["anonymousUsers"])
+                    this.anonymousUsers!.push(item);
+            }
+            this.userId = _data["userId"];
+        }
+    }
+
+    static fromJS(data: any): BatchMergeObservationAnonymousUsersSettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new BatchMergeObservationAnonymousUsersSettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["definitionId"] = this.definitionId;
+        data["groupId"] = this.groupId;
+        if (Array.isArray(this.anonymousUsers)) {
+            data["anonymousUsers"] = [];
+            for (let item of this.anonymousUsers)
+                data["anonymousUsers"].push(item);
+        }
+        data["userId"] = this.userId;
+        return data; 
+    }
+}
+
+export interface IBatchMergeObservationAnonymousUsersSettings {
+    definitionId: string;
+    groupId: string;
+    anonymousUsers: string[];
+    userId: string;
 }
 
 export class ListOfObservationSettings implements IListOfObservationSettings {
@@ -41555,6 +41985,7 @@ export interface ICalculatedModuleResult {
 }
 
 export class CreateModuleAttemptSettingsOfBookResult implements ICreateModuleAttemptSettingsOfBookResult {
+    /** Id of the actor of ActorType being assessed */
     actorId!: string;
     moduleContentId!: string;
     result!: BookResult;
@@ -41596,6 +42027,7 @@ export class CreateModuleAttemptSettingsOfBookResult implements ICreateModuleAtt
 }
 
 export interface ICreateModuleAttemptSettingsOfBookResult {
+    /** Id of the actor of ActorType being assessed */
     actorId: string;
     moduleContentId: string;
     result: BookResult;
@@ -43391,8 +43823,16 @@ export interface ISurveyInCourse {
 export class CreateCourseSettings implements ICreateCourseSettings {
     publisherId!: string;
     name!: string;
+    /** A base64 encoded image or a URL of existing image
+             */
     bannerUri?: string | undefined;
+    /** A base64 encoded image or a URL of existing image
+             */
     logoUri?: string | undefined;
+    /** A list of promotional medias. Elements can be: 
+    - base64 encoded image
+    - uri of image
+    - url of video (i.e. video has to be hosted elsewhere, at least for now) */
     mediaUris?: string[] | undefined;
     description?: string | undefined;
     sections?: CourseSection[] | undefined;
@@ -43485,8 +43925,16 @@ export class CreateCourseSettings implements ICreateCourseSettings {
 export interface ICreateCourseSettings {
     publisherId: string;
     name: string;
+    /** A base64 encoded image or a URL of existing image
+             */
     bannerUri?: string | undefined;
+    /** A base64 encoded image or a URL of existing image
+             */
     logoUri?: string | undefined;
+    /** A list of promotional medias. Elements can be: 
+    - base64 encoded image
+    - uri of image
+    - url of video (i.e. video has to be hosted elsewhere, at least for now) */
     mediaUris?: string[] | undefined;
     description?: string | undefined;
     sections?: CourseSection[] | undefined;
@@ -45098,6 +45546,7 @@ export interface IQuizQuestionResult {
 }
 
 export class CreateModuleAttemptSettingsOfQuizResult implements ICreateModuleAttemptSettingsOfQuizResult {
+    /** Id of the actor of ActorType being assessed */
     actorId!: string;
     moduleContentId!: string;
     result!: QuizResult;
@@ -45139,6 +45588,7 @@ export class CreateModuleAttemptSettingsOfQuizResult implements ICreateModuleAtt
 }
 
 export interface ICreateModuleAttemptSettingsOfQuizResult {
+    /** Id of the actor of ActorType being assessed */
     actorId: string;
     moduleContentId: string;
     result: QuizResult;
@@ -45815,6 +46265,7 @@ export enum TopicForm {
 }
 
 export class CreateModuleAttemptSettingsOfRevisionResult implements ICreateModuleAttemptSettingsOfRevisionResult {
+    /** Id of the actor of ActorType being assessed */
     actorId!: string;
     moduleContentId!: string;
     result!: RevisionResult;
@@ -45856,6 +46307,7 @@ export class CreateModuleAttemptSettingsOfRevisionResult implements ICreateModul
 }
 
 export interface ICreateModuleAttemptSettingsOfRevisionResult {
+    /** Id of the actor of ActorType being assessed */
     actorId: string;
     moduleContentId: string;
     result: RevisionResult;
@@ -46394,6 +46846,7 @@ export enum TrainingSessionStatus {
 }
 
 export class CreateTrainingSessionSettings implements ICreateTrainingSessionSettings {
+    /** The organisation or team id of the training session */
     groupId!: string;
     name!: string;
     description?: string | undefined;
@@ -46452,6 +46905,7 @@ export class CreateTrainingSessionSettings implements ICreateTrainingSessionSett
 }
 
 export interface ICreateTrainingSessionSettings {
+    /** The organisation or team id of the training session */
     groupId: string;
     name: string;
     description?: string | undefined;
@@ -46698,6 +47152,7 @@ export interface IVideoResult {
 }
 
 export class CreateModuleAttemptSettingsOfVideoResult implements ICreateModuleAttemptSettingsOfVideoResult {
+    /** Id of the actor of ActorType being assessed */
     actorId!: string;
     moduleContentId!: string;
     result!: VideoResult;
@@ -46739,6 +47194,7 @@ export class CreateModuleAttemptSettingsOfVideoResult implements ICreateModuleAt
 }
 
 export interface ICreateModuleAttemptSettingsOfVideoResult {
+    /** Id of the actor of ActorType being assessed */
     actorId: string;
     moduleContentId: string;
     result: VideoResult;
@@ -47282,6 +47738,7 @@ export interface IAssessmentSectionResult {
 }
 
 export class CreateModuleAttemptSettingsOfAssessmentResult implements ICreateModuleAttemptSettingsOfAssessmentResult {
+    /** Id of the actor of ActorType being assessed */
     actorId!: string;
     moduleContentId!: string;
     result!: AssessmentResult;
@@ -47323,6 +47780,7 @@ export class CreateModuleAttemptSettingsOfAssessmentResult implements ICreateMod
 }
 
 export interface ICreateModuleAttemptSettingsOfAssessmentResult {
+    /** Id of the actor of ActorType being assessed */
     actorId: string;
     moduleContentId: string;
     result: AssessmentResult;
@@ -47912,6 +48370,7 @@ export interface IAssessmentSubAttempt {
 }
 
 export class CreateAssessmentSubAttemptSettings implements ICreateAssessmentSubAttemptSettings {
+    /** Id of the actor of ActorType being assessed */
     actorId!: string;
     assessorId!: string;
     moduleId!: string;
@@ -47973,6 +48432,7 @@ export class CreateAssessmentSubAttemptSettings implements ICreateAssessmentSubA
 }
 
 export interface ICreateAssessmentSubAttemptSettings {
+    /** Id of the actor of ActorType being assessed */
     actorId: string;
     assessorId: string;
     moduleId: string;
@@ -49678,6 +50138,7 @@ export class OrganisationAccessToken implements IOrganisationAccessToken {
     creatorId?: string | undefined;
     creatorName?: string | undefined;
     lastUsed?: Date | undefined;
+    /** Only available at time of creation */
     token?: string | undefined;
 
     constructor(data?: IOrganisationAccessToken) {
@@ -49742,6 +50203,7 @@ export interface IOrganisationAccessToken {
     creatorId?: string | undefined;
     creatorName?: string | undefined;
     lastUsed?: Date | undefined;
+    /** Only available at time of creation */
     token?: string | undefined;
 }
 
