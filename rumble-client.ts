@@ -24,8 +24,9 @@ export class EmailClient {
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param groupId (optional) 
+     * @param includeContents (optional) 
      */
-    getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, groupId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfEmail> {
+    getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, groupId: string | null | undefined, includeContents: boolean | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfEmail> {
         let url_ = this.baseUrl + "/v1/Email?";
         if (search !== undefined && search !== null)
             url_ += "Search=" + encodeURIComponent("" + search) + "&";
@@ -39,6 +40,10 @@ export class EmailClient {
             url_ += "Take=" + encodeURIComponent("" + take) + "&";
         if (groupId !== undefined && groupId !== null)
             url_ += "groupId=" + encodeURIComponent("" + groupId) + "&";
+        if (includeContents === null)
+            throw new Error("The parameter 'includeContents' cannot be null.");
+        else if (includeContents !== undefined)
+            url_ += "includeContents=" + encodeURIComponent("" + includeContents) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <AxiosRequestConfig>{
@@ -30577,7 +30582,76 @@ export class UserClient {
         return Promise.resolve<void>(<any>null);
     }
 
-    welcomeEmailTemplate(userName: string | null | undefined, userEmail: string | null | undefined, creatorName: string | null | undefined, message_CreatorName: string | null | undefined, message_CreatorImageUri: string | null | undefined, message_CreatorDescription: string | null | undefined, message_Message: string | null | undefined, group_Name: string | null | undefined, group_Type: string | null | undefined, group_Description: string | null | undefined, group_Uri: string | null | undefined, group_LogoUri: string | null | undefined, group_OrganisationName: string | null | undefined, group_OrganisationLogoUri: string | null | undefined, applicationName: string | null | undefined, productName: string | null | undefined, supportUri: string | null | undefined, verificationUri: string | null | undefined, termOfServiceUri: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<FileResponse> {
+    sendWelcomeEmail(userId: string | null, settings: SendWelcomeEmailSettings , cancelToken?: CancelToken | undefined): Promise<FileResponse> {
+        let url_ = this.baseUrl + "/v1/User/{userId}/SendWelcomeEmail";
+        if (userId === undefined || userId === null)
+            throw new Error("The parameter 'userId' must be defined.");
+        url_ = url_.replace("{userId}", encodeURIComponent("" + userId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(settings);
+
+        let options_ = <AxiosRequestConfig>{
+            data: content_,
+            responseType: "blob",
+            method: "POST",
+            url: url_,
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/octet-stream"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processSendWelcomeEmail(_response);
+        });
+    }
+
+    protected processSendWelcomeEmail(response: AxiosResponse): Promise<FileResponse> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers["content-disposition"] : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return Promise.resolve({ fileName: fileName, status: status, data: response.data as Blob, headers: _headers });
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<FileResponse>(<any>null);
+    }
+
+    welcomeEmailTemplate(userName: string | null | undefined, userEmail: string | null | undefined, creatorName: string | null | undefined, message_CreatorName: string | null | undefined, message_CreatorImageUri: string | null | undefined, message_CreatorDescription: string | null | undefined, message_Message: string | null | undefined, group_Title: string | null | undefined, group_ImageUri: string | null | undefined, group_Uri: string | null | undefined, group_Description: string | null | undefined, group_Subtitle: string | null | undefined, group_SubtitleImageUri: string | null | undefined, group_ActionButton: string | null | undefined, group_ActionUri: string | null | undefined, applicationName: string | null | undefined, productName: string | null | undefined, supportUri: string | null | undefined, verificationUri: string | null | undefined, termOfServiceUri: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<FileResponse> {
         let url_ = this.baseUrl + "/v1/User/WelcomeEmailTemplate?";
         if (userName !== undefined && userName !== null)
             url_ += "UserName=" + encodeURIComponent("" + userName) + "&";
@@ -30593,20 +30667,22 @@ export class UserClient {
             url_ += "Message.CreatorDescription=" + encodeURIComponent("" + message_CreatorDescription) + "&";
         if (message_Message !== undefined && message_Message !== null)
             url_ += "Message.Message=" + encodeURIComponent("" + message_Message) + "&";
-        if (group_Name !== undefined && group_Name !== null)
-            url_ += "Group.Name=" + encodeURIComponent("" + group_Name) + "&";
-        if (group_Type !== undefined && group_Type !== null)
-            url_ += "Group.Type=" + encodeURIComponent("" + group_Type) + "&";
-        if (group_Description !== undefined && group_Description !== null)
-            url_ += "Group.Description=" + encodeURIComponent("" + group_Description) + "&";
+        if (group_Title !== undefined && group_Title !== null)
+            url_ += "Group.Title=" + encodeURIComponent("" + group_Title) + "&";
+        if (group_ImageUri !== undefined && group_ImageUri !== null)
+            url_ += "Group.ImageUri=" + encodeURIComponent("" + group_ImageUri) + "&";
         if (group_Uri !== undefined && group_Uri !== null)
             url_ += "Group.Uri=" + encodeURIComponent("" + group_Uri) + "&";
-        if (group_LogoUri !== undefined && group_LogoUri !== null)
-            url_ += "Group.LogoUri=" + encodeURIComponent("" + group_LogoUri) + "&";
-        if (group_OrganisationName !== undefined && group_OrganisationName !== null)
-            url_ += "Group.OrganisationName=" + encodeURIComponent("" + group_OrganisationName) + "&";
-        if (group_OrganisationLogoUri !== undefined && group_OrganisationLogoUri !== null)
-            url_ += "Group.OrganisationLogoUri=" + encodeURIComponent("" + group_OrganisationLogoUri) + "&";
+        if (group_Description !== undefined && group_Description !== null)
+            url_ += "Group.Description=" + encodeURIComponent("" + group_Description) + "&";
+        if (group_Subtitle !== undefined && group_Subtitle !== null)
+            url_ += "Group.Subtitle=" + encodeURIComponent("" + group_Subtitle) + "&";
+        if (group_SubtitleImageUri !== undefined && group_SubtitleImageUri !== null)
+            url_ += "Group.SubtitleImageUri=" + encodeURIComponent("" + group_SubtitleImageUri) + "&";
+        if (group_ActionButton !== undefined && group_ActionButton !== null)
+            url_ += "Group.ActionButton=" + encodeURIComponent("" + group_ActionButton) + "&";
+        if (group_ActionUri !== undefined && group_ActionUri !== null)
+            url_ += "Group.ActionUri=" + encodeURIComponent("" + group_ActionUri) + "&";
         if (applicationName !== undefined && applicationName !== null)
             url_ += "ApplicationName=" + encodeURIComponent("" + applicationName) + "&";
         if (productName !== undefined && productName !== null)
@@ -30677,12 +30753,14 @@ export class UserClient {
         return Promise.resolve<FileResponse>(<any>null);
     }
 
-    contactEmailTemplate(userName: string | null | undefined, creatorEmail: string | null | undefined, message_CreatorName: string | null | undefined, message_CreatorImageUri: string | null | undefined, message_CreatorDescription: string | null | undefined, message_Message: string | null | undefined, group_Name: string | null | undefined, group_Type: string | null | undefined, group_Description: string | null | undefined, group_Uri: string | null | undefined, group_LogoUri: string | null | undefined, group_OrganisationName: string | null | undefined, group_OrganisationLogoUri: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<FileResponse> {
+    contactEmailTemplate(userName: string | null | undefined, creatorEmail: string | null | undefined, creatorName: string | null | undefined, message_CreatorName: string | null | undefined, message_CreatorImageUri: string | null | undefined, message_CreatorDescription: string | null | undefined, message_Message: string | null | undefined, group_Title: string | null | undefined, group_ImageUri: string | null | undefined, group_Uri: string | null | undefined, group_Description: string | null | undefined, group_Subtitle: string | null | undefined, group_SubtitleImageUri: string | null | undefined, group_ActionButton: string | null | undefined, group_ActionUri: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<FileResponse> {
         let url_ = this.baseUrl + "/v1/User/ContactEmailTemplate?";
         if (userName !== undefined && userName !== null)
             url_ += "UserName=" + encodeURIComponent("" + userName) + "&";
         if (creatorEmail !== undefined && creatorEmail !== null)
             url_ += "CreatorEmail=" + encodeURIComponent("" + creatorEmail) + "&";
+        if (creatorName !== undefined && creatorName !== null)
+            url_ += "CreatorName=" + encodeURIComponent("" + creatorName) + "&";
         if (message_CreatorName !== undefined && message_CreatorName !== null)
             url_ += "Message.CreatorName=" + encodeURIComponent("" + message_CreatorName) + "&";
         if (message_CreatorImageUri !== undefined && message_CreatorImageUri !== null)
@@ -30691,20 +30769,22 @@ export class UserClient {
             url_ += "Message.CreatorDescription=" + encodeURIComponent("" + message_CreatorDescription) + "&";
         if (message_Message !== undefined && message_Message !== null)
             url_ += "Message.Message=" + encodeURIComponent("" + message_Message) + "&";
-        if (group_Name !== undefined && group_Name !== null)
-            url_ += "Group.Name=" + encodeURIComponent("" + group_Name) + "&";
-        if (group_Type !== undefined && group_Type !== null)
-            url_ += "Group.Type=" + encodeURIComponent("" + group_Type) + "&";
-        if (group_Description !== undefined && group_Description !== null)
-            url_ += "Group.Description=" + encodeURIComponent("" + group_Description) + "&";
+        if (group_Title !== undefined && group_Title !== null)
+            url_ += "Group.Title=" + encodeURIComponent("" + group_Title) + "&";
+        if (group_ImageUri !== undefined && group_ImageUri !== null)
+            url_ += "Group.ImageUri=" + encodeURIComponent("" + group_ImageUri) + "&";
         if (group_Uri !== undefined && group_Uri !== null)
             url_ += "Group.Uri=" + encodeURIComponent("" + group_Uri) + "&";
-        if (group_LogoUri !== undefined && group_LogoUri !== null)
-            url_ += "Group.LogoUri=" + encodeURIComponent("" + group_LogoUri) + "&";
-        if (group_OrganisationName !== undefined && group_OrganisationName !== null)
-            url_ += "Group.OrganisationName=" + encodeURIComponent("" + group_OrganisationName) + "&";
-        if (group_OrganisationLogoUri !== undefined && group_OrganisationLogoUri !== null)
-            url_ += "Group.OrganisationLogoUri=" + encodeURIComponent("" + group_OrganisationLogoUri) + "&";
+        if (group_Description !== undefined && group_Description !== null)
+            url_ += "Group.Description=" + encodeURIComponent("" + group_Description) + "&";
+        if (group_Subtitle !== undefined && group_Subtitle !== null)
+            url_ += "Group.Subtitle=" + encodeURIComponent("" + group_Subtitle) + "&";
+        if (group_SubtitleImageUri !== undefined && group_SubtitleImageUri !== null)
+            url_ += "Group.SubtitleImageUri=" + encodeURIComponent("" + group_SubtitleImageUri) + "&";
+        if (group_ActionButton !== undefined && group_ActionButton !== null)
+            url_ += "Group.ActionButton=" + encodeURIComponent("" + group_ActionButton) + "&";
+        if (group_ActionUri !== undefined && group_ActionUri !== null)
+            url_ += "Group.ActionUri=" + encodeURIComponent("" + group_ActionUri) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <AxiosRequestConfig>{
@@ -31619,12 +31699,10 @@ export class Email implements IEmail {
     from?: EmailAddress | undefined;
     to?: EmailAddress[] | undefined;
     subject?: string | undefined;
-    bodyText?: string | undefined;
     bodyHtml?: string | undefined;
     created?: Date;
     modified?: Date;
     status?: EmailStatus;
-    version?: number;
 
     constructor(data?: IEmail) {
         if (data) {
@@ -31645,12 +31723,10 @@ export class Email implements IEmail {
                     this.to!.push(EmailAddress.fromJS(item));
             }
             this.subject = _data["subject"];
-            this.bodyText = _data["bodyText"];
             this.bodyHtml = _data["bodyHtml"];
             this.created = _data["created"] ? new Date(_data["created"].toString()) : <any>undefined;
             this.modified = _data["modified"] ? new Date(_data["modified"].toString()) : <any>undefined;
             this.status = _data["status"];
-            this.version = _data["version"];
         }
     }
 
@@ -31671,12 +31747,10 @@ export class Email implements IEmail {
                 data["to"].push(item.toJSON());
         }
         data["subject"] = this.subject;
-        data["bodyText"] = this.bodyText;
         data["bodyHtml"] = this.bodyHtml;
         data["created"] = this.created ? this.created.toISOString() : <any>undefined;
         data["modified"] = this.modified ? this.modified.toISOString() : <any>undefined;
         data["status"] = this.status;
-        data["version"] = this.version;
         return data; 
     }
 }
@@ -31686,12 +31760,10 @@ export interface IEmail {
     from?: EmailAddress | undefined;
     to?: EmailAddress[] | undefined;
     subject?: string | undefined;
-    bodyText?: string | undefined;
     bodyHtml?: string | undefined;
     created?: Date;
     modified?: Date;
     status?: EmailStatus;
-    version?: number;
 }
 
 export class EmailAddress implements IEmailAddress {
@@ -51718,6 +51790,50 @@ export class MergeUserSettings implements IMergeUserSettings {
 export interface IMergeUserSettings {
     primaryUserId: string;
     secondaryUserId: string;
+}
+
+export class SendWelcomeEmailSettings implements ISendWelcomeEmailSettings {
+    groupId?: string | undefined;
+    message?: string | undefined;
+    redirect?: string | undefined;
+
+    constructor(data?: ISendWelcomeEmailSettings) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.groupId = _data["groupId"];
+            this.message = _data["message"];
+            this.redirect = _data["redirect"];
+        }
+    }
+
+    static fromJS(data: any): SendWelcomeEmailSettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new SendWelcomeEmailSettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["groupId"] = this.groupId;
+        data["message"] = this.message;
+        data["redirect"] = this.redirect;
+        return data; 
+    }
+}
+
+export interface ISendWelcomeEmailSettings {
+    groupId?: string | undefined;
+    message?: string | undefined;
+    redirect?: string | undefined;
 }
 
 export class UserEmails implements IUserEmails {
