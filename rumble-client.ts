@@ -44607,6 +44607,7 @@ export interface IModuleInEnrolment {
 }
 
 export class CertificationInEnrolment implements ICertificationInEnrolment {
+    id?: string | undefined;
     certificateId?: string | undefined;
     certificateName?: string | undefined;
     certificateLogoUri?: string | undefined;
@@ -44626,6 +44627,7 @@ export class CertificationInEnrolment implements ICertificationInEnrolment {
 
     init(_data?: any) {
         if (_data) {
+            this.id = _data["id"];
             this.certificateId = _data["certificateId"];
             this.certificateName = _data["certificateName"];
             this.certificateLogoUri = _data["certificateLogoUri"];
@@ -44649,6 +44651,7 @@ export class CertificationInEnrolment implements ICertificationInEnrolment {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
         data["certificateId"] = this.certificateId;
         data["certificateName"] = this.certificateName;
         data["certificateLogoUri"] = this.certificateLogoUri;
@@ -44665,6 +44668,7 @@ export class CertificationInEnrolment implements ICertificationInEnrolment {
 }
 
 export interface ICertificationInEnrolment {
+    id?: string | undefined;
     certificateId?: string | undefined;
     certificateName?: string | undefined;
     certificateLogoUri?: string | undefined;
