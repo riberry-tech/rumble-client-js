@@ -48588,8 +48588,12 @@ export interface IUpdateAssessmentSubAttemptSettings {
 }
 
 export class AuthenticationSettings implements IAuthenticationSettings {
+    method?: AuthenticationMethod;
     email!: string;
-    password!: string;
+    /** This will be the password if using password to login, or the one-time passcode if using one-time passcode
+to login. */
+    password?: string | undefined;
+    /** Optional 2FA code. */
     twoFactorAuthenticationCode?: string | undefined;
 
     constructor(data?: IAuthenticationSettings) {
@@ -48600,12 +48604,14 @@ export class AuthenticationSettings implements IAuthenticationSettings {
             }
         }
         if (!data) {
+            this.method = AuthenticationMethod.Password;
             this.password = "";
         }
     }
 
     init(_data?: any) {
         if (_data) {
+            this.method = _data["method"] !== undefined ? _data["method"] : AuthenticationMethod.Password;
             this.email = _data["email"];
             this.password = _data["password"] !== undefined ? _data["password"] : "";
             this.twoFactorAuthenticationCode = _data["twoFactorAuthenticationCode"];
@@ -48621,6 +48627,7 @@ export class AuthenticationSettings implements IAuthenticationSettings {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["method"] = this.method;
         data["email"] = this.email;
         data["password"] = this.password;
         data["twoFactorAuthenticationCode"] = this.twoFactorAuthenticationCode;
@@ -48629,12 +48636,23 @@ export class AuthenticationSettings implements IAuthenticationSettings {
 }
 
 export interface IAuthenticationSettings {
+    method?: AuthenticationMethod;
     email: string;
-    password: string;
+    /** This will be the password if using password to login, or the one-time passcode if using one-time passcode
+to login. */
+    password?: string | undefined;
+    /** Optional 2FA code. */
     twoFactorAuthenticationCode?: string | undefined;
 }
 
+/** 0 = Password 1 = OneTimePasscode */
+export enum AuthenticationMethod {
+    Password = 0,
+    OneTimePasscode = 1,
+}
+
 export class ChallengeToken extends Token implements IChallengeToken {
+    success?: boolean;
     twoFactorAuthenticationChallenge?: TwoFactorAuthenticationType;
 
     constructor(data?: IChallengeToken) {
@@ -48644,6 +48662,7 @@ export class ChallengeToken extends Token implements IChallengeToken {
     init(_data?: any) {
         super.init(_data);
         if (_data) {
+            this.success = _data["success"];
             this.twoFactorAuthenticationChallenge = _data["twoFactorAuthenticationChallenge"];
         }
     }
@@ -48657,6 +48676,7 @@ export class ChallengeToken extends Token implements IChallengeToken {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
         data["twoFactorAuthenticationChallenge"] = this.twoFactorAuthenticationChallenge;
         super.toJSON(data);
         return data; 
@@ -48664,13 +48684,14 @@ export class ChallengeToken extends Token implements IChallengeToken {
 }
 
 export interface IChallengeToken extends IToken {
+    success?: boolean;
     twoFactorAuthenticationChallenge?: TwoFactorAuthenticationType;
 }
 
-/** 0 = None 1 = SMS 2 = Email */
+/** 0 = None 1 = Sms 2 = Email */
 export enum TwoFactorAuthenticationType {
     None = 0,
-    SMS = 1,
+    Sms = 1,
     Email = 2,
 }
 
