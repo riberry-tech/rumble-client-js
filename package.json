@@ -5,6 +5,7 @@
   "type": "module",
   "main": "rumble-client.ts",
   "scripts": {
+    "build": "nswag swagger2tsclient /template:axios /input:swagger.json /output:rumble-client.ts /TypeStyle:Interface",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
