@@ -48654,6 +48654,7 @@ export enum AuthenticationMethod {
 export class ChallengeToken extends Token implements IChallengeToken {
     success?: boolean;
     twoFactorAuthenticationChallenge?: TwoFactorAuthenticationType;
+    rateLimit?: string;
 
     constructor(data?: IChallengeToken) {
         super(data);
@@ -48664,6 +48665,7 @@ export class ChallengeToken extends Token implements IChallengeToken {
         if (_data) {
             this.success = _data["success"];
             this.twoFactorAuthenticationChallenge = _data["twoFactorAuthenticationChallenge"];
+            this.rateLimit = _data["rateLimit"];
         }
     }
 
@@ -48678,6 +48680,7 @@ export class ChallengeToken extends Token implements IChallengeToken {
         data = typeof data === 'object' ? data : {};
         data["success"] = this.success;
         data["twoFactorAuthenticationChallenge"] = this.twoFactorAuthenticationChallenge;
+        data["rateLimit"] = this.rateLimit;
         super.toJSON(data);
         return data; 
     }
@@ -48686,6 +48689,7 @@ export class ChallengeToken extends Token implements IChallengeToken {
 export interface IChallengeToken extends IToken {
     success?: boolean;
     twoFactorAuthenticationChallenge?: TwoFactorAuthenticationType;
+    rateLimit?: string;
 }
 
 /** 0 = None 1 = Sms 2 = Email */
