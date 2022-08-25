@@ -31698,6 +31698,7 @@ export interface IListOfEmail {
 
 export class Email implements IEmail {
     id?: string | undefined;
+    type?: EmailType;
     from?: EmailAddress | undefined;
     to?: EmailAddress[] | undefined;
     subject?: string | undefined;
@@ -31718,6 +31719,7 @@ export class Email implements IEmail {
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
+            this.type = _data["type"];
             this.from = _data["from"] ? EmailAddress.fromJS(_data["from"]) : <any>undefined;
             if (Array.isArray(_data["to"])) {
                 this.to = [] as any;
@@ -31742,6 +31744,7 @@ export class Email implements IEmail {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
+        data["type"] = this.type;
         data["from"] = this.from ? this.from.toJSON() : <any>undefined;
         if (Array.isArray(this.to)) {
             data["to"] = [];
@@ -31759,6 +31762,7 @@ export class Email implements IEmail {
 
 export interface IEmail {
     id?: string | undefined;
+    type?: EmailType;
     from?: EmailAddress | undefined;
     to?: EmailAddress[] | undefined;
     subject?: string | undefined;
@@ -31766,6 +31770,29 @@ export interface IEmail {
     created?: Date;
     modified?: Date;
     status?: EmailStatus;
+}
+
+export enum EmailType {
+    None = "None",
+    EventInvite = "EventInvite",
+    EventChanged = "EventChanged",
+    ScheduledLink = "ScheduledLink",
+    RequestSurvey = "RequestSurvey",
+    AddedToGroup = "AddedToGroup",
+    AddedToClass = "AddedToClass",
+    ModuleAttempt = "ModuleAttempt",
+    Authentication = "Authentication",
+    Confirm = "Confirm",
+    ContactUser = "ContactUser",
+    PublishingRequested = "PublishingRequested",
+    PublishingRequestApproved = "PublishingRequestApproved",
+    PublishingRequestRejected = "PublishingRequestRejected",
+    RequestResetPassword = "RequestResetPassword",
+    Welcome = "Welcome",
+    Support = "Support",
+    SupportConfirmation = "SupportConfirmation",
+    SupportStatusChanged = "SupportStatusChanged",
+    RequestResetPasswordFailed = "RequestResetPasswordFailed",
 }
 
 export class EmailAddress implements IEmailAddress {
@@ -33739,8 +33766,9 @@ export class ScheduledEmail implements IScheduledEmail {
     created?: Date;
     recipientIds?: string[] | undefined;
     parameters?: any | undefined;
+    schedule?: ScheduleOption | undefined;
+    lastScheduled?: Date;
     version?: number;
-    schedule?: Schedule | undefined;
 
     constructor(data?: IScheduledEmail) {
         if (data) {
@@ -33768,8 +33796,9 @@ export class ScheduledEmail implements IScheduledEmail {
                     this.recipientIds!.push(item);
             }
             this.parameters = _data["parameters"];
+            this.schedule = _data["schedule"] ? ScheduleOption.fromJS(_data["schedule"]) : <any>undefined;
+            this.lastScheduled = _data["lastScheduled"] ? new Date(_data["lastScheduled"].toString()) : <any>undefined;
             this.version = _data["version"];
-            this.schedule = _data["schedule"] ? Schedule.fromJS(_data["schedule"]) : <any>undefined;
         }
     }
 
@@ -33797,8 +33826,9 @@ export class ScheduledEmail implements IScheduledEmail {
                 data["recipientIds"].push(item);
         }
         data["parameters"] = this.parameters;
-        data["version"] = this.version;
         data["schedule"] = this.schedule ? this.schedule.toJSON() : <any>undefined;
+        data["lastScheduled"] = this.lastScheduled ? this.lastScheduled.toISOString() : <any>undefined;
+        data["version"] = this.version;
         return data; 
     }
 }
@@ -33815,16 +33845,19 @@ export interface IScheduledEmail {
     created?: Date;
     recipientIds?: string[] | undefined;
     parameters?: any | undefined;
+    schedule?: ScheduleOption | undefined;
+    lastScheduled?: Date;
     version?: number;
-    schedule?: Schedule | undefined;
 }
 
-export class Schedule implements ISchedule {
+export class ScheduleOption implements IScheduleOption {
     start?: Date;
+    repeatType?: RepeatType;
+    repeatInterval?: number;
+    repeatOn?: number[] | undefined;
     end?: Date | undefined;
-    interval?: string | undefined;
 
-    constructor(data?: ISchedule) {
+    constructor(data?: IScheduleOption) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -33836,14 +33869,20 @@ export class Schedule implements ISchedule {
     init(_data?: any) {
         if (_data) {
             this.start = _data["start"] ? new Date(_data["start"].toString()) : <any>undefined;
+            this.repeatType = _data["repeatType"];
+            this.repeatInterval = _data["repeatInterval"];
+            if (Array.isArray(_data["repeatOn"])) {
+                this.repeatOn = [] as any;
+                for (let item of _data["repeatOn"])
+                    this.repeatOn!.push(item);
+            }
             this.end = _data["end"] ? new Date(_data["end"].toString()) : <any>undefined;
-            this.interval = _data["interval"];
         }
     }
 
-    static fromJS(data: any): Schedule {
+    static fromJS(data: any): ScheduleOption {
         data = typeof data === 'object' ? data : {};
-        let result = new Schedule();
+        let result = new ScheduleOption();
         result.init(data);
         return result;
     }
@@ -33851,22 +33890,40 @@ export class Schedule implements ISchedule {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["start"] = this.start ? this.start.toISOString() : <any>undefined;
+        data["repeatType"] = this.repeatType;
+        data["repeatInterval"] = this.repeatInterval;
+        if (Array.isArray(this.repeatOn)) {
+            data["repeatOn"] = [];
+            for (let item of this.repeatOn)
+                data["repeatOn"].push(item);
+        }
         data["end"] = this.end ? this.end.toISOString() : <any>undefined;
-        data["interval"] = this.interval;
         return data; 
     }
 }
 
-export interface ISchedule {
+export interface IScheduleOption {
     start?: Date;
+    repeatType?: RepeatType;
+    repeatInterval?: number;
+    repeatOn?: number[] | undefined;
     end?: Date | undefined;
-    interval?: string | undefined;
+}
+
+/** 0 = None 1 = Daily 2 = Weekly 3 = MonthlyByDay 4 = MonthlyByDayOfWeek 5 = Yearly */
+export enum RepeatType {
+    None = 0,
+    Daily = 1,
+    Weekly = 2,
+    MonthlyByDay = 3,
+    MonthlyByDayOfWeek = 4,
+    Yearly = 5,
 }
 
 export class CreateScheduledEmailSettings implements ICreateScheduledEmailSettings {
     type!: string;
     groupId!: string;
-    schedule!: Schedule;
+    schedule!: ScheduleOption;
     recipientIds?: string[] | undefined;
     externalApplicationId?: string | undefined;
     parameters!: any;
@@ -33879,7 +33936,7 @@ export class CreateScheduledEmailSettings implements ICreateScheduledEmailSettin
             }
         }
         if (!data) {
-            this.schedule = new Schedule();
+            this.schedule = new ScheduleOption();
         }
     }
 
@@ -33887,7 +33944,7 @@ export class CreateScheduledEmailSettings implements ICreateScheduledEmailSettin
         if (_data) {
             this.type = _data["type"];
             this.groupId = _data["groupId"];
-            this.schedule = _data["schedule"] ? Schedule.fromJS(_data["schedule"]) : new Schedule();
+            this.schedule = _data["schedule"] ? ScheduleOption.fromJS(_data["schedule"]) : new ScheduleOption();
             if (Array.isArray(_data["recipientIds"])) {
                 this.recipientIds = [] as any;
                 for (let item of _data["recipientIds"])
@@ -33924,14 +33981,14 @@ export class CreateScheduledEmailSettings implements ICreateScheduledEmailSettin
 export interface ICreateScheduledEmailSettings {
     type: string;
     groupId: string;
-    schedule: Schedule;
+    schedule: ScheduleOption;
     recipientIds?: string[] | undefined;
     externalApplicationId?: string | undefined;
     parameters: any;
 }
 
 export class UpdateScheduledEmailSettings implements IUpdateScheduledEmailSettings {
-    schedule?: Schedule | undefined;
+    schedule?: ScheduleOption | undefined;
     recipientIds?: string[] | undefined;
     externalApplicationId?: string | undefined;
     parameters?: any | undefined;
@@ -33948,7 +34005,7 @@ export class UpdateScheduledEmailSettings implements IUpdateScheduledEmailSettin
 
     init(_data?: any) {
         if (_data) {
-            this.schedule = _data["schedule"] ? Schedule.fromJS(_data["schedule"]) : <any>undefined;
+            this.schedule = _data["schedule"] ? ScheduleOption.fromJS(_data["schedule"]) : <any>undefined;
             if (Array.isArray(_data["recipientIds"])) {
                 this.recipientIds = [] as any;
                 for (let item of _data["recipientIds"])
@@ -33983,7 +34040,7 @@ export class UpdateScheduledEmailSettings implements IUpdateScheduledEmailSettin
 }
 
 export interface IUpdateScheduledEmailSettings {
-    schedule?: Schedule | undefined;
+    schedule?: ScheduleOption | undefined;
     recipientIds?: string[] | undefined;
     externalApplicationId?: string | undefined;
     parameters?: any | undefined;
