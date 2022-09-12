@@ -165,6 +165,91 @@ export class EmailClient {
         return Promise.resolve<void>(<any>null);
     }
 
+    /**
+     * @param search (optional) 
+     * @param skip (optional) 
+     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
+     * @param includeContents (optional) 
+     */
+    getAllByUser(userId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, includeContents: boolean | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfEmail> {
+        let url_ = this.baseUrl + "/v1/Email/User/{userId}?";
+        if (userId === undefined || userId === null)
+            throw new Error("The parameter 'userId' must be defined.");
+        url_ = url_.replace("{userId}", encodeURIComponent("" + userId));
+        if (search !== undefined && search !== null)
+            url_ += "Search=" + encodeURIComponent("" + search) + "&";
+        if (skip === null)
+            throw new Error("The parameter 'skip' cannot be null.");
+        else if (skip !== undefined)
+            url_ += "Skip=" + encodeURIComponent("" + skip) + "&";
+        if (take === null)
+            throw new Error("The parameter 'take' cannot be null.");
+        else if (take !== undefined)
+            url_ += "Take=" + encodeURIComponent("" + take) + "&";
+        if (includeContents === null)
+            throw new Error("The parameter 'includeContents' cannot be null.");
+        else if (includeContents !== undefined)
+            url_ += "includeContents=" + encodeURIComponent("" + includeContents) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processGetAllByUser(_response);
+        });
+    }
+
+    protected processGetAllByUser(response: AxiosResponse): Promise<ListOfEmail> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ListOfEmail.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ListOfEmail>(<any>null);
+    }
+
     get(emailId: string | null , cancelToken?: CancelToken | undefined): Promise<Email> {
         let url_ = this.baseUrl + "/v1/Email/{emailId}";
         if (emailId === undefined || emailId === null)
@@ -31698,6 +31783,7 @@ export interface IListOfEmail {
 
 export class Email implements IEmail {
     id?: string | undefined;
+    type?: EmailType;
     from?: EmailAddress | undefined;
     to?: EmailAddress[] | undefined;
     subject?: string | undefined;
@@ -31718,6 +31804,7 @@ export class Email implements IEmail {
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
+            this.type = _data["type"];
             this.from = _data["from"] ? EmailAddress.fromJS(_data["from"]) : <any>undefined;
             if (Array.isArray(_data["to"])) {
                 this.to = [] as any;
@@ -31742,6 +31829,7 @@ export class Email implements IEmail {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
+        data["type"] = this.type;
         data["from"] = this.from ? this.from.toJSON() : <any>undefined;
         if (Array.isArray(this.to)) {
             data["to"] = [];
@@ -31759,6 +31847,7 @@ export class Email implements IEmail {
 
 export interface IEmail {
     id?: string | undefined;
+    type?: EmailType;
     from?: EmailAddress | undefined;
     to?: EmailAddress[] | undefined;
     subject?: string | undefined;
@@ -31766,6 +31855,29 @@ export interface IEmail {
     created?: Date;
     modified?: Date;
     status?: EmailStatus;
+}
+
+export enum EmailType {
+    None = "None",
+    EventInvite = "EventInvite",
+    EventChanged = "EventChanged",
+    ScheduledLink = "ScheduledLink",
+    RequestSurvey = "RequestSurvey",
+    AddedToGroup = "AddedToGroup",
+    AddedToClass = "AddedToClass",
+    ModuleAttempt = "ModuleAttempt",
+    Authentication = "Authentication",
+    Confirm = "Confirm",
+    ContactUser = "ContactUser",
+    PublishingRequested = "PublishingRequested",
+    PublishingRequestApproved = "PublishingRequestApproved",
+    PublishingRequestRejected = "PublishingRequestRejected",
+    RequestResetPassword = "RequestResetPassword",
+    Welcome = "Welcome",
+    Support = "Support",
+    SupportConfirmation = "SupportConfirmation",
+    SupportStatusChanged = "SupportStatusChanged",
+    RequestResetPasswordFailed = "RequestResetPasswordFailed",
 }
 
 export class EmailAddress implements IEmailAddress {
