@@ -24,9 +24,10 @@ export class EmailClient {
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param groupId (optional) 
+     * @param statuses (optional) 
      * @param includeContents (optional) 
      */
-    getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, groupId: string | null | undefined, includeContents: boolean | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfEmail> {
+    getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, groupId: string | null | undefined, statuses: EmailStatus[] | null | undefined, includeContents: boolean | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfEmail> {
         let url_ = this.baseUrl + "/v1/Email?";
         if (search !== undefined && search !== null)
             url_ += "Search=" + encodeURIComponent("" + search) + "&";
@@ -40,6 +41,8 @@ export class EmailClient {
             url_ += "Take=" + encodeURIComponent("" + take) + "&";
         if (groupId !== undefined && groupId !== null)
             url_ += "groupId=" + encodeURIComponent("" + groupId) + "&";
+        if (statuses !== undefined && statuses !== null)
+            statuses && statuses.forEach(item => { url_ += "statuses=" + encodeURIComponent("" + item) + "&"; });
         if (includeContents === null)
             throw new Error("The parameter 'includeContents' cannot be null.");
         else if (includeContents !== undefined)
@@ -169,9 +172,10 @@ export class EmailClient {
      * @param search (optional) 
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
+     * @param statuses (optional) 
      * @param includeContents (optional) 
      */
-    getAllByUser(userId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, includeContents: boolean | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfEmail> {
+    getAllByUser(userId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, statuses: EmailStatus[] | null | undefined, includeContents: boolean | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfEmail> {
         let url_ = this.baseUrl + "/v1/Email/User/{userId}?";
         if (userId === undefined || userId === null)
             throw new Error("The parameter 'userId' must be defined.");
@@ -186,6 +190,8 @@ export class EmailClient {
             throw new Error("The parameter 'take' cannot be null.");
         else if (take !== undefined)
             url_ += "Take=" + encodeURIComponent("" + take) + "&";
+        if (statuses !== undefined && statuses !== null)
+            statuses && statuses.forEach(item => { url_ += "statuses=" + encodeURIComponent("" + item) + "&"; });
         if (includeContents === null)
             throw new Error("The parameter 'includeContents' cannot be null.");
         else if (includeContents !== undefined)
