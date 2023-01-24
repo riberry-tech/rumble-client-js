@@ -33848,6 +33848,8 @@ export interface IListOfScheduledEmail {
 export class ScheduledEmail implements IScheduledEmail {
     id?: string | undefined;
     type?: string | undefined;
+    title?: string | undefined;
+    note?: string | undefined;
     externalApplicationId?: string | undefined;
     groupId?: string | undefined;
     groupName?: string | undefined;
@@ -33873,6 +33875,8 @@ export class ScheduledEmail implements IScheduledEmail {
         if (_data) {
             this.id = _data["id"];
             this.type = _data["type"];
+            this.title = _data["title"];
+            this.note = _data["note"];
             this.externalApplicationId = _data["externalApplicationId"];
             this.groupId = _data["groupId"];
             this.groupName = _data["groupName"];
@@ -33902,6 +33906,8 @@ export class ScheduledEmail implements IScheduledEmail {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["type"] = this.type;
+        data["title"] = this.title;
+        data["note"] = this.note;
         data["externalApplicationId"] = this.externalApplicationId;
         data["groupId"] = this.groupId;
         data["groupName"] = this.groupName;
@@ -33924,6 +33930,8 @@ export class ScheduledEmail implements IScheduledEmail {
 export interface IScheduledEmail {
     id?: string | undefined;
     type?: string | undefined;
+    title?: string | undefined;
+    note?: string | undefined;
     externalApplicationId?: string | undefined;
     groupId?: string | undefined;
     groupName?: string | undefined;
@@ -34009,6 +34017,8 @@ export enum RepeatType {
 
 export class CreateScheduledEmailSettings implements ICreateScheduledEmailSettings {
     type!: string;
+    title?: string | undefined;
+    note?: string | undefined;
     groupId!: string;
     schedule!: ScheduleOption;
     recipientIds?: string[] | undefined;
@@ -34030,6 +34040,8 @@ export class CreateScheduledEmailSettings implements ICreateScheduledEmailSettin
     init(_data?: any) {
         if (_data) {
             this.type = _data["type"];
+            this.title = _data["title"];
+            this.note = _data["note"];
             this.groupId = _data["groupId"];
             this.schedule = _data["schedule"] ? ScheduleOption.fromJS(_data["schedule"]) : new ScheduleOption();
             if (Array.isArray(_data["recipientIds"])) {
@@ -34052,6 +34064,8 @@ export class CreateScheduledEmailSettings implements ICreateScheduledEmailSettin
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
+        data["title"] = this.title;
+        data["note"] = this.note;
         data["groupId"] = this.groupId;
         data["schedule"] = this.schedule ? this.schedule.toJSON() : <any>undefined;
         if (Array.isArray(this.recipientIds)) {
@@ -34067,6 +34081,8 @@ export class CreateScheduledEmailSettings implements ICreateScheduledEmailSettin
 
 export interface ICreateScheduledEmailSettings {
     type: string;
+    title?: string | undefined;
+    note?: string | undefined;
     groupId: string;
     schedule: ScheduleOption;
     recipientIds?: string[] | undefined;
@@ -34075,6 +34091,8 @@ export interface ICreateScheduledEmailSettings {
 }
 
 export class UpdateScheduledEmailSettings implements IUpdateScheduledEmailSettings {
+    title?: string | undefined;
+    note?: string | undefined;
     schedule?: ScheduleOption | undefined;
     recipientIds?: string[] | undefined;
     externalApplicationId?: string | undefined;
@@ -34092,6 +34110,8 @@ export class UpdateScheduledEmailSettings implements IUpdateScheduledEmailSettin
 
     init(_data?: any) {
         if (_data) {
+            this.title = _data["title"];
+            this.note = _data["note"];
             this.schedule = _data["schedule"] ? ScheduleOption.fromJS(_data["schedule"]) : <any>undefined;
             if (Array.isArray(_data["recipientIds"])) {
                 this.recipientIds = [] as any;
@@ -34113,6 +34133,8 @@ export class UpdateScheduledEmailSettings implements IUpdateScheduledEmailSettin
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["title"] = this.title;
+        data["note"] = this.note;
         data["schedule"] = this.schedule ? this.schedule.toJSON() : <any>undefined;
         if (Array.isArray(this.recipientIds)) {
             data["recipientIds"] = [];
@@ -34127,6 +34149,8 @@ export class UpdateScheduledEmailSettings implements IUpdateScheduledEmailSettin
 }
 
 export interface IUpdateScheduledEmailSettings {
+    title?: string | undefined;
+    note?: string | undefined;
     schedule?: ScheduleOption | undefined;
     recipientIds?: string[] | undefined;
     externalApplicationId?: string | undefined;
