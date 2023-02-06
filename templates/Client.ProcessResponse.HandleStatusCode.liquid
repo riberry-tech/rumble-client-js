@@ -39,10 +39,10 @@ Template Error: UseDtpClass must be disabled
 {%             if operation.WrapResponse -%}
 Template Error: WrapResponse must be disabled
 {%             else -%}
-return Promise.resolve<{{ operation.ResultType }}>(_responseText);
+return Promise.resolve<{{ operation.ResultType }}>(response.data);
 {%             endif -%}
 {%         else -%}
-return throwException({% if Framework.IsAngularJS %}this.q, {% endif %}"{{ response.ExceptionDescription }}", status, _responseText, _headers, result{{ response.StatusCode }});
+return throwException("", status, response.data, _headers);
 {%         endif -%}
 {%     elsif response.IsSuccess -%}
 {%         if operation.WrapResponse -%}
@@ -51,7 +51,7 @@ return Promise.resolve<{{ operation.ResultType }}>(new {{ operation.ResultType }
 return Promise.resolve<{{ operation.ResultType }}>(null as any);
 {%         endif -%}
 {%     else -%}
-return throwException("{{ response.ExceptionDescription }}", status, _responseText, _headers);
+return throwException("", status, response.data, _headers);
 {%     endif -%}
 {% template Client.ProcessResponse.ReadBodyEnd %}
 {% endif -%}
