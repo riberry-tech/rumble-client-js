@@ -32,75 +32,26 @@ return response.blob().then(blob => { return { fileName: fileName, data: blob, s
 {% else -%}
 {% template Client.ProcessResponse.ReadBodyStart %}
 {%     if response.HasType -%}
-let result{{ response.StatusCode }}: any = null;
-{%         if Framework.IsAxios -%}
-let resultData{{ response.StatusCode }}  = _responseText;
-{%             if response.UseDtoClass -%}
-{{ response.DataConversionCode }}
-{%             else -%}
-result{{ response.StatusCode }} = {% unless response.IsPlainText %}JSON.parse({% endunless %}resultData{{ response.StatusCode }}{% unless response.IsPlainText %}){% endunless %};
-{%             endif -%}
-{%         else -%}
-{%              if response.UseDtoClass or response.IsDateOrDateTime -%}
-let resultData{{ response.StatusCode }} = _responseText === "" ? null : {% if response.IsPlainText %}_responseText{% else %}{% if operation.HandleReferences %}jsonParse{% else %}JSON.parse{% endif %}(_responseText, this.jsonParseReviver){% endif %};
-{{ response.DataConversionCode }}
-{%              else -%}
-result{{ response.StatusCode }} = _responseText === "" ? null : {% if response.IsPlainText %}_responseText{% else %}{% if operation.HandleReferences %}jsonParse{% else %}JSON.parse{% endif %}(_responseText, this.jsonParseReviver){% endif %} as {{ response.Type }};
-{%              endif -%}
+{%         if response.UseDtoClass -%}
+Template Error: UseDtpClass must be disabled
 {%         endif -%}
 {%         if response.IsSuccess -%}
 {%             if operation.WrapResponse -%}
-{%                 if Framework.IsAngular -%}
-return {{ Framework.RxJs.ObservableOfMethod }}(new {{ operation.ResponseClass }}(status, _headers, result{{ response.StatusCode }}));
-{%                 elsif Framework.IsAngularJS -%}
-return this.q.resolve(new {{ operation.ResponseClass }}(status, _headers, result{{ response.StatusCode }}));
-{%                 elsif Framework.IsAxios -%}
-return Promise.resolve<{{ operation.ResultType }}>(new {{ operation.ResultType }}(status, _headers, result{{ response.StatusCode }}));
-{%                 else -%}
-return new {{ operation.ResponseClass }}(status, _headers, result{{ response.StatusCode }});
-{%                 endif -%}
+Template Error: WrapResponse must be disabled
 {%             else -%}
-{%                 if Framework.IsAngular -%}
-return {{ Framework.RxJs.ObservableOfMethod }}(result{{ response.StatusCode }});
-{%                 elsif Framework.IsAngularJS -%}
-return this.q.resolve(result{{ response.StatusCode }});
-{%                 elsif Framework.IsAxios -%}
-return Promise.resolve<{{ operation.ResultType }}>(result{{ response.StatusCode }});
-{%                 else -%}
-return result{{ response.StatusCode }};
-{%                 endif -%}
+return Promise.resolve<{{ operation.ResultType }}>(_responseText);
 {%             endif -%}
 {%         else -%}
 return throwException({% if Framework.IsAngularJS %}this.q, {% endif %}"{{ response.ExceptionDescription }}", status, _responseText, _headers, result{{ response.StatusCode }});
 {%         endif -%}
 {%     elsif response.IsSuccess -%}
 {%         if operation.WrapResponse -%}
-{%             if Framework.IsAngular -%}
-return {{ Framework.RxJs.ObservableOfMethod }}<{{ operation.ResultType }}>(new {{ operation.ResponseClass }}(status, _headers, null as any));
-{%             elsif Framework.IsAngularJS -%}
-return this.q.resolve<{{ operation.ResultType }}>(new {{ operation.ResponseClass }}(status, _headers, null as any));
-{%             elsif Framework.IsAxios -%}
 return Promise.resolve<{{ operation.ResultType }}>(new {{ operation.ResultType }}(status, _headers, null as any));
-{%             else -%}
-return new {{ operation.ResponseClass }}(status, _headers, null as any);
-{%             endif -%}
 {%         else -%}
-{%             if Framework.IsAngular -%}
-{%                 if Framework.UseRxJs7 -%}
-return {{ Framework.RxJs.ObservableOfMethod }}(null as any);
-{%                 else -%}
-return {{ Framework.RxJs.ObservableOfMethod }}<{{operation.ResultType}}>(null as any);
-{%                 endif -%}
-{%             elsif Framework.IsAngularJS -%}
-return this.q.resolve<{{ operation.ResultType }}>(null as any);
-{%             elsif Framework.IsAxios -%}
 return Promise.resolve<{{ operation.ResultType }}>(null as any);
-{%             else -%}
-return{% if operation.HasResultType %} null{% endif %};
-{%             endif -%}
 {%         endif -%}
 {%     else -%}
-return throwException({% if Framework.IsAngularJS %}this.q, {% endif %}"{{ response.ExceptionDescription }}", status, _responseText, _headers);
+return throwException("{{ response.ExceptionDescription }}", status, _responseText, _headers);
 {%     endif -%}
 {% template Client.ProcessResponse.ReadBodyEnd %}
 {% endif -%}
