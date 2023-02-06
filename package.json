@@ -6,7 +6,7 @@
   "main": "dist/rumble-client.js",
   "scripts": {
     "pre-build": "",
-    "build": "nswag swagger2tsclient /template:axios /input:swagger.json /output:rumble-client.ts /TypeStyle:Interface",
+    "build": "nswag swagger2tsclient /template:axios /input:swagger.json /output:rumble-client.ts /TypeStyle:Interface /TemplateDirectory:./templates",
     "post-build": "",
     "dist": "tsc --p tsconfig.json"
   },
