@@ -9,7 +9,8 @@
     "build": "nswag swagger2tsclient /template:axios /input:swagger.json /output:rumble-client.ts /TypeStyle:Interface /TemplateDirectory:./templates",
     "post-build": "",
     "compile": "tsc --p tsconfig.json",
-    "format": "prettier --config prettier_options.json --write ./dist/rumble-client.js"
+    "format": "prettier --config prettier_options.json --write ./dist/rumble-client.js",
+    "dist": "npm run build && npm run compile && npm run format"
   },
   "repository": {
     "type": "git",
