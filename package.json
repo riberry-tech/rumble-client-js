@@ -8,7 +8,8 @@
     "pre-build": "",
     "build": "nswag swagger2tsclient /template:axios /input:swagger.json /output:rumble-client.ts /TypeStyle:Interface /TemplateDirectory:./templates",
     "post-build": "",
-    "dist": "tsc --p tsconfig.json"
+    "compile": "tsc --p tsconfig.json",
+    "format": "prettier --config prettier_options.json --write ./dist/rumble-client.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
   "devDependencies": {
     "axios": "^0.21.4",
     "nswag": "^13.16.1",
+    "prettier": "2.8.3",
     "typescript": "^4.8.4"
   },
   "dependencies": {}
