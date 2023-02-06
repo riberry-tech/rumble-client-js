@@ -2381,6 +2381,8 @@ export interface ListOfScheduledEmail {
 export interface ScheduledEmail {
     id?: string | undefined;
     type?: string | undefined;
+    title?: string | undefined;
+    note?: string | undefined;
     externalApplicationId?: string | undefined;
     groupId?: string | undefined;
     groupName?: string | undefined;
@@ -2411,6 +2413,8 @@ export declare enum RepeatType {
 }
 export interface CreateScheduledEmailSettings {
     type: string;
+    title?: string | undefined;
+    note?: string | undefined;
     groupId: string;
     schedule: ScheduleOption;
     recipientIds?: string[] | undefined;
@@ -2418,6 +2422,8 @@ export interface CreateScheduledEmailSettings {
     parameters: any;
 }
 export interface UpdateScheduledEmailSettings {
+    title?: string | undefined;
+    note?: string | undefined;
     schedule?: ScheduleOption | undefined;
     recipientIds?: string[] | undefined;
     externalApplicationId?: string | undefined;
@@ -4614,6 +4620,7 @@ export interface OnboardUserSettings {
     displayId?: string | undefined;
     jobTypeId?: string | undefined;
     additionalRoles?: string[] | undefined;
+    labelIds?: string[] | undefined;
     notify?: boolean;
     message?: string | undefined;
 }
