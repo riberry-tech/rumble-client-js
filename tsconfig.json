@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "outDir": "dist",
+    "declarationMap": true,
+    "target": "es2015",
+    "moduleResolution": "node"
+  },
+  "include": [
+    "rumble-client.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
