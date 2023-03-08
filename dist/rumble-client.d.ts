@@ -183,22 +183,18 @@ export declare class PlatformClient {
     protected processTerms(response: AxiosResponse): Promise<string>;
     defaultSettings(environment: string | null | undefined, cancelToken?: CancelToken | undefined): Promise<any>;
     protected processDefaultSettings(response: AxiosResponse): Promise<any>;
+    status(cancelToken?: CancelToken | undefined): Promise<PlatformStatus>;
+    protected processStatus(response: AxiosResponse): Promise<PlatformStatus>;
 }
 export declare class ProjectionClient {
     private instance;
     private baseUrl;
     protected jsonParseReviver: ((key: string, value: any) => any) | undefined;
     constructor(baseUrl?: string, instance?: AxiosInstance);
-    /**
-     * @param search (optional)
-     * @param skip (optional)
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param status (optional)
-     */
-    getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, status: ProjectionStatus | null | undefined, cancelToken?: CancelToken | undefined): Promise<ProjectionList>;
-    protected processGetAll(response: AxiosResponse): Promise<ProjectionList>;
-    get(projectionId: string | null, cancelToken?: CancelToken | undefined): Promise<Projection>;
-    protected processGet(response: AxiosResponse): Promise<Projection>;
+    getAll(cancelToken?: CancelToken | undefined): Promise<ListOfProjectionBuild>;
+    protected processGetAll(response: AxiosResponse): Promise<ListOfProjectionBuild>;
+    get(projectionName: string | null, cancelToken?: CancelToken | undefined): Promise<ProjectionBuild>;
+    protected processGet(response: AxiosResponse): Promise<ProjectionBuild>;
 }
 export declare class NotificationClient {
     private instance;
@@ -2330,28 +2326,33 @@ export interface Culture {
     timePattern?: string | undefined;
     shortTimePattern?: string | undefined;
 }
-export interface ProjectionList {
-    items?: Projection[] | undefined;
-    totalItemCount?: number;
-}
-export interface Projection {
-    name?: string | undefined;
-    status?: ProjectionStatus;
-    lastBuild?: ProjectionBuild | undefined;
+export interface PlatformStatus {
+    status?: SystemStatus;
+    buildingProgress?: number;
 }
 /** 0 = Built 1 = Building 2 = Maintenance -1 = Failed */
-export declare enum ProjectionStatus {
+export declare enum SystemStatus {
     Built = 0,
     Building = 1,
     Maintenance = 2,
     Failed = -1
 }
+export interface ListOfProjectionBuild {
+    totalItemCount: number;
+    items: ProjectionBuild[];
+}
 export interface ProjectionBuild {
-    started?: Date;
-    elapsed?: string;
     eventsProcessed?: number;
     estimatedTotalEvents?: number;
-    error?: string | undefined;
+    status?: ProjectionStatus;
+}
+/** 0 = Unknown 1 = Pending 2 = Running 3 = Completed -1 = Failed */
+export declare enum ProjectionStatus {
+    Unknown = 0,
+    Pending = 1,
+    Running = 2,
+    Completed = 3,
+    Failed = -1
 }
 export interface ListOfNotification {
     totalItemCount: number;
@@ -4620,7 +4621,6 @@ export interface OnboardUserSettings {
     displayId?: string | undefined;
     jobTypeId?: string | undefined;
     additionalRoles?: string[] | undefined;
-    labelIds?: string[] | undefined;
     notify?: boolean;
     message?: string | undefined;
 }

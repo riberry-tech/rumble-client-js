@@ -2158,6 +2158,57 @@ export class PlatformClient {
     }
     return Promise.resolve(null)
   }
+  status(cancelToken) {
+    let url_ = this.baseUrl + "/v1/Platform/Status"
+    url_ = url_.replace(/[?&]$/, "")
+    let options_ = {
+      method: "GET",
+      url: url_,
+      headers: {
+        Accept: "application/json",
+      },
+      cancelToken,
+    }
+    return this.instance
+      .request(options_)
+      .catch(_error => {
+        if (isAxiosError(_error) && _error.response) {
+          return _error.response
+        } else {
+          throw _error
+        }
+      })
+      .then(_response => {
+        return this.processStatus(_response)
+      })
+  }
+  processStatus(response) {
+    const status = response.status
+    let _headers = {}
+    if (response.headers && typeof response.headers === "object") {
+      for (let k in response.headers) {
+        if (response.headers.hasOwnProperty(k)) {
+          _headers[k] = response.headers[k]
+        }
+      }
+    }
+    if (status === 200) {
+      return Promise.resolve(response.data)
+    } else if (status === 401) {
+      return throwException("", status, response.data, _headers)
+    } else if (status === 403) {
+      return throwException("", status, response.data, _headers)
+    } else if (status === 404) {
+      return throwException("", status, response.data, _headers)
+    } else if (status === 503) {
+      return throwException("", status, response.data, _headers)
+    } else if (status === 504) {
+      return throwException("", status, response.data, _headers)
+    } else if (status !== 200 && status !== 204) {
+      return throwException("", status, response.data, _headers)
+    }
+    return Promise.resolve(null)
+  }
 }
 export class ProjectionClient {
   constructor(baseUrl, instance) {
@@ -2165,24 +2216,8 @@ export class ProjectionClient {
     this.instance = instance ? instance : axios.create()
     this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : ""
   }
-  /**
-   * @param search (optional)
-   * @param skip (optional)
-   * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-   * @param status (optional)
-   */
-  getAll(search, skip, take, status, cancelToken) {
-    let url_ = this.baseUrl + "/v1/Projection?"
-    if (search !== undefined && search !== null)
-      url_ += "Search=" + encodeURIComponent("" + search) + "&"
-    if (skip === null) throw new Error("The parameter 'skip' cannot be null.")
-    else if (skip !== undefined)
-      url_ += "Skip=" + encodeURIComponent("" + skip) + "&"
-    if (take === null) throw new Error("The parameter 'take' cannot be null.")
-    else if (take !== undefined)
-      url_ += "Take=" + encodeURIComponent("" + take) + "&"
-    if (status !== undefined && status !== null)
-      url_ += "status=" + encodeURIComponent("" + status) + "&"
+  getAll(cancelToken) {
+    let url_ = this.baseUrl + "/v1/Projection"
     url_ = url_.replace(/[?&]$/, "")
     let options_ = {
       method: "GET",
@@ -2232,11 +2267,14 @@ export class ProjectionClient {
     }
     return Promise.resolve(null)
   }
-  get(projectionId, cancelToken) {
-    let url_ = this.baseUrl + "/v1/Projection/{projectionId}"
-    if (projectionId === undefined || projectionId === null)
-      throw new Error("The parameter 'projectionId' must be defined.")
-    url_ = url_.replace("{projectionId}", encodeURIComponent("" + projectionId))
+  get(projectionName, cancelToken) {
+    let url_ = this.baseUrl + "/v1/Projection/{projectionName}"
+    if (projectionName === undefined || projectionName === null)
+      throw new Error("The parameter 'projectionName' must be defined.")
+    url_ = url_.replace(
+      "{projectionName}",
+      encodeURIComponent("" + projectionName)
+    )
     url_ = url_.replace(/[?&]$/, "")
     let options_ = {
       method: "GET",
@@ -27716,11 +27754,20 @@ export var BackupStatus
   BackupStatus[(BackupStatus["Error"] = 2)] = "Error"
 })(BackupStatus || (BackupStatus = {}))
 /** 0 = Built 1 = Building 2 = Maintenance -1 = Failed */
+export var SystemStatus
+;(function (SystemStatus) {
+  SystemStatus[(SystemStatus["Built"] = 0)] = "Built"
+  SystemStatus[(SystemStatus["Building"] = 1)] = "Building"
+  SystemStatus[(SystemStatus["Maintenance"] = 2)] = "Maintenance"
+  SystemStatus[(SystemStatus["Failed"] = -1)] = "Failed"
+})(SystemStatus || (SystemStatus = {}))
+/** 0 = Unknown 1 = Pending 2 = Running 3 = Completed -1 = Failed */
 export var ProjectionStatus
 ;(function (ProjectionStatus) {
-  ProjectionStatus[(ProjectionStatus["Built"] = 0)] = "Built"
-  ProjectionStatus[(ProjectionStatus["Building"] = 1)] = "Building"
-  ProjectionStatus[(ProjectionStatus["Maintenance"] = 2)] = "Maintenance"
+  ProjectionStatus[(ProjectionStatus["Unknown"] = 0)] = "Unknown"
+  ProjectionStatus[(ProjectionStatus["Pending"] = 1)] = "Pending"
+  ProjectionStatus[(ProjectionStatus["Running"] = 2)] = "Running"
+  ProjectionStatus[(ProjectionStatus["Completed"] = 3)] = "Completed"
   ProjectionStatus[(ProjectionStatus["Failed"] = -1)] = "Failed"
 })(ProjectionStatus || (ProjectionStatus = {}))
 /** 0 = None 1 = Daily 2 = Weekly 3 = MonthlyByDay 4 = MonthlyByDayOfWeek 5 = Yearly */
