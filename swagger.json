@@ -9,7 +9,7 @@
       "name": "Riberry",
       "email": "support@riberry.io"
     },
-    "version": "1.13.6"
+    "version": "1.13.8"
   },
   "paths": {
     "/v1/Email": {
@@ -2023,66 +2023,19 @@
         }
       }
     },
-    "/v1/Projection": {
+    "/v1/Platform/Status": {
       "get": {
         "tags": [
-          "Projection"
+          "Platform"
         ],
-        "operationId": "Projection_GetAll",
-        "parameters": [
-          {
-            "name": "Search",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            },
-            "x-position": 1
-          },
-          {
-            "name": "Skip",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "maximum": 2147483647.0,
-              "minimum": 0.0
-            },
-            "x-position": 2
-          },
-          {
-            "name": "Take",
-            "in": "query",
-            "description": "The number (0 - 1000 inclusive) of items to get from the API.",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "maximum": 1000.0,
-              "minimum": 0.0
-            },
-            "x-position": 3
-          },
-          {
-            "name": "status",
-            "in": "query",
-            "schema": {
-              "nullable": true,
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/ProjectionStatus"
-                }
-              ]
-            },
-            "x-position": 4
-          }
-        ],
+        "operationId": "Platform_Status",
         "responses": {
           "200": {
             "description": "",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProjectionList"
+                  "$ref": "#/components/schemas/PlatformStatus"
                 }
               }
             }
@@ -2105,7 +2058,42 @@
         }
       }
     },
-    "/v1/Projection/{projectionId}": {
+    "/v1/Projection": {
+      "get": {
+        "tags": [
+          "Projection"
+        ],
+        "operationId": "Projection_GetAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListOfProjectionBuild"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "You are not permitted to view this."
+          },
+          "403": {
+            "description": "You are not permitted to view this."
+          },
+          "404": {
+            "description": "This resource could not be found."
+          },
+          "503": {
+            "description": "Service unavailable. Please try again later."
+          },
+          "504": {
+            "description": "Request timed out. Please try again."
+          }
+        }
+      }
+    },
+    "/v1/Projection/{projectionName}": {
       "get": {
         "tags": [
           "Projection"
@@ -2113,7 +2101,7 @@
         "operationId": "Projection_Get",
         "parameters": [
           {
-            "name": "projectionId",
+            "name": "projectionName",
             "in": "path",
             "required": true,
             "schema": {
@@ -2129,7 +2117,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Projection"
+                  "$ref": "#/components/schemas/ProjectionBuild"
                 }
               }
             }
@@ -26977,45 +26965,20 @@
           }
         }
       },
-      "ProjectionList": {
+      "PlatformStatus": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "items": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/Projection"
-            }
-          },
-          "totalItemCount": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
-      "Projection": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
           "status": {
-            "$ref": "#/components/schemas/ProjectionStatus"
+            "$ref": "#/components/schemas/SystemStatus"
           },
-          "lastBuild": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/ProjectionBuild"
-              }
-            ]
+          "buildingProgress": {
+            "type": "number",
+            "format": "float"
           }
         }
       },
-      "ProjectionStatus": {
+      "SystemStatus": {
         "type": "integer",
         "description": "0 = Built\n1 = Building\n2 = Maintenance\n-1 = Failed",
         "x-enumNames": [
@@ -27031,18 +26994,30 @@
           -1
         ]
       },
+      "ListOfProjectionBuild": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "totalItemCount",
+          "items"
+        ],
+        "properties": {
+          "totalItemCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectionBuild"
+            }
+          }
+        }
+      },
       "ProjectionBuild": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "started": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "elapsed": {
-            "type": "string",
-            "format": "time-span"
-          },
           "eventsProcessed": {
             "type": "integer",
             "format": "int32"
@@ -27051,11 +27026,28 @@
             "type": "integer",
             "format": "int32"
           },
-          "error": {
-            "type": "string",
-            "nullable": true
+          "status": {
+            "$ref": "#/components/schemas/ProjectionStatus"
           }
         }
+      },
+      "ProjectionStatus": {
+        "type": "integer",
+        "description": "0 = Unknown\n1 = Pending\n2 = Running\n3 = Completed\n-1 = Failed",
+        "x-enumNames": [
+          "Unknown",
+          "Pending",
+          "Running",
+          "Completed",
+          "Failed"
+        ],
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          -1
+        ]
       },
       "ListOfNotification": {
         "type": "object",
@@ -36906,13 +36898,6 @@
             "nullable": true
           },
           "additionalRoles": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "labelIds": {
             "type": "array",
             "nullable": true,
             "items": {
