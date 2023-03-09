@@ -2539,6 +2539,68 @@ export class PlatformClient {
         }
         return Promise.resolve<any>(<any>null);
     }
+
+    status(  cancelToken?: CancelToken | undefined): Promise<PlatformStatus> {
+        let url_ = this.baseUrl + "/v1/Platform/Status";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processStatus(_response);
+        });
+    }
+
+    protected processStatus(response: AxiosResponse): Promise<PlatformStatus> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = PlatformStatus.fromJS(resultData200);
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<PlatformStatus>(<any>null);
+    }
 }
 
 export class ProjectionClient {
@@ -2551,26 +2613,8 @@ export class ProjectionClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param status (optional) 
-     */
-    getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, status: ProjectionStatus | null | undefined , cancelToken?: CancelToken | undefined): Promise<ProjectionList> {
-        let url_ = this.baseUrl + "/v1/Projection?";
-        if (search !== undefined && search !== null)
-            url_ += "Search=" + encodeURIComponent("" + search) + "&";
-        if (skip === null)
-            throw new Error("The parameter 'skip' cannot be null.");
-        else if (skip !== undefined)
-            url_ += "Skip=" + encodeURIComponent("" + skip) + "&";
-        if (take === null)
-            throw new Error("The parameter 'take' cannot be null.");
-        else if (take !== undefined)
-            url_ += "Take=" + encodeURIComponent("" + take) + "&";
-        if (status !== undefined && status !== null)
-            url_ += "status=" + encodeURIComponent("" + status) + "&";
+    getAll(  cancelToken?: CancelToken | undefined): Promise<ListOfProjectionBuild> {
+        let url_ = this.baseUrl + "/v1/Projection";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <AxiosRequestConfig>{
@@ -2593,7 +2637,7 @@ export class ProjectionClient {
         });
     }
 
-    protected processGetAll(response: AxiosResponse): Promise<ProjectionList> {
+    protected processGetAll(response: AxiosResponse): Promise<ListOfProjectionBuild> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -2607,7 +2651,7 @@ export class ProjectionClient {
             const _responseText = response.data;
             let result200: any = null;
             let resultData200  = _responseText;
-            result200 = ProjectionList.fromJS(resultData200);
+            result200 = ListOfProjectionBuild.fromJS(resultData200);
             return result200;
         } else if (status === 401) {
             const _responseText = response.data;
@@ -2628,14 +2672,14 @@ export class ProjectionClient {
             const _responseText = response.data;
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         }
-        return Promise.resolve<ProjectionList>(<any>null);
+        return Promise.resolve<ListOfProjectionBuild>(<any>null);
     }
 
-    get(projectionId: string | null , cancelToken?: CancelToken | undefined): Promise<Projection> {
-        let url_ = this.baseUrl + "/v1/Projection/{projectionId}";
-        if (projectionId === undefined || projectionId === null)
-            throw new Error("The parameter 'projectionId' must be defined.");
-        url_ = url_.replace("{projectionId}", encodeURIComponent("" + projectionId));
+    get(projectionName: string | null , cancelToken?: CancelToken | undefined): Promise<ProjectionBuild> {
+        let url_ = this.baseUrl + "/v1/Projection/{projectionName}";
+        if (projectionName === undefined || projectionName === null)
+            throw new Error("The parameter 'projectionName' must be defined.");
+        url_ = url_.replace("{projectionName}", encodeURIComponent("" + projectionName));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <AxiosRequestConfig>{
@@ -2658,7 +2702,7 @@ export class ProjectionClient {
         });
     }
 
-    protected processGet(response: AxiosResponse): Promise<Projection> {
+    protected processGet(response: AxiosResponse): Promise<ProjectionBuild> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -2672,7 +2716,7 @@ export class ProjectionClient {
             const _responseText = response.data;
             let result200: any = null;
             let resultData200  = _responseText;
-            result200 = Projection.fromJS(resultData200);
+            result200 = ProjectionBuild.fromJS(resultData200);
             return result200;
         } else if (status === 401) {
             const _responseText = response.data;
@@ -2693,7 +2737,7 @@ export class ProjectionClient {
             const _responseText = response.data;
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         }
-        return Promise.resolve<Projection>(<any>null);
+        return Promise.resolve<ProjectionBuild>(<any>null);
     }
 }
 
@@ -33475,11 +33519,11 @@ export interface ICulture {
     shortTimePattern?: string | undefined;
 }
 
-export class ProjectionList implements IProjectionList {
-    items?: Projection[] | undefined;
-    totalItemCount?: number;
+export class PlatformStatus implements IPlatformStatus {
+    status?: SystemStatus;
+    buildingProgress?: number;
 
-    constructor(data?: IProjectionList) {
+    constructor(data?: IPlatformStatus) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -33490,97 +33534,94 @@ export class ProjectionList implements IProjectionList {
 
     init(_data?: any) {
         if (_data) {
-            if (Array.isArray(_data["items"])) {
-                this.items = [] as any;
-                for (let item of _data["items"])
-                    this.items!.push(Projection.fromJS(item));
-            }
-            this.totalItemCount = _data["totalItemCount"];
-        }
-    }
-
-    static fromJS(data: any): ProjectionList {
-        data = typeof data === 'object' ? data : {};
-        let result = new ProjectionList();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.items)) {
-            data["items"] = [];
-            for (let item of this.items)
-                data["items"].push(item.toJSON());
-        }
-        data["totalItemCount"] = this.totalItemCount;
-        return data; 
-    }
-}
-
-export interface IProjectionList {
-    items?: Projection[] | undefined;
-    totalItemCount?: number;
-}
-
-export class Projection implements IProjection {
-    name?: string | undefined;
-    status?: ProjectionStatus;
-    lastBuild?: ProjectionBuild | undefined;
-
-    constructor(data?: IProjection) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.name = _data["name"];
             this.status = _data["status"];
-            this.lastBuild = _data["lastBuild"] ? ProjectionBuild.fromJS(_data["lastBuild"]) : <any>undefined;
+            this.buildingProgress = _data["buildingProgress"];
         }
     }
 
-    static fromJS(data: any): Projection {
+    static fromJS(data: any): PlatformStatus {
         data = typeof data === 'object' ? data : {};
-        let result = new Projection();
+        let result = new PlatformStatus();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["name"] = this.name;
         data["status"] = this.status;
-        data["lastBuild"] = this.lastBuild ? this.lastBuild.toJSON() : <any>undefined;
+        data["buildingProgress"] = this.buildingProgress;
         return data; 
     }
 }
 
-export interface IProjection {
-    name?: string | undefined;
-    status?: ProjectionStatus;
-    lastBuild?: ProjectionBuild | undefined;
+export interface IPlatformStatus {
+    status?: SystemStatus;
+    buildingProgress?: number;
 }
 
 /** 0 = Built 1 = Building 2 = Maintenance -1 = Failed */
-export enum ProjectionStatus {
+export enum SystemStatus {
     Built = 0,
     Building = 1,
     Maintenance = 2,
     Failed = -1,
 }
 
+export class ListOfProjectionBuild implements IListOfProjectionBuild {
+    totalItemCount!: number;
+    items!: ProjectionBuild[];
+
+    constructor(data?: IListOfProjectionBuild) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.items = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.totalItemCount = _data["totalItemCount"];
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(ProjectionBuild.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ListOfProjectionBuild {
+        data = typeof data === 'object' ? data : {};
+        let result = new ListOfProjectionBuild();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["totalItemCount"] = this.totalItemCount;
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IListOfProjectionBuild {
+    totalItemCount: number;
+    items: ProjectionBuild[];
+}
+
 export class ProjectionBuild implements IProjectionBuild {
-    started?: Date;
-    elapsed?: string;
     eventsProcessed?: number;
     estimatedTotalEvents?: number;
-    error?: string | undefined;
+    status?: ProjectionStatus;
 
     constructor(data?: IProjectionBuild) {
         if (data) {
@@ -33593,11 +33634,9 @@ export class ProjectionBuild implements IProjectionBuild {
 
     init(_data?: any) {
         if (_data) {
-            this.started = _data["started"] ? new Date(_data["started"].toString()) : <any>undefined;
-            this.elapsed = _data["elapsed"];
             this.eventsProcessed = _data["eventsProcessed"];
             this.estimatedTotalEvents = _data["estimatedTotalEvents"];
-            this.error = _data["error"];
+            this.status = _data["status"];
         }
     }
 
@@ -33610,21 +33649,26 @@ export class ProjectionBuild implements IProjectionBuild {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["started"] = this.started ? this.started.toISOString() : <any>undefined;
-        data["elapsed"] = this.elapsed;
         data["eventsProcessed"] = this.eventsProcessed;
         data["estimatedTotalEvents"] = this.estimatedTotalEvents;
-        data["error"] = this.error;
+        data["status"] = this.status;
         return data; 
     }
 }
 
 export interface IProjectionBuild {
-    started?: Date;
-    elapsed?: string;
     eventsProcessed?: number;
     estimatedTotalEvents?: number;
-    error?: string | undefined;
+    status?: ProjectionStatus;
+}
+
+/** 0 = Unknown 1 = Pending 2 = Running 3 = Completed -1 = Failed */
+export enum ProjectionStatus {
+    Unknown = 0,
+    Pending = 1,
+    Running = 2,
+    Completed = 3,
+    Failed = -1,
 }
 
 export class ListOfNotification implements IListOfNotification {
