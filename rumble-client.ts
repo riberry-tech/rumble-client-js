@@ -50082,11 +50082,11 @@ export class Member implements IMember {
     displayId?: string | undefined;
     status?: MemberStatus;
     roles?: string[] | undefined;
+    labelIds?: string[] | undefined;
     version?: number;
     created?: Date;
     modified?: Date;
     joined?: Date;
-    labelIds?: string[] | undefined;
 
     constructor(data?: IMember) {
         if (data) {
@@ -50131,15 +50131,15 @@ export class Member implements IMember {
                 for (let item of _data["roles"])
                     this.roles!.push(item);
             }
-            this.version = _data["version"];
-            this.created = _data["created"] ? new Date(_data["created"].toString()) : <any>undefined;
-            this.modified = _data["modified"] ? new Date(_data["modified"].toString()) : <any>undefined;
-            this.joined = _data["joined"] ? new Date(_data["joined"].toString()) : <any>undefined;
             if (Array.isArray(_data["labelIds"])) {
                 this.labelIds = [] as any;
                 for (let item of _data["labelIds"])
                     this.labelIds!.push(item);
             }
+            this.version = _data["version"];
+            this.created = _data["created"] ? new Date(_data["created"].toString()) : <any>undefined;
+            this.modified = _data["modified"] ? new Date(_data["modified"].toString()) : <any>undefined;
+            this.joined = _data["joined"] ? new Date(_data["joined"].toString()) : <any>undefined;
         }
     }
 
@@ -50184,15 +50184,15 @@ export class Member implements IMember {
             for (let item of this.roles)
                 data["roles"].push(item);
         }
-        data["version"] = this.version;
-        data["created"] = this.created ? this.created.toISOString() : <any>undefined;
-        data["modified"] = this.modified ? this.modified.toISOString() : <any>undefined;
-        data["joined"] = this.joined ? this.joined.toISOString() : <any>undefined;
         if (Array.isArray(this.labelIds)) {
             data["labelIds"] = [];
             for (let item of this.labelIds)
                 data["labelIds"].push(item);
         }
+        data["version"] = this.version;
+        data["created"] = this.created ? this.created.toISOString() : <any>undefined;
+        data["modified"] = this.modified ? this.modified.toISOString() : <any>undefined;
+        data["joined"] = this.joined ? this.joined.toISOString() : <any>undefined;
         return data; 
     }
 }
@@ -50218,11 +50218,11 @@ export interface IMember {
     displayId?: string | undefined;
     status?: MemberStatus;
     roles?: string[] | undefined;
+    labelIds?: string[] | undefined;
     version?: number;
     created?: Date;
     modified?: Date;
     joined?: Date;
-    labelIds?: string[] | undefined;
 }
 
 export class MemberHistory implements IMemberHistory {
@@ -50284,6 +50284,7 @@ export interface IMemberHistory {
 export class AddGroupMemberSettings implements IAddGroupMemberSettings {
     displayId?: string | undefined;
     additionalRoles?: string[] | undefined;
+    labelIds?: string[] | undefined;
     notify?: boolean;
     message?: string | undefined;
 
@@ -50303,6 +50304,11 @@ export class AddGroupMemberSettings implements IAddGroupMemberSettings {
                 this.additionalRoles = [] as any;
                 for (let item of _data["additionalRoles"])
                     this.additionalRoles!.push(item);
+            }
+            if (Array.isArray(_data["labelIds"])) {
+                this.labelIds = [] as any;
+                for (let item of _data["labelIds"])
+                    this.labelIds!.push(item);
             }
             this.notify = _data["notify"];
             this.message = _data["message"];
@@ -50324,6 +50330,11 @@ export class AddGroupMemberSettings implements IAddGroupMemberSettings {
             for (let item of this.additionalRoles)
                 data["additionalRoles"].push(item);
         }
+        if (Array.isArray(this.labelIds)) {
+            data["labelIds"] = [];
+            for (let item of this.labelIds)
+                data["labelIds"].push(item);
+        }
         data["notify"] = this.notify;
         data["message"] = this.message;
         return data; 
@@ -50333,6 +50344,7 @@ export class AddGroupMemberSettings implements IAddGroupMemberSettings {
 export interface IAddGroupMemberSettings {
     displayId?: string | undefined;
     additionalRoles?: string[] | undefined;
+    labelIds?: string[] | undefined;
     notify?: boolean;
     message?: string | undefined;
 }
@@ -50634,8 +50646,8 @@ export interface IListOfOrganisation {
 
 export class Organisation implements IOrganisation {
     id?: string | undefined;
-    version?: number;
     name?: string | undefined;
+    shortName?: string | undefined;
     description?: string | undefined;
     contactEmail?: string | undefined;
     bannerUri?: string | undefined;
@@ -50650,6 +50662,7 @@ export class Organisation implements IOrganisation {
     registrationWhitelist?: string[] | undefined;
     publishingApproved?: boolean;
     shifts?: Shift[] | undefined;
+    version?: number;
 
     constructor(data?: IOrganisation) {
         if (data) {
@@ -50663,8 +50676,8 @@ export class Organisation implements IOrganisation {
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
-            this.version = _data["version"];
             this.name = _data["name"];
+            this.shortName = _data["shortName"];
             this.description = _data["description"];
             this.contactEmail = _data["contactEmail"];
             this.bannerUri = _data["bannerUri"];
@@ -50687,6 +50700,7 @@ export class Organisation implements IOrganisation {
                 for (let item of _data["shifts"])
                     this.shifts!.push(Shift.fromJS(item));
             }
+            this.version = _data["version"];
         }
     }
 
@@ -50700,8 +50714,8 @@ export class Organisation implements IOrganisation {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-        data["version"] = this.version;
         data["name"] = this.name;
+        data["shortName"] = this.shortName;
         data["description"] = this.description;
         data["contactEmail"] = this.contactEmail;
         data["bannerUri"] = this.bannerUri;
@@ -50724,14 +50738,15 @@ export class Organisation implements IOrganisation {
             for (let item of this.shifts)
                 data["shifts"].push(item.toJSON());
         }
+        data["version"] = this.version;
         return data; 
     }
 }
 
 export interface IOrganisation {
     id?: string | undefined;
-    version?: number;
     name?: string | undefined;
+    shortName?: string | undefined;
     description?: string | undefined;
     contactEmail?: string | undefined;
     bannerUri?: string | undefined;
@@ -50746,6 +50761,7 @@ export interface IOrganisation {
     registrationWhitelist?: string[] | undefined;
     publishingApproved?: boolean;
     shifts?: Shift[] | undefined;
+    version?: number;
 }
 
 export class Shift implements IShift {
@@ -50790,6 +50806,7 @@ export interface IShift {
 
 export class CreateOrganisationSettings implements ICreateOrganisationSettings {
     name!: string;
+    shortName?: string | undefined;
     description?: string | undefined;
     contactEmail?: string | undefined;
     bannerUri?: string | undefined;
@@ -50816,6 +50833,7 @@ export class CreateOrganisationSettings implements ICreateOrganisationSettings {
     init(_data?: any) {
         if (_data) {
             this.name = _data["name"];
+            this.shortName = _data["shortName"];
             this.description = _data["description"];
             this.contactEmail = _data["contactEmail"];
             this.bannerUri = _data["bannerUri"];
@@ -50850,6 +50868,7 @@ export class CreateOrganisationSettings implements ICreateOrganisationSettings {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
+        data["shortName"] = this.shortName;
         data["description"] = this.description;
         data["contactEmail"] = this.contactEmail;
         data["bannerUri"] = this.bannerUri;
@@ -50877,6 +50896,7 @@ export class CreateOrganisationSettings implements ICreateOrganisationSettings {
 
 export interface ICreateOrganisationSettings {
     name: string;
+    shortName?: string | undefined;
     description?: string | undefined;
     contactEmail?: string | undefined;
     bannerUri?: string | undefined;
@@ -50894,6 +50914,7 @@ export interface ICreateOrganisationSettings {
 
 export class UpdateOrganisationSettings implements IUpdateOrganisationSettings {
     name!: string;
+    shortName?: string | undefined;
     description?: string | undefined;
     contactEmail?: string | undefined;
     bannerUri?: string | undefined;
@@ -50921,6 +50942,7 @@ export class UpdateOrganisationSettings implements IUpdateOrganisationSettings {
     init(_data?: any) {
         if (_data) {
             this.name = _data["name"];
+            this.shortName = _data["shortName"];
             this.description = _data["description"];
             this.contactEmail = _data["contactEmail"];
             this.bannerUri = _data["bannerUri"];
@@ -50956,6 +50978,7 @@ export class UpdateOrganisationSettings implements IUpdateOrganisationSettings {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
+        data["shortName"] = this.shortName;
         data["description"] = this.description;
         data["contactEmail"] = this.contactEmail;
         data["bannerUri"] = this.bannerUri;
@@ -50984,6 +51007,7 @@ export class UpdateOrganisationSettings implements IUpdateOrganisationSettings {
 
 export interface IUpdateOrganisationSettings {
     name: string;
+    shortName?: string | undefined;
     description?: string | undefined;
     contactEmail?: string | undefined;
     bannerUri?: string | undefined;
@@ -51360,7 +51384,7 @@ export interface IListOfTeam {
 
 export class Team implements ITeam {
     id?: string | undefined;
-    version?: number;
+    shortName?: string | undefined;
     name?: string | undefined;
     description?: string | undefined;
     bannerUri?: string | undefined;
@@ -51370,6 +51394,7 @@ export class Team implements ITeam {
     organisationName?: string | undefined;
     organisationLogoUri?: string | undefined;
     organisationPrivacy?: PrivacyLevel;
+    version?: number;
 
     constructor(data?: ITeam) {
         if (data) {
@@ -51383,7 +51408,7 @@ export class Team implements ITeam {
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
-            this.version = _data["version"];
+            this.shortName = _data["shortName"];
             this.name = _data["name"];
             this.description = _data["description"];
             this.bannerUri = _data["bannerUri"];
@@ -51397,6 +51422,7 @@ export class Team implements ITeam {
             this.organisationName = _data["organisationName"];
             this.organisationLogoUri = _data["organisationLogoUri"];
             this.organisationPrivacy = _data["organisationPrivacy"];
+            this.version = _data["version"];
         }
     }
 
@@ -51410,7 +51436,7 @@ export class Team implements ITeam {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-        data["version"] = this.version;
+        data["shortName"] = this.shortName;
         data["name"] = this.name;
         data["description"] = this.description;
         data["bannerUri"] = this.bannerUri;
@@ -51424,13 +51450,14 @@ export class Team implements ITeam {
         data["organisationName"] = this.organisationName;
         data["organisationLogoUri"] = this.organisationLogoUri;
         data["organisationPrivacy"] = this.organisationPrivacy;
+        data["version"] = this.version;
         return data; 
     }
 }
 
 export interface ITeam {
     id?: string | undefined;
-    version?: number;
+    shortName?: string | undefined;
     name?: string | undefined;
     description?: string | undefined;
     bannerUri?: string | undefined;
@@ -51440,11 +51467,13 @@ export interface ITeam {
     organisationName?: string | undefined;
     organisationLogoUri?: string | undefined;
     organisationPrivacy?: PrivacyLevel;
+    version?: number;
 }
 
 export class CreateTeamSettings implements ICreateTeamSettings {
     organisationId!: string;
     name!: string;
+    shortName?: string | undefined;
     description?: string | undefined;
     bannerUri?: string | undefined;
     privacy?: PrivacyLevel;
@@ -51463,6 +51492,7 @@ export class CreateTeamSettings implements ICreateTeamSettings {
         if (_data) {
             this.organisationId = _data["organisationId"];
             this.name = _data["name"];
+            this.shortName = _data["shortName"];
             this.description = _data["description"];
             this.bannerUri = _data["bannerUri"];
             this.privacy = _data["privacy"];
@@ -51485,6 +51515,7 @@ export class CreateTeamSettings implements ICreateTeamSettings {
         data = typeof data === 'object' ? data : {};
         data["organisationId"] = this.organisationId;
         data["name"] = this.name;
+        data["shortName"] = this.shortName;
         data["description"] = this.description;
         data["bannerUri"] = this.bannerUri;
         data["privacy"] = this.privacy;
@@ -51500,6 +51531,7 @@ export class CreateTeamSettings implements ICreateTeamSettings {
 export interface ICreateTeamSettings {
     organisationId: string;
     name: string;
+    shortName?: string | undefined;
     description?: string | undefined;
     bannerUri?: string | undefined;
     privacy?: PrivacyLevel;
@@ -51508,6 +51540,7 @@ export interface ICreateTeamSettings {
 
 export class UpdateTeamSettings implements IUpdateTeamSettings {
     name!: string;
+    shortName?: string | undefined;
     description?: string | undefined;
     bannerUri?: string | undefined;
     privacy?: PrivacyLevel;
@@ -51526,6 +51559,7 @@ export class UpdateTeamSettings implements IUpdateTeamSettings {
     init(_data?: any) {
         if (_data) {
             this.name = _data["name"];
+            this.shortName = _data["shortName"];
             this.description = _data["description"];
             this.bannerUri = _data["bannerUri"];
             this.privacy = _data["privacy"];
@@ -51548,6 +51582,7 @@ export class UpdateTeamSettings implements IUpdateTeamSettings {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
+        data["shortName"] = this.shortName;
         data["description"] = this.description;
         data["bannerUri"] = this.bannerUri;
         data["privacy"] = this.privacy;
@@ -51563,6 +51598,7 @@ export class UpdateTeamSettings implements IUpdateTeamSettings {
 
 export interface IUpdateTeamSettings {
     name: string;
+    shortName?: string | undefined;
     description?: string | undefined;
     bannerUri?: string | undefined;
     privacy?: PrivacyLevel;
@@ -51872,12 +51908,13 @@ export interface ICreateUserSettings {
 }
 
 export class OnboardUserSettings implements IOnboardUserSettings {
-    name!: string;
+    name?: string | undefined;
     email!: string;
     groupId!: string;
     displayId?: string | undefined;
     jobTypeId?: string | undefined;
     additionalRoles?: string[] | undefined;
+    labelIds?: string[] | undefined;
     notify?: boolean;
     message?: string | undefined;
 
@@ -51901,6 +51938,11 @@ export class OnboardUserSettings implements IOnboardUserSettings {
                 this.additionalRoles = [] as any;
                 for (let item of _data["additionalRoles"])
                     this.additionalRoles!.push(item);
+            }
+            if (Array.isArray(_data["labelIds"])) {
+                this.labelIds = [] as any;
+                for (let item of _data["labelIds"])
+                    this.labelIds!.push(item);
             }
             this.notify = _data["notify"];
             this.message = _data["message"];
@@ -51926,6 +51968,11 @@ export class OnboardUserSettings implements IOnboardUserSettings {
             for (let item of this.additionalRoles)
                 data["additionalRoles"].push(item);
         }
+        if (Array.isArray(this.labelIds)) {
+            data["labelIds"] = [];
+            for (let item of this.labelIds)
+                data["labelIds"].push(item);
+        }
         data["notify"] = this.notify;
         data["message"] = this.message;
         return data; 
@@ -51933,12 +51980,13 @@ export class OnboardUserSettings implements IOnboardUserSettings {
 }
 
 export interface IOnboardUserSettings {
-    name: string;
+    name?: string | undefined;
     email: string;
     groupId: string;
     displayId?: string | undefined;
     jobTypeId?: string | undefined;
     additionalRoles?: string[] | undefined;
+    labelIds?: string[] | undefined;
     notify?: boolean;
     message?: string | undefined;
 }
