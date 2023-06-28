@@ -1748,6 +1748,71 @@ export class BackupClient {
         }
         return Promise.resolve<Backup>(<any>null);
     }
+
+    delete(id: string | null, searchDeep: boolean | undefined , cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/v1/Backup/{id}?";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        if (searchDeep === null)
+            throw new Error("The parameter 'searchDeep' cannot be null.");
+        else if (searchDeep !== undefined)
+            url_ += "searchDeep=" + encodeURIComponent("" + searchDeep) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <AxiosRequestConfig>{
+            method: "DELETE",
+            url: url_,
+            headers: {
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processDelete(_response);
+        });
+    }
+
+    protected processDelete(response: AxiosResponse): Promise<void> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 204) {
+            const _responseText = response.data;
+            return Promise.resolve<void>(<any>null);
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<void>(<any>null);
+    }
 }
 
 export class ExternalApplicationClient {
@@ -2339,6 +2404,83 @@ export class LogClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         }
         return Promise.resolve<Log>(<any>null);
+    }
+}
+
+export class MarkdownClient {
+    private instance: AxiosInstance;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(baseUrl?: string, instance?: AxiosInstance) {
+        this.instance = instance ? instance : axios.create();
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    preview(settings: MarkdownPreviewSettings , cancelToken?: CancelToken | undefined): Promise<FileResponse> {
+        let url_ = this.baseUrl + "/v1/Markdown/Preview";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(settings);
+
+        let options_ = <AxiosRequestConfig>{
+            data: content_,
+            responseType: "blob",
+            method: "POST",
+            url: url_,
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/octet-stream"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processPreview(_response);
+        });
+    }
+
+    protected processPreview(response: AxiosResponse): Promise<FileResponse> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers["content-disposition"] : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return Promise.resolve({ fileName: fileName, status: status, data: response.data as Blob, headers: _headers });
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<FileResponse>(<any>null);
     }
 }
 
@@ -31928,6 +32070,8 @@ export enum EmailType {
     SupportConfirmation = "SupportConfirmation",
     SupportStatusChanged = "SupportStatusChanged",
     RequestResetPasswordFailed = "RequestResetPasswordFailed",
+    PasswordChanged = "PasswordChanged",
+    PrimaryEmailChanged = "PrimaryEmailChanged",
 }
 
 export class EmailAddress implements IEmailAddress {
@@ -32924,6 +33068,7 @@ export interface IListOfBackup {
 
 export class Backup implements IBackup {
     id?: string | undefined;
+    type?: BackupType;
     started?: Date;
     completed?: Date | undefined;
     status?: BackupStatus;
@@ -32941,6 +33086,7 @@ export class Backup implements IBackup {
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
+            this.type = _data["type"];
             this.started = _data["started"] ? new Date(_data["started"].toString()) : <any>undefined;
             this.completed = _data["completed"] ? new Date(_data["completed"].toString()) : <any>undefined;
             this.status = _data["status"];
@@ -32958,6 +33104,7 @@ export class Backup implements IBackup {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
+        data["type"] = this.type;
         data["started"] = this.started ? this.started.toISOString() : <any>undefined;
         data["completed"] = this.completed ? this.completed.toISOString() : <any>undefined;
         data["status"] = this.status;
@@ -32968,10 +33115,18 @@ export class Backup implements IBackup {
 
 export interface IBackup {
     id?: string | undefined;
+    type?: BackupType;
     started?: Date;
     completed?: Date | undefined;
     status?: BackupStatus;
     message?: string | undefined;
+}
+
+/** 0 = Unknown 1 = Scheduled 2 = Manual */
+export enum BackupType {
+    Unknown = 0,
+    Scheduled = 1,
+    Manual = 2,
 }
 
 /** 0 = Running 1 = Completed 2 = Error */
@@ -33333,6 +33488,42 @@ export interface ILog {
     message?: string | undefined;
     level?: number;
     context?: string | undefined;
+}
+
+export class MarkdownPreviewSettings implements IMarkdownPreviewSettings {
+    text?: string | undefined;
+
+    constructor(data?: IMarkdownPreviewSettings) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.text = _data["text"];
+        }
+    }
+
+    static fromJS(data: any): MarkdownPreviewSettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new MarkdownPreviewSettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["text"] = this.text;
+        return data; 
+    }
+}
+
+export interface IMarkdownPreviewSettings {
+    text?: string | undefined;
 }
 
 export class Platform implements IPlatform {
@@ -51796,6 +51987,7 @@ export class User implements IUser {
     jobTypeId?: string | undefined;
     jobTypeName?: string | undefined;
     jobTypeCategory?: string | undefined;
+    verified?: boolean;
     version?: number;
 
     constructor(data?: IUser) {
@@ -51817,6 +52009,7 @@ export class User implements IUser {
             this.jobTypeId = _data["jobTypeId"];
             this.jobTypeName = _data["jobTypeName"];
             this.jobTypeCategory = _data["jobTypeCategory"];
+            this.verified = _data["verified"];
             this.version = _data["version"];
         }
     }
@@ -51838,6 +52031,7 @@ export class User implements IUser {
         data["jobTypeId"] = this.jobTypeId;
         data["jobTypeName"] = this.jobTypeName;
         data["jobTypeCategory"] = this.jobTypeCategory;
+        data["verified"] = this.verified;
         data["version"] = this.version;
         return data; 
     }
@@ -51852,6 +52046,7 @@ export interface IUser {
     jobTypeId?: string | undefined;
     jobTypeName?: string | undefined;
     jobTypeCategory?: string | undefined;
+    verified?: boolean;
     version?: number;
 }
 
