@@ -19,14 +19,6 @@ export class EmailClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param groupId (optional) 
-     * @param statuses (optional) 
-     * @param includeContents (optional) 
-     */
     getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, groupId: string | null | undefined, statuses: EmailStatus[] | null | undefined, includeContents: boolean | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfEmail> {
         let url_ = this.baseUrl + "/v1/Email?";
         if (search !== undefined && search !== null)
@@ -107,9 +99,6 @@ export class EmailClient {
         return Promise.resolve<ListOfEmail>(<any>null);
     }
 
-    /**
-     * This is a webhook called by SendGrid
-     */
     update(  cancelToken?: CancelToken | undefined): Promise<void> {
         let url_ = this.baseUrl + "/v1/Email";
         url_ = url_.replace(/[?&]$/, "");
@@ -168,13 +157,6 @@ export class EmailClient {
         return Promise.resolve<void>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param statuses (optional) 
-     * @param includeContents (optional) 
-     */
     getAllByUser(userId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, statuses: EmailStatus[] | null | undefined, includeContents: boolean | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfEmail> {
         let url_ = this.baseUrl + "/v1/Email/User/{userId}?";
         if (userId === undefined || userId === null)
@@ -332,12 +314,6 @@ export class GroupAttendanceClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param status (optional) 
-     */
     getAll(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, status: AttendanceStatus | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfUserAttendance> {
         let url_ = this.baseUrl + "/v1/Group/{groupId}/Attendance?";
         if (groupId === undefined || groupId === null)
@@ -562,14 +538,6 @@ export class MeetingClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param parentId (optional) 
-     * @param from (optional) 
-     * @param to (optional) 
-     */
     getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, parentId: string | null | undefined, from: Date | null | undefined, to: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfMeeting> {
         let url_ = this.baseUrl + "/v1/Meeting?";
         if (search !== undefined && search !== null)
@@ -1318,12 +1286,6 @@ export class UserAttendanceClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param status (optional) 
-     */
     getAll(userId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, status: AttendanceStatus | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfGroupAttendance> {
         let url_ = this.baseUrl + "/v1/User/{userId}/Attendance?";
         if (userId === undefined || userId === null)
@@ -1548,10 +1510,6 @@ export class BackupClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     */
     getAll(skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfBackup> {
         let url_ = this.baseUrl + "/v1/Backup?";
         if (skip === null)
@@ -1825,11 +1783,6 @@ export class ExternalApplicationClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     */
     getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfExternalApplication> {
         let url_ = this.baseUrl + "/v1/ExternalApplication?";
         if (search !== undefined && search !== null)
@@ -2170,14 +2123,6 @@ export class ImageClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * Resizes the given image to the specified size.
-     * @param uri (optional) Uri of the image to resize.
-     * @param size (optional) The default width and height of the result image in pixels.
-     * @param width (optional) A custom width to override the default size.
-     * @param height (optional) A custom height to override the default size.
-     * @return Uri of the resized image.
-     */
     get(uri: string | null | undefined, size: number | null | undefined, width: number | null | undefined, height: number | null | undefined , cancelToken?: CancelToken | undefined): Promise<ResizedImage> {
         let url_ = this.baseUrl + "/v1/Image?";
         if (uri !== undefined && uri !== null)
@@ -2259,12 +2204,6 @@ export class LogClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param logLevel (optional) 
-     */
     getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, logLevel: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfLog> {
         let url_ = this.baseUrl + "/v1/Log?";
         if (search !== undefined && search !== null)
@@ -2893,15 +2832,6 @@ export class NotificationClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param type (optional) 
-     * @param seen (optional) 
-     * @param read (optional) 
-     * @param from (optional) 
-     * @param to (optional) 
-     */
     getAll(skip: number | undefined, take: number | undefined, type: string | null | undefined, seen: boolean | null | undefined, read: boolean | null | undefined, from: Date | null | undefined, to: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfNotification> {
         let url_ = this.baseUrl + "/v1/Notification?";
         if (skip === null)
@@ -3300,11 +3230,6 @@ export class ScheduledEmailClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param groupId (optional) 
-     */
     getAll(skip: number | undefined, take: number | undefined, groupId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfScheduledEmail> {
         let url_ = this.baseUrl + "/v1/ScheduledEmail?";
         if (skip === null)
@@ -3377,10 +3302,6 @@ export class ScheduledEmailClient {
         return Promise.resolve<ListOfScheduledEmail>(<any>null);
     }
 
-    /**
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     */
     getAllForRecipient(recipientId: string | null, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfScheduledEmail> {
         let url_ = this.baseUrl + "/v1/ScheduledEmail/Recipient/{recipientId}?";
         if (recipientId === undefined || recipientId === null)
@@ -3783,11 +3704,6 @@ export class ObservationContentClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param published (optional) 
-     */
     getAll(definitionId: string | null, skip: number | undefined, take: number | undefined, published: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfObservationContent> {
         let url_ = this.baseUrl + "/v1/ObservationDefinition/{definitionId}/Content?";
         if (definitionId === undefined || definitionId === null)
@@ -4258,17 +4174,7 @@ export class ObservationClient {
         return Promise.resolve<ListOfLocatableObservation>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param definitionId (optional) 
-     * @param from (optional) 
-     * @param to (optional) 
-     * @param friendly (optional) 
-     * @param anonymousUser (optional) 
-     */
-    getAllForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, definitionId: string | null | undefined, from: Date | null | undefined, to: Date | null | undefined, friendly: boolean | null | undefined, anonymousUser: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfObservation> {
+    getAllForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, definitionId: string | null | undefined, from: Date | null | undefined, to: Date | null | undefined, labelled: boolean | null | undefined, anonymousUser: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfObservation> {
         let url_ = this.baseUrl + "/v1/Observation/Group/{groupId}?";
         if (groupId === undefined || groupId === null)
             throw new Error("The parameter 'groupId' must be defined.");
@@ -4289,8 +4195,8 @@ export class ObservationClient {
             url_ += "from=" + encodeURIComponent(from ? "" + from.toJSON() : "") + "&";
         if (to !== undefined && to !== null)
             url_ += "to=" + encodeURIComponent(to ? "" + to.toJSON() : "") + "&";
-        if (friendly !== undefined && friendly !== null)
-            url_ += "friendly=" + encodeURIComponent("" + friendly) + "&";
+        if (labelled !== undefined && labelled !== null)
+            url_ += "labelled=" + encodeURIComponent("" + labelled) + "&";
         if (anonymousUser !== undefined && anonymousUser !== null)
             url_ += "anonymousUser=" + encodeURIComponent("" + anonymousUser) + "&";
         url_ = url_.replace(/[?&]$/, "");
@@ -4353,17 +4259,7 @@ export class ObservationClient {
         return Promise.resolve<ListOfObservation>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param definitionId (optional) 
-     * @param groupId (optional) 
-     * @param from (optional) 
-     * @param to (optional) 
-     * @param friendly (optional) 
-     */
-    getAllForPublisher(publisherId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, definitionId: string | null | undefined, groupId: string | null | undefined, from: Date | null | undefined, to: Date | null | undefined, friendly: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfObservation> {
+    getAllForPublisher(publisherId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, definitionId: string | null | undefined, groupId: string | null | undefined, from: Date | null | undefined, to: Date | null | undefined, labelled: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfObservation> {
         let url_ = this.baseUrl + "/v1/Observation/Publisher/{publisherId}?";
         if (publisherId === undefined || publisherId === null)
             throw new Error("The parameter 'publisherId' must be defined.");
@@ -4386,8 +4282,8 @@ export class ObservationClient {
             url_ += "from=" + encodeURIComponent(from ? "" + from.toJSON() : "") + "&";
         if (to !== undefined && to !== null)
             url_ += "to=" + encodeURIComponent(to ? "" + to.toJSON() : "") + "&";
-        if (friendly !== undefined && friendly !== null)
-            url_ += "friendly=" + encodeURIComponent("" + friendly) + "&";
+        if (labelled !== undefined && labelled !== null)
+            url_ += "labelled=" + encodeURIComponent("" + labelled) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <AxiosRequestConfig>{
@@ -4448,13 +4344,13 @@ export class ObservationClient {
         return Promise.resolve<ListOfObservation>(<any>null);
     }
 
-    get(observationId: string | null, friendly: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<Observation> {
+    get(observationId: string | null, labelled: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<Observation> {
         let url_ = this.baseUrl + "/v1/Observation/{observationId}?";
         if (observationId === undefined || observationId === null)
             throw new Error("The parameter 'observationId' must be defined.");
         url_ = url_.replace("{observationId}", encodeURIComponent("" + observationId));
-        if (friendly !== undefined && friendly !== null)
-            url_ += "friendly=" + encodeURIComponent("" + friendly) + "&";
+        if (labelled !== undefined && labelled !== null)
+            url_ += "labelled=" + encodeURIComponent("" + labelled) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <AxiosRequestConfig>{
@@ -4843,6 +4739,76 @@ export class ObservationClient {
         }
         return Promise.resolve<FileResponse>(<any>null);
     }
+
+    extractLabelledAnswers(settings: ExtractLabelledAnswersSettings , cancelToken?: CancelToken | undefined): Promise<LabelledAnswer[]> {
+        let url_ = this.baseUrl + "/v1/Observation/ExtractLabelledAnswers";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(settings);
+
+        let options_ = <AxiosRequestConfig>{
+            data: content_,
+            method: "POST",
+            url: url_,
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processExtractLabelledAnswers(_response);
+        });
+    }
+
+    protected processExtractLabelledAnswers(response: AxiosResponse): Promise<LabelledAnswer[]> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(LabelledAnswer.fromJS(item));
+            }
+            return result200;
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<LabelledAnswer[]>(<any>null);
+    }
 }
 
 export class ObservationDefinitionClient {
@@ -4855,14 +4821,6 @@ export class ObservationDefinitionClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param programId (optional) - null/empty to show all
-    - program ID to filter to specific program
-    - "none" to filter to items not in any program
-     */
     getAllForPublisher(publisherId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, programId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfObservationDefinition> {
         let url_ = this.baseUrl + "/v1/ObservationDefinition/Publisher/{publisherId}?";
         if (publisherId === undefined || publisherId === null)
@@ -5006,18 +4964,6 @@ export class ObservationDefinitionClient {
         return Promise.resolve<ObservationDefinition>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param consumerId (optional) 
-     * @param publisherId (optional) 
-     * @param programId (optional) - null/empty to show all
-    - program ID to filter to specific program
-    - "none" to filter to items not in any program
-     * @param itemId (optional) 
-     * @param activated (optional) 
-     */
     getAllByActivation(search: string | null | undefined, skip: number | undefined, take: number | undefined, consumerId: string | null | undefined, publisherId: string | null | undefined, programId: string | null | undefined, itemId: string | null | undefined, activated: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfObservationDefinition> {
         let url_ = this.baseUrl + "/v1/ObservationDefinition?";
         if (search !== undefined && search !== null)
@@ -5226,16 +5172,6 @@ export class ObservationDefinitionClient {
         return Promise.resolve<void>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param publisherId (optional) 
-     * @param programId (optional) - null/empty to show all
-    - program ID to filter to specific program
-    - "none" to filter to items not in any program
-     * @param countryCode (optional) 
-     */
     getAllPublished(search: string | null | undefined, skip: number | undefined, take: number | undefined, publisherId: string | null | undefined, programId: string | null | undefined, countryCode: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfObservationDefinition> {
         let url_ = this.baseUrl + "/v1/ObservationDefinition/Published?";
         if (search !== undefined && search !== null)
@@ -5390,10 +5326,6 @@ export class ObservationFormClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     */
     getAllForObservationContent(contentId: string | null, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfObservationForm> {
         let url_ = this.baseUrl + "/v1/ObservationContent/{contentId}/Form?";
         if (contentId === undefined || contentId === null)
@@ -5735,10 +5667,6 @@ export class ObservationMigrationClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * Change the ownership (publisher) of an given observation definition, all related data including 
-    activations and observation will be transferred to the new publisher as well.
-     */
     migrateObservationDefinition(observationDefinitionId: string | null, settings: MigrateObservationDefinitionSettings , cancelToken?: CancelToken | undefined): Promise<void> {
         let url_ = this.baseUrl + "/v1/ObservationDefinition/{observationDefinitionId}/Migrate";
         if (observationDefinitionId === undefined || observationDefinitionId === null)
@@ -5804,13 +5732,6 @@ export class ObservationMigrationClient {
         return Promise.resolve<void>(<any>null);
     }
 
-    /**
-     * Create a duplicate copy of an observation definition under the same publisher.
-                
-    NOTE: this might run for a while if there are a lot of observations need to be migrated, when tested
-    locally, 2400 observations took about 3 minutes to finish, as such, the command would be timeout but it
-    will finish eventually, check the logs for progress.
-     */
     duplicateObservationDefinition(observationDefinitionId: string | null, settings: DuplicateObservationDefinitionSettings , cancelToken?: CancelToken | undefined): Promise<ObservationDefinition> {
         let url_ = this.baseUrl + "/v1/ObservationDefinition/{observationDefinitionId}/Duplicate";
         if (observationDefinitionId === undefined || observationDefinitionId === null)
@@ -6031,12 +5952,6 @@ export class ObservationSettingsClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param definitionId (optional) 
-     * @param organisationId (optional) 
-     */
     getAll(skip: number | undefined, take: number | undefined, definitionId: string | null | undefined, organisationId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfObservationSettings> {
         let url_ = this.baseUrl + "/v1/ObservationSettings?";
         if (skip === null)
@@ -7208,13 +7123,6 @@ export class ProductClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param publisherId (optional) 
-     * @param countryCode (optional) 
-     */
     getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, publisherId: string | null | undefined, countryCode: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<Product> {
         let url_ = this.baseUrl + "/v1/Product?";
         if (search !== undefined && search !== null)
@@ -7559,11 +7467,6 @@ export class PublisherClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     */
     getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfPublisher> {
         let url_ = this.baseUrl + "/v1/Publisher?";
         if (search !== undefined && search !== null)
@@ -8336,14 +8239,6 @@ export class ImplementationClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param publisherId (optional) 
-     * @param consumerId (optional) 
-     * @param teamId (optional) 
-     */
     getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, publisherId: string | null | undefined, consumerId: string | null | undefined, teamId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfImplementation> {
         let url_ = this.baseUrl + "/v1/Implementation?";
         if (search !== undefined && search !== null)
@@ -8679,11 +8574,6 @@ export class ImplementationClient {
         return Promise.resolve<void>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     */
     getAllTasks(implementationId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfTask> {
         let url_ = this.baseUrl + "/v1/Implementation/{implementationId}/Task?";
         if (implementationId === undefined || implementationId === null)
@@ -8770,17 +8660,6 @@ export class ItemActivationClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param itemType (optional) 
-     * @param programId (optional) - null/empty to show all
-    - program ID to filter to specific program
-    - "none" to filter to items not in any program
-     * @param consumerId (optional) 
-     * @param includeDeactivated (optional) 
-     */
     getAllForPublisher(publisherId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, itemType: string | null | undefined, programId: string | null | undefined, consumerId: string | null | undefined, includeDeactivated: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfItemActivation> {
         let url_ = this.baseUrl + "/v1/ItemActivation/Publisher/{publisherId}?";
         if (publisherId === undefined || publisherId === null)
@@ -8864,18 +8743,6 @@ export class ItemActivationClient {
         return Promise.resolve<ListOfItemActivation>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param consumerId (optional) 
-     * @param itemType (optional) 
-     * @param itemId (optional) 
-     * @param programId (optional) - null/empty to show all
-    - program ID to filter to specific program
-    - "none" to filter to items not in any program
-     * @param publisherId (optional) 
-     */
     getAllByActivation(search: string | null | undefined, skip: number | undefined, take: number | undefined, consumerId: string | null | undefined, itemType: string | null | undefined, itemId: string | null | undefined, programId: string | null | undefined, publisherId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfItemActivation> {
         let url_ = this.baseUrl + "/v1/ItemActivation?";
         if (search !== undefined && search !== null)
@@ -9233,13 +9100,6 @@ export class ProgramActivationClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param programId (optional) 
-     * @param consumerId (optional) 
-     */
     getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, programId: string | null | undefined, consumerId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfProgramActivation> {
         let url_ = this.baseUrl + "/v1/ProgramActivation?";
         if (search !== undefined && search !== null)
@@ -9316,12 +9176,6 @@ export class ProgramActivationClient {
         return Promise.resolve<ListOfProgramActivation>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param programId (optional) 
-     */
     getAllForPublisher(publisherId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, programId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfProgramActivation> {
         let url_ = this.baseUrl + "/v1/ProgramActivation/Publisher/{publisherId}?";
         if (publisherId === undefined || publisherId === null)
@@ -9745,11 +9599,6 @@ export class ProgramClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     */
     getAllForPublisher(publisherId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfProgram> {
         let url_ = this.baseUrl + "/v1/Program/Publisher/{publisherId}?";
         if (publisherId === undefined || publisherId === null)
@@ -9825,15 +9674,6 @@ export class ProgramClient {
         return Promise.resolve<ListOfProgram>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param publisherId (optional) 
-     * @param programId (optional) - null/empty to show all
-    - program ID to filter to specific program
-     * @param countryCode (optional) 
-     */
     getAllPublished(search: string | null | undefined, skip: number | undefined, take: number | undefined, publisherId: string | null | undefined, programId: string | null | undefined, countryCode: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfProgram> {
         let url_ = this.baseUrl + "/v1/Program/Published?";
         if (search !== undefined && search !== null)
@@ -9912,15 +9752,6 @@ export class ProgramClient {
         return Promise.resolve<ListOfProgram>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param consumerId (optional) 
-     * @param publisherId (optional) 
-     * @param itemId (optional) 
-     * @param activated (optional) 
-     */
     getAllByActivation(search: string | null | undefined, skip: number | undefined, take: number | undefined, consumerId: string | null | undefined, publisherId: string | null | undefined, itemId: string | null | undefined, activated: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfProgram> {
         let url_ = this.baseUrl + "/v1/Program?";
         if (search !== undefined && search !== null)
@@ -10537,11 +10368,6 @@ export class TaskCommentClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     */
     getAll(taskId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfComment> {
         let url_ = this.baseUrl + "/v1/Task/{taskId}/Comment?";
         if (taskId === undefined || taskId === null)
@@ -10886,11 +10712,6 @@ export class TaskCommentClient {
         return Promise.resolve<void>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     */
     getAllReplies(taskId: string | null, commentId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfComment> {
         let url_ = this.baseUrl + "/v1/Task/{taskId}/Comment/{commentId}/Reply?";
         if (taskId === undefined || taskId === null)
@@ -10980,12 +10801,6 @@ export class TaskClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param implementationId (optional) 
-     */
     getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, implementationId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfTask> {
         let url_ = this.baseUrl + "/v1/Task?";
         if (search !== undefined && search !== null)
@@ -11454,11 +11269,6 @@ export class SharingClient {
         return Promise.resolve<void>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     */
     getAllGroupInvitationsForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfSharing> {
         let url_ = this.baseUrl + "/v1/Sharing/GroupInvitation/Group/{groupId}?";
         if (groupId === undefined || groupId === null)
@@ -11611,12 +11421,6 @@ export class TicketClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param userId (optional) 
-     */
     getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, userId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfTicket> {
         let url_ = this.baseUrl + "/v1/Ticket?";
         if (search !== undefined && search !== null)
@@ -11898,10 +11702,6 @@ export class SurveyContentClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     */
     getAll(surveyId: string | null, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfSurveyContent> {
         let url_ = this.baseUrl + "/v1/Survey/{surveyId}/Content?";
         if (surveyId === undefined || surveyId === null)
@@ -12566,11 +12366,6 @@ export class SurveyClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     */
     getAllForPublisher(publisherId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfSurvey> {
         let url_ = this.baseUrl + "/v1/Survey/Publisher/{publisherId}?";
         if (publisherId === undefined || publisherId === null)
@@ -12712,18 +12507,6 @@ export class SurveyClient {
         return Promise.resolve<Survey>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param consumerId (optional) 
-     * @param publisherId (optional) 
-     * @param programId (optional) - null/empty to show all
-    - program ID to filter to specific program
-    - "none" to filter to items not in any program
-     * @param itemId (optional) 
-     * @param activated (optional) 
-     */
     getAllByActivation(search: string | null | undefined, skip: number | undefined, take: number | undefined, consumerId: string | null | undefined, publisherId: string | null | undefined, programId: string | null | undefined, itemId: string | null | undefined, activated: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfSurvey> {
         let url_ = this.baseUrl + "/v1/Survey?";
         if (search !== undefined && search !== null)
@@ -12997,16 +12780,6 @@ export class SurveyClient {
         return Promise.resolve<void>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param publisherId (optional) 
-     * @param programId (optional) - null/empty to show all
-    - program ID to filter to specific program
-    - "none" to filter to items not in any program
-     * @param countryCode (optional) 
-     */
     getAllPublished(search: string | null | undefined, skip: number | undefined, take: number | undefined, publisherId: string | null | undefined, programId: string | null | undefined, countryCode: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfSurvey> {
         let url_ = this.baseUrl + "/v1/Survey/Published?";
         if (search !== undefined && search !== null)
@@ -13096,12 +12869,6 @@ export class SurveyRequestClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param surveyId (optional) 
-     */
     getAllForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, surveyId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfSurveyRequest> {
         let url_ = this.baseUrl + "/v1/SurveyRequest/Group/{groupId}?";
         if (groupId === undefined || groupId === null)
@@ -13447,16 +13214,6 @@ export class SurveyResponseClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param groupId (optional) 
-     * @param publisherId (optional) 
-     * @param contentId (optional) 
-     * @param jobTypeId (optional) 
-     * @param submitted (optional) 
-     */
     getAllForSurvey(surveyId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, groupId: string | null | undefined, publisherId: string | null | undefined, contentId: string | null | undefined, jobTypeId: string | null | undefined, submitted: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfSurveyResponse> {
         let url_ = this.baseUrl + "/v1/SurveyResponse/Survey/{surveyId}?";
         if (surveyId === undefined || surveyId === null)
@@ -13542,13 +13299,6 @@ export class SurveyResponseClient {
         return Promise.resolve<ListOfSurveyResponse>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param surveyId (optional) 
-     * @param submitted (optional) 
-     */
     getAllForRespondent(respondentId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, surveyId: string | null | undefined, submitted: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfSurveyResponse> {
         let url_ = this.baseUrl + "/v1/SurveyResponse/Respondent/{respondentId}?";
         if (respondentId === undefined || respondentId === null)
@@ -13974,12 +13724,6 @@ export class BookAttemptClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param moduleId (optional) 
-     */
     getAllForActor(actorId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, moduleId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfModuleAttemptOfBookResult> {
         let url_ = this.baseUrl + "/v1/BookAttempt/Actor/{actorId}?";
         if (actorId === undefined || actorId === null)
@@ -14057,15 +13801,6 @@ export class BookAttemptClient {
         return Promise.resolve<ListOfModuleAttemptOfBookResult>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param moduleId (optional) 
-     * @param actorType (optional) 
-     * @param from (optional) 
-     * @param to (optional) 
-     */
     getAllForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, moduleId: string | null | undefined, actorType: ActorType | null | undefined, from: Date | null | undefined, to: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfModuleAttemptOfBookResult> {
         let url_ = this.baseUrl + "/v1/BookAttempt/Group/{groupId}?";
         if (groupId === undefined || groupId === null)
@@ -14485,10 +14220,6 @@ export class BookContentClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     */
     getAll(moduleId: string | null, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfModuleContentOfBookSettings> {
         let url_ = this.baseUrl + "/v1/BookContent/{moduleId}/Content?";
         if (moduleId === undefined || moduleId === null)
@@ -15308,12 +15039,6 @@ export class CertificateClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param publisherId (optional) 
-     */
     getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, publisherId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfCertificate> {
         let url_ = this.baseUrl + "/v1/Certificate?";
         if (search !== undefined && search !== null)
@@ -15656,11 +15381,6 @@ export class CertificationClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     */
     getAllForTrainee(traineeId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfCertification> {
         let url_ = this.baseUrl + "/v1/Certification/Trainee/{traineeId}?";
         if (traineeId === undefined || traineeId === null)
@@ -15736,13 +15456,6 @@ export class CertificationClient {
         return Promise.resolve<ListOfCertification>(<any>null);
     }
 
-    /**
-     * Gets the certifications for a trainee at the given time.
-     * @param traineeId The user id of the trainee.
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param at (optional) The UTC time at which to get certificates. If not specified, the current time is used.
-     */
     getAllHistoryForTrainee(traineeId: string | null, skip: number | undefined, take: number | undefined, at: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfCertificationFact> {
         let url_ = this.baseUrl + "/v1/Certification/Trainee/{traineeId}/History?";
         if (traineeId === undefined || traineeId === null)
@@ -15818,15 +15531,6 @@ export class CertificationClient {
         return Promise.resolve<ListOfCertificationFact>(<any>null);
     }
 
-    /**
-     * Gets the list of users with a certificate in a group at a specified time, optionally filtered by their status and roles in the group.
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param certificateId (optional) 
-     * @param memberStatus (optional) 
-     * @param role (optional) 
-     * @param at (optional) The UTC time at which to get certificates. If not specified, the current time is used.
-     */
     getAllHistoryForGroup(groupId: string | null, skip: number | undefined, take: number | undefined, certificateId: string | null | undefined, memberStatus: MemberStatus | null | undefined, role: string | null | undefined, at: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfCertificationFact> {
         let url_ = this.baseUrl + "/v1/Certification/Group/{groupId}/History?";
         if (groupId === undefined || groupId === null)
@@ -16113,20 +15817,6 @@ export class ClassClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * Get a list of all classes
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param organisationId (optional) Optional organisation id filter
-     * @param teamId (optional) Optional team id filter
-     * @param publisherId (optional) Optional publisher id filter
-     * @param courseId (optional) Optional course id filter
-     * @param programId (optional) - null/empty to show all
-    - program ID to filter to specific program
-    - "none" to filter to items not in any program
-     * @param activated (optional) Optional filter by class activation state
-     */
     getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, organisationId: string | null | undefined, teamId: string | null | undefined, publisherId: string | null | undefined, courseId: string | null | undefined, programId: string | null | undefined, activated: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfClass> {
         let url_ = this.baseUrl + "/v1/Class?";
         if (search !== undefined && search !== null)
@@ -16468,9 +16158,6 @@ export class ClassClient {
         return Promise.resolve<void>(<any>null);
     }
 
-    /**
-     * Send assessment requested notification to trainers
-     */
     notifyAssessors(classId: string | null, settings: NotifyAssessorsSettings , cancelToken?: CancelToken | undefined): Promise<void> {
         let url_ = this.baseUrl + "/v1/Class/{classId}/NotifyAssessors";
         if (classId === undefined || classId === null)
@@ -16547,14 +16234,6 @@ export class CourseClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param programId (optional) - null/empty to show all
-    - program ID to filter to specific program
-    - "none" to filter to items not in any program
-     */
     getAllForPublisher(publisherId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, programId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfCourse> {
         let url_ = this.baseUrl + "/v1/Course/Publisher/{publisherId}?";
         if (publisherId === undefined || publisherId === null)
@@ -16698,18 +16377,6 @@ export class CourseClient {
         return Promise.resolve<Course>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param consumerId (optional) 
-     * @param publisherId (optional) 
-     * @param programId (optional) - null/empty to show all
-    - program ID to filter to specific program
-    - "none" to filter to items not in any program
-     * @param itemId (optional) 
-     * @param activated (optional) 
-     */
     getAllByActivation(search: string | null | undefined, skip: number | undefined, take: number | undefined, consumerId: string | null | undefined, publisherId: string | null | undefined, programId: string | null | undefined, itemId: string | null | undefined, activated: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfCourse> {
         let url_ = this.baseUrl + "/v1/Course?";
         if (search !== undefined && search !== null)
@@ -16918,16 +16585,6 @@ export class CourseClient {
         return Promise.resolve<void>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param publisherId (optional) 
-     * @param programId (optional) - null/empty to show all
-    - program ID to filter to specific program
-    - "none" to filter to items not in any program
-     * @param countryCode (optional) 
-     */
     getAllPublished(search: string | null | undefined, skip: number | undefined, take: number | undefined, publisherId: string | null | undefined, programId: string | null | undefined, countryCode: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfCourse> {
         let url_ = this.baseUrl + "/v1/Course/Published?";
         if (search !== undefined && search !== null)
@@ -17082,15 +16739,6 @@ export class EnrolmentClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param activated (optional) 
-     * @param programId (optional) - null/empty to show all
-    - program ID to filter to specific program
-    - "none" to filter to items not in any program
-     */
     getAllForTrainee(traineeId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, activated: boolean | null | undefined, programId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfEnrolment> {
         let url_ = this.baseUrl + "/v1/Enrolment/Trainee/{traineeId}?";
         if (traineeId === undefined || traineeId === null)
@@ -17170,11 +16818,6 @@ export class EnrolmentClient {
         return Promise.resolve<ListOfEnrolment>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     */
     getAllForClass(classId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfEnrolment> {
         let url_ = this.baseUrl + "/v1/Enrolment/Class/{classId}?";
         if (classId === undefined || classId === null)
@@ -17326,12 +16969,6 @@ export class ModuleAttemptClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param moduleId (optional) 
-     */
     getAllForActor(actorId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, moduleId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfModuleAttempt> {
         let url_ = this.baseUrl + "/v1/ModuleAttempt/Actor/{actorId}?";
         if (actorId === undefined || actorId === null)
@@ -17409,17 +17046,6 @@ export class ModuleAttemptClient {
         return Promise.resolve<ListOfModuleAttempt>(<any>null);
     }
 
-    /**
-     * Gets all module attempts within the given group.
-     * @param groupId The group to get module attempts from
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param moduleId (optional) Filter the results by module id
-     * @param actorType (optional) Filter the results by actor type i.e. User, TrainingSession or Team. If left null, all actor types will be searched for.
-     * @param from (optional) Start time of the module attempts
-     * @param to (optional) End time of the module attempts
-     */
     getAllForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, moduleId: string | null | undefined, actorType: ActorType | null | undefined, from: Date | null | undefined, to: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfModuleAttempt> {
         let url_ = this.baseUrl + "/v1/ModuleAttempt/Group/{groupId}?";
         if (groupId === undefined || groupId === null)
@@ -17640,13 +17266,6 @@ export class ModuleClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param publisherId (optional) 
-     * @param type (optional) 
-     */
     getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, publisherId: string | null | undefined, type: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfModule> {
         let url_ = this.baseUrl + "/v1/Module?";
         if (search !== undefined && search !== null)
@@ -17723,10 +17342,6 @@ export class ModuleClient {
         return Promise.resolve<ListOfModule>(<any>null);
     }
 
-    /**
-     * Creates a module using the given data
-     * @param settings The data used to create the module
-     */
     create(settings: CreateModuleSettings , cancelToken?: CancelToken | undefined): Promise<Module> {
         let url_ = this.baseUrl + "/v1/Module";
         url_ = url_.replace(/[?&]$/, "");
@@ -18049,12 +17664,6 @@ export class ModuleClient {
         return Promise.resolve<ListOfFile>(<any>null);
     }
 
-    /**
-     * Creates a file and attaches it to the module
-     * @param moduleId Id of the module to attach the file to
-     * @param settings Data used to create the file
-     * @return Information about the created file
-     */
     createFile(moduleId: string | null, settings: CreateFileSettings , cancelToken?: CancelToken | undefined): Promise<File> {
         let url_ = this.baseUrl + "/v1/Module/{moduleId}/File";
         if (moduleId === undefined || moduleId === null)
@@ -18746,12 +18355,6 @@ export class QuizAttemptClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param moduleId (optional) 
-     */
     getAllForActor(actorId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, moduleId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfModuleAttemptOfQuizResult> {
         let url_ = this.baseUrl + "/v1/QuizAttempt/Actor/{actorId}?";
         if (actorId === undefined || actorId === null)
@@ -18829,15 +18432,6 @@ export class QuizAttemptClient {
         return Promise.resolve<ListOfModuleAttemptOfQuizResult>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param moduleId (optional) 
-     * @param actorType (optional) 
-     * @param from (optional) 
-     * @param to (optional) 
-     */
     getAllForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, moduleId: string | null | undefined, actorType: ActorType | null | undefined, from: Date | null | undefined, to: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfModuleAttemptOfQuizResult> {
         let url_ = this.baseUrl + "/v1/QuizAttempt/Group/{groupId}?";
         if (groupId === undefined || groupId === null)
@@ -19257,10 +18851,6 @@ export class QuizContentClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     */
     getAll(moduleId: string | null, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfModuleContentOfQuizSettings> {
         let url_ = this.baseUrl + "/v1/QuizContent/{moduleId}/Content?";
         if (moduleId === undefined || moduleId === null)
@@ -20080,12 +19670,6 @@ export class RevisionAttemptClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param moduleId (optional) 
-     */
     getAllForActor(actorId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, moduleId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfModuleAttemptOfRevisionResult> {
         let url_ = this.baseUrl + "/v1/RevisionAttempt/Actor/{actorId}?";
         if (actorId === undefined || actorId === null)
@@ -20163,15 +19747,6 @@ export class RevisionAttemptClient {
         return Promise.resolve<ListOfModuleAttemptOfRevisionResult>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param moduleId (optional) 
-     * @param actorType (optional) 
-     * @param from (optional) 
-     * @param to (optional) 
-     */
     getAllForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, moduleId: string | null | undefined, actorType: ActorType | null | undefined, from: Date | null | undefined, to: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfModuleAttemptOfRevisionResult> {
         let url_ = this.baseUrl + "/v1/RevisionAttempt/Group/{groupId}?";
         if (groupId === undefined || groupId === null)
@@ -20591,10 +20166,6 @@ export class RevisionContentClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     */
     getAll(moduleId: string | null, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfModuleContentOfRevisionSettings> {
         let url_ = this.baseUrl + "/v1/RevisionContent/{moduleId}/Content?";
         if (moduleId === undefined || moduleId === null)
@@ -21414,14 +20985,6 @@ export class TrainingSessionClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param groupId (optional) 
-     * @param from (optional) 
-     * @param status (optional) 
-     */
     getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, groupId: string | null | undefined, from: Date | null | undefined, status: TrainingSessionStatus | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfTrainingSession> {
         let url_ = this.baseUrl + "/v1/TrainingSession?";
         if (search !== undefined && search !== null)
@@ -21768,12 +21331,6 @@ export class VideoAttemptClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param moduleId (optional) 
-     */
     getAllForActor(actorId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, moduleId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfModuleAttemptOfVideoResult> {
         let url_ = this.baseUrl + "/v1/VideoAttempt/Actor/{actorId}?";
         if (actorId === undefined || actorId === null)
@@ -21851,15 +21408,6 @@ export class VideoAttemptClient {
         return Promise.resolve<ListOfModuleAttemptOfVideoResult>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param moduleId (optional) 
-     * @param actorType (optional) 
-     * @param from (optional) 
-     * @param to (optional) 
-     */
     getAllForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, moduleId: string | null | undefined, actorType: ActorType | null | undefined, from: Date | null | undefined, to: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfModuleAttemptOfVideoResult> {
         let url_ = this.baseUrl + "/v1/VideoAttempt/Group/{groupId}?";
         if (groupId === undefined || groupId === null)
@@ -22279,10 +21827,6 @@ export class VideoContentClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     */
     getAll(moduleId: string | null, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfModuleContentOfVideoSettings> {
         let url_ = this.baseUrl + "/v1/VideoContent/{moduleId}/Content?";
         if (moduleId === undefined || moduleId === null)
@@ -23102,12 +22646,6 @@ export class AssessmentAttemptClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param moduleId (optional) 
-     */
     getAllForActor(actorId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, moduleId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfModuleAttemptOfAssessmentResult> {
         let url_ = this.baseUrl + "/v1/AssessmentAttempt/Actor/{actorId}?";
         if (actorId === undefined || actorId === null)
@@ -23185,15 +22723,6 @@ export class AssessmentAttemptClient {
         return Promise.resolve<ListOfModuleAttemptOfAssessmentResult>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param moduleId (optional) 
-     * @param actorType (optional) 
-     * @param from (optional) 
-     * @param to (optional) 
-     */
     getAllForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, moduleId: string | null | undefined, actorType: ActorType | null | undefined, from: Date | null | undefined, to: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfModuleAttemptOfAssessmentResult> {
         let url_ = this.baseUrl + "/v1/AssessmentAttempt/Group/{groupId}?";
         if (groupId === undefined || groupId === null)
@@ -23613,10 +23142,6 @@ export class AssessmentContentClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     */
     getAll(moduleId: string | null, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfModuleContentOfAssessmentSettings> {
         let url_ = this.baseUrl + "/v1/AssessmentContent/{moduleId}/Content?";
         if (moduleId === undefined || moduleId === null)
@@ -24436,12 +23961,6 @@ export class AssessmentSubAttemptClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param assessmentId (optional) 
-     */
     getAllForActor(actorId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, assessmentId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfAssessmentSubAttempt> {
         let url_ = this.baseUrl + "/v1/AssessmentSubAttempt/Actor/{actorId}?";
         if (actorId === undefined || actorId === null)
@@ -24519,15 +24038,6 @@ export class AssessmentSubAttemptClient {
         return Promise.resolve<ListOfAssessmentSubAttempt>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param assessmentId (optional) 
-     * @param actorType (optional) 
-     * @param from (optional) 
-     * @param to (optional) 
-     */
     getAllForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, assessmentId: string | null | undefined, actorType: ActorType | null | undefined, from: Date | null | undefined, to: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfAssessmentSubAttempt> {
         let url_ = this.baseUrl + "/v1/AssessmentSubAttempt/Group/{groupId}?";
         if (groupId === undefined || groupId === null)
@@ -24879,9 +24389,6 @@ export class AuthenticationClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * Set authentication cookie
-     */
     signIn(settings: AuthenticationSettings , cancelToken?: CancelToken | undefined): Promise<FileResponse> {
         let url_ = this.baseUrl + "/v1/Authentication/SignIn";
         url_ = url_.replace(/[?&]$/, "");
@@ -24948,9 +24455,6 @@ export class AuthenticationClient {
         return Promise.resolve<FileResponse>(<any>null);
     }
 
-    /**
-     * Clear authentication cookie
-     */
     signOut(  cancelToken?: CancelToken | undefined): Promise<void> {
         let url_ = this.baseUrl + "/v1/Authentication/SignOut";
         url_ = url_.replace(/[?&]$/, "");
@@ -25009,9 +24513,6 @@ export class AuthenticationClient {
         return Promise.resolve<void>(<any>null);
     }
 
-    /**
-     * Generate a TokenModel
-     */
     token(settings: AuthenticationSettings , cancelToken?: CancelToken | undefined): Promise<ChallengeToken> {
         let url_ = this.baseUrl + "/v1/Authentication/Token";
         url_ = url_.replace(/[?&]$/, "");
@@ -25140,9 +24641,6 @@ export class AuthenticationClient {
         return Promise.resolve<Token>(<any>null);
     }
 
-    /**
-     * Generate a TokenModel on behalf of userId
-     */
     impersonate(userId: string | null , cancelToken?: CancelToken | undefined): Promise<Token> {
         let url_ = this.baseUrl + "/v1/Authentication/Impersonate/{userId}";
         if (userId === undefined || userId === null)
@@ -25208,10 +24706,6 @@ export class AuthenticationClient {
         return Promise.resolve<Token>(<any>null);
     }
 
-    /**
-     * Revert the supplied TokenModel to one with no
-    impersonating data
-     */
     unimpersonate(  cancelToken?: CancelToken | undefined): Promise<Token> {
         let url_ = this.baseUrl + "/v1/Authentication/Unimpersonate";
         url_ = url_.replace(/[?&]$/, "");
@@ -25274,9 +24768,6 @@ export class AuthenticationClient {
         return Promise.resolve<Token>(<any>null);
     }
 
-    /**
-     * Gets the Identity
-     */
     identity(  cancelToken?: CancelToken | undefined): Promise<Identity> {
         let url_ = this.baseUrl + "/v1/Authentication/Identity";
         url_ = url_.replace(/[?&]$/, "");
@@ -25340,14 +24831,9 @@ export class AuthenticationClient {
     }
 
     /**
-     * Checks if the authenticated Identity has the given permission
-     * @param permission (optional) The required permission
-     * @param groupId (optional) The GroupId. If this is null or empty, all the current identity's
-    groups will be searched.
-     * @param orChildren (optional) If groupId is provided and orChildren
-    is true, all child groups of groupId
-    will also be checked
-     * @return Returns true if the current identity is permitted
+     * @param permission (optional) 
+     * @param groupId (optional) 
+     * @param orChildren (optional) 
      * @deprecated
      */
     permitted(permission: string | null | undefined, groupId: string | null | undefined, orChildren: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<boolean> {
@@ -25418,10 +24904,6 @@ export class AuthenticationClient {
         return Promise.resolve<boolean>(<any>null);
     }
 
-    /**
-     * @param permission The required permission
-     * @return Returns true if the current identity is permitted
-     */
     permittedAll(permission: string | null, groupIds: string[] , cancelToken?: CancelToken | undefined): Promise<string[]> {
         let url_ = this.baseUrl + "/v1/Authentication/Permitted/{permission}";
         if (permission === undefined || permission === null)
@@ -25775,10 +25257,6 @@ export class EmailRegistrationClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * Check if the given email is registered in the system.
-     * @return 200 OK if the email is found, else a 404
-     */
     get(settings: EmailSettings , cancelToken?: CancelToken | undefined): Promise<FileResponse> {
         let url_ = this.baseUrl + "/v1/EmailRegistration";
         url_ = url_.replace(/[?&]$/, "");
@@ -25856,12 +25334,6 @@ export class GroupCommentClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param includeChildGroups (optional) 
-     */
     getAll(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, includeChildGroups: boolean | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfGroupComment> {
         let url_ = this.baseUrl + "/v1/Group/{groupId}/Comment?";
         if (groupId === undefined || groupId === null)
@@ -26210,11 +25682,6 @@ export class GroupCommentClient {
         return Promise.resolve<void>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     */
     getAllReplies(groupId: string | null, commentId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfComment> {
         let url_ = this.baseUrl + "/v1/Group/{groupId}/Comment/{commentId}/Reply?";
         if (groupId === undefined || groupId === null)
@@ -26380,12 +25847,6 @@ export class GroupFileClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param includeChildGroups (optional) 
-     */
     getAll(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, includeChildGroups: boolean | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfGroupFile> {
         let url_ = this.baseUrl + "/v1/Group/{groupId}/File?";
         if (groupId === undefined || groupId === null)
@@ -26813,11 +26274,6 @@ export class JobTypeClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     */
     getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfJobType> {
         let url_ = this.baseUrl + "/v1/JobType?";
         if (search !== undefined && search !== null)
@@ -27162,11 +26618,6 @@ export class LabelClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     */
     getAllForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfLabel> {
         let url_ = this.baseUrl + "/v1/Label/Group/{groupId}?";
         if (groupId === undefined || groupId === null)
@@ -27510,16 +26961,6 @@ export class MemberClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param status (optional) 
-     * @param jobTypeIds (optional) 
-     * @param jobCategories (optional) 
-     * @param roles (optional) 
-     * @param includeDeactivated (optional) 
-     */
     getAllForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, status: MemberStatus | null | undefined, jobTypeIds: string[] | null | undefined, jobCategories: string[] | null | undefined, roles: string[] | null | undefined, includeDeactivated: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfMember> {
         let url_ = this.baseUrl + "/v1/Member/Group/{groupId}?";
         if (groupId === undefined || groupId === null)
@@ -27605,17 +27046,6 @@ export class MemberClient {
         return Promise.resolve<ListOfMember>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param status (optional) 
-     * @param jobTypeIds (optional) 
-     * @param jobCategories (optional) 
-     * @param memberRoles (optional) 
-     * @param identityPermission (optional) 
-     * @param includeDeactivated (optional) 
-     */
     getAllForChildGroups(groupId: string | null, childGroupType: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, status: MemberStatus | null | undefined, jobTypeIds: string[] | null | undefined, jobCategories: string[] | null | undefined, memberRoles: string[] | null | undefined, identityPermission: string | null | undefined, includeDeactivated: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfMember> {
         let url_ = this.baseUrl + "/v1/Member/Group/{groupId}/Child/{childGroupType}?";
         if (groupId === undefined || groupId === null)
@@ -27706,12 +27136,6 @@ export class MemberClient {
         return Promise.resolve<ListOfMember>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param status (optional) 
-     */
     getAllForUser(userId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, status: MemberStatus | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfMember> {
         let url_ = this.baseUrl + "/v1/Member/User/{userId}?";
         if (userId === undefined || userId === null)
@@ -27789,14 +27213,6 @@ export class MemberClient {
         return Promise.resolve<ListOfMember>(<any>null);
     }
 
-    /**
-     * Gets the list of users in a group at the given time.
-     * @param groupId Id of the group to get the users from.
-     * @param at (optional) The UTC time at which to get users. If not specified, the current time is used.
-     * @param status (optional) The status used to filter the result.
-     * @param role (optional) The role used to filter the result
-     * @return The list of users with their membership status and roles within the group at the given time.
-     */
     getAllGroupHistory(groupId: string | null, at: Date | null | undefined, status: MemberStatus | null | undefined, role: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<MemberHistory[]> {
         let url_ = this.baseUrl + "/v1/Member/Group/{groupId}/History?";
         if (groupId === undefined || groupId === null)
@@ -28542,12 +27958,6 @@ export class OrganisationAccessTokenClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param organisationId (optional) 
-     */
     getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, organisationId: string | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfOrganisationAccessToken> {
         let url_ = this.baseUrl + "/v1/OrganisationAccessToken?";
         if (search !== undefined && search !== null)
@@ -28825,12 +28235,6 @@ export class OrganisationClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param identityPermissions (optional) 
-     */
     getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, identityPermissions: string[] | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfOrganisation> {
         let url_ = this.baseUrl + "/v1/Organisation?";
         if (search !== undefined && search !== null)
@@ -29507,10 +28911,6 @@ export class PhoneNumberRegistrationClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * Check if the phoneNumber is registered in the system
-     * @return 200 OK if the phoneNumber is found, else a 404
-     */
     get(phoneNumber: string | null , cancelToken?: CancelToken | undefined): Promise<FileResponse> {
         let url_ = this.baseUrl + "/v1/PhoneNumberRegistration/{phoneNumber}";
         if (phoneNumber === undefined || phoneNumber === null)
@@ -29727,13 +29127,6 @@ export class TeamClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param organisationId (optional) 
-     * @param identityPermissions (optional) 
-     */
     getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined, organisationId: string | null | undefined, identityPermissions: string[] | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfTeam> {
         let url_ = this.baseUrl + "/v1/Team?";
         if (search !== undefined && search !== null)
@@ -30078,15 +29471,6 @@ export class UserActivityClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param moduleType (optional) 
-     * @param programId (optional) 
-     * @param from (optional) 
-     * @param to (optional) 
-     */
     getAllForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, moduleType: string | null | undefined, programId: string | null | undefined, from: Date | null | undefined, to: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfUserActivity> {
         let url_ = this.baseUrl + "/v1/UserActivity/Group/{groupId}?";
         if (groupId === undefined || groupId === null)
@@ -30170,15 +29554,6 @@ export class UserActivityClient {
         return Promise.resolve<ListOfUserActivity>(<any>null);
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param moduleType (optional) 
-     * @param programId (optional) 
-     * @param from (optional) 
-     * @param to (optional) 
-     */
     getAllForPublisher(publisherId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, moduleType: string | null | undefined, programId: string | null | undefined, from: Date | null | undefined, to: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfUserActivity> {
         let url_ = this.baseUrl + "/v1/UserActivity/Publisher/{publisherId}?";
         if (publisherId === undefined || publisherId === null)
@@ -30273,11 +29648,6 @@ export class UserClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @param search (optional) 
-     * @param skip (optional) 
-     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     */
     getAll(search: string | null | undefined, skip: number | undefined, take: number | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfUser> {
         let url_ = this.baseUrl + "/v1/User?";
         if (search !== undefined && search !== null)
@@ -34808,7 +34178,6 @@ export interface ILocatableObservation extends IObservation {
 
 export class PageOptions implements IPageOptions {
     skip?: number;
-    /** The number (0 - 1000 inclusive) of items to get from the API. */
     take?: number;
 
     constructor(data?: IPageOptions) {
@@ -34844,14 +34213,13 @@ export class PageOptions implements IPageOptions {
 
 export interface IPageOptions {
     skip?: number;
-    /** The number (0 - 1000 inclusive) of items to get from the API. */
     take?: number;
 }
 
 export class ObservationAreaOptions extends PageOptions implements IObservationAreaOptions {
     southWest?: CoordinatesBuilder | undefined;
     northEast?: CoordinatesBuilder | undefined;
-    friendly?: boolean | undefined;
+    labelled?: boolean | undefined;
 
     constructor(data?: IObservationAreaOptions) {
         super(data);
@@ -34862,7 +34230,7 @@ export class ObservationAreaOptions extends PageOptions implements IObservationA
         if (_data) {
             this.southWest = _data["southWest"] ? CoordinatesBuilder.fromJS(_data["southWest"]) : <any>undefined;
             this.northEast = _data["northEast"] ? CoordinatesBuilder.fromJS(_data["northEast"]) : <any>undefined;
-            this.friendly = _data["friendly"];
+            this.labelled = _data["labelled"];
         }
     }
 
@@ -34877,7 +34245,7 @@ export class ObservationAreaOptions extends PageOptions implements IObservationA
         data = typeof data === 'object' ? data : {};
         data["southWest"] = this.southWest ? this.southWest.toJSON() : <any>undefined;
         data["northEast"] = this.northEast ? this.northEast.toJSON() : <any>undefined;
-        data["friendly"] = this.friendly;
+        data["labelled"] = this.labelled;
         super.toJSON(data);
         return data; 
     }
@@ -34886,7 +34254,7 @@ export class ObservationAreaOptions extends PageOptions implements IObservationA
 export interface IObservationAreaOptions extends IPageOptions {
     southWest?: CoordinatesBuilder | undefined;
     northEast?: CoordinatesBuilder | undefined;
-    friendly?: boolean | undefined;
+    labelled?: boolean | undefined;
 }
 
 export class CoordinatesBuilder implements ICoordinatesBuilder {
@@ -35130,6 +34498,102 @@ export class PredictObservationSettings implements IPredictObservationSettings {
 
 export interface IPredictObservationSettings {
     dataUri: string;
+}
+
+export class LabelledAnswer implements ILabelledAnswer {
+    label?: string | undefined;
+    value?: any | undefined;
+
+    constructor(data?: ILabelledAnswer) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.label = _data["label"];
+            this.value = _data["value"];
+        }
+    }
+
+    static fromJS(data: any): LabelledAnswer {
+        data = typeof data === 'object' ? data : {};
+        let result = new LabelledAnswer();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["label"] = this.label;
+        data["value"] = this.value;
+        return data; 
+    }
+}
+
+export interface ILabelledAnswer {
+    label?: string | undefined;
+    value?: any | undefined;
+}
+
+export class ExtractLabelledAnswersSettings implements IExtractLabelledAnswersSettings {
+    questions?: any[] | undefined;
+    answers?: any[] | undefined;
+
+    constructor(data?: IExtractLabelledAnswersSettings) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["questions"])) {
+                this.questions = [] as any;
+                for (let item of _data["questions"])
+                    this.questions!.push(item);
+            }
+            if (Array.isArray(_data["answers"])) {
+                this.answers = [] as any;
+                for (let item of _data["answers"])
+                    this.answers!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): ExtractLabelledAnswersSettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new ExtractLabelledAnswersSettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.questions)) {
+            data["questions"] = [];
+            for (let item of this.questions)
+                data["questions"].push(item);
+        }
+        if (Array.isArray(this.answers)) {
+            data["answers"] = [];
+            for (let item of this.answers)
+                data["answers"].push(item);
+        }
+        return data; 
+    }
+}
+
+export interface IExtractLabelledAnswersSettings {
+    questions?: any[] | undefined;
+    answers?: any[] | undefined;
 }
 
 export class ListOfObservationDefinition implements IListOfObservationDefinition {
@@ -35516,12 +34980,8 @@ export interface IObservationForm {
 
 export class CreateObservationFormSettings implements ICreateObservationFormSettings {
     contentId!: string;
-    /** The index of the file question in the target observation content
-that will be used to store the OCR image. */
     fileQuestionIndex?: number | undefined;
-    /** ID of the ML training model. */
     modelId!: string;
-    /** Version of the ML training model. */
     modelVersion!: string;
     widthMillimetres?: number;
     heightMillimetres?: number;
@@ -35567,12 +35027,8 @@ that will be used to store the OCR image. */
 
 export interface ICreateObservationFormSettings {
     contentId: string;
-    /** The index of the file question in the target observation content
-that will be used to store the OCR image. */
     fileQuestionIndex?: number | undefined;
-    /** ID of the ML training model. */
     modelId: string;
-    /** Version of the ML training model. */
     modelVersion: string;
     widthMillimetres?: number;
     heightMillimetres?: number;
@@ -35677,7 +35133,6 @@ export interface IMigrateObservationDefinitionSettings {
 export class DuplicateObservationDefinitionSettings implements IDuplicateObservationDefinitionSettings {
     name!: string;
     description!: string;
-    /** List of consumers to be migrated with the new observation definition. */
     consumerIds!: string[];
     dryRun?: boolean;
 
@@ -35730,7 +35185,6 @@ export class DuplicateObservationDefinitionSettings implements IDuplicateObserva
 export interface IDuplicateObservationDefinitionSettings {
     name: string;
     description: string;
-    /** List of consumers to be migrated with the new observation definition. */
     consumerIds: string[];
     dryRun?: boolean;
 }
@@ -39809,6 +39263,7 @@ export abstract class QuestionBase implements IQuestionBase {
     type?: string | undefined;
     name?: string | undefined;
     body?: string | undefined;
+    label?: string | undefined;
     required?: boolean;
 
     constructor(data?: IQuestionBase) {
@@ -39825,6 +39280,7 @@ export abstract class QuestionBase implements IQuestionBase {
             this.type = _data["type"];
             this.name = _data["name"];
             this.body = _data["body"];
+            this.label = _data["label"];
             this.required = _data["required"];
         }
     }
@@ -39839,6 +39295,7 @@ export abstract class QuestionBase implements IQuestionBase {
         data["type"] = this.type;
         data["name"] = this.name;
         data["body"] = this.body;
+        data["label"] = this.label;
         data["required"] = this.required;
         return data; 
     }
@@ -39848,6 +39305,7 @@ export interface IQuestionBase {
     type?: string | undefined;
     name?: string | undefined;
     body?: string | undefined;
+    label?: string | undefined;
     required?: boolean;
 }
 
@@ -42462,7 +41920,6 @@ export interface ICalculatedModuleResult {
 }
 
 export class CreateModuleAttemptSettingsOfBookResult implements ICreateModuleAttemptSettingsOfBookResult {
-    /** Id of the actor of ActorType being assessed */
     actorId!: string;
     moduleContentId!: string;
     result!: BookResult;
@@ -42504,7 +41961,6 @@ export class CreateModuleAttemptSettingsOfBookResult implements ICreateModuleAtt
 }
 
 export interface ICreateModuleAttemptSettingsOfBookResult {
-    /** Id of the actor of ActorType being assessed */
     actorId: string;
     moduleContentId: string;
     result: BookResult;
@@ -44300,16 +43756,8 @@ export interface ISurveyInCourse {
 export class CreateCourseSettings implements ICreateCourseSettings {
     publisherId!: string;
     name!: string;
-    /** A base64 encoded image or a URL of existing image
-             */
     bannerUri?: string | undefined;
-    /** A base64 encoded image or a URL of existing image
-             */
     logoUri?: string | undefined;
-    /** A list of promotional medias. Elements can be: 
-    - base64 encoded image
-    - uri of image
-    - url of video (i.e. video has to be hosted elsewhere, at least for now) */
     mediaUris?: string[] | undefined;
     description?: string | undefined;
     sections?: CourseSection[] | undefined;
@@ -44402,16 +43850,8 @@ export class CreateCourseSettings implements ICreateCourseSettings {
 export interface ICreateCourseSettings {
     publisherId: string;
     name: string;
-    /** A base64 encoded image or a URL of existing image
-             */
     bannerUri?: string | undefined;
-    /** A base64 encoded image or a URL of existing image
-             */
     logoUri?: string | undefined;
-    /** A list of promotional medias. Elements can be: 
-    - base64 encoded image
-    - uri of image
-    - url of video (i.e. video has to be hosted elsewhere, at least for now) */
     mediaUris?: string[] | undefined;
     description?: string | undefined;
     sections?: CourseSection[] | undefined;
@@ -46031,7 +45471,6 @@ export interface IQuizQuestionResult {
 }
 
 export class CreateModuleAttemptSettingsOfQuizResult implements ICreateModuleAttemptSettingsOfQuizResult {
-    /** Id of the actor of ActorType being assessed */
     actorId!: string;
     moduleContentId!: string;
     result!: QuizResult;
@@ -46073,7 +45512,6 @@ export class CreateModuleAttemptSettingsOfQuizResult implements ICreateModuleAtt
 }
 
 export interface ICreateModuleAttemptSettingsOfQuizResult {
-    /** Id of the actor of ActorType being assessed */
     actorId: string;
     moduleContentId: string;
     result: QuizResult;
@@ -46750,7 +46188,6 @@ export enum TopicForm {
 }
 
 export class CreateModuleAttemptSettingsOfRevisionResult implements ICreateModuleAttemptSettingsOfRevisionResult {
-    /** Id of the actor of ActorType being assessed */
     actorId!: string;
     moduleContentId!: string;
     result!: RevisionResult;
@@ -46792,7 +46229,6 @@ export class CreateModuleAttemptSettingsOfRevisionResult implements ICreateModul
 }
 
 export interface ICreateModuleAttemptSettingsOfRevisionResult {
-    /** Id of the actor of ActorType being assessed */
     actorId: string;
     moduleContentId: string;
     result: RevisionResult;
@@ -47331,7 +46767,6 @@ export enum TrainingSessionStatus {
 }
 
 export class CreateTrainingSessionSettings implements ICreateTrainingSessionSettings {
-    /** The organisation or team id of the training session */
     groupId!: string;
     name!: string;
     description?: string | undefined;
@@ -47390,7 +46825,6 @@ export class CreateTrainingSessionSettings implements ICreateTrainingSessionSett
 }
 
 export interface ICreateTrainingSessionSettings {
-    /** The organisation or team id of the training session */
     groupId: string;
     name: string;
     description?: string | undefined;
@@ -47637,7 +47071,6 @@ export interface IVideoResult {
 }
 
 export class CreateModuleAttemptSettingsOfVideoResult implements ICreateModuleAttemptSettingsOfVideoResult {
-    /** Id of the actor of ActorType being assessed */
     actorId!: string;
     moduleContentId!: string;
     result!: VideoResult;
@@ -47679,7 +47112,6 @@ export class CreateModuleAttemptSettingsOfVideoResult implements ICreateModuleAt
 }
 
 export interface ICreateModuleAttemptSettingsOfVideoResult {
-    /** Id of the actor of ActorType being assessed */
     actorId: string;
     moduleContentId: string;
     result: VideoResult;
@@ -48223,7 +47655,6 @@ export interface IAssessmentSectionResult {
 }
 
 export class CreateModuleAttemptSettingsOfAssessmentResult implements ICreateModuleAttemptSettingsOfAssessmentResult {
-    /** Id of the actor of ActorType being assessed */
     actorId!: string;
     moduleContentId!: string;
     result!: AssessmentResult;
@@ -48265,7 +47696,6 @@ export class CreateModuleAttemptSettingsOfAssessmentResult implements ICreateMod
 }
 
 export interface ICreateModuleAttemptSettingsOfAssessmentResult {
-    /** Id of the actor of ActorType being assessed */
     actorId: string;
     moduleContentId: string;
     result: AssessmentResult;
@@ -48855,7 +48285,6 @@ export interface IAssessmentSubAttempt {
 }
 
 export class CreateAssessmentSubAttemptSettings implements ICreateAssessmentSubAttemptSettings {
-    /** Id of the actor of ActorType being assessed */
     actorId!: string;
     assessorId!: string;
     moduleId!: string;
@@ -48917,7 +48346,6 @@ export class CreateAssessmentSubAttemptSettings implements ICreateAssessmentSubA
 }
 
 export interface ICreateAssessmentSubAttemptSettings {
-    /** Id of the actor of ActorType being assessed */
     actorId: string;
     assessorId: string;
     moduleId: string;
@@ -48993,10 +48421,7 @@ export interface IUpdateAssessmentSubAttemptSettings {
 export class AuthenticationSettings implements IAuthenticationSettings {
     method?: AuthenticationMethod;
     email!: string;
-    /** This will be the password if using password to login, or the one-time passcode if using one-time passcode
-to login. */
     password?: string | undefined;
-    /** Optional 2FA code. */
     twoFactorAuthenticationCode?: string | undefined;
 
     constructor(data?: IAuthenticationSettings) {
@@ -49041,10 +48466,7 @@ to login. */
 export interface IAuthenticationSettings {
     method?: AuthenticationMethod;
     email: string;
-    /** This will be the password if using password to login, or the one-time passcode if using one-time passcode
-to login. */
     password?: string | undefined;
-    /** Optional 2FA code. */
     twoFactorAuthenticationCode?: string | undefined;
 }
 
@@ -50660,7 +50082,6 @@ export class OrganisationAccessToken implements IOrganisationAccessToken {
     creatorId?: string | undefined;
     creatorName?: string | undefined;
     lastUsed?: Date | undefined;
-    /** Only available at time of creation */
     token?: string | undefined;
 
     constructor(data?: IOrganisationAccessToken) {
@@ -50725,7 +50146,6 @@ export interface IOrganisationAccessToken {
     creatorId?: string | undefined;
     creatorName?: string | undefined;
     lastUsed?: Date | undefined;
-    /** Only available at time of creation */
     token?: string | undefined;
 }
 
@@ -52463,9 +51883,7 @@ export interface IUserEmailSettings {
 }
 
 export class UserEmailVerificationToken extends Token implements IUserEmailVerificationToken {
-    /** If is verifying the primary email. */
     primary?: boolean;
-    /** If the email has been already been verified. */
     regression?: boolean;
 
     constructor(data?: IUserEmailVerificationToken) {
@@ -52497,9 +51915,7 @@ export class UserEmailVerificationToken extends Token implements IUserEmailVerif
 }
 
 export interface IUserEmailVerificationToken extends IToken {
-    /** If is verifying the primary email. */
     primary?: boolean;
-    /** If the email has been already been verified. */
     regression?: boolean;
 }
 
