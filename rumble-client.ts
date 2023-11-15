@@ -52158,6 +52158,7 @@ export interface IListOfUser {
 export class User implements IUser {
     id?: string | undefined;
     name?: string | undefined;
+    alternativeNames?: string[] | undefined;
     imageUri?: string | undefined;
     description?: string | undefined;
     qualifications?: string | undefined;
@@ -52180,6 +52181,11 @@ export class User implements IUser {
         if (_data) {
             this.id = _data["id"];
             this.name = _data["name"];
+            if (Array.isArray(_data["alternativeNames"])) {
+                this.alternativeNames = [] as any;
+                for (let item of _data["alternativeNames"])
+                    this.alternativeNames!.push(item);
+            }
             this.imageUri = _data["imageUri"];
             this.description = _data["description"];
             this.qualifications = _data["qualifications"];
@@ -52202,6 +52208,11 @@ export class User implements IUser {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["name"] = this.name;
+        if (Array.isArray(this.alternativeNames)) {
+            data["alternativeNames"] = [];
+            for (let item of this.alternativeNames)
+                data["alternativeNames"].push(item);
+        }
         data["imageUri"] = this.imageUri;
         data["description"] = this.description;
         data["qualifications"] = this.qualifications;
@@ -52217,6 +52228,7 @@ export class User implements IUser {
 export interface IUser {
     id?: string | undefined;
     name?: string | undefined;
+    alternativeNames?: string[] | undefined;
     imageUri?: string | undefined;
     description?: string | undefined;
     qualifications?: string | undefined;
@@ -52229,6 +52241,7 @@ export interface IUser {
 
 export class CreateUserSettings implements ICreateUserSettings {
     name!: string;
+    alternativeNames?: string[] | undefined;
     email!: string;
     password!: string;
     reCaptchaResponse?: string | undefined;
@@ -52246,6 +52259,11 @@ export class CreateUserSettings implements ICreateUserSettings {
     init(_data?: any) {
         if (_data) {
             this.name = _data["name"];
+            if (Array.isArray(_data["alternativeNames"])) {
+                this.alternativeNames = [] as any;
+                for (let item of _data["alternativeNames"])
+                    this.alternativeNames!.push(item);
+            }
             this.email = _data["email"];
             this.password = _data["password"];
             this.reCaptchaResponse = _data["reCaptchaResponse"];
@@ -52263,6 +52281,11 @@ export class CreateUserSettings implements ICreateUserSettings {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
+        if (Array.isArray(this.alternativeNames)) {
+            data["alternativeNames"] = [];
+            for (let item of this.alternativeNames)
+                data["alternativeNames"].push(item);
+        }
         data["email"] = this.email;
         data["password"] = this.password;
         data["reCaptchaResponse"] = this.reCaptchaResponse;
@@ -52273,6 +52296,7 @@ export class CreateUserSettings implements ICreateUserSettings {
 
 export interface ICreateUserSettings {
     name: string;
+    alternativeNames?: string[] | undefined;
     email: string;
     password: string;
     reCaptchaResponse?: string | undefined;
@@ -52365,6 +52389,7 @@ export interface IOnboardUserSettings {
 
 export class UpdateUserSettings implements IUpdateUserSettings {
     name!: string;
+    alternativeNames?: string[];
     qualifications?: string | undefined;
     description?: string | undefined;
     jobTypeId?: string | undefined;
@@ -52383,6 +52408,11 @@ export class UpdateUserSettings implements IUpdateUserSettings {
     init(_data?: any) {
         if (_data) {
             this.name = _data["name"];
+            if (Array.isArray(_data["alternativeNames"])) {
+                this.alternativeNames = [] as any;
+                for (let item of _data["alternativeNames"])
+                    this.alternativeNames!.push(item);
+            }
             this.qualifications = _data["qualifications"];
             this.description = _data["description"];
             this.jobTypeId = _data["jobTypeId"];
@@ -52401,6 +52431,11 @@ export class UpdateUserSettings implements IUpdateUserSettings {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
+        if (Array.isArray(this.alternativeNames)) {
+            data["alternativeNames"] = [];
+            for (let item of this.alternativeNames)
+                data["alternativeNames"].push(item);
+        }
         data["qualifications"] = this.qualifications;
         data["description"] = this.description;
         data["jobTypeId"] = this.jobTypeId;
@@ -52412,6 +52447,7 @@ export class UpdateUserSettings implements IUpdateUserSettings {
 
 export interface IUpdateUserSettings {
     name: string;
+    alternativeNames?: string[];
     qualifications?: string | undefined;
     description?: string | undefined;
     jobTypeId?: string | undefined;
