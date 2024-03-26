@@ -4265,10 +4265,9 @@ export class ObservationClient {
      * @param definitionId (optional) 
      * @param from (optional) 
      * @param to (optional) 
-     * @param labelled (optional) 
      * @param anonymousUser (optional) 
      */
-    getAllForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, definitionId: string | null | undefined, from: Date | null | undefined, to: Date | null | undefined, labelled: boolean | null | undefined, anonymousUser: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfObservation> {
+    getAllForGroup(groupId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, definitionId: string | null | undefined, from: Date | null | undefined, to: Date | null | undefined, anonymousUser: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfObservation> {
         let url_ = this.baseUrl + "/v1/Observation/Group/{groupId}?";
         if (groupId === undefined || groupId === null)
             throw new Error("The parameter 'groupId' must be defined.");
@@ -4289,8 +4288,6 @@ export class ObservationClient {
             url_ += "from=" + encodeURIComponent(from ? "" + from.toJSON() : "") + "&";
         if (to !== undefined && to !== null)
             url_ += "to=" + encodeURIComponent(to ? "" + to.toJSON() : "") + "&";
-        if (labelled !== undefined && labelled !== null)
-            url_ += "labelled=" + encodeURIComponent("" + labelled) + "&";
         if (anonymousUser !== undefined && anonymousUser !== null)
             url_ += "anonymousUser=" + encodeURIComponent("" + anonymousUser) + "&";
         url_ = url_.replace(/[?&]$/, "");
@@ -4362,9 +4359,8 @@ export class ObservationClient {
      * @param groupId (optional) 
      * @param from (optional) 
      * @param to (optional) 
-     * @param labelled (optional) 
      */
-    getAllForPublisher(publisherId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, definitionId: string | null | undefined, contentId: string | null | undefined, groupId: string | null | undefined, from: Date | null | undefined, to: Date | null | undefined, labelled: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfObservation> {
+    getAllForPublisher(publisherId: string | null, search: string | null | undefined, skip: number | undefined, take: number | undefined, definitionId: string | null | undefined, contentId: string | null | undefined, groupId: string | null | undefined, from: Date | null | undefined, to: Date | null | undefined , cancelToken?: CancelToken | undefined): Promise<ListOfObservation> {
         let url_ = this.baseUrl + "/v1/Observation/Publisher/{publisherId}?";
         if (publisherId === undefined || publisherId === null)
             throw new Error("The parameter 'publisherId' must be defined.");
@@ -4389,8 +4385,6 @@ export class ObservationClient {
             url_ += "from=" + encodeURIComponent(from ? "" + from.toJSON() : "") + "&";
         if (to !== undefined && to !== null)
             url_ += "to=" + encodeURIComponent(to ? "" + to.toJSON() : "") + "&";
-        if (labelled !== undefined && labelled !== null)
-            url_ += "labelled=" + encodeURIComponent("" + labelled) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <AxiosRequestConfig>{
@@ -4451,13 +4445,11 @@ export class ObservationClient {
         return Promise.resolve<ListOfObservation>(<any>null);
     }
 
-    get(observationId: string | null, labelled: boolean | null | undefined , cancelToken?: CancelToken | undefined): Promise<Observation> {
-        let url_ = this.baseUrl + "/v1/Observation/{observationId}?";
+    get(observationId: string | null , cancelToken?: CancelToken | undefined): Promise<Observation> {
+        let url_ = this.baseUrl + "/v1/Observation/{observationId}";
         if (observationId === undefined || observationId === null)
             throw new Error("The parameter 'observationId' must be defined.");
         url_ = url_.replace("{observationId}", encodeURIComponent("" + observationId));
-        if (labelled !== undefined && labelled !== null)
-            url_ += "labelled=" + encodeURIComponent("" + labelled) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <AxiosRequestConfig>{
@@ -4845,76 +4837,6 @@ export class ObservationClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         }
         return Promise.resolve<FileResponse>(<any>null);
-    }
-
-    extractLabelledAnswers(settings: ExtractLabelledAnswersSettings , cancelToken?: CancelToken | undefined): Promise<LabelledAnswer[]> {
-        let url_ = this.baseUrl + "/v1/Observation/ExtractLabelledAnswers";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(settings);
-
-        let options_ = <AxiosRequestConfig>{
-            data: content_,
-            method: "POST",
-            url: url_,
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            cancelToken
-        };
-
-        return this.instance.request(options_).catch((_error: any) => {
-            if (isAxiosError(_error) && _error.response) {
-                return _error.response;
-            } else {
-                throw _error;
-            }
-        }).then((_response: AxiosResponse) => {
-            return this.processExtractLabelledAnswers(_response);
-        });
-    }
-
-    protected processExtractLabelledAnswers(response: AxiosResponse): Promise<LabelledAnswer[]> {
-        const status = response.status;
-        let _headers: any = {};
-        if (response.headers && typeof response.headers === "object") {
-            for (let k in response.headers) {
-                if (response.headers.hasOwnProperty(k)) {
-                    _headers[k] = response.headers[k];
-                }
-            }
-        }
-        if (status === 200) {
-            const _responseText = response.data;
-            let result200: any = null;
-            let resultData200  = _responseText;
-            if (Array.isArray(resultData200)) {
-                result200 = [] as any;
-                for (let item of resultData200)
-                    result200!.push(LabelledAnswer.fromJS(item));
-            }
-            return result200;
-        } else if (status === 401) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-        } else if (status === 403) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-        } else if (status === 404) {
-            const _responseText = response.data;
-            return throwException("This resource could not be found.", status, _responseText, _headers);
-        } else if (status === 503) {
-            const _responseText = response.data;
-            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
-        } else if (status === 504) {
-            const _responseText = response.data;
-            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
-        } else if (status !== 200 && status !== 204) {
-            const _responseText = response.data;
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-        }
-        return Promise.resolve<LabelledAnswer[]>(<any>null);
     }
 }
 
@@ -34928,7 +34850,6 @@ export interface IPageOptions {
 export class ObservationAreaOptions extends PageOptions implements IObservationAreaOptions {
     southWest?: CoordinatesBuilder | undefined;
     northEast?: CoordinatesBuilder | undefined;
-    labelled?: boolean | undefined;
 
     constructor(data?: IObservationAreaOptions) {
         super(data);
@@ -34939,7 +34860,6 @@ export class ObservationAreaOptions extends PageOptions implements IObservationA
         if (_data) {
             this.southWest = _data["southWest"] ? CoordinatesBuilder.fromJS(_data["southWest"]) : <any>undefined;
             this.northEast = _data["northEast"] ? CoordinatesBuilder.fromJS(_data["northEast"]) : <any>undefined;
-            this.labelled = _data["labelled"];
         }
     }
 
@@ -34954,7 +34874,6 @@ export class ObservationAreaOptions extends PageOptions implements IObservationA
         data = typeof data === 'object' ? data : {};
         data["southWest"] = this.southWest ? this.southWest.toJSON() : <any>undefined;
         data["northEast"] = this.northEast ? this.northEast.toJSON() : <any>undefined;
-        data["labelled"] = this.labelled;
         super.toJSON(data);
         return data; 
     }
@@ -34963,7 +34882,6 @@ export class ObservationAreaOptions extends PageOptions implements IObservationA
 export interface IObservationAreaOptions extends IPageOptions {
     southWest?: CoordinatesBuilder | undefined;
     northEast?: CoordinatesBuilder | undefined;
-    labelled?: boolean | undefined;
 }
 
 export class CoordinatesBuilder implements ICoordinatesBuilder {
@@ -35207,102 +35125,6 @@ export class PredictObservationSettings implements IPredictObservationSettings {
 
 export interface IPredictObservationSettings {
     dataUri: string;
-}
-
-export class LabelledAnswer implements ILabelledAnswer {
-    label?: string | undefined;
-    value?: any | undefined;
-
-    constructor(data?: ILabelledAnswer) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.label = _data["label"];
-            this.value = _data["value"];
-        }
-    }
-
-    static fromJS(data: any): LabelledAnswer {
-        data = typeof data === 'object' ? data : {};
-        let result = new LabelledAnswer();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["label"] = this.label;
-        data["value"] = this.value;
-        return data; 
-    }
-}
-
-export interface ILabelledAnswer {
-    label?: string | undefined;
-    value?: any | undefined;
-}
-
-export class ExtractLabelledAnswersSettings implements IExtractLabelledAnswersSettings {
-    questions?: any[] | undefined;
-    answers?: any[] | undefined;
-
-    constructor(data?: IExtractLabelledAnswersSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["questions"])) {
-                this.questions = [] as any;
-                for (let item of _data["questions"])
-                    this.questions!.push(item);
-            }
-            if (Array.isArray(_data["answers"])) {
-                this.answers = [] as any;
-                for (let item of _data["answers"])
-                    this.answers!.push(item);
-            }
-        }
-    }
-
-    static fromJS(data: any): ExtractLabelledAnswersSettings {
-        data = typeof data === 'object' ? data : {};
-        let result = new ExtractLabelledAnswersSettings();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.questions)) {
-            data["questions"] = [];
-            for (let item of this.questions)
-                data["questions"].push(item);
-        }
-        if (Array.isArray(this.answers)) {
-            data["answers"] = [];
-            for (let item of this.answers)
-                data["answers"].push(item);
-        }
-        return data; 
-    }
-}
-
-export interface IExtractLabelledAnswersSettings {
-    questions?: any[] | undefined;
-    answers?: any[] | undefined;
 }
 
 export class ListOfObservationDefinition implements IListOfObservationDefinition {
@@ -39984,6 +39806,8 @@ export abstract class QuestionBase implements IQuestionBase {
     body?: string | undefined;
     label?: string | undefined;
     required?: boolean;
+    disableIf?: string | undefined;
+    customValidations?: CustomValidation[] | undefined;
 
     constructor(data?: IQuestionBase) {
         if (data) {
@@ -40001,6 +39825,12 @@ export abstract class QuestionBase implements IQuestionBase {
             this.body = _data["body"];
             this.label = _data["label"];
             this.required = _data["required"];
+            this.disableIf = _data["disableIf"];
+            if (Array.isArray(_data["customValidations"])) {
+                this.customValidations = [] as any;
+                for (let item of _data["customValidations"])
+                    this.customValidations!.push(CustomValidation.fromJS(item));
+            }
         }
     }
 
@@ -40016,6 +39846,12 @@ export abstract class QuestionBase implements IQuestionBase {
         data["body"] = this.body;
         data["label"] = this.label;
         data["required"] = this.required;
+        data["disableIf"] = this.disableIf;
+        if (Array.isArray(this.customValidations)) {
+            data["customValidations"] = [];
+            for (let item of this.customValidations)
+                data["customValidations"].push(item.toJSON());
+        }
         return data; 
     }
 }
@@ -40026,6 +39862,8 @@ export interface IQuestionBase {
     body?: string | undefined;
     label?: string | undefined;
     required?: boolean;
+    disableIf?: string | undefined;
+    customValidations?: CustomValidation[] | undefined;
 }
 
 export class ListQuestion extends QuestionBase implements IListQuestion {
@@ -40078,6 +39916,46 @@ export enum LayoutType {
     None = 0,
     Horizontal = 1,
     Vertical = 2,
+}
+
+export class CustomValidation implements ICustomValidation {
+    expression?: string | undefined;
+    errorMessage?: string | undefined;
+
+    constructor(data?: ICustomValidation) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.expression = _data["expression"];
+            this.errorMessage = _data["errorMessage"];
+        }
+    }
+
+    static fromJS(data: any): CustomValidation {
+        data = typeof data === 'object' ? data : {};
+        let result = new CustomValidation();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["expression"] = this.expression;
+        data["errorMessage"] = this.errorMessage;
+        return data; 
+    }
+}
+
+export interface ICustomValidation {
+    expression?: string | undefined;
+    errorMessage?: string | undefined;
 }
 
 export class CompositeQuestion extends QuestionBase implements ICompositeQuestion {
