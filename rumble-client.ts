@@ -31973,7 +31973,7 @@ export class Email implements IEmail {
     type?: EmailType;
     from?: EmailAddress | undefined;
     replyTo?: EmailAddress | undefined;
-    to?: EmailAddress[] | undefined;
+    to?: EmailAddress | undefined;
     subject?: string | undefined;
     bodyHtml?: string | undefined;
     created?: Date;
@@ -31995,11 +31995,7 @@ export class Email implements IEmail {
             this.type = _data["type"];
             this.from = _data["from"] ? EmailAddress.fromJS(_data["from"]) : <any>undefined;
             this.replyTo = _data["replyTo"] ? EmailAddress.fromJS(_data["replyTo"]) : <any>undefined;
-            if (Array.isArray(_data["to"])) {
-                this.to = [] as any;
-                for (let item of _data["to"])
-                    this.to!.push(EmailAddress.fromJS(item));
-            }
+            this.to = _data["to"] ? EmailAddress.fromJS(_data["to"]) : <any>undefined;
             this.subject = _data["subject"];
             this.bodyHtml = _data["bodyHtml"];
             this.created = _data["created"] ? new Date(_data["created"].toString()) : <any>undefined;
@@ -32021,11 +32017,7 @@ export class Email implements IEmail {
         data["type"] = this.type;
         data["from"] = this.from ? this.from.toJSON() : <any>undefined;
         data["replyTo"] = this.replyTo ? this.replyTo.toJSON() : <any>undefined;
-        if (Array.isArray(this.to)) {
-            data["to"] = [];
-            for (let item of this.to)
-                data["to"].push(item.toJSON());
-        }
+        data["to"] = this.to ? this.to.toJSON() : <any>undefined;
         data["subject"] = this.subject;
         data["bodyHtml"] = this.bodyHtml;
         data["created"] = this.created ? this.created.toISOString() : <any>undefined;
@@ -32040,7 +32032,7 @@ export interface IEmail {
     type?: EmailType;
     from?: EmailAddress | undefined;
     replyTo?: EmailAddress | undefined;
-    to?: EmailAddress[] | undefined;
+    to?: EmailAddress | undefined;
     subject?: string | undefined;
     bodyHtml?: string | undefined;
     created?: Date;
@@ -32063,11 +32055,11 @@ export enum EmailType {
     PublishingRequested = "PublishingRequested",
     PublishingRequestApproved = "PublishingRequestApproved",
     PublishingRequestRejected = "PublishingRequestRejected",
-    RequestResetPassword = "RequestResetPassword",
     Welcome = "Welcome",
     Support = "Support",
     SupportConfirmation = "SupportConfirmation",
     SupportStatusChanged = "SupportStatusChanged",
+    RequestResetPassword = "RequestResetPassword",
     RequestResetPasswordFailed = "RequestResetPasswordFailed",
     PasswordChanged = "PasswordChanged",
     PrimaryEmailChanged = "PrimaryEmailChanged",
