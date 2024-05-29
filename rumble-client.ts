@@ -29783,9 +29783,9 @@ export class LabelClient {
      * @param search (optional) 
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param includeArchived (optional) 
+     * @param includeInactive (optional) 
      */
-    getAllForGroup(groupId: string, search: string | null | undefined, skip: number | undefined, take: number | undefined, includeArchived: boolean | null | undefined, cancelToken?: CancelToken | undefined): Promise<ListOfLabel> {
+    getAllForGroup(groupId: string, search: string | null | undefined, skip: number | undefined, take: number | undefined, includeInactive: boolean | null | undefined, cancelToken?: CancelToken | undefined): Promise<ListOfLabel> {
         let url_ = this.baseUrl + "/v1/Label/Group/{groupId}?";
         if (groupId === undefined || groupId === null)
             throw new Error("The parameter 'groupId' must be defined.");
@@ -29800,8 +29800,8 @@ export class LabelClient {
             throw new Error("The parameter 'take' cannot be null.");
         else if (take !== undefined)
             url_ += "Take=" + encodeURIComponent("" + take) + "&";
-        if (includeArchived !== undefined && includeArchived !== null)
-            url_ += "includeArchived=" + encodeURIComponent("" + includeArchived) + "&";
+        if (includeInactive !== undefined && includeInactive !== null)
+            url_ += "includeInactive=" + encodeURIComponent("" + includeInactive) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: AxiosRequestConfig = {
@@ -53361,7 +53361,7 @@ export class Label implements ILabel {
     groupName?: string | undefined;
     name?: string | undefined;
     colour?: Colour;
-    archived?: boolean;
+    inactive?: boolean;
 
     constructor(data?: ILabel) {
         if (data) {
@@ -53381,7 +53381,7 @@ export class Label implements ILabel {
             this.groupName = _data["groupName"];
             this.name = _data["name"];
             this.colour = _data["colour"] ? Colour.fromJS(_data["colour"]) : <any>undefined;
-            this.archived = _data["archived"];
+            this.inactive = _data["inactive"];
         }
     }
 
@@ -53401,7 +53401,7 @@ export class Label implements ILabel {
         data["groupName"] = this.groupName;
         data["name"] = this.name;
         data["colour"] = this.colour ? this.colour.toJSON() : <any>undefined;
-        data["archived"] = this.archived;
+        data["inactive"] = this.inactive;
         return data;
     }
 }
@@ -53414,7 +53414,7 @@ export interface ILabel {
     groupName?: string | undefined;
     name?: string | undefined;
     colour?: Colour;
-    archived?: boolean;
+    inactive?: boolean;
 }
 
 export class Colour implements IColour {
@@ -53512,7 +53512,7 @@ export interface ICreateLabelSettings {
 export class UpdateLabelSettings implements IUpdateLabelSettings {
     name!: string;
     colour?: Colour;
-    archived?: boolean;
+    inactive?: boolean;
     version?: number;
 
     constructor(data?: IUpdateLabelSettings) {
@@ -53528,7 +53528,7 @@ export class UpdateLabelSettings implements IUpdateLabelSettings {
         if (_data) {
             this.name = _data["name"];
             this.colour = _data["colour"] ? Colour.fromJS(_data["colour"]) : <any>undefined;
-            this.archived = _data["archived"];
+            this.inactive = _data["inactive"];
             this.version = _data["version"];
         }
     }
@@ -53544,7 +53544,7 @@ export class UpdateLabelSettings implements IUpdateLabelSettings {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
         data["colour"] = this.colour ? this.colour.toJSON() : <any>undefined;
-        data["archived"] = this.archived;
+        data["inactive"] = this.inactive;
         data["version"] = this.version;
         return data;
     }
@@ -53553,7 +53553,7 @@ export class UpdateLabelSettings implements IUpdateLabelSettings {
 export interface IUpdateLabelSettings {
     name: string;
     colour?: Colour;
-    archived?: boolean;
+    inactive?: boolean;
     version?: number;
 }
 
