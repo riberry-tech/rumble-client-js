@@ -29783,8 +29783,9 @@ export class LabelClient {
      * @param search (optional) 
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
+     * @param includeArchived (optional) 
      */
-    getAllForGroup(groupId: string, search: string | null | undefined, skip: number | undefined, take: number | undefined, cancelToken?: CancelToken | undefined): Promise<ListOfLabel> {
+    getAllForGroup(groupId: string, search: string | null | undefined, skip: number | undefined, take: number | undefined, includeArchived: boolean | null | undefined, cancelToken?: CancelToken | undefined): Promise<ListOfLabel> {
         let url_ = this.baseUrl + "/v1/Label/Group/{groupId}?";
         if (groupId === undefined || groupId === null)
             throw new Error("The parameter 'groupId' must be defined.");
@@ -29799,6 +29800,8 @@ export class LabelClient {
             throw new Error("The parameter 'take' cannot be null.");
         else if (take !== undefined)
             url_ += "Take=" + encodeURIComponent("" + take) + "&";
+        if (includeArchived !== undefined && includeArchived !== null)
+            url_ += "includeArchived=" + encodeURIComponent("" + includeArchived) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: AxiosRequestConfig = {
@@ -43743,11 +43746,12 @@ export interface ISurveyAnswerTypes {
     labelAnswer?: LabelAnswer | undefined;
 }
 
-export abstract class AnswerBase implements IAnswerBase {
+export abstract class AnswerBaseOfObjectOf implements IAnswerBaseOfObjectOf {
     type?: string | undefined;
     questionIndex?: number;
+    value?: any[] | undefined;
 
-    constructor(data?: IAnswerBase) {
+    constructor(data?: IAnswerBaseOfObjectOf) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -43760,29 +43764,39 @@ export abstract class AnswerBase implements IAnswerBase {
         if (_data) {
             this.type = _data["type"];
             this.questionIndex = _data["questionIndex"];
+            if (Array.isArray(_data["value"])) {
+                this.value = [] as any;
+                for (let item of _data["value"])
+                    this.value!.push(item);
+            }
         }
     }
 
-    static fromJS(data: any): AnswerBase {
+    static fromJS(data: any): AnswerBaseOfObjectOf {
         data = typeof data === 'object' ? data : {};
-        throw new Error("The abstract class 'AnswerBase' cannot be instantiated.");
+        throw new Error("The abstract class 'AnswerBaseOfObjectOf' cannot be instantiated.");
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
         data["questionIndex"] = this.questionIndex;
+        if (Array.isArray(this.value)) {
+            data["value"] = [];
+            for (let item of this.value)
+                data["value"].push(item);
+        }
         return data;
     }
 }
 
-export interface IAnswerBase {
+export interface IAnswerBaseOfObjectOf {
     type?: string | undefined;
     questionIndex?: number;
+    value?: any[] | undefined;
 }
 
-export class ListAnswer extends AnswerBase implements IListAnswer {
-    answers?: any[] | undefined;
+export class ListAnswer extends AnswerBaseOfObjectOf implements IListAnswer {
 
     constructor(data?: IListAnswer) {
         super(data);
@@ -43790,13 +43804,6 @@ export class ListAnswer extends AnswerBase implements IListAnswer {
 
     init(_data?: any) {
         super.init(_data);
-        if (_data) {
-            if (Array.isArray(_data["answers"])) {
-                this.answers = [] as any;
-                for (let item of _data["answers"])
-                    this.answers!.push(item);
-            }
-        }
     }
 
     static fromJS(data: any): ListAnswer {
@@ -43808,22 +43815,15 @@ export class ListAnswer extends AnswerBase implements IListAnswer {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.answers)) {
-            data["answers"] = [];
-            for (let item of this.answers)
-                data["answers"].push(item);
-        }
         super.toJSON(data);
         return data;
     }
 }
 
-export interface IListAnswer extends IAnswerBase {
-    answers?: any[] | undefined;
+export interface IListAnswer extends IAnswerBaseOfObjectOf {
 }
 
-export class CompositeAnswer extends AnswerBase implements ICompositeAnswer {
-    answers?: any[] | undefined;
+export class CompositeAnswer extends AnswerBaseOfObjectOf implements ICompositeAnswer {
 
     constructor(data?: ICompositeAnswer) {
         super(data);
@@ -43831,13 +43831,6 @@ export class CompositeAnswer extends AnswerBase implements ICompositeAnswer {
 
     init(_data?: any) {
         super.init(_data);
-        if (_data) {
-            if (Array.isArray(_data["answers"])) {
-                this.answers = [] as any;
-                for (let item of _data["answers"])
-                    this.answers!.push(item);
-            }
-        }
     }
 
     static fromJS(data: any): CompositeAnswer {
@@ -43849,22 +43842,57 @@ export class CompositeAnswer extends AnswerBase implements ICompositeAnswer {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.answers)) {
-            data["answers"] = [];
-            for (let item of this.answers)
-                data["answers"].push(item);
-        }
         super.toJSON(data);
         return data;
     }
 }
 
-export interface ICompositeAnswer extends IAnswerBase {
-    answers?: any[] | undefined;
+export interface ICompositeAnswer extends IAnswerBaseOfObjectOf {
 }
 
-export class DecimalAnswer extends AnswerBase implements IDecimalAnswer {
+export abstract class AnswerBaseOfNullableDouble implements IAnswerBaseOfNullableDouble {
+    type?: string | undefined;
+    questionIndex?: number;
     value?: number | undefined;
+
+    constructor(data?: IAnswerBaseOfNullableDouble) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.type = _data["type"];
+            this.questionIndex = _data["questionIndex"];
+            this.value = _data["value"];
+        }
+    }
+
+    static fromJS(data: any): AnswerBaseOfNullableDouble {
+        data = typeof data === 'object' ? data : {};
+        throw new Error("The abstract class 'AnswerBaseOfNullableDouble' cannot be instantiated.");
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["type"] = this.type;
+        data["questionIndex"] = this.questionIndex;
+        data["value"] = this.value;
+        return data;
+    }
+}
+
+export interface IAnswerBaseOfNullableDouble {
+    type?: string | undefined;
+    questionIndex?: number;
+    value?: number | undefined;
+}
+
+export class DecimalAnswer extends AnswerBaseOfNullableDouble implements IDecimalAnswer {
 
     constructor(data?: IDecimalAnswer) {
         super(data);
@@ -43872,9 +43900,6 @@ export class DecimalAnswer extends AnswerBase implements IDecimalAnswer {
 
     init(_data?: any) {
         super.init(_data);
-        if (_data) {
-            this.value = _data["value"];
-        }
     }
 
     static fromJS(data: any): DecimalAnswer {
@@ -43886,18 +43911,57 @@ export class DecimalAnswer extends AnswerBase implements IDecimalAnswer {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["value"] = this.value;
         super.toJSON(data);
         return data;
     }
 }
 
-export interface IDecimalAnswer extends IAnswerBase {
+export interface IDecimalAnswer extends IAnswerBaseOfNullableDouble {
+}
+
+export abstract class AnswerBaseOfNullableInteger implements IAnswerBaseOfNullableInteger {
+    type?: string | undefined;
+    questionIndex?: number;
+    value?: number | undefined;
+
+    constructor(data?: IAnswerBaseOfNullableInteger) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.type = _data["type"];
+            this.questionIndex = _data["questionIndex"];
+            this.value = _data["value"];
+        }
+    }
+
+    static fromJS(data: any): AnswerBaseOfNullableInteger {
+        data = typeof data === 'object' ? data : {};
+        throw new Error("The abstract class 'AnswerBaseOfNullableInteger' cannot be instantiated.");
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["type"] = this.type;
+        data["questionIndex"] = this.questionIndex;
+        data["value"] = this.value;
+        return data;
+    }
+}
+
+export interface IAnswerBaseOfNullableInteger {
+    type?: string | undefined;
+    questionIndex?: number;
     value?: number | undefined;
 }
 
-export class IntegerAnswer extends AnswerBase implements IIntegerAnswer {
-    value?: number | undefined;
+export class IntegerAnswer extends AnswerBaseOfNullableInteger implements IIntegerAnswer {
 
     constructor(data?: IIntegerAnswer) {
         super(data);
@@ -43905,9 +43969,6 @@ export class IntegerAnswer extends AnswerBase implements IIntegerAnswer {
 
     init(_data?: any) {
         super.init(_data);
-        if (_data) {
-            this.value = _data["value"];
-        }
     }
 
     static fromJS(data: any): IntegerAnswer {
@@ -43919,18 +43980,65 @@ export class IntegerAnswer extends AnswerBase implements IIntegerAnswer {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["value"] = this.value;
         super.toJSON(data);
         return data;
     }
 }
 
-export interface IIntegerAnswer extends IAnswerBase {
-    value?: number | undefined;
+export interface IIntegerAnswer extends IAnswerBaseOfNullableInteger {
 }
 
-export class MultipleChoiceAnswer extends AnswerBase implements IMultipleChoiceAnswer {
-    options?: number[] | undefined;
+export abstract class AnswerBaseOfInt32Of implements IAnswerBaseOfInt32Of {
+    type?: string | undefined;
+    questionIndex?: number;
+    value?: number[] | undefined;
+
+    constructor(data?: IAnswerBaseOfInt32Of) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.type = _data["type"];
+            this.questionIndex = _data["questionIndex"];
+            if (Array.isArray(_data["value"])) {
+                this.value = [] as any;
+                for (let item of _data["value"])
+                    this.value!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): AnswerBaseOfInt32Of {
+        data = typeof data === 'object' ? data : {};
+        throw new Error("The abstract class 'AnswerBaseOfInt32Of' cannot be instantiated.");
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["type"] = this.type;
+        data["questionIndex"] = this.questionIndex;
+        if (Array.isArray(this.value)) {
+            data["value"] = [];
+            for (let item of this.value)
+                data["value"].push(item);
+        }
+        return data;
+    }
+}
+
+export interface IAnswerBaseOfInt32Of {
+    type?: string | undefined;
+    questionIndex?: number;
+    value?: number[] | undefined;
+}
+
+export class MultipleChoiceAnswer extends AnswerBaseOfInt32Of implements IMultipleChoiceAnswer {
 
     constructor(data?: IMultipleChoiceAnswer) {
         super(data);
@@ -43938,13 +44046,6 @@ export class MultipleChoiceAnswer extends AnswerBase implements IMultipleChoiceA
 
     init(_data?: any) {
         super.init(_data);
-        if (_data) {
-            if (Array.isArray(_data["options"])) {
-                this.options = [] as any;
-                for (let item of _data["options"])
-                    this.options!.push(item);
-            }
-        }
     }
 
     static fromJS(data: any): MultipleChoiceAnswer {
@@ -43956,22 +44057,57 @@ export class MultipleChoiceAnswer extends AnswerBase implements IMultipleChoiceA
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.options)) {
-            data["options"] = [];
-            for (let item of this.options)
-                data["options"].push(item);
-        }
         super.toJSON(data);
         return data;
     }
 }
 
-export interface IMultipleChoiceAnswer extends IAnswerBase {
-    options?: number[] | undefined;
+export interface IMultipleChoiceAnswer extends IAnswerBaseOfInt32Of {
 }
 
-export class StringAnswer extends AnswerBase implements IStringAnswer {
+export abstract class AnswerBaseOfString implements IAnswerBaseOfString {
+    type?: string | undefined;
+    questionIndex?: number;
     value?: string | undefined;
+
+    constructor(data?: IAnswerBaseOfString) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.type = _data["type"];
+            this.questionIndex = _data["questionIndex"];
+            this.value = _data["value"];
+        }
+    }
+
+    static fromJS(data: any): AnswerBaseOfString {
+        data = typeof data === 'object' ? data : {};
+        throw new Error("The abstract class 'AnswerBaseOfString' cannot be instantiated.");
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["type"] = this.type;
+        data["questionIndex"] = this.questionIndex;
+        data["value"] = this.value;
+        return data;
+    }
+}
+
+export interface IAnswerBaseOfString {
+    type?: string | undefined;
+    questionIndex?: number;
+    value?: string | undefined;
+}
+
+export class StringAnswer extends AnswerBaseOfString implements IStringAnswer {
 
     constructor(data?: IStringAnswer) {
         super(data);
@@ -43979,9 +44115,6 @@ export class StringAnswer extends AnswerBase implements IStringAnswer {
 
     init(_data?: any) {
         super.init(_data);
-        if (_data) {
-            this.value = _data["value"];
-        }
     }
 
     static fromJS(data: any): StringAnswer {
@@ -43993,18 +44126,15 @@ export class StringAnswer extends AnswerBase implements IStringAnswer {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["value"] = this.value;
         super.toJSON(data);
         return data;
     }
 }
 
-export interface IStringAnswer extends IAnswerBase {
-    value?: string | undefined;
+export interface IStringAnswer extends IAnswerBaseOfString {
 }
 
-export class PercentageAnswer extends AnswerBase implements IPercentageAnswer {
-    value?: number | undefined;
+export class PercentageAnswer extends AnswerBaseOfNullableDouble implements IPercentageAnswer {
 
     constructor(data?: IPercentageAnswer) {
         super(data);
@@ -44012,9 +44142,6 @@ export class PercentageAnswer extends AnswerBase implements IPercentageAnswer {
 
     init(_data?: any) {
         super.init(_data);
-        if (_data) {
-            this.value = _data["value"];
-        }
     }
 
     static fromJS(data: any): PercentageAnswer {
@@ -44026,18 +44153,57 @@ export class PercentageAnswer extends AnswerBase implements IPercentageAnswer {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["value"] = this.value;
         super.toJSON(data);
         return data;
     }
 }
 
-export interface IPercentageAnswer extends IAnswerBase {
-    value?: number | undefined;
+export interface IPercentageAnswer extends IAnswerBaseOfNullableDouble {
 }
 
-export class DateTimeAnswer extends AnswerBase implements IDateTimeAnswer {
+export abstract class AnswerBaseOfNullableDateTime implements IAnswerBaseOfNullableDateTime {
+    type?: string | undefined;
+    questionIndex?: number;
     value?: Date | undefined;
+
+    constructor(data?: IAnswerBaseOfNullableDateTime) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.type = _data["type"];
+            this.questionIndex = _data["questionIndex"];
+            this.value = _data["value"] ? new Date(_data["value"].toString()) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): AnswerBaseOfNullableDateTime {
+        data = typeof data === 'object' ? data : {};
+        throw new Error("The abstract class 'AnswerBaseOfNullableDateTime' cannot be instantiated.");
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["type"] = this.type;
+        data["questionIndex"] = this.questionIndex;
+        data["value"] = this.value ? this.value.toISOString() : <any>undefined;
+        return data;
+    }
+}
+
+export interface IAnswerBaseOfNullableDateTime {
+    type?: string | undefined;
+    questionIndex?: number;
+    value?: Date | undefined;
+}
+
+export class DateTimeAnswer extends AnswerBaseOfNullableDateTime implements IDateTimeAnswer {
 
     constructor(data?: IDateTimeAnswer) {
         super(data);
@@ -44045,9 +44211,6 @@ export class DateTimeAnswer extends AnswerBase implements IDateTimeAnswer {
 
     init(_data?: any) {
         super.init(_data);
-        if (_data) {
-            this.value = _data["value"] ? new Date(_data["value"].toString()) : <any>undefined;
-        }
     }
 
     static fromJS(data: any): DateTimeAnswer {
@@ -44059,18 +44222,57 @@ export class DateTimeAnswer extends AnswerBase implements IDateTimeAnswer {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["value"] = this.value ? this.value.toISOString() : <any>undefined;
         super.toJSON(data);
         return data;
     }
 }
 
-export interface IDateTimeAnswer extends IAnswerBase {
-    value?: Date | undefined;
+export interface IDateTimeAnswer extends IAnswerBaseOfNullableDateTime {
 }
 
-export class TimeSpanAnswer extends AnswerBase implements ITimeSpanAnswer {
+export abstract class AnswerBaseOfNullableTimeSpan implements IAnswerBaseOfNullableTimeSpan {
+    type?: string | undefined;
+    questionIndex?: number;
     value?: string | undefined;
+
+    constructor(data?: IAnswerBaseOfNullableTimeSpan) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.type = _data["type"];
+            this.questionIndex = _data["questionIndex"];
+            this.value = _data["value"];
+        }
+    }
+
+    static fromJS(data: any): AnswerBaseOfNullableTimeSpan {
+        data = typeof data === 'object' ? data : {};
+        throw new Error("The abstract class 'AnswerBaseOfNullableTimeSpan' cannot be instantiated.");
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["type"] = this.type;
+        data["questionIndex"] = this.questionIndex;
+        data["value"] = this.value;
+        return data;
+    }
+}
+
+export interface IAnswerBaseOfNullableTimeSpan {
+    type?: string | undefined;
+    questionIndex?: number;
+    value?: string | undefined;
+}
+
+export class TimeSpanAnswer extends AnswerBaseOfNullableTimeSpan implements ITimeSpanAnswer {
 
     constructor(data?: ITimeSpanAnswer) {
         super(data);
@@ -44078,9 +44280,6 @@ export class TimeSpanAnswer extends AnswerBase implements ITimeSpanAnswer {
 
     init(_data?: any) {
         super.init(_data);
-        if (_data) {
-            this.value = _data["value"];
-        }
     }
 
     static fromJS(data: any): TimeSpanAnswer {
@@ -44092,19 +44291,57 @@ export class TimeSpanAnswer extends AnswerBase implements ITimeSpanAnswer {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["value"] = this.value;
         super.toJSON(data);
         return data;
     }
 }
 
-export interface ITimeSpanAnswer extends IAnswerBase {
-    value?: string | undefined;
+export interface ITimeSpanAnswer extends IAnswerBaseOfNullableTimeSpan {
 }
 
-export class UserAnswer extends AnswerBase implements IUserAnswer {
-    valueType?: UserValueType;
-    value?: string | undefined;
+export abstract class AnswerBaseOfUserAnswerValue implements IAnswerBaseOfUserAnswerValue {
+    type?: string | undefined;
+    questionIndex?: number;
+    value?: UserAnswerValue | undefined;
+
+    constructor(data?: IAnswerBaseOfUserAnswerValue) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.type = _data["type"];
+            this.questionIndex = _data["questionIndex"];
+            this.value = _data["value"] ? UserAnswerValue.fromJS(_data["value"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): AnswerBaseOfUserAnswerValue {
+        data = typeof data === 'object' ? data : {};
+        throw new Error("The abstract class 'AnswerBaseOfUserAnswerValue' cannot be instantiated.");
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["type"] = this.type;
+        data["questionIndex"] = this.questionIndex;
+        data["value"] = this.value ? this.value.toJSON() : <any>undefined;
+        return data;
+    }
+}
+
+export interface IAnswerBaseOfUserAnswerValue {
+    type?: string | undefined;
+    questionIndex?: number;
+    value?: UserAnswerValue | undefined;
+}
+
+export class UserAnswer extends AnswerBaseOfUserAnswerValue implements IUserAnswer {
 
     constructor(data?: IUserAnswer) {
         super(data);
@@ -44112,10 +44349,6 @@ export class UserAnswer extends AnswerBase implements IUserAnswer {
 
     init(_data?: any) {
         super.init(_data);
-        if (_data) {
-            this.valueType = _data["valueType"];
-            this.value = _data["value"];
-        }
     }
 
     static fromJS(data: any): UserAnswer {
@@ -44127,14 +44360,50 @@ export class UserAnswer extends AnswerBase implements IUserAnswer {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["valueType"] = this.valueType;
-        data["value"] = this.value;
         super.toJSON(data);
         return data;
     }
 }
 
-export interface IUserAnswer extends IAnswerBase {
+export interface IUserAnswer extends IAnswerBaseOfUserAnswerValue {
+}
+
+export class UserAnswerValue implements IUserAnswerValue {
+    valueType?: UserValueType;
+    value?: string | undefined;
+
+    constructor(data?: IUserAnswerValue) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.valueType = _data["valueType"];
+            this.value = _data["value"];
+        }
+    }
+
+    static fromJS(data: any): UserAnswerValue {
+        data = typeof data === 'object' ? data : {};
+        let result = new UserAnswerValue();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["valueType"] = this.valueType;
+        data["value"] = this.value;
+        return data;
+    }
+}
+
+export interface IUserAnswerValue {
     valueType?: UserValueType;
     value?: string | undefined;
 }
@@ -44145,8 +44414,7 @@ export enum UserValueType {
     Name = 1,
 }
 
-export class GroupAnswer extends AnswerBase implements IGroupAnswer {
-    groupId?: string | undefined;
+export class GroupAnswer extends AnswerBaseOfString implements IGroupAnswer {
 
     constructor(data?: IGroupAnswer) {
         super(data);
@@ -44154,9 +44422,6 @@ export class GroupAnswer extends AnswerBase implements IGroupAnswer {
 
     init(_data?: any) {
         super.init(_data);
-        if (_data) {
-            this.groupId = _data["groupId"];
-        }
     }
 
     static fromJS(data: any): GroupAnswer {
@@ -44168,18 +44433,15 @@ export class GroupAnswer extends AnswerBase implements IGroupAnswer {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["groupId"] = this.groupId;
         super.toJSON(data);
         return data;
     }
 }
 
-export interface IGroupAnswer extends IAnswerBase {
-    groupId?: string | undefined;
+export interface IGroupAnswer extends IAnswerBaseOfString {
 }
 
-export class FileAnswer extends AnswerBase implements IFileAnswer {
-    uri?: string | undefined;
+export class FileAnswer extends AnswerBaseOfString implements IFileAnswer {
 
     constructor(data?: IFileAnswer) {
         super(data);
@@ -44187,9 +44449,6 @@ export class FileAnswer extends AnswerBase implements IFileAnswer {
 
     init(_data?: any) {
         super.init(_data);
-        if (_data) {
-            this.uri = _data["uri"];
-        }
     }
 
     static fromJS(data: any): FileAnswer {
@@ -44201,18 +44460,57 @@ export class FileAnswer extends AnswerBase implements IFileAnswer {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["uri"] = this.uri;
         super.toJSON(data);
         return data;
     }
 }
 
-export interface IFileAnswer extends IAnswerBase {
-    uri?: string | undefined;
+export interface IFileAnswer extends IAnswerBaseOfString {
 }
 
-export class BinaryAnswer extends AnswerBase implements IBinaryAnswer {
+export abstract class AnswerBaseOfBoolean implements IAnswerBaseOfBoolean {
+    type?: string | undefined;
+    questionIndex?: number;
     value?: boolean;
+
+    constructor(data?: IAnswerBaseOfBoolean) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.type = _data["type"];
+            this.questionIndex = _data["questionIndex"];
+            this.value = _data["value"];
+        }
+    }
+
+    static fromJS(data: any): AnswerBaseOfBoolean {
+        data = typeof data === 'object' ? data : {};
+        throw new Error("The abstract class 'AnswerBaseOfBoolean' cannot be instantiated.");
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["type"] = this.type;
+        data["questionIndex"] = this.questionIndex;
+        data["value"] = this.value;
+        return data;
+    }
+}
+
+export interface IAnswerBaseOfBoolean {
+    type?: string | undefined;
+    questionIndex?: number;
+    value?: boolean;
+}
+
+export class BinaryAnswer extends AnswerBaseOfBoolean implements IBinaryAnswer {
 
     constructor(data?: IBinaryAnswer) {
         super(data);
@@ -44220,9 +44518,6 @@ export class BinaryAnswer extends AnswerBase implements IBinaryAnswer {
 
     init(_data?: any) {
         super.init(_data);
-        if (_data) {
-            this.value = _data["value"];
-        }
     }
 
     static fromJS(data: any): BinaryAnswer {
@@ -44234,18 +44529,15 @@ export class BinaryAnswer extends AnswerBase implements IBinaryAnswer {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["value"] = this.value;
         super.toJSON(data);
         return data;
     }
 }
 
-export interface IBinaryAnswer extends IAnswerBase {
-    value?: boolean;
+export interface IBinaryAnswer extends IAnswerBaseOfBoolean {
 }
 
-export class TimeOfDayAnswer extends AnswerBase implements ITimeOfDayAnswer {
-    value?: string | undefined;
+export class TimeOfDayAnswer extends AnswerBaseOfNullableTimeSpan implements ITimeOfDayAnswer {
 
     constructor(data?: ITimeOfDayAnswer) {
         super(data);
@@ -44253,9 +44545,6 @@ export class TimeOfDayAnswer extends AnswerBase implements ITimeOfDayAnswer {
 
     init(_data?: any) {
         super.init(_data);
-        if (_data) {
-            this.value = _data["value"];
-        }
     }
 
     static fromJS(data: any): TimeOfDayAnswer {
@@ -44267,18 +44556,15 @@ export class TimeOfDayAnswer extends AnswerBase implements ITimeOfDayAnswer {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["value"] = this.value;
         super.toJSON(data);
         return data;
     }
 }
 
-export interface ITimeOfDayAnswer extends IAnswerBase {
-    value?: string | undefined;
+export interface ITimeOfDayAnswer extends IAnswerBaseOfNullableTimeSpan {
 }
 
-export class EmailAnswer extends AnswerBase implements IEmailAnswer {
-    value?: string | undefined;
+export class EmailAnswer extends AnswerBaseOfString implements IEmailAnswer {
 
     constructor(data?: IEmailAnswer) {
         super(data);
@@ -44286,9 +44572,6 @@ export class EmailAnswer extends AnswerBase implements IEmailAnswer {
 
     init(_data?: any) {
         super.init(_data);
-        if (_data) {
-            this.value = _data["value"];
-        }
     }
 
     static fromJS(data: any): EmailAnswer {
@@ -44300,18 +44583,65 @@ export class EmailAnswer extends AnswerBase implements IEmailAnswer {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["value"] = this.value;
         super.toJSON(data);
         return data;
     }
 }
 
-export interface IEmailAnswer extends IAnswerBase {
-    value?: string | undefined;
+export interface IEmailAnswer extends IAnswerBaseOfString {
 }
 
-export class LabelAnswer extends AnswerBase implements ILabelAnswer {
-    answers?: string[] | undefined;
+export abstract class AnswerBaseOfStringOf implements IAnswerBaseOfStringOf {
+    type?: string | undefined;
+    questionIndex?: number;
+    value?: string[] | undefined;
+
+    constructor(data?: IAnswerBaseOfStringOf) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.type = _data["type"];
+            this.questionIndex = _data["questionIndex"];
+            if (Array.isArray(_data["value"])) {
+                this.value = [] as any;
+                for (let item of _data["value"])
+                    this.value!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): AnswerBaseOfStringOf {
+        data = typeof data === 'object' ? data : {};
+        throw new Error("The abstract class 'AnswerBaseOfStringOf' cannot be instantiated.");
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["type"] = this.type;
+        data["questionIndex"] = this.questionIndex;
+        if (Array.isArray(this.value)) {
+            data["value"] = [];
+            for (let item of this.value)
+                data["value"].push(item);
+        }
+        return data;
+    }
+}
+
+export interface IAnswerBaseOfStringOf {
+    type?: string | undefined;
+    questionIndex?: number;
+    value?: string[] | undefined;
+}
+
+export class LabelAnswer extends AnswerBaseOfStringOf implements ILabelAnswer {
 
     constructor(data?: ILabelAnswer) {
         super(data);
@@ -44319,13 +44649,6 @@ export class LabelAnswer extends AnswerBase implements ILabelAnswer {
 
     init(_data?: any) {
         super.init(_data);
-        if (_data) {
-            if (Array.isArray(_data["answers"])) {
-                this.answers = [] as any;
-                for (let item of _data["answers"])
-                    this.answers!.push(item);
-            }
-        }
     }
 
     static fromJS(data: any): LabelAnswer {
@@ -44337,18 +44660,12 @@ export class LabelAnswer extends AnswerBase implements ILabelAnswer {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.answers)) {
-            data["answers"] = [];
-            for (let item of this.answers)
-                data["answers"].push(item);
-        }
         super.toJSON(data);
         return data;
     }
 }
 
-export interface ILabelAnswer extends IAnswerBase {
-    answers?: string[] | undefined;
+export interface ILabelAnswer extends IAnswerBaseOfStringOf {
 }
 
 export class SurveySettings implements ISurveySettings {
@@ -53044,6 +53361,7 @@ export class Label implements ILabel {
     groupName?: string | undefined;
     name?: string | undefined;
     colour?: Colour;
+    archived?: boolean;
 
     constructor(data?: ILabel) {
         if (data) {
@@ -53063,6 +53381,7 @@ export class Label implements ILabel {
             this.groupName = _data["groupName"];
             this.name = _data["name"];
             this.colour = _data["colour"] ? Colour.fromJS(_data["colour"]) : <any>undefined;
+            this.archived = _data["archived"];
         }
     }
 
@@ -53082,6 +53401,7 @@ export class Label implements ILabel {
         data["groupName"] = this.groupName;
         data["name"] = this.name;
         data["colour"] = this.colour ? this.colour.toJSON() : <any>undefined;
+        data["archived"] = this.archived;
         return data;
     }
 }
@@ -53094,6 +53414,7 @@ export interface ILabel {
     groupName?: string | undefined;
     name?: string | undefined;
     colour?: Colour;
+    archived?: boolean;
 }
 
 export class Colour implements IColour {
@@ -53191,6 +53512,7 @@ export interface ICreateLabelSettings {
 export class UpdateLabelSettings implements IUpdateLabelSettings {
     name!: string;
     colour?: Colour;
+    archived?: boolean;
     version?: number;
 
     constructor(data?: IUpdateLabelSettings) {
@@ -53206,6 +53528,7 @@ export class UpdateLabelSettings implements IUpdateLabelSettings {
         if (_data) {
             this.name = _data["name"];
             this.colour = _data["colour"] ? Colour.fromJS(_data["colour"]) : <any>undefined;
+            this.archived = _data["archived"];
             this.version = _data["version"];
         }
     }
@@ -53221,6 +53544,7 @@ export class UpdateLabelSettings implements IUpdateLabelSettings {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
         data["colour"] = this.colour ? this.colour.toJSON() : <any>undefined;
+        data["archived"] = this.archived;
         data["version"] = this.version;
         return data;
     }
@@ -53229,6 +53553,7 @@ export class UpdateLabelSettings implements IUpdateLabelSettings {
 export interface IUpdateLabelSettings {
     name: string;
     colour?: Colour;
+    archived?: boolean;
     version?: number;
 }
 
