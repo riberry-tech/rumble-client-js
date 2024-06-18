@@ -4875,6 +4875,98 @@ export class ObservationClient {
         return Promise.resolve<ListOfObservation>(null as any);
     }
 
+    /**
+     * @param search (optional) 
+     * @param skip (optional) 
+     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
+     * @param from (optional) 
+     * @param to (optional) 
+     */
+    getAllForUser(userId: string, search: string | null | undefined, skip: number | undefined, take: number | undefined, from: Date | null | undefined, to: Date | null | undefined, cancelToken?: CancelToken | undefined): Promise<ListOfObservation> {
+        let url_ = this.baseUrl + "/v1/Observation/User/{userId}?";
+        if (userId === undefined || userId === null)
+            throw new Error("The parameter 'userId' must be defined.");
+        url_ = url_.replace("{userId}", encodeURIComponent("" + userId));
+        if (search !== undefined && search !== null)
+            url_ += "Search=" + encodeURIComponent("" + search) + "&";
+        if (skip === null)
+            throw new Error("The parameter 'skip' cannot be null.");
+        else if (skip !== undefined)
+            url_ += "Skip=" + encodeURIComponent("" + skip) + "&";
+        if (take === null)
+            throw new Error("The parameter 'take' cannot be null.");
+        else if (take !== undefined)
+            url_ += "Take=" + encodeURIComponent("" + take) + "&";
+        if (from !== undefined && from !== null)
+            url_ += "from=" + encodeURIComponent(from ? "" + from.toISOString() : "") + "&";
+        if (to !== undefined && to !== null)
+            url_ += "to=" + encodeURIComponent(to ? "" + to.toISOString() : "") + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: AxiosRequestConfig = {
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processGetAllForUser(_response);
+        });
+    }
+
+    protected processGetAllForUser(response: AxiosResponse): Promise<ListOfObservation> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ListOfObservation.fromJS(resultData200);
+            return Promise.resolve<ListOfObservation>(result200);
+
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ListOfObservation>(null as any);
+    }
+
     get(observationId: string, cancelToken?: CancelToken | undefined): Promise<Observation> {
         let url_ = this.baseUrl + "/v1/Observation/{observationId}";
         if (observationId === undefined || observationId === null)
@@ -5156,6 +5248,9 @@ export class ObservationClient {
         return Promise.resolve<Observation>(null as any);
     }
 
+    /**
+     * @deprecated
+     */
     predict(observationContentId: string, settings: PredictObservationSettings, cancelToken?: CancelToken | undefined): Promise<CreateObservationSettings> {
         let url_ = this.baseUrl + "/v1/Observation/{observationContentId}/Predict";
         if (observationContentId === undefined || observationContentId === null)
@@ -29783,9 +29878,8 @@ export class LabelClient {
      * @param search (optional) 
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param includeInactive (optional) 
      */
-    getAllForGroup(groupId: string, search: string | null | undefined, skip: number | undefined, take: number | undefined, includeInactive: boolean | null | undefined, cancelToken?: CancelToken | undefined): Promise<ListOfLabel> {
+    getAllForGroup(groupId: string, search: string | null | undefined, skip: number | undefined, take: number | undefined, cancelToken?: CancelToken | undefined): Promise<ListOfLabel> {
         let url_ = this.baseUrl + "/v1/Label/Group/{groupId}?";
         if (groupId === undefined || groupId === null)
             throw new Error("The parameter 'groupId' must be defined.");
@@ -29800,8 +29894,6 @@ export class LabelClient {
             throw new Error("The parameter 'take' cannot be null.");
         else if (take !== undefined)
             url_ += "Take=" + encodeURIComponent("" + take) + "&";
-        if (includeInactive !== undefined && includeInactive !== null)
-            url_ += "includeInactive=" + encodeURIComponent("" + includeInactive) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: AxiosRequestConfig = {
