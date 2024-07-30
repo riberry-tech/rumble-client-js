@@ -47316,8 +47316,6 @@ export class Course implements ICourse {
     certificates?: CertificateInCourse[] | undefined;
     recommendedJobTypeIds?: string[] | undefined;
     processReports?: ProcessReportInCourse[] | undefined;
-    preSurvey?: SurveyInCourse | undefined;
-    postSurvey?: SurveyInCourse | undefined;
     version?: number;
 
     constructor(data?: ICourse) {
@@ -47369,8 +47367,6 @@ export class Course implements ICourse {
                 for (let item of _data["processReports"])
                     this.processReports!.push(ProcessReportInCourse.fromJS(item));
             }
-            this.preSurvey = _data["preSurvey"] ? SurveyInCourse.fromJS(_data["preSurvey"]) : <any>undefined;
-            this.postSurvey = _data["postSurvey"] ? SurveyInCourse.fromJS(_data["postSurvey"]) : <any>undefined;
             this.version = _data["version"];
         }
     }
@@ -47422,8 +47418,6 @@ export class Course implements ICourse {
             for (let item of this.processReports)
                 data["processReports"].push(item.toJSON());
         }
-        data["preSurvey"] = this.preSurvey ? this.preSurvey.toJSON() : <any>undefined;
-        data["postSurvey"] = this.postSurvey ? this.postSurvey.toJSON() : <any>undefined;
         data["version"] = this.version;
         return data;
     }
@@ -47444,8 +47438,6 @@ export interface ICourse {
     certificates?: CertificateInCourse[] | undefined;
     recommendedJobTypeIds?: string[] | undefined;
     processReports?: ProcessReportInCourse[] | undefined;
-    preSurvey?: SurveyInCourse | undefined;
-    postSurvey?: SurveyInCourse | undefined;
     version?: number;
 }
 
@@ -47491,7 +47483,8 @@ export interface IProgramInCourse {
 
 export class SectionInCourse implements ISectionInCourse {
     name?: string | undefined;
-    modules?: ModuleInCourse[] | undefined;
+    required?: boolean;
+    units?: UnitInCourse[] | undefined;
 
     constructor(data?: ISectionInCourse) {
         if (data) {
@@ -47505,10 +47498,11 @@ export class SectionInCourse implements ISectionInCourse {
     init(_data?: any) {
         if (_data) {
             this.name = _data["name"];
-            if (Array.isArray(_data["modules"])) {
-                this.modules = [] as any;
-                for (let item of _data["modules"])
-                    this.modules!.push(ModuleInCourse.fromJS(item));
+            this.required = _data["required"];
+            if (Array.isArray(_data["units"])) {
+                this.units = [] as any;
+                for (let item of _data["units"])
+                    this.units!.push(UnitInCourse.fromJS(item));
             }
         }
     }
@@ -47523,10 +47517,11 @@ export class SectionInCourse implements ISectionInCourse {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
-        if (Array.isArray(this.modules)) {
-            data["modules"] = [];
-            for (let item of this.modules)
-                data["modules"].push(item.toJSON());
+        data["required"] = this.required;
+        if (Array.isArray(this.units)) {
+            data["units"] = [];
+            for (let item of this.units)
+                data["units"].push(item.toJSON());
         }
         return data;
     }
@@ -47534,17 +47529,15 @@ export class SectionInCourse implements ISectionInCourse {
 
 export interface ISectionInCourse {
     name?: string | undefined;
-    modules?: ModuleInCourse[] | undefined;
+    required?: boolean;
+    units?: UnitInCourse[] | undefined;
 }
 
-export class ModuleInCourse implements IModuleInCourse {
+export abstract class UnitInCourse implements IUnitInCourse {
+    unitType?: CourseUnitType;
     id?: string | undefined;
-    name?: string | undefined;
-    type?: string | undefined;
-    imageUri?: string | undefined;
-    open?: boolean;
 
-    constructor(data?: IModuleInCourse) {
+    constructor(data?: IUnitInCourse) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -47555,38 +47548,32 @@ export class ModuleInCourse implements IModuleInCourse {
 
     init(_data?: any) {
         if (_data) {
+            this.unitType = _data["unitType"];
             this.id = _data["id"];
-            this.name = _data["name"];
-            this.type = _data["type"];
-            this.imageUri = _data["imageUri"];
-            this.open = _data["open"];
         }
     }
 
-    static fromJS(data: any): ModuleInCourse {
+    static fromJS(data: any): UnitInCourse {
         data = typeof data === 'object' ? data : {};
-        let result = new ModuleInCourse();
-        result.init(data);
-        return result;
+        throw new Error("The abstract class 'UnitInCourse' cannot be instantiated.");
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["unitType"] = this.unitType;
         data["id"] = this.id;
-        data["name"] = this.name;
-        data["type"] = this.type;
-        data["imageUri"] = this.imageUri;
-        data["open"] = this.open;
         return data;
     }
 }
 
-export interface IModuleInCourse {
+export interface IUnitInCourse {
+    unitType?: CourseUnitType;
     id?: string | undefined;
-    name?: string | undefined;
-    type?: string | undefined;
-    imageUri?: string | undefined;
-    open?: boolean;
+}
+
+export enum CourseUnitType {
+    Module = "Module",
+    Survey = "Survey",
 }
 
 export class CertificateInCourse implements ICertificateInCourse {
@@ -47693,50 +47680,6 @@ export interface IProcessReportInCourse {
     type?: string | undefined;
 }
 
-export class SurveyInCourse implements ISurveyInCourse {
-    id?: string | undefined;
-    name?: string | undefined;
-    required?: boolean;
-
-    constructor(data?: ISurveyInCourse) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.name = _data["name"];
-            this.required = _data["required"];
-        }
-    }
-
-    static fromJS(data: any): SurveyInCourse {
-        data = typeof data === 'object' ? data : {};
-        let result = new SurveyInCourse();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["name"] = this.name;
-        data["required"] = this.required;
-        return data;
-    }
-}
-
-export interface ISurveyInCourse {
-    id?: string | undefined;
-    name?: string | undefined;
-    required?: boolean;
-}
-
 export class CreateCourseSettings implements ICreateCourseSettings {
     publisherId!: string;
     name!: string;
@@ -47755,8 +47698,6 @@ export class CreateCourseSettings implements ICreateCourseSettings {
     sections?: CourseSection[] | undefined;
     recommendedJobTypeIds?: string[] | undefined;
     processReportIds?: string[] | undefined;
-    preSurvey?: CourseSurvey | undefined;
-    postSurvey?: CourseSurvey | undefined;
 
     constructor(data?: ICreateCourseSettings) {
         if (data) {
@@ -47794,8 +47735,6 @@ export class CreateCourseSettings implements ICreateCourseSettings {
                 for (let item of _data["processReportIds"])
                     this.processReportIds!.push(item);
             }
-            this.preSurvey = _data["preSurvey"] ? CourseSurvey.fromJS(_data["preSurvey"]) : <any>undefined;
-            this.postSurvey = _data["postSurvey"] ? CourseSurvey.fromJS(_data["postSurvey"]) : <any>undefined;
         }
     }
 
@@ -47833,8 +47772,6 @@ export class CreateCourseSettings implements ICreateCourseSettings {
             for (let item of this.processReportIds)
                 data["processReportIds"].push(item);
         }
-        data["preSurvey"] = this.preSurvey ? this.preSurvey.toJSON() : <any>undefined;
-        data["postSurvey"] = this.postSurvey ? this.postSurvey.toJSON() : <any>undefined;
         return data;
     }
 }
@@ -47857,13 +47794,12 @@ export interface ICreateCourseSettings {
     sections?: CourseSection[] | undefined;
     recommendedJobTypeIds?: string[] | undefined;
     processReportIds?: string[] | undefined;
-    preSurvey?: CourseSurvey | undefined;
-    postSurvey?: CourseSurvey | undefined;
 }
 
 export class CourseSection implements ICourseSection {
     name?: string | undefined;
-    modules?: CourseModule[] | undefined;
+    units?: CourseUnit[] | undefined;
+    required?: boolean;
 
     constructor(data?: ICourseSection) {
         if (data) {
@@ -47877,11 +47813,12 @@ export class CourseSection implements ICourseSection {
     init(_data?: any) {
         if (_data) {
             this.name = _data["name"];
-            if (Array.isArray(_data["modules"])) {
-                this.modules = [] as any;
-                for (let item of _data["modules"])
-                    this.modules!.push(CourseModule.fromJS(item));
+            if (Array.isArray(_data["units"])) {
+                this.units = [] as any;
+                for (let item of _data["units"])
+                    this.units!.push(CourseUnit.fromJS(item));
             }
+            this.required = _data["required"];
         }
     }
 
@@ -47895,26 +47832,29 @@ export class CourseSection implements ICourseSection {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
-        if (Array.isArray(this.modules)) {
-            data["modules"] = [];
-            for (let item of this.modules)
-                data["modules"].push(item.toJSON());
+        if (Array.isArray(this.units)) {
+            data["units"] = [];
+            for (let item of this.units)
+                data["units"].push(item.toJSON());
         }
+        data["required"] = this.required;
         return data;
     }
 }
 
 export interface ICourseSection {
     name?: string | undefined;
-    modules?: CourseModule[] | undefined;
+    units?: CourseUnit[] | undefined;
+    required?: boolean;
 }
 
-export class CourseModule implements ICourseModule {
+export class CourseUnit implements ICourseUnit {
+    unitType?: CourseUnitType;
     id?: string | undefined;
     open?: boolean;
     certificateIds?: string[] | undefined;
 
-    constructor(data?: ICourseModule) {
+    constructor(data?: ICourseUnit) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -47925,6 +47865,7 @@ export class CourseModule implements ICourseModule {
 
     init(_data?: any) {
         if (_data) {
+            this.unitType = _data["unitType"];
             this.id = _data["id"];
             this.open = _data["open"];
             if (Array.isArray(_data["certificateIds"])) {
@@ -47935,15 +47876,16 @@ export class CourseModule implements ICourseModule {
         }
     }
 
-    static fromJS(data: any): CourseModule {
+    static fromJS(data: any): CourseUnit {
         data = typeof data === 'object' ? data : {};
-        let result = new CourseModule();
+        let result = new CourseUnit();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["unitType"] = this.unitType;
         data["id"] = this.id;
         data["open"] = this.open;
         if (Array.isArray(this.certificateIds)) {
@@ -47955,50 +47897,11 @@ export class CourseModule implements ICourseModule {
     }
 }
 
-export interface ICourseModule {
+export interface ICourseUnit {
+    unitType?: CourseUnitType;
     id?: string | undefined;
     open?: boolean;
     certificateIds?: string[] | undefined;
-}
-
-export class CourseSurvey implements ICourseSurvey {
-    id?: string | undefined;
-    required?: boolean;
-
-    constructor(data?: ICourseSurvey) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.required = _data["required"];
-        }
-    }
-
-    static fromJS(data: any): CourseSurvey {
-        data = typeof data === 'object' ? data : {};
-        let result = new CourseSurvey();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["required"] = this.required;
-        return data;
-    }
-}
-
-export interface ICourseSurvey {
-    id?: string | undefined;
-    required?: boolean;
 }
 
 export class UpdateCourseSettings implements IUpdateCourseSettings {
@@ -48011,8 +47914,6 @@ export class UpdateCourseSettings implements IUpdateCourseSettings {
     sections?: CourseSection[] | undefined;
     recommendedJobTypeIds?: string[] | undefined;
     processReportIds?: string[] | undefined;
-    preSurvey?: CourseSurvey | undefined;
-    postSurvey?: CourseSurvey | undefined;
     version?: number;
 
     constructor(data?: IUpdateCourseSettings) {
@@ -48051,8 +47952,6 @@ export class UpdateCourseSettings implements IUpdateCourseSettings {
                 for (let item of _data["processReportIds"])
                     this.processReportIds!.push(item);
             }
-            this.preSurvey = _data["preSurvey"] ? CourseSurvey.fromJS(_data["preSurvey"]) : <any>undefined;
-            this.postSurvey = _data["postSurvey"] ? CourseSurvey.fromJS(_data["postSurvey"]) : <any>undefined;
             this.version = _data["version"];
         }
     }
@@ -48091,8 +47990,6 @@ export class UpdateCourseSettings implements IUpdateCourseSettings {
             for (let item of this.processReportIds)
                 data["processReportIds"].push(item);
         }
-        data["preSurvey"] = this.preSurvey ? this.preSurvey.toJSON() : <any>undefined;
-        data["postSurvey"] = this.postSurvey ? this.postSurvey.toJSON() : <any>undefined;
         data["version"] = this.version;
         return data;
     }
@@ -48108,8 +48005,6 @@ export interface IUpdateCourseSettings {
     sections?: CourseSection[] | undefined;
     recommendedJobTypeIds?: string[] | undefined;
     processReportIds?: string[] | undefined;
-    preSurvey?: CourseSurvey | undefined;
-    postSurvey?: CourseSurvey | undefined;
     version?: number;
 }
 
@@ -48283,8 +48178,6 @@ export interface IEnrolment2 {
 export class Enrolment extends Enrolment2 implements IEnrolment {
     courseSections?: CourseSectionInEnrolment[] | undefined;
     certifications?: CertificationInEnrolment[] | undefined;
-    preSurveyResponse?: SurveyResponseInEnrolment | undefined;
-    postSurveyResponse?: SurveyResponseInEnrolment | undefined;
 
     constructor(data?: IEnrolment) {
         super(data);
@@ -48303,8 +48196,6 @@ export class Enrolment extends Enrolment2 implements IEnrolment {
                 for (let item of _data["certifications"])
                     this.certifications!.push(CertificationInEnrolment.fromJS(item));
             }
-            this.preSurveyResponse = _data["preSurveyResponse"] ? SurveyResponseInEnrolment.fromJS(_data["preSurveyResponse"]) : <any>undefined;
-            this.postSurveyResponse = _data["postSurveyResponse"] ? SurveyResponseInEnrolment.fromJS(_data["postSurveyResponse"]) : <any>undefined;
         }
     }
 
@@ -48327,8 +48218,6 @@ export class Enrolment extends Enrolment2 implements IEnrolment {
             for (let item of this.certifications)
                 data["certifications"].push(item.toJSON());
         }
-        data["preSurveyResponse"] = this.preSurveyResponse ? this.preSurveyResponse.toJSON() : <any>undefined;
-        data["postSurveyResponse"] = this.postSurveyResponse ? this.postSurveyResponse.toJSON() : <any>undefined;
         super.toJSON(data);
         return data;
     }
@@ -48337,13 +48226,12 @@ export class Enrolment extends Enrolment2 implements IEnrolment {
 export interface IEnrolment extends IEnrolment2 {
     courseSections?: CourseSectionInEnrolment[] | undefined;
     certifications?: CertificationInEnrolment[] | undefined;
-    preSurveyResponse?: SurveyResponseInEnrolment | undefined;
-    postSurveyResponse?: SurveyResponseInEnrolment | undefined;
 }
 
 export class CourseSectionInEnrolment implements ICourseSectionInEnrolment {
     name?: string | undefined;
-    modules?: ModuleInEnrolment[] | undefined;
+    required?: boolean;
+    units?: UnitResultInEnrolment[] | undefined;
 
     constructor(data?: ICourseSectionInEnrolment) {
         if (data) {
@@ -48357,10 +48245,11 @@ export class CourseSectionInEnrolment implements ICourseSectionInEnrolment {
     init(_data?: any) {
         if (_data) {
             this.name = _data["name"];
-            if (Array.isArray(_data["modules"])) {
-                this.modules = [] as any;
-                for (let item of _data["modules"])
-                    this.modules!.push(ModuleInEnrolment.fromJS(item));
+            this.required = _data["required"];
+            if (Array.isArray(_data["units"])) {
+                this.units = [] as any;
+                for (let item of _data["units"])
+                    this.units!.push(UnitResultInEnrolment.fromJS(item));
             }
         }
     }
@@ -48375,10 +48264,11 @@ export class CourseSectionInEnrolment implements ICourseSectionInEnrolment {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
-        if (Array.isArray(this.modules)) {
-            data["modules"] = [];
-            for (let item of this.modules)
-                data["modules"].push(item.toJSON());
+        data["required"] = this.required;
+        if (Array.isArray(this.units)) {
+            data["units"] = [];
+            for (let item of this.units)
+                data["units"].push(item.toJSON());
         }
         return data;
     }
@@ -48386,19 +48276,16 @@ export class CourseSectionInEnrolment implements ICourseSectionInEnrolment {
 
 export interface ICourseSectionInEnrolment {
     name?: string | undefined;
-    modules?: ModuleInEnrolment[] | undefined;
+    required?: boolean;
+    units?: UnitResultInEnrolment[] | undefined;
 }
 
-export class ModuleInEnrolment implements IModuleInEnrolment {
+export class UnitResultInEnrolment implements IUnitResultInEnrolment {
+    unitType?: CourseUnitType;
     id?: string | undefined;
     name?: string | undefined;
-    type?: string | undefined;
-    imageUri?: string | undefined;
-    open?: boolean;
-    result?: CalculatedModuleResult | undefined;
-    modified?: Date | undefined;
 
-    constructor(data?: IModuleInEnrolment) {
+    constructor(data?: IUnitResultInEnrolment) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -48409,44 +48296,32 @@ export class ModuleInEnrolment implements IModuleInEnrolment {
 
     init(_data?: any) {
         if (_data) {
+            this.unitType = _data["unitType"];
             this.id = _data["id"];
             this.name = _data["name"];
-            this.type = _data["type"];
-            this.imageUri = _data["imageUri"];
-            this.open = _data["open"];
-            this.result = _data["result"] ? CalculatedModuleResult.fromJS(_data["result"]) : <any>undefined;
-            this.modified = _data["modified"] ? new Date(_data["modified"].toString()) : <any>undefined;
         }
     }
 
-    static fromJS(data: any): ModuleInEnrolment {
+    static fromJS(data: any): UnitResultInEnrolment {
         data = typeof data === 'object' ? data : {};
-        let result = new ModuleInEnrolment();
+        let result = new UnitResultInEnrolment();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["unitType"] = this.unitType;
         data["id"] = this.id;
         data["name"] = this.name;
-        data["type"] = this.type;
-        data["imageUri"] = this.imageUri;
-        data["open"] = this.open;
-        data["result"] = this.result ? this.result.toJSON() : <any>undefined;
-        data["modified"] = this.modified ? this.modified.toISOString() : <any>undefined;
         return data;
     }
 }
 
-export interface IModuleInEnrolment {
+export interface IUnitResultInEnrolment {
+    unitType?: CourseUnitType;
     id?: string | undefined;
     name?: string | undefined;
-    type?: string | undefined;
-    imageUri?: string | undefined;
-    open?: boolean;
-    result?: CalculatedModuleResult | undefined;
-    modified?: Date | undefined;
 }
 
 export class CertificationInEnrolment implements ICertificationInEnrolment {
@@ -48519,58 +48394,6 @@ export interface ICertificationInEnrolment {
     started?: Date | undefined;
     certified?: Date | undefined;
     expires?: Date | undefined;
-}
-
-export class SurveyResponseInEnrolment implements ISurveyResponseInEnrolment {
-    surveyId?: string | undefined;
-    surveyName?: string | undefined;
-    required?: boolean;
-    started?: Date | undefined;
-    submitted?: Date | undefined;
-
-    constructor(data?: ISurveyResponseInEnrolment) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.surveyId = _data["surveyId"];
-            this.surveyName = _data["surveyName"];
-            this.required = _data["required"];
-            this.started = _data["started"] ? new Date(_data["started"].toString()) : <any>undefined;
-            this.submitted = _data["submitted"] ? new Date(_data["submitted"].toString()) : <any>undefined;
-        }
-    }
-
-    static fromJS(data: any): SurveyResponseInEnrolment {
-        data = typeof data === 'object' ? data : {};
-        let result = new SurveyResponseInEnrolment();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["surveyId"] = this.surveyId;
-        data["surveyName"] = this.surveyName;
-        data["required"] = this.required;
-        data["started"] = this.started ? this.started.toISOString() : <any>undefined;
-        data["submitted"] = this.submitted ? this.submitted.toISOString() : <any>undefined;
-        return data;
-    }
-}
-
-export interface ISurveyResponseInEnrolment {
-    surveyId?: string | undefined;
-    surveyName?: string | undefined;
-    required?: boolean;
-    started?: Date | undefined;
-    submitted?: Date | undefined;
 }
 
 export class ProgramInEnrolment implements IProgramInEnrolment {
