@@ -19,7 +19,7 @@ export class EmailClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -359,7 +359,7 @@ export class GroupAttendanceClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -610,7 +610,7 @@ export class MeetingClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -1440,7 +1440,7 @@ export class UserAttendanceClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -1691,7 +1691,7 @@ export class BackupClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -1995,7 +1995,7 @@ export class ExternalApplicationClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -2373,7 +2373,7 @@ export class ImageClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -2471,7 +2471,7 @@ export class LogClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -2644,7 +2644,7 @@ export class MarkdownClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -2735,7 +2735,7 @@ export class PlatformClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -3025,7 +3025,7 @@ export class ProjectionClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -3178,7 +3178,7 @@ export class NotificationClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -3624,7 +3624,7 @@ export class ScheduledEmailClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -4152,7 +4152,7 @@ export class ObservationContentClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -4600,7 +4600,7 @@ export class ObservationClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -5415,7 +5415,7 @@ export class ObservationDefinitionClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -5995,7 +5995,7 @@ export class ObservationFormClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -6373,7 +6373,7 @@ export class ObservationMigrationClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -6699,7 +6699,7 @@ export class ObservationSettingsClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -7080,7 +7080,7 @@ export class CustomerClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -7236,7 +7236,7 @@ export class MerchantClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -7544,7 +7544,7 @@ export class PaymentClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -7701,7 +7701,7 @@ export class PaymentSettingsClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -8009,7 +8009,7 @@ export class ProductClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -8393,7 +8393,7 @@ export class PublisherClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -8711,7 +8711,7 @@ export class StripeClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -8798,7 +8798,7 @@ export class TaskFileClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -9255,7 +9255,7 @@ export class ImplementationClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -9728,7 +9728,7 @@ export class ItemActivationClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -10230,7 +10230,7 @@ export class ProgramActivationClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -10787,7 +10787,7 @@ export class ProgramClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -11356,7 +11356,7 @@ export class ProgramPhaseClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -11651,7 +11651,7 @@ export class TaskCommentClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -12133,7 +12133,7 @@ export class TaskClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -12514,7 +12514,7 @@ export class SharingClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -12824,7 +12824,7 @@ export class TicketClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -13138,7 +13138,7 @@ export class SurveyContentClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -13874,7 +13874,7 @@ export class SurveyClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -14449,7 +14449,7 @@ export class SurveyRequestClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -14833,7 +14833,7 @@ export class SurveyResponseClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -15323,7 +15323,7 @@ export class ActorClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -15408,7 +15408,7 @@ export class BookAttemptClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -15964,7 +15964,7 @@ export class BookContentClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -16872,7 +16872,7 @@ export class CertificateClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -17253,7 +17253,7 @@ export class CertificationClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -17759,7 +17759,7 @@ export class ClassClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -18232,7 +18232,7 @@ export class CourseClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -18812,7 +18812,7 @@ export class EnrolmentClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -19077,7 +19077,7 @@ export class ModuleAttemptClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -19418,7 +19418,7 @@ export class ModuleClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -20255,7 +20255,7 @@ export class ModuleNpsClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -20631,7 +20631,7 @@ export class QuizAttemptClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -21187,7 +21187,7 @@ export class QuizContentClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -22095,7 +22095,7 @@ export class RevisionAttemptClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -22651,7 +22651,7 @@ export class RevisionContentClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -23559,7 +23559,7 @@ export class TrainingSessionClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -23946,7 +23946,7 @@ export class VideoAttemptClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -24502,7 +24502,7 @@ export class VideoContentClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -25410,7 +25410,7 @@ export class AssessmentAttemptClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -25966,7 +25966,7 @@ export class AssessmentContentClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -26874,7 +26874,7 @@ export class AssessmentSubAttemptClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -27356,7 +27356,7 @@ export class AuthenticationClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -28048,7 +28048,7 @@ export class CommunicationPreferencesClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -28344,7 +28344,7 @@ export class EmailRegistrationClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -28439,7 +28439,7 @@ export class GroupCommentClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -28926,7 +28926,7 @@ export class GroupClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -29011,7 +29011,7 @@ export class GroupFileClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -29488,7 +29488,7 @@ export class JobTypeClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -29870,7 +29870,7 @@ export class LabelClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -30251,7 +30251,7 @@ export class MemberClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -31373,7 +31373,7 @@ export class OrganisationAccessTokenClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -31683,7 +31683,7 @@ export class OrganisationClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -32064,7 +32064,7 @@ export class PasswordClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -32431,7 +32431,7 @@ export class PhoneNumberRegistrationClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -32525,7 +32525,7 @@ export class RoleClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -32680,7 +32680,7 @@ export class TeamClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -33064,7 +33064,7 @@ export class UserActivityClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -33274,7 +33274,7 @@ export class UserClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -34226,7 +34226,7 @@ export class UserEmailClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -34807,7 +34807,7 @@ export class UserPhoneNumberClient {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
 
     }
 
@@ -35092,21 +35092,9 @@ export class UserPhoneNumberClient {
     }
 }
 
-export class ListOfEmail implements IListOfEmail {
+export class ListOfEmail {
     totalItemCount!: number;
     items!: Email[];
-
-    constructor(data?: IListOfEmail) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -35138,12 +35126,7 @@ export class ListOfEmail implements IListOfEmail {
     }
 }
 
-export interface IListOfEmail {
-    totalItemCount: number;
-    items: Email[];
-}
-
-export class Email implements IEmail {
+export class Email {
     id?: string | undefined;
     type?: EmailType;
     from?: EmailAddress | undefined;
@@ -35154,15 +35137,6 @@ export class Email implements IEmail {
     created?: Date;
     modified?: Date;
     status?: EmailStatus;
-
-    constructor(data?: IEmail) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -35202,19 +35176,6 @@ export class Email implements IEmail {
     }
 }
 
-export interface IEmail {
-    id?: string | undefined;
-    type?: EmailType;
-    from?: EmailAddress | undefined;
-    replyTo?: EmailAddress | undefined;
-    to?: EmailAddress | undefined;
-    subject?: string | undefined;
-    bodyHtml?: string | undefined;
-    created?: Date;
-    modified?: Date;
-    status?: EmailStatus;
-}
-
 export enum EmailType {
     None = "None",
     EventInvite = "EventInvite",
@@ -35240,18 +35201,9 @@ export enum EmailType {
     PrimaryEmailChanged = "PrimaryEmailChanged",
 }
 
-export class EmailAddress implements IEmailAddress {
+export class EmailAddress {
     address?: string | undefined;
     name?: string | undefined;
-
-    constructor(data?: IEmailAddress) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -35275,11 +35227,6 @@ export class EmailAddress implements IEmailAddress {
     }
 }
 
-export interface IEmailAddress {
-    address?: string | undefined;
-    name?: string | undefined;
-}
-
 /** 0 = None 1 = Submitted 2 = Received 3 = Read 4 = Clicked 5 = Spammed 6 = Error */
 export enum EmailStatus {
     None = 0,
@@ -35291,21 +35238,9 @@ export enum EmailStatus {
     Error = 6,
 }
 
-export class ListOfUserAttendance implements IListOfUserAttendance {
+export class ListOfUserAttendance {
     totalItemCount!: number;
     items!: UserAttendance[];
-
-    constructor(data?: IListOfUserAttendance) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -35337,27 +35272,13 @@ export class ListOfUserAttendance implements IListOfUserAttendance {
     }
 }
 
-export interface IListOfUserAttendance {
-    totalItemCount: number;
-    items: UserAttendance[];
-}
-
-export class Attendance implements IAttendance {
+export class Attendance {
     id?: string | undefined;
     memberId?: string | undefined;
     status?: AttendanceStatus;
     created?: Date;
     modified?: Date;
     version?: number;
-
-    constructor(data?: IAttendance) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -35389,16 +35310,7 @@ export class Attendance implements IAttendance {
     }
 }
 
-export interface IAttendance {
-    id?: string | undefined;
-    memberId?: string | undefined;
-    status?: AttendanceStatus;
-    created?: Date;
-    modified?: Date;
-    version?: number;
-}
-
-export class UserAttendance extends Attendance implements IUserAttendance {
+export class UserAttendance extends Attendance {
     userId?: string | undefined;
     userName?: string | undefined;
     userImageUri?: string | undefined;
@@ -35406,10 +35318,6 @@ export class UserAttendance extends Attendance implements IUserAttendance {
     userJobTypeName?: string | undefined;
     userJobTypeCategory?: string | undefined;
     userQualifications?: string | undefined;
-
-    constructor(data?: IUserAttendance) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -35445,16 +35353,6 @@ export class UserAttendance extends Attendance implements IUserAttendance {
     }
 }
 
-export interface IUserAttendance extends IAttendance {
-    userId?: string | undefined;
-    userName?: string | undefined;
-    userImageUri?: string | undefined;
-    userJobTypeId?: string | undefined;
-    userJobTypeName?: string | undefined;
-    userJobTypeCategory?: string | undefined;
-    userQualifications?: string | undefined;
-}
-
 /** 0 = None 1 = Yes 2 = No 3 = Maybe */
 export enum AttendanceStatus {
     None = 0,
@@ -35463,18 +35361,9 @@ export enum AttendanceStatus {
     Maybe = 3,
 }
 
-export class UpdateAttendanceSettings implements IUpdateAttendanceSettings {
+export class UpdateAttendanceSettings {
     status?: AttendanceStatus;
     version!: number;
-
-    constructor(data?: IUpdateAttendanceSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -35498,26 +35387,9 @@ export class UpdateAttendanceSettings implements IUpdateAttendanceSettings {
     }
 }
 
-export interface IUpdateAttendanceSettings {
-    status?: AttendanceStatus;
-    version: number;
-}
-
-export class ListOfMeeting implements IListOfMeeting {
+export class ListOfMeeting {
     totalItemCount!: number;
     items!: Meeting[];
-
-    constructor(data?: IListOfMeeting) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -35549,12 +35421,7 @@ export class ListOfMeeting implements IListOfMeeting {
     }
 }
 
-export interface IListOfMeeting {
-    totalItemCount: number;
-    items: Meeting[];
-}
-
-export class Meeting implements IMeeting {
+export class Meeting {
     id?: string | undefined;
     name?: string | undefined;
     description?: string | undefined;
@@ -35563,15 +35430,6 @@ export class Meeting implements IMeeting {
     location?: Location;
     parentId?: string | undefined;
     version?: number;
-
-    constructor(data?: IMeeting) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -35607,29 +35465,9 @@ export class Meeting implements IMeeting {
     }
 }
 
-export interface IMeeting {
-    id?: string | undefined;
-    name?: string | undefined;
-    description?: string | undefined;
-    start?: Date | undefined;
-    end?: Date | undefined;
-    location?: Location;
-    parentId?: string | undefined;
-    version?: number;
-}
-
-export class Location implements ILocation {
+export class Location {
     address?: string | undefined;
     coordinates?: Coordinates;
-
-    constructor(data?: ILocation) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -35653,23 +35491,9 @@ export class Location implements ILocation {
     }
 }
 
-export interface ILocation {
-    address?: string | undefined;
-    coordinates?: Coordinates;
-}
-
-export class Coordinates implements ICoordinates {
+export class Coordinates {
     longitude?: number;
     latitude?: number;
-
-    constructor(data?: ICoordinates) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -35693,12 +35517,7 @@ export class Coordinates implements ICoordinates {
     }
 }
 
-export interface ICoordinates {
-    longitude?: number;
-    latitude?: number;
-}
-
-export class CreateMeetingSettings implements ICreateMeetingSettings {
+export class CreateMeetingSettings {
     parentId!: string;
     name!: string;
     description?: string | undefined;
@@ -35706,15 +35525,6 @@ export class CreateMeetingSettings implements ICreateMeetingSettings {
     end?: Date | undefined;
     location?: LocationBuilder | undefined;
     files?: CreateFileSettings[] | undefined;
-
-    constructor(data?: ICreateMeetingSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -35756,29 +35566,10 @@ export class CreateMeetingSettings implements ICreateMeetingSettings {
     }
 }
 
-export interface ICreateMeetingSettings {
-    parentId: string;
-    name: string;
-    description?: string | undefined;
-    start?: Date | undefined;
-    end?: Date | undefined;
-    location?: LocationBuilder | undefined;
-    files?: CreateFileSettings[] | undefined;
-}
-
-export class LocationBuilder implements ILocationBuilder {
+export class LocationBuilder {
     address?: string | undefined;
     longitude?: number;
     latitude?: number;
-
-    constructor(data?: ILocationBuilder) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -35804,25 +35595,10 @@ export class LocationBuilder implements ILocationBuilder {
     }
 }
 
-export interface ILocationBuilder {
-    address?: string | undefined;
-    longitude?: number;
-    latitude?: number;
-}
-
-export class CreateFileSettings implements ICreateFileSettings {
+export class CreateFileSettings {
     name!: string;
     description?: string | undefined;
     dataUri!: string;
-
-    constructor(data?: ICreateFileSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -35848,13 +35624,7 @@ export class CreateFileSettings implements ICreateFileSettings {
     }
 }
 
-export interface ICreateFileSettings {
-    name: string;
-    description?: string | undefined;
-    dataUri: string;
-}
-
-export class UpdateMeetingSettings implements IUpdateMeetingSettings {
+export class UpdateMeetingSettings {
     name!: string;
     description?: string | undefined;
     start?: Date | undefined;
@@ -35863,15 +35633,6 @@ export class UpdateMeetingSettings implements IUpdateMeetingSettings {
     version!: number;
     notify?: boolean;
     eventUri?: string | undefined;
-
-    constructor(data?: IUpdateMeetingSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -35907,32 +35668,9 @@ export class UpdateMeetingSettings implements IUpdateMeetingSettings {
     }
 }
 
-export interface IUpdateMeetingSettings {
-    name: string;
-    description?: string | undefined;
-    start?: Date | undefined;
-    end?: Date | undefined;
-    location?: LocationBuilder | undefined;
-    version: number;
-    notify?: boolean;
-    eventUri?: string | undefined;
-}
-
-export class ListOfFile implements IListOfFile {
+export class ListOfFile {
     totalItemCount!: number;
     items!: File[];
-
-    constructor(data?: IListOfFile) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -35964,12 +35702,7 @@ export class ListOfFile implements IListOfFile {
     }
 }
 
-export interface IListOfFile {
-    totalItemCount: number;
-    items: File[];
-}
-
-export class File implements IFile {
+export class File {
     id?: string | undefined;
     name?: string | undefined;
     description?: string | undefined;
@@ -35982,15 +35715,6 @@ export class File implements IFile {
     modified?: Date;
     parentId?: string | undefined;
     version?: number;
-
-    constructor(data?: IFile) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -36034,35 +35758,11 @@ export class File implements IFile {
     }
 }
 
-export interface IFile {
-    id?: string | undefined;
-    name?: string | undefined;
-    description?: string | undefined;
-    byteCount?: number;
-    contentType?: string | undefined;
-    extension?: string | undefined;
-    creatorId?: string | undefined;
-    creatorName?: string | undefined;
-    created?: Date;
-    modified?: Date;
-    parentId?: string | undefined;
-    version?: number;
-}
-
-export class UpdateFileSettings implements IUpdateFileSettings {
+export class UpdateFileSettings {
     name!: string;
     description?: string | undefined;
     dataUri?: string | undefined;
     version!: number;
-
-    constructor(data?: IUpdateFileSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -36090,28 +35790,9 @@ export class UpdateFileSettings implements IUpdateFileSettings {
     }
 }
 
-export interface IUpdateFileSettings {
-    name: string;
-    description?: string | undefined;
-    dataUri?: string | undefined;
-    version: number;
-}
-
-export class ListOfGroupAttendance implements IListOfGroupAttendance {
+export class ListOfGroupAttendance {
     totalItemCount!: number;
     items!: GroupAttendance[];
-
-    constructor(data?: IListOfGroupAttendance) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -36143,17 +35824,8 @@ export class ListOfGroupAttendance implements IListOfGroupAttendance {
     }
 }
 
-export interface IListOfGroupAttendance {
-    totalItemCount: number;
-    items: GroupAttendance[];
-}
-
-export class GroupAttendance extends Attendance implements IGroupAttendance {
+export class GroupAttendance extends Attendance {
     groupName?: string | undefined;
-
-    constructor(data?: IGroupAttendance) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -36177,25 +35849,9 @@ export class GroupAttendance extends Attendance implements IGroupAttendance {
     }
 }
 
-export interface IGroupAttendance extends IAttendance {
-    groupName?: string | undefined;
-}
-
-export class ListOfBackup implements IListOfBackup {
+export class ListOfBackup {
     totalItemCount!: number;
     items!: Backup[];
-
-    constructor(data?: IListOfBackup) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -36227,27 +35883,13 @@ export class ListOfBackup implements IListOfBackup {
     }
 }
 
-export interface IListOfBackup {
-    totalItemCount: number;
-    items: Backup[];
-}
-
-export class Backup implements IBackup {
+export class Backup {
     id?: string | undefined;
     type?: BackupType;
     started?: Date;
     completed?: Date | undefined;
     status?: BackupStatus;
     message?: string | undefined;
-
-    constructor(data?: IBackup) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -36279,15 +35921,6 @@ export class Backup implements IBackup {
     }
 }
 
-export interface IBackup {
-    id?: string | undefined;
-    type?: BackupType;
-    started?: Date;
-    completed?: Date | undefined;
-    status?: BackupStatus;
-    message?: string | undefined;
-}
-
 /** 0 = Unknown 1 = Scheduled 2 = Manual */
 export enum BackupType {
     Unknown = 0,
@@ -36302,21 +35935,9 @@ export enum BackupStatus {
     Error = 2,
 }
 
-export class ListOfExternalApplication implements IListOfExternalApplication {
+export class ListOfExternalApplication {
     totalItemCount!: number;
     items!: ExternalApplication[];
-
-    constructor(data?: IListOfExternalApplication) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -36348,27 +35969,13 @@ export class ListOfExternalApplication implements IListOfExternalApplication {
     }
 }
 
-export interface IListOfExternalApplication {
-    totalItemCount: number;
-    items: ExternalApplication[];
-}
-
-export class ExternalApplication implements IExternalApplication {
+export class ExternalApplication {
     id?: string | undefined;
     name?: string | undefined;
     imageUri?: string | undefined;
     endpoint?: string | undefined;
     isDefault?: boolean;
     version?: number;
-
-    constructor(data?: IExternalApplication) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -36400,29 +36007,11 @@ export class ExternalApplication implements IExternalApplication {
     }
 }
 
-export interface IExternalApplication {
-    id?: string | undefined;
-    name?: string | undefined;
-    imageUri?: string | undefined;
-    endpoint?: string | undefined;
-    isDefault?: boolean;
-    version?: number;
-}
-
-export class CreateExternalApplicationSettings implements ICreateExternalApplicationSettings {
+export class CreateExternalApplicationSettings {
     name!: string;
     imageUri?: string | undefined;
     endpoint?: string | undefined;
     isDefault?: boolean;
-
-    constructor(data?: ICreateExternalApplicationSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -36450,28 +36039,12 @@ export class CreateExternalApplicationSettings implements ICreateExternalApplica
     }
 }
 
-export interface ICreateExternalApplicationSettings {
-    name: string;
-    imageUri?: string | undefined;
-    endpoint?: string | undefined;
-    isDefault?: boolean;
-}
-
-export class UpdateExternalApplicationSettings implements IUpdateExternalApplicationSettings {
+export class UpdateExternalApplicationSettings {
     name!: string;
     imageUri?: string | undefined;
     endpoint?: string | undefined;
     isDefault?: boolean;
     version!: number;
-
-    constructor(data?: IUpdateExternalApplicationSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -36501,27 +36074,10 @@ export class UpdateExternalApplicationSettings implements IUpdateExternalApplica
     }
 }
 
-export interface IUpdateExternalApplicationSettings {
-    name: string;
-    imageUri?: string | undefined;
-    endpoint?: string | undefined;
-    isDefault?: boolean;
-    version: number;
-}
-
-export class ResizedImage implements IResizedImage {
+export class ResizedImage {
     uri?: string | undefined;
     width?: number;
     height?: number;
-
-    constructor(data?: IResizedImage) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -36547,27 +36103,9 @@ export class ResizedImage implements IResizedImage {
     }
 }
 
-export interface IResizedImage {
-    uri?: string | undefined;
-    width?: number;
-    height?: number;
-}
-
-export class ListOfLog implements IListOfLog {
+export class ListOfLog {
     totalItemCount!: number;
     items!: Log[];
-
-    constructor(data?: IListOfLog) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -36599,26 +36137,12 @@ export class ListOfLog implements IListOfLog {
     }
 }
 
-export interface IListOfLog {
-    totalItemCount: number;
-    items: Log[];
-}
-
-export class Log implements ILog {
+export class Log {
     id?: string | undefined;
     created?: Date;
     message?: string | undefined;
     level?: number;
     context?: string | undefined;
-
-    constructor(data?: ILog) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -36648,25 +36172,8 @@ export class Log implements ILog {
     }
 }
 
-export interface ILog {
-    id?: string | undefined;
-    created?: Date;
-    message?: string | undefined;
-    level?: number;
-    context?: string | undefined;
-}
-
-export class MarkdownPreviewSettings implements IMarkdownPreviewSettings {
+export class MarkdownPreviewSettings {
     text?: string | undefined;
-
-    constructor(data?: IMarkdownPreviewSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -36688,11 +36195,7 @@ export class MarkdownPreviewSettings implements IMarkdownPreviewSettings {
     }
 }
 
-export interface IMarkdownPreviewSettings {
-    text?: string | undefined;
-}
-
-export class Platform implements IPlatform {
+export class Platform {
     id?: string | undefined;
     name?: string | undefined;
     environment?: string | undefined;
@@ -36704,15 +36207,6 @@ export class Platform implements IPlatform {
     supportEmailAddress?: string | undefined;
     systemEmailAddress?: string | undefined;
     cultures?: Culture[] | undefined;
-
-    constructor(data?: IPlatform) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -36762,33 +36256,10 @@ export class Platform implements IPlatform {
     }
 }
 
-export interface IPlatform {
-    id?: string | undefined;
-    name?: string | undefined;
-    environment?: string | undefined;
-    timeZoneId?: string | undefined;
-    version?: ApplicationVersion;
-    compileConfiguration?: string | undefined;
-    compileDate?: Date | undefined;
-    reCaptchaSiteKey?: string | undefined;
-    supportEmailAddress?: string | undefined;
-    systemEmailAddress?: string | undefined;
-    cultures?: Culture[] | undefined;
-}
-
-export class ApplicationVersion implements IApplicationVersion {
+export class ApplicationVersion {
     major?: number;
     minor?: number;
     build?: number;
-
-    constructor(data?: IApplicationVersion) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -36814,28 +36285,13 @@ export class ApplicationVersion implements IApplicationVersion {
     }
 }
 
-export interface IApplicationVersion {
-    major?: number;
-    minor?: number;
-    build?: number;
-}
-
-export class Culture implements ICulture {
+export class Culture {
     id?: string | undefined;
     name?: string | undefined;
     datePattern?: string | undefined;
     shortDatePattern?: string | undefined;
     timePattern?: string | undefined;
     shortTimePattern?: string | undefined;
-
-    constructor(data?: ICulture) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -36867,27 +36323,9 @@ export class Culture implements ICulture {
     }
 }
 
-export interface ICulture {
-    id?: string | undefined;
-    name?: string | undefined;
-    datePattern?: string | undefined;
-    shortDatePattern?: string | undefined;
-    timePattern?: string | undefined;
-    shortTimePattern?: string | undefined;
-}
-
-export class PlatformStatus implements IPlatformStatus {
+export class PlatformStatus {
     status?: SystemStatus;
     buildingProgress?: number;
-
-    constructor(data?: IPlatformStatus) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -36911,11 +36349,6 @@ export class PlatformStatus implements IPlatformStatus {
     }
 }
 
-export interface IPlatformStatus {
-    status?: SystemStatus;
-    buildingProgress?: number;
-}
-
 /** 0 = Built 1 = Building 2 = Maintenance -1 = Failed */
 export enum SystemStatus {
     Built = 0,
@@ -36924,21 +36357,9 @@ export enum SystemStatus {
     Failed = -1,
 }
 
-export class ListOfProjectionBuild implements IListOfProjectionBuild {
+export class ListOfProjectionBuild {
     totalItemCount!: number;
     items!: ProjectionBuild[];
-
-    constructor(data?: IListOfProjectionBuild) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -36970,24 +36391,10 @@ export class ListOfProjectionBuild implements IListOfProjectionBuild {
     }
 }
 
-export interface IListOfProjectionBuild {
-    totalItemCount: number;
-    items: ProjectionBuild[];
-}
-
-export class ProjectionBuild implements IProjectionBuild {
+export class ProjectionBuild {
     eventsProcessed?: number;
     estimatedTotalEvents?: number;
     status?: ProjectionStatus;
-
-    constructor(data?: IProjectionBuild) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -37013,12 +36420,6 @@ export class ProjectionBuild implements IProjectionBuild {
     }
 }
 
-export interface IProjectionBuild {
-    eventsProcessed?: number;
-    estimatedTotalEvents?: number;
-    status?: ProjectionStatus;
-}
-
 /** 0 = Unknown 1 = Pending 2 = Running 3 = Completed -1 = Failed */
 export enum ProjectionStatus {
     Unknown = 0,
@@ -37028,21 +36429,9 @@ export enum ProjectionStatus {
     Failed = -1,
 }
 
-export class ListOfNotification implements IListOfNotification {
+export class ListOfNotification {
     totalItemCount!: number;
     items!: Notification[];
-
-    constructor(data?: IListOfNotification) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -37074,12 +36463,7 @@ export class ListOfNotification implements IListOfNotification {
     }
 }
 
-export interface IListOfNotification {
-    totalItemCount: number;
-    items: Notification[];
-}
-
-export class Notification implements INotification {
+export class Notification {
     id?: string | undefined;
     type?: string | undefined;
     recipientId?: string | undefined;
@@ -37090,15 +36474,6 @@ export class Notification implements INotification {
     creatorName?: string | undefined;
     created?: Date;
     version?: number;
-
-    constructor(data?: INotification) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -37138,32 +36513,10 @@ export class Notification implements INotification {
     }
 }
 
-export interface INotification {
-    id?: string | undefined;
-    type?: string | undefined;
-    recipientId?: string | undefined;
-    parameters?: any | undefined;
-    seen?: boolean;
-    read?: boolean;
-    creatorId?: string | undefined;
-    creatorName?: string | undefined;
-    created?: Date;
-    version?: number;
-}
-
-export class UpdateNotificationSettings implements IUpdateNotificationSettings {
+export class UpdateNotificationSettings {
     seen?: boolean;
     read?: boolean;
     version!: number;
-
-    constructor(data?: IUpdateNotificationSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -37189,27 +36542,9 @@ export class UpdateNotificationSettings implements IUpdateNotificationSettings {
     }
 }
 
-export interface IUpdateNotificationSettings {
-    seen?: boolean;
-    read?: boolean;
-    version: number;
-}
-
-export class ListOfScheduledEmail implements IListOfScheduledEmail {
+export class ListOfScheduledEmail {
     totalItemCount!: number;
     items!: ScheduledEmail[];
-
-    constructor(data?: IListOfScheduledEmail) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -37241,12 +36576,7 @@ export class ListOfScheduledEmail implements IListOfScheduledEmail {
     }
 }
 
-export interface IListOfScheduledEmail {
-    totalItemCount: number;
-    items: ScheduledEmail[];
-}
-
-export class ScheduledEmail implements IScheduledEmail {
+export class ScheduledEmail {
     id?: string | undefined;
     type?: string | undefined;
     title?: string | undefined;
@@ -37262,15 +36592,6 @@ export class ScheduledEmail implements IScheduledEmail {
     parameters?: any | undefined;
     schedule?: ScheduleOption | undefined;
     version?: number;
-
-    constructor(data?: IScheduledEmail) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -37328,39 +36649,12 @@ export class ScheduledEmail implements IScheduledEmail {
     }
 }
 
-export interface IScheduledEmail {
-    id?: string | undefined;
-    type?: string | undefined;
-    title?: string | undefined;
-    note?: string | undefined;
-    externalApplicationId?: string | undefined;
-    groupId?: string | undefined;
-    groupName?: string | undefined;
-    organisationId?: string | undefined;
-    timeZoneId?: string | undefined;
-    creatorId?: string | undefined;
-    created?: Date;
-    recipientIds?: string[] | undefined;
-    parameters?: any | undefined;
-    schedule?: ScheduleOption | undefined;
-    version?: number;
-}
-
-export class ScheduleOption implements IScheduleOption {
+export class ScheduleOption {
     start?: Date;
     repeatType?: RepeatType;
     repeatInterval?: number;
     repeatOn?: number[] | undefined;
     end?: Date | undefined;
-
-    constructor(data?: IScheduleOption) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -37398,14 +36692,6 @@ export class ScheduleOption implements IScheduleOption {
     }
 }
 
-export interface IScheduleOption {
-    start?: Date;
-    repeatType?: RepeatType;
-    repeatInterval?: number;
-    repeatOn?: number[] | undefined;
-    end?: Date | undefined;
-}
-
 /** 0 = None 1 = Daily 2 = Weekly 3 = MonthlyByDay 4 = MonthlyByDayOfWeek 5 = Yearly */
 export enum RepeatType {
     None = 0,
@@ -37416,7 +36702,7 @@ export enum RepeatType {
     Yearly = 5,
 }
 
-export class CreateScheduledEmailSettings implements ICreateScheduledEmailSettings {
+export class CreateScheduledEmailSettings {
     type!: string;
     title?: string | undefined;
     note?: string | undefined;
@@ -37425,18 +36711,6 @@ export class CreateScheduledEmailSettings implements ICreateScheduledEmailSettin
     recipientIds?: string[] | undefined;
     externalApplicationId?: string | undefined;
     parameters!: any;
-
-    constructor(data?: ICreateScheduledEmailSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.schedule = new ScheduleOption();
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -37480,18 +36754,7 @@ export class CreateScheduledEmailSettings implements ICreateScheduledEmailSettin
     }
 }
 
-export interface ICreateScheduledEmailSettings {
-    type: string;
-    title?: string | undefined;
-    note?: string | undefined;
-    groupId: string;
-    schedule: ScheduleOption;
-    recipientIds?: string[] | undefined;
-    externalApplicationId?: string | undefined;
-    parameters: any;
-}
-
-export class UpdateScheduledEmailSettings implements IUpdateScheduledEmailSettings {
+export class UpdateScheduledEmailSettings {
     title?: string | undefined;
     note?: string | undefined;
     schedule?: ScheduleOption | undefined;
@@ -37499,15 +36762,6 @@ export class UpdateScheduledEmailSettings implements IUpdateScheduledEmailSettin
     externalApplicationId?: string | undefined;
     parameters?: any | undefined;
     version?: number;
-
-    constructor(data?: IUpdateScheduledEmailSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -37549,31 +36803,9 @@ export class UpdateScheduledEmailSettings implements IUpdateScheduledEmailSettin
     }
 }
 
-export interface IUpdateScheduledEmailSettings {
-    title?: string | undefined;
-    note?: string | undefined;
-    schedule?: ScheduleOption | undefined;
-    recipientIds?: string[] | undefined;
-    externalApplicationId?: string | undefined;
-    parameters?: any | undefined;
-    version?: number;
-}
-
-export class ListOfObservationContent implements IListOfObservationContent {
+export class ListOfObservationContent {
     totalItemCount!: number;
     items!: ObservationContent[];
-
-    constructor(data?: IListOfObservationContent) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -37605,12 +36837,7 @@ export class ListOfObservationContent implements IListOfObservationContent {
     }
 }
 
-export interface IListOfObservationContent {
-    totalItemCount: number;
-    items: ObservationContent[];
-}
-
-export class ObservationContent implements IObservationContent {
+export class ObservationContent {
     id?: string | undefined;
     publisherId?: string | undefined;
     definitionId?: string | undefined;
@@ -37619,15 +36846,6 @@ export class ObservationContent implements IObservationContent {
     created?: Date;
     modified?: Date;
     version?: number;
-
-    constructor(data?: IObservationContent) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -37671,33 +36889,10 @@ export class ObservationContent implements IObservationContent {
     }
 }
 
-export interface IObservationContent {
-    id?: string | undefined;
-    publisherId?: string | undefined;
-    definitionId?: string | undefined;
-    questions?: any[] | undefined;
-    published?: boolean;
-    created?: Date;
-    modified?: Date;
-    version?: number;
-}
-
-export class CreateObservationContentSettings implements ICreateObservationContentSettings {
+export class CreateObservationContentSettings {
     definitionId!: string;
     questions!: any[];
     published?: boolean;
-
-    constructor(data?: ICreateObservationContentSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.questions = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -37731,27 +36926,9 @@ export class CreateObservationContentSettings implements ICreateObservationConte
     }
 }
 
-export interface ICreateObservationContentSettings {
-    definitionId: string;
-    questions: any[];
-    published?: boolean;
-}
-
-export class UpdateObservationContentSettings implements IUpdateObservationContentSettings {
+export class UpdateObservationContentSettings {
     questions!: any[];
     version?: number;
-
-    constructor(data?: IUpdateObservationContentSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.questions = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -37783,26 +36960,9 @@ export class UpdateObservationContentSettings implements IUpdateObservationConte
     }
 }
 
-export interface IUpdateObservationContentSettings {
-    questions: any[];
-    version?: number;
-}
-
-export class ListOfLocatableObservation implements IListOfLocatableObservation {
+export class ListOfLocatableObservation {
     totalItemCount!: number;
     items!: LocatableObservation[];
-
-    constructor(data?: IListOfLocatableObservation) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -37834,12 +36994,7 @@ export class ListOfLocatableObservation implements IListOfLocatableObservation {
     }
 }
 
-export interface IListOfLocatableObservation {
-    totalItemCount: number;
-    items: LocatableObservation[];
-}
-
-export class Observation implements IObservation {
+export class Observation {
     id?: string | undefined;
     name?: string | undefined;
     performed?: Date;
@@ -37855,15 +37010,6 @@ export class Observation implements IObservation {
     contentId?: string | undefined;
     creatorId?: string | undefined;
     version?: number;
-
-    constructor(data?: IObservation) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -37921,30 +37067,8 @@ export class Observation implements IObservation {
     }
 }
 
-export interface IObservation {
-    id?: string | undefined;
-    name?: string | undefined;
-    performed?: Date;
-    answers?: any[] | undefined;
-    groupId?: string | undefined;
-    groupName?: string | undefined;
-    groupType?: string | undefined;
-    organisationId?: string | undefined;
-    observerId?: string | undefined;
-    observerName?: string | undefined;
-    definitionId?: string | undefined;
-    publisherId?: string | undefined;
-    contentId?: string | undefined;
-    creatorId?: string | undefined;
-    version?: number;
-}
-
-export class LocatableObservation extends Observation implements ILocatableObservation {
+export class LocatableObservation extends Observation {
     coordinates?: Coordinates | undefined;
-
-    constructor(data?: ILocatableObservation) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -37968,23 +37092,10 @@ export class LocatableObservation extends Observation implements ILocatableObser
     }
 }
 
-export interface ILocatableObservation extends IObservation {
-    coordinates?: Coordinates | undefined;
-}
-
-export class PageOptions implements IPageOptions {
+export class PageOptions {
     skip?: number;
     /** The number (0 - 1000 inclusive) of items to get from the API. */
     take?: number;
-
-    constructor(data?: IPageOptions) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -38008,19 +37119,9 @@ export class PageOptions implements IPageOptions {
     }
 }
 
-export interface IPageOptions {
-    skip?: number;
-    /** The number (0 - 1000 inclusive) of items to get from the API. */
-    take?: number;
-}
-
-export class ObservationAreaOptions extends PageOptions implements IObservationAreaOptions {
+export class ObservationAreaOptions extends PageOptions {
     southWest?: CoordinatesBuilder | undefined;
     northEast?: CoordinatesBuilder | undefined;
-
-    constructor(data?: IObservationAreaOptions) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -38046,23 +37147,9 @@ export class ObservationAreaOptions extends PageOptions implements IObservationA
     }
 }
 
-export interface IObservationAreaOptions extends IPageOptions {
-    southWest?: CoordinatesBuilder | undefined;
-    northEast?: CoordinatesBuilder | undefined;
-}
-
-export class CoordinatesBuilder implements ICoordinatesBuilder {
+export class CoordinatesBuilder {
     longitude?: number;
     latitude?: number;
-
-    constructor(data?: ICoordinatesBuilder) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -38086,26 +37173,9 @@ export class CoordinatesBuilder implements ICoordinatesBuilder {
     }
 }
 
-export interface ICoordinatesBuilder {
-    longitude?: number;
-    latitude?: number;
-}
-
-export class ListOfObservation implements IListOfObservation {
+export class ListOfObservation {
     totalItemCount!: number;
     items!: Observation[];
-
-    constructor(data?: IListOfObservation) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -38137,26 +37207,12 @@ export class ListOfObservation implements IListOfObservation {
     }
 }
 
-export interface IListOfObservation {
-    totalItemCount: number;
-    items: Observation[];
-}
-
-export class CreateObservationSettings implements ICreateObservationSettings {
+export class CreateObservationSettings {
     contentId!: string;
     groupId!: string;
     observerId?: string | undefined;
     answers?: any[] | undefined;
     performed?: Date;
-
-    constructor(data?: ICreateObservationSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -38194,28 +37250,11 @@ export class CreateObservationSettings implements ICreateObservationSettings {
     }
 }
 
-export interface ICreateObservationSettings {
-    contentId: string;
-    groupId: string;
-    observerId?: string | undefined;
-    answers?: any[] | undefined;
-    performed?: Date;
-}
-
-export class UpdateObservationSettings implements IUpdateObservationSettings {
+export class UpdateObservationSettings {
     observerId?: string | undefined;
     answers?: any[] | undefined;
     performed?: Date;
     version!: number;
-
-    constructor(data?: IUpdateObservationSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -38251,24 +37290,8 @@ export class UpdateObservationSettings implements IUpdateObservationSettings {
     }
 }
 
-export interface IUpdateObservationSettings {
-    observerId?: string | undefined;
-    answers?: any[] | undefined;
-    performed?: Date;
-    version: number;
-}
-
-export class PredictObservationSettings implements IPredictObservationSettings {
+export class PredictObservationSettings {
     dataUri!: string;
-
-    constructor(data?: IPredictObservationSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -38290,25 +37313,9 @@ export class PredictObservationSettings implements IPredictObservationSettings {
     }
 }
 
-export interface IPredictObservationSettings {
-    dataUri: string;
-}
-
-export class ListOfObservationDefinition implements IListOfObservationDefinition {
+export class ListOfObservationDefinition {
     totalItemCount!: number;
     items!: ObservationDefinition[];
-
-    constructor(data?: IListOfObservationDefinition) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -38340,12 +37347,7 @@ export class ListOfObservationDefinition implements IListOfObservationDefinition
     }
 }
 
-export interface IListOfObservationDefinition {
-    totalItemCount: number;
-    items: ObservationDefinition[];
-}
-
-export class ObservationDefinition implements IObservationDefinition {
+export class ObservationDefinition {
     id?: string | undefined;
     name?: string | undefined;
     description?: string | undefined;
@@ -38355,15 +37357,6 @@ export class ObservationDefinition implements IObservationDefinition {
     publishedContentId?: string | undefined;
     programs?: ProgramInObservationDefinition[] | undefined;
     version?: number;
-
-    constructor(data?: IObservationDefinition) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -38409,30 +37402,9 @@ export class ObservationDefinition implements IObservationDefinition {
     }
 }
 
-export interface IObservationDefinition {
+export class ProgramInObservationDefinition {
     id?: string | undefined;
     name?: string | undefined;
-    description?: string | undefined;
-    publisherId?: string | undefined;
-    publisherName?: string | undefined;
-    published?: boolean;
-    publishedContentId?: string | undefined;
-    programs?: ProgramInObservationDefinition[] | undefined;
-    version?: number;
-}
-
-export class ProgramInObservationDefinition implements IProgramInObservationDefinition {
-    id?: string | undefined;
-    name?: string | undefined;
-
-    constructor(data?: IProgramInObservationDefinition) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -38456,24 +37428,10 @@ export class ProgramInObservationDefinition implements IProgramInObservationDefi
     }
 }
 
-export interface IProgramInObservationDefinition {
-    id?: string | undefined;
-    name?: string | undefined;
-}
-
-export class CreateObservationDefinitionSettings implements ICreateObservationDefinitionSettings {
+export class CreateObservationDefinitionSettings {
     publisherId!: string;
     name!: string;
     description!: string;
-
-    constructor(data?: ICreateObservationDefinitionSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -38499,25 +37457,10 @@ export class CreateObservationDefinitionSettings implements ICreateObservationDe
     }
 }
 
-export interface ICreateObservationDefinitionSettings {
-    publisherId: string;
-    name: string;
-    description: string;
-}
-
-export class UpdateObservationDefinitionSettings implements IUpdateObservationDefinitionSettings {
+export class UpdateObservationDefinitionSettings {
     name!: string;
     description!: string;
     version!: number;
-
-    constructor(data?: IUpdateObservationDefinitionSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -38543,27 +37486,9 @@ export class UpdateObservationDefinitionSettings implements IUpdateObservationDe
     }
 }
 
-export interface IUpdateObservationDefinitionSettings {
-    name: string;
-    description: string;
-    version: number;
-}
-
-export class ListOfObservationForm implements IListOfObservationForm {
+export class ListOfObservationForm {
     totalItemCount!: number;
     items!: ObservationForm[];
-
-    constructor(data?: IListOfObservationForm) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -38595,12 +37520,7 @@ export class ListOfObservationForm implements IListOfObservationForm {
     }
 }
 
-export interface IListOfObservationForm {
-    totalItemCount: number;
-    items: ObservationForm[];
-}
-
-export class ObservationForm implements IObservationForm {
+export class ObservationForm {
     id?: string | undefined;
     publisherId?: string | undefined;
     definitionId?: string | undefined;
@@ -38612,15 +37532,6 @@ export class ObservationForm implements IObservationForm {
     heightMillimetres?: number;
     modified?: Date;
     version?: number;
-
-    constructor(data?: IObservationForm) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -38662,21 +37573,7 @@ export class ObservationForm implements IObservationForm {
     }
 }
 
-export interface IObservationForm {
-    id?: string | undefined;
-    publisherId?: string | undefined;
-    definitionId?: string | undefined;
-    contentId?: string | undefined;
-    fileQuestionIndex?: number | undefined;
-    modelId?: string | undefined;
-    modelVersion?: string | undefined;
-    widthMillimetres?: number;
-    heightMillimetres?: number;
-    modified?: Date;
-    version?: number;
-}
-
-export class CreateObservationFormSettings implements ICreateObservationFormSettings {
+export class CreateObservationFormSettings {
     contentId!: string;
     /** The index of the file question in the target observation content
 that will be used to store the OCR image. */
@@ -38687,15 +37584,6 @@ that will be used to store the OCR image. */
     modelVersion!: string;
     widthMillimetres?: number;
     heightMillimetres?: number;
-
-    constructor(data?: ICreateObservationFormSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -38727,35 +37615,13 @@ that will be used to store the OCR image. */
     }
 }
 
-export interface ICreateObservationFormSettings {
-    contentId: string;
-    /** The index of the file question in the target observation content
-that will be used to store the OCR image. */
-    fileQuestionIndex?: number | undefined;
-    /** ID of the ML training model. */
-    modelId: string;
-    /** Version of the ML training model. */
-    modelVersion: string;
-    widthMillimetres?: number;
-    heightMillimetres?: number;
-}
-
-export class UpdateObservationFormSettings implements IUpdateObservationFormSettings {
+export class UpdateObservationFormSettings {
     fileQuestionIndex?: number | undefined;
     modelId!: string;
     modelVersion!: string;
     widthMillimetres?: number;
     heightMillimetres?: number;
     version?: number;
-
-    constructor(data?: IUpdateObservationFormSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -38787,27 +37653,9 @@ export class UpdateObservationFormSettings implements IUpdateObservationFormSett
     }
 }
 
-export interface IUpdateObservationFormSettings {
-    fileQuestionIndex?: number | undefined;
-    modelId: string;
-    modelVersion: string;
-    widthMillimetres?: number;
-    heightMillimetres?: number;
-    version?: number;
-}
-
-export class MigrateObservationDefinitionSettings implements IMigrateObservationDefinitionSettings {
+export class MigrateObservationDefinitionSettings {
     publisherId!: string;
     version!: number;
-
-    constructor(data?: IMigrateObservationDefinitionSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -38831,29 +37679,12 @@ export class MigrateObservationDefinitionSettings implements IMigrateObservation
     }
 }
 
-export interface IMigrateObservationDefinitionSettings {
-    publisherId: string;
-    version: number;
-}
-
-export class DuplicateObservationDefinitionSettings implements IDuplicateObservationDefinitionSettings {
+export class DuplicateObservationDefinitionSettings {
     name!: string;
     description!: string;
     /** List of consumers to be migrated with the new observation definition. */
     consumerIds!: string[];
     dryRun?: boolean;
-
-    constructor(data?: IDuplicateObservationDefinitionSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.consumerIds = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -38889,31 +37720,11 @@ export class DuplicateObservationDefinitionSettings implements IDuplicateObserva
     }
 }
 
-export interface IDuplicateObservationDefinitionSettings {
-    name: string;
-    description: string;
-    /** List of consumers to be migrated with the new observation definition. */
-    consumerIds: string[];
-    dryRun?: boolean;
-}
-
-export class BatchMergeObservationAnonymousUsersSettings implements IBatchMergeObservationAnonymousUsersSettings {
+export class BatchMergeObservationAnonymousUsersSettings {
     definitionId!: string;
     groupId!: string;
     anonymousUsers!: string[];
     userId!: string;
-
-    constructor(data?: IBatchMergeObservationAnonymousUsersSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.anonymousUsers = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -38949,28 +37760,9 @@ export class BatchMergeObservationAnonymousUsersSettings implements IBatchMergeO
     }
 }
 
-export interface IBatchMergeObservationAnonymousUsersSettings {
-    definitionId: string;
-    groupId: string;
-    anonymousUsers: string[];
-    userId: string;
-}
-
-export class ListOfObservationSettings implements IListOfObservationSettings {
+export class ListOfObservationSettings {
     totalItemCount!: number;
     items!: ObservationSettings[];
-
-    constructor(data?: IListOfObservationSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -39002,27 +37794,13 @@ export class ListOfObservationSettings implements IListOfObservationSettings {
     }
 }
 
-export interface IListOfObservationSettings {
-    totalItemCount: number;
-    items: ObservationSettings[];
-}
-
-export class ObservationSettings implements IObservationSettings {
+export class ObservationSettings {
     id?: string | undefined;
     organisationId?: string | undefined;
     definitionId?: string | undefined;
     publisherId?: string | undefined;
     privacy?: PrivacyLevel;
     version?: number;
-
-    constructor(data?: IObservationSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -39054,15 +37832,6 @@ export class ObservationSettings implements IObservationSettings {
     }
 }
 
-export interface IObservationSettings {
-    id?: string | undefined;
-    organisationId?: string | undefined;
-    definitionId?: string | undefined;
-    publisherId?: string | undefined;
-    privacy?: PrivacyLevel;
-    version?: number;
-}
-
 /** 0 = Public 1 = Closed 2 = Secret */
 export enum PrivacyLevel {
     Public = 0,
@@ -39070,19 +37839,10 @@ export enum PrivacyLevel {
     Secret = 2,
 }
 
-export class CreateObservationSettingsSettings implements ICreateObservationSettingsSettings {
+export class CreateObservationSettingsSettings {
     organisationId!: string;
     definitionId!: string;
     privacy?: PrivacyLevel;
-
-    constructor(data?: ICreateObservationSettingsSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -39108,24 +37868,9 @@ export class CreateObservationSettingsSettings implements ICreateObservationSett
     }
 }
 
-export interface ICreateObservationSettingsSettings {
-    organisationId: string;
-    definitionId: string;
-    privacy?: PrivacyLevel;
-}
-
-export class UpdateObservationSettingsSettings implements IUpdateObservationSettingsSettings {
+export class UpdateObservationSettingsSettings {
     privacy?: PrivacyLevel;
     version?: number;
-
-    constructor(data?: IUpdateObservationSettingsSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -39149,23 +37894,9 @@ export class UpdateObservationSettingsSettings implements IUpdateObservationSett
     }
 }
 
-export interface IUpdateObservationSettingsSettings {
-    privacy?: PrivacyLevel;
-    version?: number;
-}
-
-export class Customer implements ICustomer {
+export class Customer {
     id?: string | undefined;
     userId?: string | undefined;
-
-    constructor(data?: ICustomer) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -39189,24 +37920,10 @@ export class Customer implements ICustomer {
     }
 }
 
-export interface ICustomer {
-    id?: string | undefined;
-    userId?: string | undefined;
-}
-
-export class Merchant implements IMerchant {
+export class Merchant {
     id?: string | undefined;
     publisherId?: string | undefined;
     verified?: boolean;
-
-    constructor(data?: IMerchant) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -39232,13 +37949,7 @@ export class Merchant implements IMerchant {
     }
 }
 
-export interface IMerchant {
-    id?: string | undefined;
-    publisherId?: string | undefined;
-    verified?: boolean;
-}
-
-export class Payment implements IPayment {
+export class Payment {
     id?: string | undefined;
     created?: Date;
     userId?: string | undefined;
@@ -39251,15 +37962,6 @@ export class Payment implements IPayment {
     amount?: number;
     merchantAmount?: number;
     status?: PaymentStatus;
-
-    constructor(data?: IPayment) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -39303,21 +38005,6 @@ export class Payment implements IPayment {
     }
 }
 
-export interface IPayment {
-    id?: string | undefined;
-    created?: Date;
-    userId?: string | undefined;
-    customerId?: string | undefined;
-    publisherId?: string | undefined;
-    merchantId?: string | undefined;
-    productId?: string | undefined;
-    itemId?: string | undefined;
-    currencyCode?: string | undefined;
-    amount?: number;
-    merchantAmount?: number;
-    status?: PaymentStatus;
-}
-
 /** 0 = None 1 = Pending 2 = Succeeded 3 = Failed 4 = Refunded */
 export enum PaymentStatus {
     None = 0,
@@ -39327,18 +38014,9 @@ export enum PaymentStatus {
     Refunded = 4,
 }
 
-export class CreatePaymentSettings implements ICreatePaymentSettings {
+export class CreatePaymentSettings {
     productId!: string;
     token!: string;
-
-    constructor(data?: ICreatePaymentSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -39362,23 +38040,9 @@ export class CreatePaymentSettings implements ICreatePaymentSettings {
     }
 }
 
-export interface ICreatePaymentSettings {
-    productId: string;
-    token: string;
-}
-
-export class Region implements IRegion {
+export class Region {
     name?: string | undefined;
     countries?: Country[] | undefined;
-
-    constructor(data?: IRegion) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -39410,24 +38074,10 @@ export class Region implements IRegion {
     }
 }
 
-export interface IRegion {
-    name?: string | undefined;
-    countries?: Country[] | undefined;
-}
-
-export class Country implements ICountry {
+export class Country {
     name?: string | undefined;
     code?: string | undefined;
     currencies?: Currency[] | undefined;
-
-    constructor(data?: ICountry) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -39461,25 +38111,10 @@ export class Country implements ICountry {
     }
 }
 
-export interface ICountry {
-    name?: string | undefined;
-    code?: string | undefined;
-    currencies?: Currency[] | undefined;
-}
-
-export class Currency implements ICurrency {
+export class Currency {
     name?: string | undefined;
     code?: string | undefined;
     symbol?: string | undefined;
-
-    constructor(data?: ICurrency) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -39505,13 +38140,7 @@ export class Currency implements ICurrency {
     }
 }
 
-export interface ICurrency {
-    name?: string | undefined;
-    code?: string | undefined;
-    symbol?: string | undefined;
-}
-
-export class Product implements IProduct {
+export class Product {
     id?: string | undefined;
     itemName?: string | undefined;
     itemType?: string | undefined;
@@ -39526,15 +38155,6 @@ export class Product implements IProduct {
     prices?: Price[] | undefined;
     published?: boolean;
     version?: number;
-
-    constructor(data?: IProduct) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -39590,36 +38210,10 @@ export class Product implements IProduct {
     }
 }
 
-export interface IProduct {
-    id?: string | undefined;
-    itemName?: string | undefined;
-    itemType?: string | undefined;
-    itemDescription?: string | undefined;
-    publisherId?: string | undefined;
-    publisherName?: string | undefined;
-    publisherApproved?: boolean;
-    programId?: string | undefined;
-    programName?: string | undefined;
-    merchantId?: string | undefined;
-    itemId?: string | undefined;
-    prices?: Price[] | undefined;
-    published?: boolean;
-    version?: number;
-}
-
-export class Price implements IPrice {
+export class Price {
     countryCode?: string | undefined;
     currencyCode?: string | undefined;
     amount?: number;
-
-    constructor(data?: IPrice) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -39645,26 +38239,11 @@ export class Price implements IPrice {
     }
 }
 
-export interface IPrice {
-    countryCode?: string | undefined;
-    currencyCode?: string | undefined;
-    amount?: number;
-}
-
-export class CreateProductSettings implements ICreateProductSettings {
+export class CreateProductSettings {
     publisherId!: string;
     itemId!: string;
     published?: boolean;
     prices?: Price[] | undefined;
-
-    constructor(data?: ICreateProductSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -39700,26 +38279,10 @@ export class CreateProductSettings implements ICreateProductSettings {
     }
 }
 
-export interface ICreateProductSettings {
-    publisherId: string;
-    itemId: string;
-    published?: boolean;
-    prices?: Price[] | undefined;
-}
-
-export class UpdateProductSettings implements IUpdateProductSettings {
+export class UpdateProductSettings {
     prices?: Price[] | undefined;
     published?: boolean;
     version!: number;
-
-    constructor(data?: IUpdateProductSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -39753,27 +38316,9 @@ export class UpdateProductSettings implements IUpdateProductSettings {
     }
 }
 
-export interface IUpdateProductSettings {
-    prices?: Price[] | undefined;
-    published?: boolean;
-    version: number;
-}
-
-export class ListOfPublisher implements IListOfPublisher {
+export class ListOfPublisher {
     totalItemCount!: number;
     items!: Publisher[];
-
-    constructor(data?: IListOfPublisher) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -39805,26 +38350,12 @@ export class ListOfPublisher implements IListOfPublisher {
     }
 }
 
-export interface IListOfPublisher {
-    totalItemCount: number;
-    items: Publisher[];
-}
-
-export class Publisher implements IPublisher {
+export class Publisher {
     id?: string | undefined;
     requested?: boolean;
     request?: PublishingOptions | undefined;
     approved?: boolean;
     publishing?: PublishingOptions | undefined;
-
-    constructor(data?: IPublisher) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -39854,27 +38385,10 @@ export class Publisher implements IPublisher {
     }
 }
 
-export interface IPublisher {
-    id?: string | undefined;
-    requested?: boolean;
-    request?: PublishingOptions | undefined;
-    approved?: boolean;
-    publishing?: PublishingOptions | undefined;
-}
-
-export class PublishingOptions implements IPublishingOptions {
+export class PublishingOptions {
     freeBusinessToConsumer?: boolean;
     paidBusinessToConsumer?: boolean;
     businessToBusiness?: boolean;
-
-    constructor(data?: IPublishingOptions) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -39900,28 +38414,10 @@ export class PublishingOptions implements IPublishingOptions {
     }
 }
 
-export interface IPublishingOptions {
-    freeBusinessToConsumer?: boolean;
-    paidBusinessToConsumer?: boolean;
-    businessToBusiness?: boolean;
-}
-
-export class RequestPublisherSettings implements IRequestPublisherSettings {
+export class RequestPublisherSettings {
     options!: PublishingOptions;
     notes?: string | undefined;
     approvalUri?: string | undefined;
-
-    constructor(data?: IRequestPublisherSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.options = new PublishingOptions();
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -39947,28 +38443,10 @@ export class RequestPublisherSettings implements IRequestPublisherSettings {
     }
 }
 
-export interface IRequestPublisherSettings {
-    options: PublishingOptions;
-    notes?: string | undefined;
-    approvalUri?: string | undefined;
-}
-
-export class ApprovePublisherSettings implements IApprovePublisherSettings {
+export class ApprovePublisherSettings {
     options!: PublishingOptions;
     notes?: string | undefined;
     publishingUri?: string | undefined;
-
-    constructor(data?: IApprovePublisherSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.options = new PublishingOptions();
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -39994,27 +38472,9 @@ export class ApprovePublisherSettings implements IApprovePublisherSettings {
     }
 }
 
-export interface IApprovePublisherSettings {
-    options: PublishingOptions;
-    notes?: string | undefined;
-    publishingUri?: string | undefined;
-}
-
-export class ListOfImplementation implements IListOfImplementation {
+export class ListOfImplementation {
     totalItemCount!: number;
     items!: Implementation[];
-
-    constructor(data?: IListOfImplementation) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -40046,12 +38506,7 @@ export class ListOfImplementation implements IListOfImplementation {
     }
 }
 
-export interface IListOfImplementation {
-    totalItemCount: number;
-    items: Implementation[];
-}
-
-export class Implementation implements IImplementation {
+export class Implementation {
     id?: string | undefined;
     templateId?: string | undefined;
     creatorId?: string | undefined;
@@ -40069,15 +38524,6 @@ export class Implementation implements IImplementation {
     archived?: boolean;
     phases?: PhaseInImplementation[] | undefined;
     version?: number;
-
-    constructor(data?: IImplementation) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -40139,39 +38585,10 @@ export class Implementation implements IImplementation {
     }
 }
 
-export interface IImplementation {
-    id?: string | undefined;
-    templateId?: string | undefined;
-    creatorId?: string | undefined;
-    publisherId?: string | undefined;
-    publisherName?: string | undefined;
-    publisherLogoUri?: string | undefined;
-    consumerId?: string | undefined;
-    consumerName?: string | undefined;
-    consumerLogoUri?: string | undefined;
-    teamId?: string | undefined;
-    teamName?: string | undefined;
-    name?: string | undefined;
-    description?: string | undefined;
-    startDate?: Date | undefined;
-    archived?: boolean;
-    phases?: PhaseInImplementation[] | undefined;
-    version?: number;
-}
-
-export class PhaseInImplementation implements IPhaseInImplementation {
+export class PhaseInImplementation {
     name?: string | undefined;
     order?: number;
     tasks?: TaskInImplementation[] | undefined;
-
-    constructor(data?: IPhaseInImplementation) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -40205,26 +38622,11 @@ export class PhaseInImplementation implements IPhaseInImplementation {
     }
 }
 
-export interface IPhaseInImplementation {
-    name?: string | undefined;
-    order?: number;
-    tasks?: TaskInImplementation[] | undefined;
-}
-
-export class TaskInImplementation implements ITaskInImplementation {
+export class TaskInImplementation {
     id?: string | undefined;
     name?: string | undefined;
     order?: number;
     status?: TaskStatus;
-
-    constructor(data?: ITaskInImplementation) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -40252,13 +38654,6 @@ export class TaskInImplementation implements ITaskInImplementation {
     }
 }
 
-export interface ITaskInImplementation {
-    id?: string | undefined;
-    name?: string | undefined;
-    order?: number;
-    status?: TaskStatus;
-}
-
 /** 0 = None 1 = NotStarted 2 = Started 3 = Complete 4 = Rejected */
 export enum TaskStatus {
     None = 0,
@@ -40268,21 +38663,9 @@ export enum TaskStatus {
     Rejected = 4,
 }
 
-export class ListOfTask implements IListOfTask {
+export class ListOfTask {
     totalItemCount!: number;
     items!: Task[];
-
-    constructor(data?: IListOfTask) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -40314,12 +38697,7 @@ export class ListOfTask implements IListOfTask {
     }
 }
 
-export interface IListOfTask {
-    totalItemCount: number;
-    items: Task[];
-}
-
-export class Task implements ITask {
+export class Task {
     id?: string | undefined;
     groupId?: string | undefined;
     creatorId?: string | undefined;
@@ -40334,15 +38712,6 @@ export class Task implements ITask {
     subtasks?: SubtaskInTask[] | undefined;
     assignees?: AssigneeInTask[] | undefined;
     version?: number;
-
-    constructor(data?: ITask) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -40406,39 +38775,13 @@ export class Task implements ITask {
     }
 }
 
-export interface ITask {
-    id?: string | undefined;
-    groupId?: string | undefined;
-    creatorId?: string | undefined;
-    creatorName?: string | undefined;
-    creatorImageUri?: string | undefined;
-    templateId?: string | undefined;
-    name?: string | undefined;
-    description?: string | undefined;
-    estimatedDuration?: string;
-    status?: TaskStatus;
-    due?: Date | undefined;
-    subtasks?: SubtaskInTask[] | undefined;
-    assignees?: AssigneeInTask[] | undefined;
-    version?: number;
-}
-
-export class SubtaskInTask implements ISubtaskInTask {
+export class SubtaskInTask {
     id?: string | undefined;
     name?: string | undefined;
     order?: number;
     estimatedDuration?: string;
     status?: TaskStatus;
     due?: Date | undefined;
-
-    constructor(data?: ISubtaskInTask) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -40470,28 +38813,10 @@ export class SubtaskInTask implements ISubtaskInTask {
     }
 }
 
-export interface ISubtaskInTask {
-    id?: string | undefined;
-    name?: string | undefined;
-    order?: number;
-    estimatedDuration?: string;
-    status?: TaskStatus;
-    due?: Date | undefined;
-}
-
-export class AssigneeInTask implements IAssigneeInTask {
+export class AssigneeInTask {
     id?: string | undefined;
     name?: string | undefined;
     imageUri?: string | undefined;
-
-    constructor(data?: IAssigneeInTask) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -40517,13 +38842,7 @@ export class AssigneeInTask implements IAssigneeInTask {
     }
 }
 
-export interface IAssigneeInTask {
-    id?: string | undefined;
-    name?: string | undefined;
-    imageUri?: string | undefined;
-}
-
-export class CreateImplementationSettings implements ICreateImplementationSettings {
+export class CreateImplementationSettings {
     publisherId!: string;
     templateId?: string | undefined;
     consumerId?: string | undefined;
@@ -40532,15 +38851,6 @@ export class CreateImplementationSettings implements ICreateImplementationSettin
     description?: string | undefined;
     startDate?: Date | undefined;
     phases?: ImplementationPhase[] | undefined;
-
-    constructor(data?: ICreateImplementationSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -40584,30 +38894,10 @@ export class CreateImplementationSettings implements ICreateImplementationSettin
     }
 }
 
-export interface ICreateImplementationSettings {
-    publisherId: string;
-    templateId?: string | undefined;
-    consumerId?: string | undefined;
-    teamId?: string | undefined;
-    name: string;
-    description?: string | undefined;
-    startDate?: Date | undefined;
-    phases?: ImplementationPhase[] | undefined;
-}
-
-export class ImplementationPhase implements IImplementationPhase {
+export class ImplementationPhase {
     name?: string | undefined;
     order?: number;
     tasks?: PhaseTask[] | undefined;
-
-    constructor(data?: IImplementationPhase) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -40641,24 +38931,9 @@ export class ImplementationPhase implements IImplementationPhase {
     }
 }
 
-export interface IImplementationPhase {
-    name?: string | undefined;
-    order?: number;
-    tasks?: PhaseTask[] | undefined;
-}
-
-export class PhaseTask implements IPhaseTask {
+export class PhaseTask {
     id?: string | undefined;
     order?: number;
-
-    constructor(data?: IPhaseTask) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -40682,27 +38957,13 @@ export class PhaseTask implements IPhaseTask {
     }
 }
 
-export interface IPhaseTask {
-    id?: string | undefined;
-    order?: number;
-}
-
-export class UpdateImplementationSettings implements IUpdateImplementationSettings {
+export class UpdateImplementationSettings {
     name!: string;
     description?: string | undefined;
     phases?: ImplementationPhase[] | undefined;
     startDate?: Date | undefined;
     archived?: boolean;
     version?: number;
-
-    constructor(data?: IUpdateImplementationSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -40742,30 +39003,9 @@ export class UpdateImplementationSettings implements IUpdateImplementationSettin
     }
 }
 
-export interface IUpdateImplementationSettings {
-    name: string;
-    description?: string | undefined;
-    phases?: ImplementationPhase[] | undefined;
-    startDate?: Date | undefined;
-    archived?: boolean;
-    version?: number;
-}
-
-export class ListOfItemActivation implements IListOfItemActivation {
+export class ListOfItemActivation {
     totalItemCount!: number;
     items!: ItemActivation[];
-
-    constructor(data?: IListOfItemActivation) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -40797,12 +39037,7 @@ export class ListOfItemActivation implements IListOfItemActivation {
     }
 }
 
-export interface IListOfItemActivation {
-    totalItemCount: number;
-    items: ItemActivation[];
-}
-
-export class ItemActivation implements IItemActivation {
+export class ItemActivation {
     id?: string | undefined;
     itemId?: string | undefined;
     itemType?: string | undefined;
@@ -40818,15 +39053,6 @@ export class ItemActivation implements IItemActivation {
     version?: number;
     created?: Date;
     modified?: Date;
-
-    constructor(data?: IItemActivation) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -40884,36 +39110,9 @@ export class ItemActivation implements IItemActivation {
     }
 }
 
-export interface IItemActivation {
-    id?: string | undefined;
-    itemId?: string | undefined;
-    itemType?: string | undefined;
-    itemName?: string | undefined;
-    programs?: ProgramInItemActivation[] | undefined;
-    publisherId?: string | undefined;
-    publisherName?: string | undefined;
-    consumerOrganisationId?: string | undefined;
-    consumerType?: string | undefined;
-    consumerId?: string | undefined;
-    consumerName?: string | undefined;
-    activated?: boolean;
-    version?: number;
-    created?: Date;
-    modified?: Date;
-}
-
-export class ProgramInItemActivation implements IProgramInItemActivation {
+export class ProgramInItemActivation {
     id?: string | undefined;
     name?: string | undefined;
-
-    constructor(data?: IProgramInItemActivation) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -40937,26 +39136,9 @@ export class ProgramInItemActivation implements IProgramInItemActivation {
     }
 }
 
-export interface IProgramInItemActivation {
-    id?: string | undefined;
-    name?: string | undefined;
-}
-
-export class ListOfProgramActivation implements IListOfProgramActivation {
+export class ListOfProgramActivation {
     totalItemCount!: number;
     items!: ProgramActivation[];
-
-    constructor(data?: IListOfProgramActivation) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -40988,12 +39170,7 @@ export class ListOfProgramActivation implements IListOfProgramActivation {
     }
 }
 
-export interface IListOfProgramActivation {
-    totalItemCount: number;
-    items: ProgramActivation[];
-}
-
-export class ProgramActivation implements IProgramActivation {
+export class ProgramActivation {
     id?: string | undefined;
     programId?: string | undefined;
     consumerType?: string | undefined;
@@ -41004,15 +39181,6 @@ export class ProgramActivation implements IProgramActivation {
     currentPhaseId?: string | undefined;
     phaseActivations?: PhaseActivationInProgramActivation[] | undefined;
     version?: number;
-
-    constructor(data?: IProgramActivation) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -41060,31 +39228,9 @@ export class ProgramActivation implements IProgramActivation {
     }
 }
 
-export interface IProgramActivation {
-    id?: string | undefined;
-    programId?: string | undefined;
-    consumerType?: string | undefined;
-    consumerId?: string | undefined;
-    consumerName?: string | undefined;
-    launchedAt?: Date;
-    sponsor?: string | undefined;
-    currentPhaseId?: string | undefined;
-    phaseActivations?: PhaseActivationInProgramActivation[] | undefined;
-    version?: number;
-}
-
-export class PhaseActivationInProgramActivation implements IPhaseActivationInProgramActivation {
+export class PhaseActivationInProgramActivation {
     id?: string | undefined;
     status?: ProgramPhaseActivationStatus;
-
-    constructor(data?: IPhaseActivationInProgramActivation) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -41108,11 +39254,6 @@ export class PhaseActivationInProgramActivation implements IPhaseActivationInPro
     }
 }
 
-export interface IPhaseActivationInProgramActivation {
-    id?: string | undefined;
-    status?: ProgramPhaseActivationStatus;
-}
-
 /** 0 = NotActivated 1 = Requested 2 = Activated 3 = Deactivated */
 export enum ProgramPhaseActivationStatus {
     NotActivated = 0,
@@ -41121,19 +39262,10 @@ export enum ProgramPhaseActivationStatus {
     Deactivated = 3,
 }
 
-export class ActivateProgramPhaseSettings implements IActivateProgramPhaseSettings {
+export class ActivateProgramPhaseSettings {
     consumerId!: string;
     programPhaseId!: string;
     sponsor?: string | undefined;
-
-    constructor(data?: IActivateProgramPhaseSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -41159,27 +39291,9 @@ export class ActivateProgramPhaseSettings implements IActivateProgramPhaseSettin
     }
 }
 
-export interface IActivateProgramPhaseSettings {
-    consumerId: string;
-    programPhaseId: string;
-    sponsor?: string | undefined;
-}
-
-export class ListOfProgram implements IListOfProgram {
+export class ListOfProgram {
     totalItemCount!: number;
     items!: Program[];
-
-    constructor(data?: IListOfProgram) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -41211,12 +39325,7 @@ export class ListOfProgram implements IListOfProgram {
     }
 }
 
-export interface IListOfProgram {
-    totalItemCount: number;
-    items: Program[];
-}
-
-export class Program implements IProgram {
+export class Program {
     id?: string | undefined;
     name?: string | undefined;
     logoUri?: string | undefined;
@@ -41227,15 +39336,6 @@ export class Program implements IProgram {
     resources?: ProgramResource[] | undefined;
     phases?: ProgramPhaseInProgram[] | undefined;
     version?: number;
-
-    constructor(data?: IProgram) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -41291,31 +39391,9 @@ export class Program implements IProgram {
     }
 }
 
-export interface IProgram {
-    id?: string | undefined;
-    name?: string | undefined;
-    logoUri?: string | undefined;
-    bannerUri?: string | undefined;
-    publisherId?: string | undefined;
-    publisherName?: string | undefined;
-    publisherLogoUri?: string | undefined;
-    resources?: ProgramResource[] | undefined;
-    phases?: ProgramPhaseInProgram[] | undefined;
-    version?: number;
-}
-
-export class ProgramResource implements IProgramResource {
+export class ProgramResource {
     id?: string | undefined;
     type?: ProgramResourceType;
-
-    constructor(data?: IProgramResource) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -41339,11 +39417,6 @@ export class ProgramResource implements IProgramResource {
     }
 }
 
-export interface IProgramResource {
-    id?: string | undefined;
-    type?: ProgramResourceType;
-}
-
 /** 0 = Course 1 = ObservationDefinition 2 = Survey 3 = Implementation */
 export enum ProgramResourceType {
     Course = 0,
@@ -41352,18 +39425,9 @@ export enum ProgramResourceType {
     Implementation = 3,
 }
 
-export class ProgramPhaseInProgram implements IProgramPhaseInProgram {
+export class ProgramPhaseInProgram {
     id?: string | undefined;
     resources?: ProgramResource[] | undefined;
-
-    constructor(data?: IProgramPhaseInProgram) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -41395,26 +39459,12 @@ export class ProgramPhaseInProgram implements IProgramPhaseInProgram {
     }
 }
 
-export interface IProgramPhaseInProgram {
-    id?: string | undefined;
-    resources?: ProgramResource[] | undefined;
-}
-
-export class CreateProgramSettings implements ICreateProgramSettings {
+export class CreateProgramSettings {
     publisherId!: string;
     name!: string;
     bannerUri?: string | undefined;
     logoUri?: string | undefined;
     resources?: ProgramResource[] | undefined;
-
-    constructor(data?: ICreateProgramSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -41452,29 +39502,12 @@ export class CreateProgramSettings implements ICreateProgramSettings {
     }
 }
 
-export interface ICreateProgramSettings {
-    publisherId: string;
-    name: string;
-    bannerUri?: string | undefined;
-    logoUri?: string | undefined;
-    resources?: ProgramResource[] | undefined;
-}
-
-export class UpdateProgramSettings implements IUpdateProgramSettings {
+export class UpdateProgramSettings {
     name!: string;
     bannerUri?: string | undefined;
     logoUri?: string | undefined;
     resources?: ProgramResource[] | undefined;
     version?: number;
-
-    constructor(data?: IUpdateProgramSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -41512,15 +39545,7 @@ export class UpdateProgramSettings implements IUpdateProgramSettings {
     }
 }
 
-export interface IUpdateProgramSettings {
-    name: string;
-    bannerUri?: string | undefined;
-    logoUri?: string | undefined;
-    resources?: ProgramResource[] | undefined;
-    version?: number;
-}
-
-export class ProgramPhase implements IProgramPhase {
+export class ProgramPhase {
     id?: string | undefined;
     publisherId?: string | undefined;
     publisherName?: string | undefined;
@@ -41533,15 +39558,6 @@ export class ProgramPhase implements IProgramPhase {
     description?: string | undefined;
     resources?: ProgramResource[] | undefined;
     version?: number;
-
-    constructor(data?: IProgramPhase) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -41593,35 +39609,11 @@ export class ProgramPhase implements IProgramPhase {
     }
 }
 
-export interface IProgramPhase {
-    id?: string | undefined;
-    publisherId?: string | undefined;
-    publisherName?: string | undefined;
-    publisherLogoUri?: string | undefined;
-    programId?: string | undefined;
-    programName?: string | undefined;
-    programLogoUri?: string | undefined;
-    programBannerUri?: string | undefined;
-    name?: string | undefined;
-    description?: string | undefined;
-    resources?: ProgramResource[] | undefined;
-    version?: number;
-}
-
-export class CreateProgramPhaseSettings implements ICreateProgramPhaseSettings {
+export class CreateProgramPhaseSettings {
     programId!: string;
     name!: string;
     description?: string | undefined;
     resources?: ProgramResource[] | undefined;
-
-    constructor(data?: ICreateProgramPhaseSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -41657,27 +39649,11 @@ export class CreateProgramPhaseSettings implements ICreateProgramPhaseSettings {
     }
 }
 
-export interface ICreateProgramPhaseSettings {
-    programId: string;
-    name: string;
-    description?: string | undefined;
-    resources?: ProgramResource[] | undefined;
-}
-
-export class UpdateProgramPhaseSettings implements IUpdateProgramPhaseSettings {
+export class UpdateProgramPhaseSettings {
     name!: string;
     description?: string | undefined;
     resources?: ProgramResource[] | undefined;
     version?: number;
-
-    constructor(data?: IUpdateProgramPhaseSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -41713,28 +39689,9 @@ export class UpdateProgramPhaseSettings implements IUpdateProgramPhaseSettings {
     }
 }
 
-export interface IUpdateProgramPhaseSettings {
-    name: string;
-    description?: string | undefined;
-    resources?: ProgramResource[] | undefined;
-    version?: number;
-}
-
-export class ListOfComment implements IListOfComment {
+export class ListOfComment {
     totalItemCount!: number;
     items!: Comment[];
-
-    constructor(data?: IListOfComment) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -41766,12 +39723,7 @@ export class ListOfComment implements IListOfComment {
     }
 }
 
-export interface IListOfComment {
-    totalItemCount: number;
-    items: Comment[];
-}
-
-export class Comment implements IComment {
+export class Comment {
     id?: string | undefined;
     rootId?: string | undefined;
     parentId?: string | undefined;
@@ -41787,15 +39739,6 @@ export class Comment implements IComment {
     modified?: Date;
     replyCount?: number;
     version?: number;
-
-    constructor(data?: IComment) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -41845,36 +39788,9 @@ export class Comment implements IComment {
     }
 }
 
-export interface IComment {
-    id?: string | undefined;
-    rootId?: string | undefined;
-    parentId?: string | undefined;
-    content?: string | undefined;
-    creatorId?: string | undefined;
-    creatorName?: string | undefined;
-    creatorImageUri?: string | undefined;
-    creatorJobTypeId?: string | undefined;
-    creatorJobTypeName?: string | undefined;
-    created?: Date;
-    modifierId?: string | undefined;
-    modifierName?: string | undefined;
-    modified?: Date;
-    replyCount?: number;
-    version?: number;
-}
-
-export class CreateCommentSettings implements ICreateCommentSettings {
+export class CreateCommentSettings {
     parentId?: string | undefined;
     content!: string;
-
-    constructor(data?: ICreateCommentSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -41898,23 +39814,9 @@ export class CreateCommentSettings implements ICreateCommentSettings {
     }
 }
 
-export interface ICreateCommentSettings {
-    parentId?: string | undefined;
-    content: string;
-}
-
-export class UpdateCommentSettings implements IUpdateCommentSettings {
+export class UpdateCommentSettings {
     content!: string;
     version?: number;
-
-    constructor(data?: IUpdateCommentSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -41938,12 +39840,7 @@ export class UpdateCommentSettings implements IUpdateCommentSettings {
     }
 }
 
-export interface IUpdateCommentSettings {
-    content: string;
-    version?: number;
-}
-
-export class CreateTaskSettings implements ICreateTaskSettings {
+export class CreateTaskSettings {
     groupId!: string;
     templateId?: string | undefined;
     name!: string;
@@ -41952,15 +39849,6 @@ export class CreateTaskSettings implements ICreateTaskSettings {
     due?: Date | undefined;
     subtasks?: TaskSubtask[] | undefined;
     assigneeIds?: string[] | undefined;
-
-    constructor(data?: ICreateTaskSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -42012,29 +39900,9 @@ export class CreateTaskSettings implements ICreateTaskSettings {
     }
 }
 
-export interface ICreateTaskSettings {
-    groupId: string;
-    templateId?: string | undefined;
-    name: string;
-    description?: string | undefined;
-    estimatedDuration?: string;
-    due?: Date | undefined;
-    subtasks?: TaskSubtask[] | undefined;
-    assigneeIds?: string[] | undefined;
-}
-
-export class TaskSubtask implements ITaskSubtask {
+export class TaskSubtask {
     id?: string | undefined;
     order?: number;
-
-    constructor(data?: ITaskSubtask) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -42058,12 +39926,7 @@ export class TaskSubtask implements ITaskSubtask {
     }
 }
 
-export interface ITaskSubtask {
-    id?: string | undefined;
-    order?: number;
-}
-
-export class UpdateTaskSettings implements IUpdateTaskSettings {
+export class UpdateTaskSettings {
     name!: string;
     description?: string | undefined;
     estimatedDuration?: string;
@@ -42072,15 +39935,6 @@ export class UpdateTaskSettings implements IUpdateTaskSettings {
     subtasks?: TaskSubtask[] | undefined;
     assigneeIds?: string[] | undefined;
     version?: number;
-
-    constructor(data?: IUpdateTaskSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -42132,18 +39986,7 @@ export class UpdateTaskSettings implements IUpdateTaskSettings {
     }
 }
 
-export interface IUpdateTaskSettings {
-    name: string;
-    description?: string | undefined;
-    estimatedDuration?: string;
-    status?: TaskStatus;
-    due?: Date | undefined;
-    subtasks?: TaskSubtask[] | undefined;
-    assigneeIds?: string[] | undefined;
-    version?: number;
-}
-
-export class Sharing implements ISharing {
+export class Sharing {
     id?: string | undefined;
     aliasId?: string | undefined;
     note?: string | undefined;
@@ -42154,15 +39997,6 @@ export class Sharing implements ISharing {
     created?: Date;
     expires?: Date;
     disabled?: boolean;
-
-    constructor(data?: ISharing) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -42202,19 +40036,6 @@ export class Sharing implements ISharing {
     }
 }
 
-export interface ISharing {
-    id?: string | undefined;
-    aliasId?: string | undefined;
-    note?: string | undefined;
-    type?: SharingType;
-    payload?: any | undefined;
-    creatorId?: string | undefined;
-    creatorType?: IdentityType;
-    created?: Date;
-    expires?: Date;
-    disabled?: boolean;
-}
-
 export enum SharingType {
     GroupInvitation = "GroupInvitation",
 }
@@ -42226,21 +40047,9 @@ export enum IdentityType {
     Organisation = 2,
 }
 
-export class ListOfSharing implements IListOfSharing {
+export class ListOfSharing {
     totalItemCount!: number;
     items!: Sharing[];
-
-    constructor(data?: IListOfSharing) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -42272,24 +40081,10 @@ export class ListOfSharing implements IListOfSharing {
     }
 }
 
-export interface IListOfSharing {
-    totalItemCount: number;
-    items: Sharing[];
-}
-
-export class CreateSharingSettingsBase implements ICreateSharingSettingsBase {
+export class CreateSharingSettingsBase {
     aliasId?: string | undefined;
     note?: string | undefined;
     duration?: string | undefined;
-
-    constructor(data?: ICreateSharingSettingsBase) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -42315,19 +40110,9 @@ export class CreateSharingSettingsBase implements ICreateSharingSettingsBase {
     }
 }
 
-export interface ICreateSharingSettingsBase {
-    aliasId?: string | undefined;
-    note?: string | undefined;
-    duration?: string | undefined;
-}
-
-export class CreateGroupInvitationSharingSettings extends CreateSharingSettingsBase implements ICreateGroupInvitationSharingSettings {
+export class CreateGroupInvitationSharingSettings extends CreateSharingSettingsBase {
     groupId!: string;
     roles?: string[] | undefined;
-
-    constructor(data?: ICreateGroupInvitationSharingSettings) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -42361,26 +40146,9 @@ export class CreateGroupInvitationSharingSettings extends CreateSharingSettingsB
     }
 }
 
-export interface ICreateGroupInvitationSharingSettings extends ICreateSharingSettingsBase {
-    groupId: string;
-    roles?: string[] | undefined;
-}
-
-export class ListOfTicket implements IListOfTicket {
+export class ListOfTicket {
     totalItemCount!: number;
     items!: Ticket[];
-
-    constructor(data?: IListOfTicket) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -42412,12 +40180,7 @@ export class ListOfTicket implements IListOfTicket {
     }
 }
 
-export interface IListOfTicket {
-    totalItemCount: number;
-    items: Ticket[];
-}
-
-export class Ticket implements ITicket {
+export class Ticket {
     id?: string | undefined;
     version?: number;
     message?: string | undefined;
@@ -42429,15 +40192,6 @@ export class Ticket implements ITicket {
     modified?: Date;
     status?: TicketStatus;
     statusReason?: string | undefined;
-
-    constructor(data?: ITicket) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -42479,20 +40233,6 @@ export class Ticket implements ITicket {
     }
 }
 
-export interface ITicket {
-    id?: string | undefined;
-    version?: number;
-    message?: string | undefined;
-    ticketType?: TicketType;
-    userId?: string | undefined;
-    userEmail?: string | undefined;
-    userName?: string | undefined;
-    created?: Date;
-    modified?: Date;
-    status?: TicketStatus;
-    statusReason?: string | undefined;
-}
-
 /** 0 = None 1 = GeneralEnquiry */
 export enum TicketType {
     None = 0,
@@ -42506,20 +40246,11 @@ export enum TicketStatus {
     Rejected = 2,
 }
 
-export class CreateTicketSettings implements ICreateTicketSettings {
+export class CreateTicketSettings {
     userEmail!: string;
     userName!: string;
     message!: string;
     type?: TicketType;
-
-    constructor(data?: ICreateTicketSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -42547,26 +40278,10 @@ export class CreateTicketSettings implements ICreateTicketSettings {
     }
 }
 
-export interface ICreateTicketSettings {
-    userEmail: string;
-    userName: string;
-    message: string;
-    type?: TicketType;
-}
-
-export class UpdateTicketSettings implements IUpdateTicketSettings {
+export class UpdateTicketSettings {
     status?: TicketStatus;
     reason?: string | undefined;
     version!: number;
-
-    constructor(data?: IUpdateTicketSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -42592,27 +40307,9 @@ export class UpdateTicketSettings implements IUpdateTicketSettings {
     }
 }
 
-export interface IUpdateTicketSettings {
-    status?: TicketStatus;
-    reason?: string | undefined;
-    version: number;
-}
-
-export class ListOfSurveyContent implements IListOfSurveyContent {
+export class ListOfSurveyContent {
     totalItemCount!: number;
     items!: SurveyContent[];
-
-    constructor(data?: IListOfSurveyContent) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -42644,12 +40341,7 @@ export class ListOfSurveyContent implements IListOfSurveyContent {
     }
 }
 
-export interface IListOfSurveyContent {
-    totalItemCount: number;
-    items: SurveyContent[];
-}
-
-export class SurveyContent implements ISurveyContent {
+export class SurveyContent {
     id?: string | undefined;
     publisherId?: string | undefined;
     surveyId?: string | undefined;
@@ -42658,15 +40350,6 @@ export class SurveyContent implements ISurveyContent {
     created?: Date;
     modified?: Date;
     version?: number;
-
-    constructor(data?: ISurveyContent) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -42710,32 +40393,9 @@ export class SurveyContent implements ISurveyContent {
     }
 }
 
-export interface ISurveyContent {
-    id?: string | undefined;
-    publisherId?: string | undefined;
-    surveyId?: string | undefined;
-    questions?: any[] | undefined;
-    published?: boolean;
-    created?: Date;
-    modified?: Date;
-    version?: number;
-}
-
-export class CreateSurveyContentSettings implements ICreateSurveyContentSettings {
+export class CreateSurveyContentSettings {
     questions!: any[];
     published?: boolean;
-
-    constructor(data?: ICreateSurveyContentSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.questions = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -42767,26 +40427,9 @@ export class CreateSurveyContentSettings implements ICreateSurveyContentSettings
     }
 }
 
-export interface ICreateSurveyContentSettings {
-    questions: any[];
-    published?: boolean;
-}
-
-export class UpdateSurveyContentSettings implements IUpdateSurveyContentSettings {
+export class UpdateSurveyContentSettings {
     questions!: any[];
     version?: number;
-
-    constructor(data?: IUpdateSurveyContentSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.questions = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -42818,12 +40461,7 @@ export class UpdateSurveyContentSettings implements IUpdateSurveyContentSettings
     }
 }
 
-export interface IUpdateSurveyContentSettings {
-    questions: any[];
-    version?: number;
-}
-
-export class SurveyQuestionTypes implements ISurveyQuestionTypes {
+export class SurveyQuestionTypes {
     listQuestion?: ListQuestion | undefined;
     compositeQuestion?: CompositeQuestion | undefined;
     decimalQuestion?: DecimalQuestion | undefined;
@@ -42840,15 +40478,6 @@ export class SurveyQuestionTypes implements ISurveyQuestionTypes {
     timeOfDayQuestion?: TimeOfDayQuestion | undefined;
     emailQuestion?: EmailQuestion | undefined;
     labelQuestion?: LabelQuestion | undefined;
-
-    constructor(data?: ISurveyQuestionTypes) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -42900,26 +40529,7 @@ export class SurveyQuestionTypes implements ISurveyQuestionTypes {
     }
 }
 
-export interface ISurveyQuestionTypes {
-    listQuestion?: ListQuestion | undefined;
-    compositeQuestion?: CompositeQuestion | undefined;
-    decimalQuestion?: DecimalQuestion | undefined;
-    integerQuestion?: IntegerQuestion | undefined;
-    multipleChoiceQuestion?: MultipleChoiceQuestion | undefined;
-    stringQuestion?: StringQuestion | undefined;
-    percentageQuestion?: PercentageQuestion | undefined;
-    dateTimeQuestion?: DateTimeQuestion | undefined;
-    timeSpanQuestion?: TimeSpanQuestion | undefined;
-    userQuestion?: UserQuestion | undefined;
-    groupQuestion?: GroupQuestion | undefined;
-    fileQuestion?: FileQuestion | undefined;
-    binaryQuestion?: BinaryQuestion | undefined;
-    timeOfDayQuestion?: TimeOfDayQuestion | undefined;
-    emailQuestion?: EmailQuestion | undefined;
-    labelQuestion?: LabelQuestion | undefined;
-}
-
-export abstract class QuestionBase implements IQuestionBase {
+export abstract class QuestionBase {
     type?: string | undefined;
     label?: string | undefined;
     note?: string | undefined;
@@ -42927,15 +40537,6 @@ export abstract class QuestionBase implements IQuestionBase {
     required?: boolean;
     enableIf?: string | undefined;
     customValidations?: CustomValidation[] | undefined;
-
-    constructor(data?: IQuestionBase) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -42975,25 +40576,11 @@ export abstract class QuestionBase implements IQuestionBase {
     }
 }
 
-export interface IQuestionBase {
-    type?: string | undefined;
-    label?: string | undefined;
-    note?: string | undefined;
-    variable?: string | undefined;
-    required?: boolean;
-    enableIf?: string | undefined;
-    customValidations?: CustomValidation[] | undefined;
-}
-
-export class ListQuestion extends QuestionBase implements IListQuestion {
+export class ListQuestion extends QuestionBase {
     layout?: LayoutType;
     question?: any | undefined;
     minimumAnswers?: number | undefined;
     maximumAnswers?: number | undefined;
-
-    constructor(data?: IListQuestion) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -43023,13 +40610,6 @@ export class ListQuestion extends QuestionBase implements IListQuestion {
     }
 }
 
-export interface IListQuestion extends IQuestionBase {
-    layout?: LayoutType;
-    question?: any | undefined;
-    minimumAnswers?: number | undefined;
-    maximumAnswers?: number | undefined;
-}
-
 /** 0 = None 1 = Horizontal 2 = Vertical */
 export enum LayoutType {
     None = 0,
@@ -43037,18 +40617,9 @@ export enum LayoutType {
     Vertical = 2,
 }
 
-export class CustomValidation implements ICustomValidation {
+export class CustomValidation {
     expression?: string | undefined;
     errorMessage?: string | undefined;
-
-    constructor(data?: ICustomValidation) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -43072,18 +40643,9 @@ export class CustomValidation implements ICustomValidation {
     }
 }
 
-export interface ICustomValidation {
-    expression?: string | undefined;
-    errorMessage?: string | undefined;
-}
-
-export class CompositeQuestion extends QuestionBase implements ICompositeQuestion {
+export class CompositeQuestion extends QuestionBase {
     layout?: LayoutType;
     questions?: any[] | undefined;
-
-    constructor(data?: ICompositeQuestion) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -43117,18 +40679,9 @@ export class CompositeQuestion extends QuestionBase implements ICompositeQuestio
     }
 }
 
-export interface ICompositeQuestion extends IQuestionBase {
-    layout?: LayoutType;
-    questions?: any[] | undefined;
-}
-
-export class DecimalQuestion extends QuestionBase implements IDecimalQuestion {
+export class DecimalQuestion extends QuestionBase {
     minimum?: number | undefined;
     maximum?: number | undefined;
-
-    constructor(data?: IDecimalQuestion) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -43154,19 +40707,10 @@ export class DecimalQuestion extends QuestionBase implements IDecimalQuestion {
     }
 }
 
-export interface IDecimalQuestion extends IQuestionBase {
-    minimum?: number | undefined;
-    maximum?: number | undefined;
-}
-
-export class IntegerQuestion extends QuestionBase implements IIntegerQuestion {
+export class IntegerQuestion extends QuestionBase {
     display?: IntegerQuestionDisplayType;
     minimum?: number | undefined;
     maximum?: number | undefined;
-
-    constructor(data?: IIntegerQuestion) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -43194,26 +40738,16 @@ export class IntegerQuestion extends QuestionBase implements IIntegerQuestion {
     }
 }
 
-export interface IIntegerQuestion extends IQuestionBase {
-    display?: IntegerQuestionDisplayType;
-    minimum?: number | undefined;
-    maximum?: number | undefined;
-}
-
 /** 0 = None 1 = Counter */
 export enum IntegerQuestionDisplayType {
     None = 0,
     Counter = 1,
 }
 
-export class MultipleChoiceQuestion extends QuestionBase implements IMultipleChoiceQuestion {
+export class MultipleChoiceQuestion extends QuestionBase {
     options?: string[] | undefined;
     minimumResponses?: number | undefined;
     maximumResponses?: number | undefined;
-
-    constructor(data?: IMultipleChoiceQuestion) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -43249,20 +40783,10 @@ export class MultipleChoiceQuestion extends QuestionBase implements IMultipleCho
     }
 }
 
-export interface IMultipleChoiceQuestion extends IQuestionBase {
-    options?: string[] | undefined;
-    minimumResponses?: number | undefined;
-    maximumResponses?: number | undefined;
-}
-
-export class StringQuestion extends QuestionBase implements IStringQuestion {
+export class StringQuestion extends QuestionBase {
     lineType?: LineType;
     minimumLength?: number | undefined;
     maximumLength?: number | undefined;
-
-    constructor(data?: IStringQuestion) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -43290,12 +40814,6 @@ export class StringQuestion extends QuestionBase implements IStringQuestion {
     }
 }
 
-export interface IStringQuestion extends IQuestionBase {
-    lineType?: LineType;
-    minimumLength?: number | undefined;
-    maximumLength?: number | undefined;
-}
-
 /** 0 = None 1 = SingleLine 2 = MultiLine */
 export enum LineType {
     None = 0,
@@ -43303,13 +40821,9 @@ export enum LineType {
     MultiLine = 2,
 }
 
-export class PercentageQuestion extends QuestionBase implements IPercentageQuestion {
+export class PercentageQuestion extends QuestionBase {
     minimum?: number | undefined;
     maximum?: number | undefined;
-
-    constructor(data?: IPercentageQuestion) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -43335,19 +40849,10 @@ export class PercentageQuestion extends QuestionBase implements IPercentageQuest
     }
 }
 
-export interface IPercentageQuestion extends IQuestionBase {
-    minimum?: number | undefined;
-    maximum?: number | undefined;
-}
-
-export class DateTimeQuestion extends QuestionBase implements IDateTimeQuestion {
+export class DateTimeQuestion extends QuestionBase {
     constraint?: DateTimeConstraintType;
     minimum?: Date | undefined;
     maximum?: Date | undefined;
-
-    constructor(data?: IDateTimeQuestion) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -43375,26 +40880,16 @@ export class DateTimeQuestion extends QuestionBase implements IDateTimeQuestion 
     }
 }
 
-export interface IDateTimeQuestion extends IQuestionBase {
-    constraint?: DateTimeConstraintType;
-    minimum?: Date | undefined;
-    maximum?: Date | undefined;
-}
-
 /** 0 = None 1 = Date */
 export enum DateTimeConstraintType {
     None = 0,
     Date = 1,
 }
 
-export class TimeSpanQuestion extends QuestionBase implements ITimeSpanQuestion {
+export class TimeSpanQuestion extends QuestionBase {
     constraint?: TimeSpanConstraintType;
     minimum?: string | undefined;
     maximum?: string | undefined;
-
-    constructor(data?: ITimeSpanQuestion) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -43422,12 +40917,6 @@ export class TimeSpanQuestion extends QuestionBase implements ITimeSpanQuestion 
     }
 }
 
-export interface ITimeSpanQuestion extends IQuestionBase {
-    constraint?: TimeSpanConstraintType;
-    minimum?: string | undefined;
-    maximum?: string | undefined;
-}
-
 /** 0 = None 1 = Days 2 = Hours 3 = Minutes 4 = Seconds */
 export enum TimeSpanConstraintType {
     None = 0,
@@ -43437,13 +40926,9 @@ export enum TimeSpanConstraintType {
     Seconds = 4,
 }
 
-export class UserQuestion extends QuestionBase implements IUserQuestion {
+export class UserQuestion extends QuestionBase {
     jobTypeCategories?: string[] | undefined;
     jobTypeIds?: string[] | undefined;
-
-    constructor(data?: IUserQuestion) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -43485,17 +40970,8 @@ export class UserQuestion extends QuestionBase implements IUserQuestion {
     }
 }
 
-export interface IUserQuestion extends IQuestionBase {
-    jobTypeCategories?: string[] | undefined;
-    jobTypeIds?: string[] | undefined;
-}
-
-export class GroupQuestion extends QuestionBase implements IGroupQuestion {
+export class GroupQuestion extends QuestionBase {
     groupType?: string | undefined;
-
-    constructor(data?: IGroupQuestion) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -43519,16 +40995,8 @@ export class GroupQuestion extends QuestionBase implements IGroupQuestion {
     }
 }
 
-export interface IGroupQuestion extends IQuestionBase {
-    groupType?: string | undefined;
-}
-
-export class FileQuestion extends QuestionBase implements IFileQuestion {
+export class FileQuestion extends QuestionBase {
     contentTypes?: string[] | undefined;
-
-    constructor(data?: IFileQuestion) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -43560,15 +41028,7 @@ export class FileQuestion extends QuestionBase implements IFileQuestion {
     }
 }
 
-export interface IFileQuestion extends IQuestionBase {
-    contentTypes?: string[] | undefined;
-}
-
-export class BinaryQuestion extends QuestionBase implements IBinaryQuestion {
-
-    constructor(data?: IBinaryQuestion) {
-        super(data);
-    }
+export class BinaryQuestion extends QuestionBase {
 
     init(_data?: any) {
         super.init(_data);
@@ -43588,14 +41048,7 @@ export class BinaryQuestion extends QuestionBase implements IBinaryQuestion {
     }
 }
 
-export interface IBinaryQuestion extends IQuestionBase {
-}
-
-export class TimeOfDayQuestion extends QuestionBase implements ITimeOfDayQuestion {
-
-    constructor(data?: ITimeOfDayQuestion) {
-        super(data);
-    }
+export class TimeOfDayQuestion extends QuestionBase {
 
     init(_data?: any) {
         super.init(_data);
@@ -43615,15 +41068,8 @@ export class TimeOfDayQuestion extends QuestionBase implements ITimeOfDayQuestio
     }
 }
 
-export interface ITimeOfDayQuestion extends IQuestionBase {
-}
-
-export class EmailQuestion extends QuestionBase implements IEmailQuestion {
+export class EmailQuestion extends QuestionBase {
     constraint?: DomainConstraint | undefined;
-
-    constructor(data?: IEmailQuestion) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -43647,22 +41093,9 @@ export class EmailQuestion extends QuestionBase implements IEmailQuestion {
     }
 }
 
-export interface IEmailQuestion extends IQuestionBase {
-    constraint?: DomainConstraint | undefined;
-}
-
-export class DomainConstraint implements IDomainConstraint {
+export class DomainConstraint {
     type?: DomainConstraintType;
     domains?: string[] | undefined;
-
-    constructor(data?: IDomainConstraint) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -43694,24 +41127,15 @@ export class DomainConstraint implements IDomainConstraint {
     }
 }
 
-export interface IDomainConstraint {
-    type?: DomainConstraintType;
-    domains?: string[] | undefined;
-}
-
 /** 0 = Black 1 = White */
 export enum DomainConstraintType {
     Black = 0,
     White = 1,
 }
 
-export class LabelQuestion extends QuestionBase implements ILabelQuestion {
+export class LabelQuestion extends QuestionBase {
     minimumResponses?: number | undefined;
     maximumResponses?: number | undefined;
-
-    constructor(data?: ILabelQuestion) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -43737,12 +41161,7 @@ export class LabelQuestion extends QuestionBase implements ILabelQuestion {
     }
 }
 
-export interface ILabelQuestion extends IQuestionBase {
-    minimumResponses?: number | undefined;
-    maximumResponses?: number | undefined;
-}
-
-export class SurveyAnswerTypes implements ISurveyAnswerTypes {
+export class SurveyAnswerTypes {
     listAnswer?: ListAnswer | undefined;
     compositeAnswer?: CompositeAnswer | undefined;
     decimalAnswer?: DecimalAnswer | undefined;
@@ -43759,15 +41178,6 @@ export class SurveyAnswerTypes implements ISurveyAnswerTypes {
     timeOfDayAnswer?: TimeOfDayAnswer | undefined;
     emailAnswer?: EmailAnswer | undefined;
     labelAnswer?: LabelAnswer | undefined;
-
-    constructor(data?: ISurveyAnswerTypes) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -43819,38 +41229,10 @@ export class SurveyAnswerTypes implements ISurveyAnswerTypes {
     }
 }
 
-export interface ISurveyAnswerTypes {
-    listAnswer?: ListAnswer | undefined;
-    compositeAnswer?: CompositeAnswer | undefined;
-    decimalAnswer?: DecimalAnswer | undefined;
-    integerAnswer?: IntegerAnswer | undefined;
-    multipleChoiceAnswer?: MultipleChoiceAnswer | undefined;
-    stringAnswer?: StringAnswer | undefined;
-    percentageAnswer?: PercentageAnswer | undefined;
-    dateTimeAnswer?: DateTimeAnswer | undefined;
-    timeSpanAnswer?: TimeSpanAnswer | undefined;
-    userAnswer?: UserAnswer | undefined;
-    groupAnswer?: GroupAnswer | undefined;
-    fileAnswer?: FileAnswer | undefined;
-    binaryAnswer?: BinaryAnswer | undefined;
-    timeOfDayAnswer?: TimeOfDayAnswer | undefined;
-    emailAnswer?: EmailAnswer | undefined;
-    labelAnswer?: LabelAnswer | undefined;
-}
-
-export abstract class AnswerBaseOfObjectOf implements IAnswerBaseOfObjectOf {
+export abstract class AnswerBaseOfObjectOf {
     type?: string | undefined;
     questionIndex?: number;
     value?: any[] | undefined;
-
-    constructor(data?: IAnswerBaseOfObjectOf) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -43882,17 +41264,7 @@ export abstract class AnswerBaseOfObjectOf implements IAnswerBaseOfObjectOf {
     }
 }
 
-export interface IAnswerBaseOfObjectOf {
-    type?: string | undefined;
-    questionIndex?: number;
-    value?: any[] | undefined;
-}
-
-export class ListAnswer extends AnswerBaseOfObjectOf implements IListAnswer {
-
-    constructor(data?: IListAnswer) {
-        super(data);
-    }
+export class ListAnswer extends AnswerBaseOfObjectOf {
 
     init(_data?: any) {
         super.init(_data);
@@ -43912,14 +41284,7 @@ export class ListAnswer extends AnswerBaseOfObjectOf implements IListAnswer {
     }
 }
 
-export interface IListAnswer extends IAnswerBaseOfObjectOf {
-}
-
-export class CompositeAnswer extends AnswerBaseOfObjectOf implements ICompositeAnswer {
-
-    constructor(data?: ICompositeAnswer) {
-        super(data);
-    }
+export class CompositeAnswer extends AnswerBaseOfObjectOf {
 
     init(_data?: any) {
         super.init(_data);
@@ -43939,22 +41304,10 @@ export class CompositeAnswer extends AnswerBaseOfObjectOf implements ICompositeA
     }
 }
 
-export interface ICompositeAnswer extends IAnswerBaseOfObjectOf {
-}
-
-export abstract class AnswerBaseOfNullableDouble implements IAnswerBaseOfNullableDouble {
+export abstract class AnswerBaseOfNullableDouble {
     type?: string | undefined;
     questionIndex?: number;
     value?: number | undefined;
-
-    constructor(data?: IAnswerBaseOfNullableDouble) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -43978,17 +41331,7 @@ export abstract class AnswerBaseOfNullableDouble implements IAnswerBaseOfNullabl
     }
 }
 
-export interface IAnswerBaseOfNullableDouble {
-    type?: string | undefined;
-    questionIndex?: number;
-    value?: number | undefined;
-}
-
-export class DecimalAnswer extends AnswerBaseOfNullableDouble implements IDecimalAnswer {
-
-    constructor(data?: IDecimalAnswer) {
-        super(data);
-    }
+export class DecimalAnswer extends AnswerBaseOfNullableDouble {
 
     init(_data?: any) {
         super.init(_data);
@@ -44008,22 +41351,10 @@ export class DecimalAnswer extends AnswerBaseOfNullableDouble implements IDecima
     }
 }
 
-export interface IDecimalAnswer extends IAnswerBaseOfNullableDouble {
-}
-
-export abstract class AnswerBaseOfNullableInteger implements IAnswerBaseOfNullableInteger {
+export abstract class AnswerBaseOfNullableInteger {
     type?: string | undefined;
     questionIndex?: number;
     value?: number | undefined;
-
-    constructor(data?: IAnswerBaseOfNullableInteger) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -44047,17 +41378,7 @@ export abstract class AnswerBaseOfNullableInteger implements IAnswerBaseOfNullab
     }
 }
 
-export interface IAnswerBaseOfNullableInteger {
-    type?: string | undefined;
-    questionIndex?: number;
-    value?: number | undefined;
-}
-
-export class IntegerAnswer extends AnswerBaseOfNullableInteger implements IIntegerAnswer {
-
-    constructor(data?: IIntegerAnswer) {
-        super(data);
-    }
+export class IntegerAnswer extends AnswerBaseOfNullableInteger {
 
     init(_data?: any) {
         super.init(_data);
@@ -44077,22 +41398,10 @@ export class IntegerAnswer extends AnswerBaseOfNullableInteger implements IInteg
     }
 }
 
-export interface IIntegerAnswer extends IAnswerBaseOfNullableInteger {
-}
-
-export abstract class AnswerBaseOfInt32Of implements IAnswerBaseOfInt32Of {
+export abstract class AnswerBaseOfInt32Of {
     type?: string | undefined;
     questionIndex?: number;
     value?: number[] | undefined;
-
-    constructor(data?: IAnswerBaseOfInt32Of) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -44124,17 +41433,7 @@ export abstract class AnswerBaseOfInt32Of implements IAnswerBaseOfInt32Of {
     }
 }
 
-export interface IAnswerBaseOfInt32Of {
-    type?: string | undefined;
-    questionIndex?: number;
-    value?: number[] | undefined;
-}
-
-export class MultipleChoiceAnswer extends AnswerBaseOfInt32Of implements IMultipleChoiceAnswer {
-
-    constructor(data?: IMultipleChoiceAnswer) {
-        super(data);
-    }
+export class MultipleChoiceAnswer extends AnswerBaseOfInt32Of {
 
     init(_data?: any) {
         super.init(_data);
@@ -44154,22 +41453,10 @@ export class MultipleChoiceAnswer extends AnswerBaseOfInt32Of implements IMultip
     }
 }
 
-export interface IMultipleChoiceAnswer extends IAnswerBaseOfInt32Of {
-}
-
-export abstract class AnswerBaseOfString implements IAnswerBaseOfString {
+export abstract class AnswerBaseOfString {
     type?: string | undefined;
     questionIndex?: number;
     value?: string | undefined;
-
-    constructor(data?: IAnswerBaseOfString) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -44193,17 +41480,7 @@ export abstract class AnswerBaseOfString implements IAnswerBaseOfString {
     }
 }
 
-export interface IAnswerBaseOfString {
-    type?: string | undefined;
-    questionIndex?: number;
-    value?: string | undefined;
-}
-
-export class StringAnswer extends AnswerBaseOfString implements IStringAnswer {
-
-    constructor(data?: IStringAnswer) {
-        super(data);
-    }
+export class StringAnswer extends AnswerBaseOfString {
 
     init(_data?: any) {
         super.init(_data);
@@ -44223,14 +41500,7 @@ export class StringAnswer extends AnswerBaseOfString implements IStringAnswer {
     }
 }
 
-export interface IStringAnswer extends IAnswerBaseOfString {
-}
-
-export class PercentageAnswer extends AnswerBaseOfNullableDouble implements IPercentageAnswer {
-
-    constructor(data?: IPercentageAnswer) {
-        super(data);
-    }
+export class PercentageAnswer extends AnswerBaseOfNullableDouble {
 
     init(_data?: any) {
         super.init(_data);
@@ -44250,22 +41520,10 @@ export class PercentageAnswer extends AnswerBaseOfNullableDouble implements IPer
     }
 }
 
-export interface IPercentageAnswer extends IAnswerBaseOfNullableDouble {
-}
-
-export abstract class AnswerBaseOfNullableDateTime implements IAnswerBaseOfNullableDateTime {
+export abstract class AnswerBaseOfNullableDateTime {
     type?: string | undefined;
     questionIndex?: number;
     value?: Date | undefined;
-
-    constructor(data?: IAnswerBaseOfNullableDateTime) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -44289,17 +41547,7 @@ export abstract class AnswerBaseOfNullableDateTime implements IAnswerBaseOfNulla
     }
 }
 
-export interface IAnswerBaseOfNullableDateTime {
-    type?: string | undefined;
-    questionIndex?: number;
-    value?: Date | undefined;
-}
-
-export class DateTimeAnswer extends AnswerBaseOfNullableDateTime implements IDateTimeAnswer {
-
-    constructor(data?: IDateTimeAnswer) {
-        super(data);
-    }
+export class DateTimeAnswer extends AnswerBaseOfNullableDateTime {
 
     init(_data?: any) {
         super.init(_data);
@@ -44319,22 +41567,10 @@ export class DateTimeAnswer extends AnswerBaseOfNullableDateTime implements IDat
     }
 }
 
-export interface IDateTimeAnswer extends IAnswerBaseOfNullableDateTime {
-}
-
-export abstract class AnswerBaseOfNullableTimeSpan implements IAnswerBaseOfNullableTimeSpan {
+export abstract class AnswerBaseOfNullableTimeSpan {
     type?: string | undefined;
     questionIndex?: number;
     value?: string | undefined;
-
-    constructor(data?: IAnswerBaseOfNullableTimeSpan) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -44358,17 +41594,7 @@ export abstract class AnswerBaseOfNullableTimeSpan implements IAnswerBaseOfNulla
     }
 }
 
-export interface IAnswerBaseOfNullableTimeSpan {
-    type?: string | undefined;
-    questionIndex?: number;
-    value?: string | undefined;
-}
-
-export class TimeSpanAnswer extends AnswerBaseOfNullableTimeSpan implements ITimeSpanAnswer {
-
-    constructor(data?: ITimeSpanAnswer) {
-        super(data);
-    }
+export class TimeSpanAnswer extends AnswerBaseOfNullableTimeSpan {
 
     init(_data?: any) {
         super.init(_data);
@@ -44388,22 +41614,10 @@ export class TimeSpanAnswer extends AnswerBaseOfNullableTimeSpan implements ITim
     }
 }
 
-export interface ITimeSpanAnswer extends IAnswerBaseOfNullableTimeSpan {
-}
-
-export abstract class AnswerBaseOfUserAnswerValue implements IAnswerBaseOfUserAnswerValue {
+export abstract class AnswerBaseOfUserAnswerValue {
     type?: string | undefined;
     questionIndex?: number;
     value?: UserAnswerValue | undefined;
-
-    constructor(data?: IAnswerBaseOfUserAnswerValue) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -44427,17 +41641,7 @@ export abstract class AnswerBaseOfUserAnswerValue implements IAnswerBaseOfUserAn
     }
 }
 
-export interface IAnswerBaseOfUserAnswerValue {
-    type?: string | undefined;
-    questionIndex?: number;
-    value?: UserAnswerValue | undefined;
-}
-
-export class UserAnswer extends AnswerBaseOfUserAnswerValue implements IUserAnswer {
-
-    constructor(data?: IUserAnswer) {
-        super(data);
-    }
+export class UserAnswer extends AnswerBaseOfUserAnswerValue {
 
     init(_data?: any) {
         super.init(_data);
@@ -44457,21 +41661,9 @@ export class UserAnswer extends AnswerBaseOfUserAnswerValue implements IUserAnsw
     }
 }
 
-export interface IUserAnswer extends IAnswerBaseOfUserAnswerValue {
-}
-
-export class UserAnswerValue implements IUserAnswerValue {
+export class UserAnswerValue {
     valueType?: UserValueType;
     value?: string | undefined;
-
-    constructor(data?: IUserAnswerValue) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -44495,22 +41687,13 @@ export class UserAnswerValue implements IUserAnswerValue {
     }
 }
 
-export interface IUserAnswerValue {
-    valueType?: UserValueType;
-    value?: string | undefined;
-}
-
 /** 0 = Id 1 = Name */
 export enum UserValueType {
     Id = 0,
     Name = 1,
 }
 
-export class GroupAnswer extends AnswerBaseOfString implements IGroupAnswer {
-
-    constructor(data?: IGroupAnswer) {
-        super(data);
-    }
+export class GroupAnswer extends AnswerBaseOfString {
 
     init(_data?: any) {
         super.init(_data);
@@ -44530,14 +41713,7 @@ export class GroupAnswer extends AnswerBaseOfString implements IGroupAnswer {
     }
 }
 
-export interface IGroupAnswer extends IAnswerBaseOfString {
-}
-
-export class FileAnswer extends AnswerBaseOfString implements IFileAnswer {
-
-    constructor(data?: IFileAnswer) {
-        super(data);
-    }
+export class FileAnswer extends AnswerBaseOfString {
 
     init(_data?: any) {
         super.init(_data);
@@ -44557,22 +41733,10 @@ export class FileAnswer extends AnswerBaseOfString implements IFileAnswer {
     }
 }
 
-export interface IFileAnswer extends IAnswerBaseOfString {
-}
-
-export abstract class AnswerBaseOfBoolean implements IAnswerBaseOfBoolean {
+export abstract class AnswerBaseOfBoolean {
     type?: string | undefined;
     questionIndex?: number;
     value?: boolean;
-
-    constructor(data?: IAnswerBaseOfBoolean) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -44596,17 +41760,7 @@ export abstract class AnswerBaseOfBoolean implements IAnswerBaseOfBoolean {
     }
 }
 
-export interface IAnswerBaseOfBoolean {
-    type?: string | undefined;
-    questionIndex?: number;
-    value?: boolean;
-}
-
-export class BinaryAnswer extends AnswerBaseOfBoolean implements IBinaryAnswer {
-
-    constructor(data?: IBinaryAnswer) {
-        super(data);
-    }
+export class BinaryAnswer extends AnswerBaseOfBoolean {
 
     init(_data?: any) {
         super.init(_data);
@@ -44626,14 +41780,7 @@ export class BinaryAnswer extends AnswerBaseOfBoolean implements IBinaryAnswer {
     }
 }
 
-export interface IBinaryAnswer extends IAnswerBaseOfBoolean {
-}
-
-export class TimeOfDayAnswer extends AnswerBaseOfNullableTimeSpan implements ITimeOfDayAnswer {
-
-    constructor(data?: ITimeOfDayAnswer) {
-        super(data);
-    }
+export class TimeOfDayAnswer extends AnswerBaseOfNullableTimeSpan {
 
     init(_data?: any) {
         super.init(_data);
@@ -44653,14 +41800,7 @@ export class TimeOfDayAnswer extends AnswerBaseOfNullableTimeSpan implements ITi
     }
 }
 
-export interface ITimeOfDayAnswer extends IAnswerBaseOfNullableTimeSpan {
-}
-
-export class EmailAnswer extends AnswerBaseOfString implements IEmailAnswer {
-
-    constructor(data?: IEmailAnswer) {
-        super(data);
-    }
+export class EmailAnswer extends AnswerBaseOfString {
 
     init(_data?: any) {
         super.init(_data);
@@ -44680,22 +41820,10 @@ export class EmailAnswer extends AnswerBaseOfString implements IEmailAnswer {
     }
 }
 
-export interface IEmailAnswer extends IAnswerBaseOfString {
-}
-
-export abstract class AnswerBaseOfStringOf implements IAnswerBaseOfStringOf {
+export abstract class AnswerBaseOfStringOf {
     type?: string | undefined;
     questionIndex?: number;
     value?: string[] | undefined;
-
-    constructor(data?: IAnswerBaseOfStringOf) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -44727,17 +41855,7 @@ export abstract class AnswerBaseOfStringOf implements IAnswerBaseOfStringOf {
     }
 }
 
-export interface IAnswerBaseOfStringOf {
-    type?: string | undefined;
-    questionIndex?: number;
-    value?: string[] | undefined;
-}
-
-export class LabelAnswer extends AnswerBaseOfStringOf implements ILabelAnswer {
-
-    constructor(data?: ILabelAnswer) {
-        super(data);
-    }
+export class LabelAnswer extends AnswerBaseOfStringOf {
 
     init(_data?: any) {
         super.init(_data);
@@ -44757,20 +41875,8 @@ export class LabelAnswer extends AnswerBaseOfStringOf implements ILabelAnswer {
     }
 }
 
-export interface ILabelAnswer extends IAnswerBaseOfStringOf {
-}
-
-export class SurveySettings implements ISurveySettings {
+export class SurveySettings {
     questions?: any[] | undefined;
-
-    constructor(data?: ISurveySettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -44800,25 +41906,9 @@ export class SurveySettings implements ISurveySettings {
     }
 }
 
-export interface ISurveySettings {
-    questions?: any[] | undefined;
-}
-
-export class ListOfSurvey implements IListOfSurvey {
+export class ListOfSurvey {
     totalItemCount!: number;
     items!: Survey[];
-
-    constructor(data?: IListOfSurvey) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -44850,12 +41940,7 @@ export class ListOfSurvey implements IListOfSurvey {
     }
 }
 
-export interface IListOfSurvey {
-    totalItemCount: number;
-    items: Survey[];
-}
-
-export class Survey implements ISurvey {
+export class Survey {
     id?: string | undefined;
     publisherId?: string | undefined;
     name?: string | undefined;
@@ -44864,15 +41949,6 @@ export class Survey implements ISurvey {
     published?: boolean;
     publishedContentId?: string | undefined;
     version?: number;
-
-    constructor(data?: ISurvey) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -44908,31 +41984,11 @@ export class Survey implements ISurvey {
     }
 }
 
-export interface ISurvey {
-    id?: string | undefined;
-    publisherId?: string | undefined;
-    name?: string | undefined;
-    description?: string | undefined;
-    isPublic?: boolean;
-    published?: boolean;
-    publishedContentId?: string | undefined;
-    version?: number;
-}
-
-export class CreateSurveySettings implements ICreateSurveySettings {
+export class CreateSurveySettings {
     publisherId!: string;
     name!: string;
     description?: string | undefined;
     isPublic?: boolean;
-
-    constructor(data?: ICreateSurveySettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -44960,27 +42016,11 @@ export class CreateSurveySettings implements ICreateSurveySettings {
     }
 }
 
-export interface ICreateSurveySettings {
-    publisherId: string;
-    name: string;
-    description?: string | undefined;
-    isPublic?: boolean;
-}
-
-export class UpdateSurveySettings implements IUpdateSurveySettings {
+export class UpdateSurveySettings {
     name!: string;
     description?: string | undefined;
     isPublic?: boolean;
     version?: number;
-
-    constructor(data?: IUpdateSurveySettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -45008,28 +42048,9 @@ export class UpdateSurveySettings implements IUpdateSurveySettings {
     }
 }
 
-export interface IUpdateSurveySettings {
-    name: string;
-    description?: string | undefined;
-    isPublic?: boolean;
-    version?: number;
-}
-
-export class ListOfSurveyRequest implements IListOfSurveyRequest {
+export class ListOfSurveyRequest {
     totalItemCount!: number;
     items!: SurveyRequest[];
-
-    constructor(data?: IListOfSurveyRequest) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -45061,12 +42082,7 @@ export class ListOfSurveyRequest implements IListOfSurveyRequest {
     }
 }
 
-export interface IListOfSurveyRequest {
-    totalItemCount: number;
-    items: SurveyRequest[];
-}
-
-export class SurveyRequest implements ISurveyRequest {
+export class SurveyRequest {
     id?: string | undefined;
     surveyId?: string | undefined;
     surveyName?: string | undefined;
@@ -45079,15 +42095,6 @@ export class SurveyRequest implements ISurveyRequest {
     token?: string | undefined;
     created?: Date;
     version?: number;
-
-    constructor(data?: ISurveyRequest) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -45131,32 +42138,8 @@ export class SurveyRequest implements ISurveyRequest {
     }
 }
 
-export interface ISurveyRequest {
-    id?: string | undefined;
-    surveyId?: string | undefined;
-    surveyName?: string | undefined;
-    surveyPublisherId?: string | undefined;
-    groupId?: string | undefined;
-    respondentId?: string | undefined;
-    respondentName?: string | undefined;
-    creatorId?: string | undefined;
-    creatorName?: string | undefined;
-    token?: string | undefined;
-    created?: Date;
-    version?: number;
-}
-
-export class Token implements IToken {
+export class Token {
     value?: string | undefined;
-
-    constructor(data?: IToken) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -45178,24 +42161,11 @@ export class Token implements IToken {
     }
 }
 
-export interface IToken {
-    value?: string | undefined;
-}
-
-export class CreateSurveyRequestSettings implements ICreateSurveyRequestSettings {
+export class CreateSurveyRequestSettings {
     surveyId!: string;
     groupId!: string;
     respondentId!: string;
     message?: string | undefined;
-
-    constructor(data?: ICreateSurveyRequestSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -45223,28 +42193,9 @@ export class CreateSurveyRequestSettings implements ICreateSurveyRequestSettings
     }
 }
 
-export interface ICreateSurveyRequestSettings {
-    surveyId: string;
-    groupId: string;
-    respondentId: string;
-    message?: string | undefined;
-}
-
-export class ListOfSurveyResponse implements IListOfSurveyResponse {
+export class ListOfSurveyResponse {
     totalItemCount!: number;
     items!: SurveyResponse[];
-
-    constructor(data?: IListOfSurveyResponse) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -45276,12 +42227,7 @@ export class ListOfSurveyResponse implements IListOfSurveyResponse {
     }
 }
 
-export interface IListOfSurveyResponse {
-    totalItemCount: number;
-    items: SurveyResponse[];
-}
-
-export class SurveyResponse implements ISurveyResponse {
+export class SurveyResponse {
     id?: string | undefined;
     surveyId?: string | undefined;
     surveyName?: string | undefined;
@@ -45299,15 +42245,6 @@ export class SurveyResponse implements ISurveyResponse {
     started?: Date;
     submitted?: Date | undefined;
     version?: number;
-
-    constructor(data?: ISurveyResponse) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -45377,41 +42314,12 @@ export class SurveyResponse implements ISurveyResponse {
     }
 }
 
-export interface ISurveyResponse {
-    id?: string | undefined;
-    surveyId?: string | undefined;
-    surveyName?: string | undefined;
-    surveyPublisherId?: string | undefined;
-    surveyContentId?: string | undefined;
-    surveyRequestId?: string | undefined;
-    groupId?: string | undefined;
-    parentGroupIds?: string[] | undefined;
-    respondentId?: string | undefined;
-    respondentName?: string | undefined;
-    respondentIPAddress?: string | undefined;
-    respondentUserAgent?: string | undefined;
-    respondentJobTypeId?: string | undefined;
-    answers?: any[] | undefined;
-    started?: Date;
-    submitted?: Date | undefined;
-    version?: number;
-}
-
-export class CreateSurveyResponseSettings implements ICreateSurveyResponseSettings {
+export class CreateSurveyResponseSettings {
     surveyContentId!: string;
     groupId!: string;
     surveyRequestId?: string | undefined;
     answers?: any[] | undefined;
     submitted?: boolean;
-
-    constructor(data?: ICreateSurveyResponseSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -45449,27 +42357,10 @@ export class CreateSurveyResponseSettings implements ICreateSurveyResponseSettin
     }
 }
 
-export interface ICreateSurveyResponseSettings {
-    surveyContentId: string;
-    groupId: string;
-    surveyRequestId?: string | undefined;
-    answers?: any[] | undefined;
-    submitted?: boolean;
-}
-
-export class UpdateSurveyResponseSettings implements IUpdateSurveyResponseSettings {
+export class UpdateSurveyResponseSettings {
     answers?: any[] | undefined;
     submitted?: boolean;
     version!: number;
-
-    constructor(data?: IUpdateSurveyResponseSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -45503,26 +42394,11 @@ export class UpdateSurveyResponseSettings implements IUpdateSurveyResponseSettin
     }
 }
 
-export interface IUpdateSurveyResponseSettings {
-    answers?: any[] | undefined;
-    submitted?: boolean;
-    version: number;
-}
-
-export class Actor implements IActor {
+export class Actor {
     id?: string | undefined;
     name?: string | undefined;
     imageUri?: string | undefined;
     type?: ActorType;
-
-    constructor(data?: IActor) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -45550,13 +42426,6 @@ export class Actor implements IActor {
     }
 }
 
-export interface IActor {
-    id?: string | undefined;
-    name?: string | undefined;
-    imageUri?: string | undefined;
-    type?: ActorType;
-}
-
 /** 0 = None 1 = User 2 = TrainingSession 3 = Team */
 export enum ActorType {
     None = 0,
@@ -45565,21 +42434,9 @@ export enum ActorType {
     Team = 3,
 }
 
-export class ListOfModuleAttemptOfBookResult implements IListOfModuleAttemptOfBookResult {
+export class ListOfModuleAttemptOfBookResult {
     totalItemCount!: number;
     items!: ModuleAttemptOfBookResult[];
-
-    constructor(data?: IListOfModuleAttemptOfBookResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -45611,12 +42468,7 @@ export class ListOfModuleAttemptOfBookResult implements IListOfModuleAttemptOfBo
     }
 }
 
-export interface IListOfModuleAttemptOfBookResult {
-    totalItemCount: number;
-    items: ModuleAttemptOfBookResult[];
-}
-
-export class ModuleAttempt implements IModuleAttempt {
+export class ModuleAttempt {
     id?: string | undefined;
     actorId?: string | undefined;
     actorType?: ActorType;
@@ -45640,15 +42492,6 @@ export class ModuleAttempt implements IModuleAttempt {
     modified?: Date;
     passed?: Date | undefined;
     version?: number;
-
-    constructor(data?: IModuleAttempt) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -45722,38 +42565,8 @@ export class ModuleAttempt implements IModuleAttempt {
     }
 }
 
-export interface IModuleAttempt {
-    id?: string | undefined;
-    actorId?: string | undefined;
-    actorType?: ActorType;
-    actorName?: string | undefined;
-    actorImageUri?: string | undefined;
-    creatorId?: string | undefined;
-    creatorName?: string | undefined;
-    publisherId?: string | undefined;
-    publisherName?: string | undefined;
-    publisherLogoUri?: string | undefined;
-    moduleId?: string | undefined;
-    moduleName?: string | undefined;
-    moduleContentId?: string | undefined;
-    moduleType?: string | undefined;
-    result?: any | undefined;
-    calculatedResult?: CalculatedModuleResult;
-    classIds?: string[] | undefined;
-    trainingSessionId?: string | undefined;
-    trainingSessionModuleAttemptId?: string | undefined;
-    created?: Date;
-    modified?: Date;
-    passed?: Date | undefined;
-    version?: number;
-}
-
-export class ModuleAttemptOfBookResult extends ModuleAttempt implements IModuleAttemptOfBookResult {
+export class ModuleAttemptOfBookResult extends ModuleAttempt {
     result?: BookResult | undefined;
-
-    constructor(data?: IModuleAttemptOfBookResult) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -45777,22 +42590,9 @@ export class ModuleAttemptOfBookResult extends ModuleAttempt implements IModuleA
     }
 }
 
-export interface IModuleAttemptOfBookResult extends IModuleAttempt {
-    result?: BookResult | undefined;
-}
-
-export class BookResult implements IBookResult {
+export class BookResult {
     bookmark?: Bookmark | undefined;
     maxBookmark?: Bookmark | undefined;
-
-    constructor(data?: IBookResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -45816,22 +42616,8 @@ export class BookResult implements IBookResult {
     }
 }
 
-export interface IBookResult {
-    bookmark?: Bookmark | undefined;
-    maxBookmark?: Bookmark | undefined;
-}
-
-export class Bookmark implements IBookmark {
+export class Bookmark {
     percentage?: number;
-
-    constructor(data?: IBookmark) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -45853,23 +42639,10 @@ export class Bookmark implements IBookmark {
     }
 }
 
-export interface IBookmark {
-    percentage?: number;
-}
-
-export class CalculatedModuleResult implements ICalculatedModuleResult {
+export class CalculatedModuleResult {
     passed?: boolean;
     progress?: number;
     score?: number;
-
-    constructor(data?: ICalculatedModuleResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -45895,29 +42668,11 @@ export class CalculatedModuleResult implements ICalculatedModuleResult {
     }
 }
 
-export interface ICalculatedModuleResult {
-    passed?: boolean;
-    progress?: number;
-    score?: number;
-}
-
-export class CreateModuleAttemptSettingsOfBookResult implements ICreateModuleAttemptSettingsOfBookResult {
+export class CreateModuleAttemptSettingsOfBookResult {
     /** Id of the actor of ActorType being assessed */
     actorId!: string;
     moduleContentId!: string;
     result!: BookResult;
-
-    constructor(data?: ICreateModuleAttemptSettingsOfBookResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.result = new BookResult();
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -45943,28 +42698,9 @@ export class CreateModuleAttemptSettingsOfBookResult implements ICreateModuleAtt
     }
 }
 
-export interface ICreateModuleAttemptSettingsOfBookResult {
-    /** Id of the actor of ActorType being assessed */
-    actorId: string;
-    moduleContentId: string;
-    result: BookResult;
-}
-
-export class UpdateModuleAttemptSettingsOfBookResult implements IUpdateModuleAttemptSettingsOfBookResult {
+export class UpdateModuleAttemptSettingsOfBookResult {
     result!: BookResult;
     version?: number;
-
-    constructor(data?: IUpdateModuleAttemptSettingsOfBookResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.result = new BookResult();
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -45988,26 +42724,9 @@ export class UpdateModuleAttemptSettingsOfBookResult implements IUpdateModuleAtt
     }
 }
 
-export interface IUpdateModuleAttemptSettingsOfBookResult {
-    result: BookResult;
-    version?: number;
-}
-
-export class ListOfModuleContentOfBookSettings implements IListOfModuleContentOfBookSettings {
+export class ListOfModuleContentOfBookSettings {
     totalItemCount!: number;
     items!: ModuleContentOfBookSettings[];
-
-    constructor(data?: IListOfModuleContentOfBookSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -46039,12 +42758,7 @@ export class ListOfModuleContentOfBookSettings implements IListOfModuleContentOf
     }
 }
 
-export interface IListOfModuleContentOfBookSettings {
-    totalItemCount: number;
-    items: ModuleContentOfBookSettings[];
-}
-
-export class ModuleContent implements IModuleContent {
+export class ModuleContent {
     id?: string | undefined;
     publisherId?: string | undefined;
     moduleId?: string | undefined;
@@ -46054,15 +42768,6 @@ export class ModuleContent implements IModuleContent {
     created?: Date;
     modified?: Date;
     version?: number;
-
-    constructor(data?: IModuleContent) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -46100,24 +42805,8 @@ export class ModuleContent implements IModuleContent {
     }
 }
 
-export interface IModuleContent {
-    id?: string | undefined;
-    publisherId?: string | undefined;
-    moduleId?: string | undefined;
-    type?: string | undefined;
-    settings?: any | undefined;
-    published?: boolean;
-    created?: Date;
-    modified?: Date;
-    version?: number;
-}
-
-export class ModuleContentOfBookSettings extends ModuleContent implements IModuleContentOfBookSettings {
+export class ModuleContentOfBookSettings extends ModuleContent {
     settings?: BookSettings | undefined;
-
-    constructor(data?: IModuleContentOfBookSettings) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -46141,24 +42830,8 @@ export class ModuleContentOfBookSettings extends ModuleContent implements IModul
     }
 }
 
-export interface IModuleContentOfBookSettings extends IModuleContent {
-    settings?: BookSettings | undefined;
-}
-
-export class BookSettings implements IBookSettings {
+export class BookSettings {
     chapters!: Chapter[];
-
-    constructor(data?: IBookSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.chapters = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -46188,23 +42861,10 @@ export class BookSettings implements IBookSettings {
     }
 }
 
-export interface IBookSettings {
-    chapters: Chapter[];
-}
-
-export class Chapter implements IChapter {
+export class Chapter {
     title?: string | undefined;
     body?: string | undefined;
     slides?: string[] | undefined;
-
-    constructor(data?: IChapter) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -46238,27 +42898,9 @@ export class Chapter implements IChapter {
     }
 }
 
-export interface IChapter {
-    title?: string | undefined;
-    body?: string | undefined;
-    slides?: string[] | undefined;
-}
-
-export class ModuleContentSettingsOfBookSettings implements IModuleContentSettingsOfBookSettings {
+export class ModuleContentSettingsOfBookSettings {
     settings!: BookSettings;
     files?: ModuleContentFileSettings[] | undefined;
-
-    constructor(data?: IModuleContentSettingsOfBookSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.settings = new BookSettings();
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -46290,17 +42932,8 @@ export class ModuleContentSettingsOfBookSettings implements IModuleContentSettin
     }
 }
 
-export interface IModuleContentSettingsOfBookSettings {
-    settings: BookSettings;
-    files?: ModuleContentFileSettings[] | undefined;
-}
-
-export class CreateModuleContentSettingsOfBookSettings extends ModuleContentSettingsOfBookSettings implements ICreateModuleContentSettingsOfBookSettings {
+export class CreateModuleContentSettingsOfBookSettings extends ModuleContentSettingsOfBookSettings {
     published?: boolean;
-
-    constructor(data?: ICreateModuleContentSettingsOfBookSettings) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -46324,22 +42957,9 @@ export class CreateModuleContentSettingsOfBookSettings extends ModuleContentSett
     }
 }
 
-export interface ICreateModuleContentSettingsOfBookSettings extends IModuleContentSettingsOfBookSettings {
-    published?: boolean;
-}
-
-export class ModuleContentFileSettings implements IModuleContentFileSettings {
+export class ModuleContentFileSettings {
     name!: string;
     dataUri!: string;
-
-    constructor(data?: IModuleContentFileSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -46363,17 +42983,8 @@ export class ModuleContentFileSettings implements IModuleContentFileSettings {
     }
 }
 
-export interface IModuleContentFileSettings {
-    name: string;
-    dataUri: string;
-}
-
-export class UpdateModuleContentSettingsOfBookSettings extends ModuleContentSettingsOfBookSettings implements IUpdateModuleContentSettingsOfBookSettings {
+export class UpdateModuleContentSettingsOfBookSettings extends ModuleContentSettingsOfBookSettings {
     version?: number;
-
-    constructor(data?: IUpdateModuleContentSettingsOfBookSettings) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -46397,25 +43008,9 @@ export class UpdateModuleContentSettingsOfBookSettings extends ModuleContentSett
     }
 }
 
-export interface IUpdateModuleContentSettingsOfBookSettings extends IModuleContentSettingsOfBookSettings {
-    version?: number;
-}
-
-export class ListOfCertificate implements IListOfCertificate {
+export class ListOfCertificate {
     totalItemCount!: number;
     items!: Certificate[];
-
-    constructor(data?: IListOfCertificate) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -46447,12 +43042,7 @@ export class ListOfCertificate implements IListOfCertificate {
     }
 }
 
-export interface IListOfCertificate {
-    totalItemCount: number;
-    items: Certificate[];
-}
-
-export class Certificate implements ICertificate {
+export class Certificate {
     id?: string | undefined;
     name?: string | undefined;
     description?: string | undefined;
@@ -46462,15 +43052,6 @@ export class Certificate implements ICertificate {
     publisherLogoUri?: string | undefined;
     validityPeriod?: string;
     version?: number;
-
-    constructor(data?: ICertificate) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -46508,33 +43089,12 @@ export class Certificate implements ICertificate {
     }
 }
 
-export interface ICertificate {
-    id?: string | undefined;
-    name?: string | undefined;
-    description?: string | undefined;
-    logoUri?: string | undefined;
-    publisherId?: string | undefined;
-    publisherName?: string | undefined;
-    publisherLogoUri?: string | undefined;
-    validityPeriod?: string;
-    version?: number;
-}
-
-export class CreateCertificateSettings implements ICreateCertificateSettings {
+export class CreateCertificateSettings {
     publisherId!: string;
     name!: string;
     description?: string | undefined;
     logoUri?: string | undefined;
     validityPeriod?: string;
-
-    constructor(data?: ICreateCertificateSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -46564,29 +43124,12 @@ export class CreateCertificateSettings implements ICreateCertificateSettings {
     }
 }
 
-export interface ICreateCertificateSettings {
-    publisherId: string;
-    name: string;
-    description?: string | undefined;
-    logoUri?: string | undefined;
-    validityPeriod?: string;
-}
-
-export class UpdateCertificateSettings implements IUpdateCertificateSettings {
+export class UpdateCertificateSettings {
     name!: string;
     description?: string | undefined;
     logoUri?: string | undefined;
     validityPeriod?: string;
     version?: number;
-
-    constructor(data?: IUpdateCertificateSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -46616,29 +43159,9 @@ export class UpdateCertificateSettings implements IUpdateCertificateSettings {
     }
 }
 
-export interface IUpdateCertificateSettings {
-    name: string;
-    description?: string | undefined;
-    logoUri?: string | undefined;
-    validityPeriod?: string;
-    version?: number;
-}
-
-export class ListOfCertification implements IListOfCertification {
+export class ListOfCertification {
     totalItemCount!: number;
     items!: Certification[];
-
-    constructor(data?: IListOfCertification) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -46670,12 +43193,7 @@ export class ListOfCertification implements IListOfCertification {
     }
 }
 
-export interface IListOfCertification {
-    totalItemCount: number;
-    items: Certification[];
-}
-
-export class Certification implements ICertification {
+export class Certification {
     id?: string | undefined;
     certificateId?: string | undefined;
     certificateName?: string | undefined;
@@ -46686,15 +43204,6 @@ export class Certification implements ICertification {
     certified?: Date | undefined;
     expires?: Date | undefined;
     validityPeriod?: string;
-
-    constructor(data?: ICertification) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -46734,34 +43243,9 @@ export class Certification implements ICertification {
     }
 }
 
-export interface ICertification {
-    id?: string | undefined;
-    certificateId?: string | undefined;
-    certificateName?: string | undefined;
-    certificateLogoUri?: string | undefined;
-    traineeId?: string | undefined;
-    traineeName?: string | undefined;
-    started?: Date;
-    certified?: Date | undefined;
-    expires?: Date | undefined;
-    validityPeriod?: string;
-}
-
-export class ListOfCertificationFact implements IListOfCertificationFact {
+export class ListOfCertificationFact {
     totalItemCount!: number;
     items!: CertificationFact[];
-
-    constructor(data?: IListOfCertificationFact) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -46793,12 +43277,7 @@ export class ListOfCertificationFact implements IListOfCertificationFact {
     }
 }
 
-export interface IListOfCertificationFact {
-    totalItemCount: number;
-    items: CertificationFact[];
-}
-
-export class CertificationFact implements ICertificationFact {
+export class CertificationFact {
     id?: string | undefined;
     certificationId?: string | undefined;
     certificateId?: string | undefined;
@@ -46807,15 +43286,6 @@ export class CertificationFact implements ICertificationFact {
     started?: Date | undefined;
     certified?: Date | undefined;
     validityPeriod?: string | undefined;
-
-    constructor(data?: ICertificationFact) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -46851,17 +43321,6 @@ export class CertificationFact implements ICertificationFact {
     }
 }
 
-export interface ICertificationFact {
-    id?: string | undefined;
-    certificationId?: string | undefined;
-    certificateId?: string | undefined;
-    traineeId?: string | undefined;
-    created?: Date;
-    started?: Date | undefined;
-    certified?: Date | undefined;
-    validityPeriod?: string | undefined;
-}
-
 /** 0 = None 1 = Left 2 = Requested 3 = Joined 4 = Banned */
 export enum MemberStatus {
     None = 0,
@@ -46871,21 +43330,9 @@ export enum MemberStatus {
     Banned = 4,
 }
 
-export class ListOfClass implements IListOfClass {
+export class ListOfClass {
     totalItemCount!: number;
     items!: Class[];
-
-    constructor(data?: IListOfClass) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -46917,12 +43364,7 @@ export class ListOfClass implements IListOfClass {
     }
 }
 
-export interface IListOfClass {
-    totalItemCount: number;
-    items: Class[];
-}
-
-export class Class implements IClass {
+export class Class {
     id?: string | undefined;
     description?: string | undefined;
     gracePeriod?: string;
@@ -46947,15 +43389,6 @@ export class Class implements IClass {
     programs?: ProgramInClass[] | undefined;
     courseRecommendedJobTypeIds?: string[] | undefined;
     version?: number;
-
-    constructor(data?: IClass) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -47039,45 +43472,9 @@ export class Class implements IClass {
     }
 }
 
-export interface IClass {
-    id?: string | undefined;
-    description?: string | undefined;
-    gracePeriod?: string;
-    allowAssessmentRequests?: boolean;
-    teamId?: string | undefined;
-    teamName?: string | undefined;
-    teamCourseActivationId?: string | undefined;
-    teamCourseActivated?: boolean;
-    organisationId?: string | undefined;
-    organisationName?: string | undefined;
-    organisationLogoUri?: string | undefined;
-    organisationCourseActivationId?: string | undefined;
-    organisationCourseActivated?: boolean;
-    publisherId?: string | undefined;
-    publisherName?: string | undefined;
-    publisherLogoUri?: string | undefined;
-    courseId?: string | undefined;
-    courseName?: string | undefined;
-    courseDescription?: string | undefined;
-    courseBannerUri?: string | undefined;
-    courseLogoUri?: string | undefined;
-    programs?: ProgramInClass[] | undefined;
-    courseRecommendedJobTypeIds?: string[] | undefined;
-    version?: number;
-}
-
-export class ProgramInClass implements IProgramInClass {
+export class ProgramInClass {
     id?: string | undefined;
     name?: string | undefined;
-
-    constructor(data?: IProgramInClass) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -47101,26 +43498,12 @@ export class ProgramInClass implements IProgramInClass {
     }
 }
 
-export interface IProgramInClass {
-    id?: string | undefined;
-    name?: string | undefined;
-}
-
-export class CreateClassSettings implements ICreateClassSettings {
+export class CreateClassSettings {
     teamId!: string;
     courseId!: string;
     description?: string | undefined;
     gracePeriod?: string;
     allowAssessmentRequests?: boolean;
-
-    constructor(data?: ICreateClassSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -47150,28 +43533,11 @@ export class CreateClassSettings implements ICreateClassSettings {
     }
 }
 
-export interface ICreateClassSettings {
-    teamId: string;
-    courseId: string;
-    description?: string | undefined;
-    gracePeriod?: string;
-    allowAssessmentRequests?: boolean;
-}
-
-export class UpdateClassSettings implements IUpdateClassSettings {
+export class UpdateClassSettings {
     description?: string | undefined;
     gracePeriod?: string;
     allowAssessmentRequests?: boolean;
     version?: number;
-
-    constructor(data?: IUpdateClassSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -47199,26 +43565,10 @@ export class UpdateClassSettings implements IUpdateClassSettings {
     }
 }
 
-export interface IUpdateClassSettings {
-    description?: string | undefined;
-    gracePeriod?: string;
-    allowAssessmentRequests?: boolean;
-    version?: number;
-}
-
-export class NotifyAssessorsSettings implements INotifyAssessorsSettings {
+export class NotifyAssessorsSettings {
     enrolmentId!: string;
     assessmentId!: string;
     traineeId!: string;
-
-    constructor(data?: INotifyAssessorsSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -47244,27 +43594,9 @@ export class NotifyAssessorsSettings implements INotifyAssessorsSettings {
     }
 }
 
-export interface INotifyAssessorsSettings {
-    enrolmentId: string;
-    assessmentId: string;
-    traineeId: string;
-}
-
-export class ListOfCourse implements IListOfCourse {
+export class ListOfCourse {
     totalItemCount!: number;
     items!: Course[];
-
-    constructor(data?: IListOfCourse) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -47296,12 +43628,7 @@ export class ListOfCourse implements IListOfCourse {
     }
 }
 
-export interface IListOfCourse {
-    totalItemCount: number;
-    items: Course[];
-}
-
-export class Course implements ICourse {
+export class Course {
     id?: string | undefined;
     name?: string | undefined;
     description?: string | undefined;
@@ -47317,15 +43644,6 @@ export class Course implements ICourse {
     recommendedJobTypeIds?: string[] | undefined;
     processReports?: ProcessReportInCourse[] | undefined;
     version?: number;
-
-    constructor(data?: ICourse) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -47423,36 +43741,9 @@ export class Course implements ICourse {
     }
 }
 
-export interface ICourse {
+export class ProgramInCourse {
     id?: string | undefined;
     name?: string | undefined;
-    description?: string | undefined;
-    bannerUri?: string | undefined;
-    logoUri?: string | undefined;
-    mediaUris?: string[] | undefined;
-    publisherId?: string | undefined;
-    publisherName?: string | undefined;
-    publisherLogoUri?: string | undefined;
-    programs?: ProgramInCourse[] | undefined;
-    sections?: SectionInCourse[] | undefined;
-    certificates?: CertificateInCourse[] | undefined;
-    recommendedJobTypeIds?: string[] | undefined;
-    processReports?: ProcessReportInCourse[] | undefined;
-    version?: number;
-}
-
-export class ProgramInCourse implements IProgramInCourse {
-    id?: string | undefined;
-    name?: string | undefined;
-
-    constructor(data?: IProgramInCourse) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -47476,24 +43767,10 @@ export class ProgramInCourse implements IProgramInCourse {
     }
 }
 
-export interface IProgramInCourse {
-    id?: string | undefined;
-    name?: string | undefined;
-}
-
-export class SectionInCourse implements ISectionInCourse {
+export class SectionInCourse {
     name?: string | undefined;
     required?: boolean;
-    units?: UnitInCourse[] | undefined;
-
-    constructor(data?: ISectionInCourse) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
+    units?: any[] | undefined;
 
     init(_data?: any) {
         if (_data) {
@@ -47502,7 +43779,7 @@ export class SectionInCourse implements ISectionInCourse {
             if (Array.isArray(_data["units"])) {
                 this.units = [] as any;
                 for (let item of _data["units"])
-                    this.units!.push(UnitInCourse.fromJS(item));
+                    this.units!.push(item);
             }
         }
     }
@@ -47521,76 +43798,18 @@ export class SectionInCourse implements ISectionInCourse {
         if (Array.isArray(this.units)) {
             data["units"] = [];
             for (let item of this.units)
-                data["units"].push(item.toJSON());
+                data["units"].push(item);
         }
         return data;
     }
 }
 
-export interface ISectionInCourse {
-    name?: string | undefined;
-    required?: boolean;
-    units?: UnitInCourse[] | undefined;
-}
-
-export abstract class UnitInCourse implements IUnitInCourse {
-    unitType?: CourseUnitType;
-    id?: string | undefined;
-
-    constructor(data?: IUnitInCourse) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.unitType = _data["unitType"];
-            this.id = _data["id"];
-        }
-    }
-
-    static fromJS(data: any): UnitInCourse {
-        data = typeof data === 'object' ? data : {};
-        throw new Error("The abstract class 'UnitInCourse' cannot be instantiated.");
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["unitType"] = this.unitType;
-        data["id"] = this.id;
-        return data;
-    }
-}
-
-export interface IUnitInCourse {
-    unitType?: CourseUnitType;
-    id?: string | undefined;
-}
-
-export enum CourseUnitType {
-    Module = "Module",
-    Survey = "Survey",
-}
-
-export class CertificateInCourse implements ICertificateInCourse {
+export class CertificateInCourse {
     id?: string | undefined;
     name?: string | undefined;
     logoUri?: string | undefined;
     validityPeriod?: string;
     moduleIds?: string[] | undefined;
-
-    constructor(data?: ICertificateInCourse) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -47628,27 +43847,10 @@ export class CertificateInCourse implements ICertificateInCourse {
     }
 }
 
-export interface ICertificateInCourse {
-    id?: string | undefined;
-    name?: string | undefined;
-    logoUri?: string | undefined;
-    validityPeriod?: string;
-    moduleIds?: string[] | undefined;
-}
-
-export class ProcessReportInCourse implements IProcessReportInCourse {
+export class ProcessReportInCourse {
     id?: string | undefined;
     name?: string | undefined;
     type?: string | undefined;
-
-    constructor(data?: IProcessReportInCourse) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -47674,13 +43876,7 @@ export class ProcessReportInCourse implements IProcessReportInCourse {
     }
 }
 
-export interface IProcessReportInCourse {
-    id?: string | undefined;
-    name?: string | undefined;
-    type?: string | undefined;
-}
-
-export class CreateCourseSettings implements ICreateCourseSettings {
+export class CreateCourseSettings {
     publisherId!: string;
     name!: string;
     /** A base64 encoded image or a URL of existing image
@@ -47698,15 +43894,6 @@ export class CreateCourseSettings implements ICreateCourseSettings {
     sections?: CourseSection[] | undefined;
     recommendedJobTypeIds?: string[] | undefined;
     processReportIds?: string[] | undefined;
-
-    constructor(data?: ICreateCourseSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -47776,39 +43963,10 @@ export class CreateCourseSettings implements ICreateCourseSettings {
     }
 }
 
-export interface ICreateCourseSettings {
-    publisherId: string;
-    name: string;
-    /** A base64 encoded image or a URL of existing image
-             */
-    bannerUri?: string | undefined;
-    /** A base64 encoded image or a URL of existing image
-             */
-    logoUri?: string | undefined;
-    /** A list of promotional medias. Elements can be: 
-    - base64 encoded image
-    - uri of image
-    - url of video (i.e. video has to be hosted elsewhere, at least for now) */
-    mediaUris?: string[] | undefined;
-    description?: string | undefined;
-    sections?: CourseSection[] | undefined;
-    recommendedJobTypeIds?: string[] | undefined;
-    processReportIds?: string[] | undefined;
-}
-
-export class CourseSection implements ICourseSection {
+export class CourseSection {
     name?: string | undefined;
     units?: CourseUnit[] | undefined;
     required?: boolean;
-
-    constructor(data?: ICourseSection) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -47842,26 +44000,11 @@ export class CourseSection implements ICourseSection {
     }
 }
 
-export interface ICourseSection {
-    name?: string | undefined;
-    units?: CourseUnit[] | undefined;
-    required?: boolean;
-}
-
-export class CourseUnit implements ICourseUnit {
+export class CourseUnit {
     unitType?: CourseUnitType;
     id?: string | undefined;
     open?: boolean;
     certificateIds?: string[] | undefined;
-
-    constructor(data?: ICourseUnit) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -47897,14 +44040,12 @@ export class CourseUnit implements ICourseUnit {
     }
 }
 
-export interface ICourseUnit {
-    unitType?: CourseUnitType;
-    id?: string | undefined;
-    open?: boolean;
-    certificateIds?: string[] | undefined;
+export enum CourseUnitType {
+    Module = "Module",
+    Survey = "Survey",
 }
 
-export class UpdateCourseSettings implements IUpdateCourseSettings {
+export class UpdateCourseSettings {
     name!: string;
     bannerUri?: string | undefined;
     logoUri?: string | undefined;
@@ -47915,15 +44056,6 @@ export class UpdateCourseSettings implements IUpdateCourseSettings {
     recommendedJobTypeIds?: string[] | undefined;
     processReportIds?: string[] | undefined;
     version?: number;
-
-    constructor(data?: IUpdateCourseSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -47995,34 +44127,9 @@ export class UpdateCourseSettings implements IUpdateCourseSettings {
     }
 }
 
-export interface IUpdateCourseSettings {
-    name: string;
-    bannerUri?: string | undefined;
-    logoUri?: string | undefined;
-    mediaUris?: string[] | undefined;
-    description?: string | undefined;
-    open?: boolean;
-    sections?: CourseSection[] | undefined;
-    recommendedJobTypeIds?: string[] | undefined;
-    processReportIds?: string[] | undefined;
-    version?: number;
-}
-
-export class ListOfEnrolment implements IListOfEnrolment {
+export class ListOfEnrolment {
     totalItemCount!: number;
     items!: Enrolment[];
-
-    constructor(data?: IListOfEnrolment) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -48054,12 +44161,7 @@ export class ListOfEnrolment implements IListOfEnrolment {
     }
 }
 
-export interface IListOfEnrolment {
-    totalItemCount: number;
-    items: Enrolment[];
-}
-
-export class Enrolment2 implements IEnrolment2 {
+export class Enrolment2 {
     id?: string | undefined;
     traineeId?: string | undefined;
     traineeName?: string | undefined;
@@ -48077,15 +44179,6 @@ export class Enrolment2 implements IEnrolment2 {
     courseBannerUri?: string | undefined;
     courseLogoUri?: string | undefined;
     classes?: ClassInEnrolment[] | undefined;
-
-    constructor(data?: IEnrolment2) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -48155,33 +44248,9 @@ export class Enrolment2 implements IEnrolment2 {
     }
 }
 
-export interface IEnrolment2 {
-    id?: string | undefined;
-    traineeId?: string | undefined;
-    traineeName?: string | undefined;
-    traineeImageUri?: string | undefined;
-    traineeJobTypeId?: string | undefined;
-    traineeJobTypeName?: string | undefined;
-    traineeCourseActivationId?: string | undefined;
-    traineeCourseActivated?: boolean;
-    publisherId?: string | undefined;
-    publisherName?: string | undefined;
-    publisherLogoUri?: string | undefined;
-    programs?: ProgramInEnrolment[] | undefined;
-    courseId?: string | undefined;
-    courseName?: string | undefined;
-    courseBannerUri?: string | undefined;
-    courseLogoUri?: string | undefined;
-    classes?: ClassInEnrolment[] | undefined;
-}
-
-export class Enrolment extends Enrolment2 implements IEnrolment {
+export class Enrolment extends Enrolment2 {
     courseSections?: CourseSectionInEnrolment[] | undefined;
     certifications?: CertificationInEnrolment[] | undefined;
-
-    constructor(data?: IEnrolment) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -48223,24 +44292,10 @@ export class Enrolment extends Enrolment2 implements IEnrolment {
     }
 }
 
-export interface IEnrolment extends IEnrolment2 {
-    courseSections?: CourseSectionInEnrolment[] | undefined;
-    certifications?: CertificationInEnrolment[] | undefined;
-}
-
-export class CourseSectionInEnrolment implements ICourseSectionInEnrolment {
+export class CourseSectionInEnrolment {
     name?: string | undefined;
     required?: boolean;
-    units?: UnitResultInEnrolment[] | undefined;
-
-    constructor(data?: ICourseSectionInEnrolment) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
+    units?: any[] | undefined;
 
     init(_data?: any) {
         if (_data) {
@@ -48249,7 +44304,7 @@ export class CourseSectionInEnrolment implements ICourseSectionInEnrolment {
             if (Array.isArray(_data["units"])) {
                 this.units = [] as any;
                 for (let item of _data["units"])
-                    this.units!.push(UnitResultInEnrolment.fromJS(item));
+                    this.units!.push(item);
             }
         }
     }
@@ -48268,63 +44323,13 @@ export class CourseSectionInEnrolment implements ICourseSectionInEnrolment {
         if (Array.isArray(this.units)) {
             data["units"] = [];
             for (let item of this.units)
-                data["units"].push(item.toJSON());
+                data["units"].push(item);
         }
         return data;
     }
 }
 
-export interface ICourseSectionInEnrolment {
-    name?: string | undefined;
-    required?: boolean;
-    units?: UnitResultInEnrolment[] | undefined;
-}
-
-export class UnitResultInEnrolment implements IUnitResultInEnrolment {
-    unitType?: CourseUnitType;
-    id?: string | undefined;
-    name?: string | undefined;
-
-    constructor(data?: IUnitResultInEnrolment) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.unitType = _data["unitType"];
-            this.id = _data["id"];
-            this.name = _data["name"];
-        }
-    }
-
-    static fromJS(data: any): UnitResultInEnrolment {
-        data = typeof data === 'object' ? data : {};
-        let result = new UnitResultInEnrolment();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["unitType"] = this.unitType;
-        data["id"] = this.id;
-        data["name"] = this.name;
-        return data;
-    }
-}
-
-export interface IUnitResultInEnrolment {
-    unitType?: CourseUnitType;
-    id?: string | undefined;
-    name?: string | undefined;
-}
-
-export class CertificationInEnrolment implements ICertificationInEnrolment {
+export class CertificationInEnrolment {
     id?: string | undefined;
     certificateId?: string | undefined;
     certificateName?: string | undefined;
@@ -48333,15 +44338,6 @@ export class CertificationInEnrolment implements ICertificationInEnrolment {
     started?: Date | undefined;
     certified?: Date | undefined;
     expires?: Date | undefined;
-
-    constructor(data?: ICertificationInEnrolment) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -48385,29 +44381,9 @@ export class CertificationInEnrolment implements ICertificationInEnrolment {
     }
 }
 
-export interface ICertificationInEnrolment {
-    id?: string | undefined;
-    certificateId?: string | undefined;
-    certificateName?: string | undefined;
-    certificateLogoUri?: string | undefined;
-    certificateModuleIds?: string[] | undefined;
-    started?: Date | undefined;
-    certified?: Date | undefined;
-    expires?: Date | undefined;
-}
-
-export class ProgramInEnrolment implements IProgramInEnrolment {
+export class ProgramInEnrolment {
     id?: string | undefined;
     name?: string | undefined;
-
-    constructor(data?: IProgramInEnrolment) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -48431,12 +44407,7 @@ export class ProgramInEnrolment implements IProgramInEnrolment {
     }
 }
 
-export interface IProgramInEnrolment {
-    id?: string | undefined;
-    name?: string | undefined;
-}
-
-export class ClassInEnrolment implements IClassInEnrolment {
+export class ClassInEnrolment {
     id?: string | undefined;
     teamId?: string | undefined;
     teamName?: string | undefined;
@@ -48449,15 +44420,6 @@ export class ClassInEnrolment implements IClassInEnrolment {
     joined?: Date;
     gracePeriod?: string;
     description?: string | undefined;
-
-    constructor(data?: IClassInEnrolment) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -48501,36 +44463,9 @@ export class ClassInEnrolment implements IClassInEnrolment {
     }
 }
 
-export interface IClassInEnrolment {
-    id?: string | undefined;
-    teamId?: string | undefined;
-    teamName?: string | undefined;
-    teamCourseActivationId?: string | undefined;
-    teamCourseActivated?: boolean;
-    organisationId?: string | undefined;
-    organisationName?: string | undefined;
-    organisationCourseActivationId?: string | undefined;
-    organisationCourseActivated?: boolean;
-    joined?: Date;
-    gracePeriod?: string;
-    description?: string | undefined;
-}
-
-export class ListOfModuleAttempt implements IListOfModuleAttempt {
+export class ListOfModuleAttempt {
     totalItemCount!: number;
     items!: ModuleAttempt[];
-
-    constructor(data?: IListOfModuleAttempt) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -48562,26 +44497,9 @@ export class ListOfModuleAttempt implements IListOfModuleAttempt {
     }
 }
 
-export interface IListOfModuleAttempt {
-    totalItemCount: number;
-    items: ModuleAttempt[];
-}
-
-export class ListOfModule implements IListOfModule {
+export class ListOfModule {
     totalItemCount!: number;
     items!: Module[];
-
-    constructor(data?: IListOfModule) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -48613,12 +44531,7 @@ export class ListOfModule implements IListOfModule {
     }
 }
 
-export interface IListOfModule {
-    totalItemCount: number;
-    items: Module[];
-}
-
-export class Module implements IModule {
+export class Module {
     id?: string | undefined;
     name?: string | undefined;
     description?: string | undefined;
@@ -48630,15 +44543,6 @@ export class Module implements IModule {
     published?: boolean;
     publishedContentId?: string | undefined;
     version?: number;
-
-    constructor(data?: IModule) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -48680,36 +44584,13 @@ export class Module implements IModule {
     }
 }
 
-export interface IModule {
-    id?: string | undefined;
-    name?: string | undefined;
-    description?: string | undefined;
-    imageUri?: string | undefined;
-    publisherId?: string | undefined;
-    publisherName?: string | undefined;
-    publisherLogoUri?: string | undefined;
-    type?: string | undefined;
-    published?: boolean;
-    publishedContentId?: string | undefined;
-    version?: number;
-}
-
-export class CreateModuleSettings implements ICreateModuleSettings {
+export class CreateModuleSettings {
     publisherId!: string;
     type!: string;
     name!: string;
     description?: string | undefined;
     imageUri?: string | undefined;
     files?: CreateFileSettings[] | undefined;
-
-    constructor(data?: ICreateModuleSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -48749,29 +44630,11 @@ export class CreateModuleSettings implements ICreateModuleSettings {
     }
 }
 
-export interface ICreateModuleSettings {
-    publisherId: string;
-    type: string;
-    name: string;
-    description?: string | undefined;
-    imageUri?: string | undefined;
-    files?: CreateFileSettings[] | undefined;
-}
-
-export class UpdateModuleSettings implements IUpdateModuleSettings {
+export class UpdateModuleSettings {
     name!: string;
     description?: string | undefined;
     imageUri?: string | undefined;
     version?: number;
-
-    constructor(data?: IUpdateModuleSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -48799,28 +44662,9 @@ export class UpdateModuleSettings implements IUpdateModuleSettings {
     }
 }
 
-export interface IUpdateModuleSettings {
-    name: string;
-    description?: string | undefined;
-    imageUri?: string | undefined;
-    version?: number;
-}
-
-export class ListOfModuleNps implements IListOfModuleNps {
+export class ListOfModuleNps {
     totalItemCount!: number;
     items!: ModuleNps[];
-
-    constructor(data?: IListOfModuleNps) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -48852,12 +44696,7 @@ export class ListOfModuleNps implements IListOfModuleNps {
     }
 }
 
-export interface IListOfModuleNps {
-    totalItemCount: number;
-    items: ModuleNps[];
-}
-
-export class ModuleNps implements IModuleNps {
+export class ModuleNps {
     id?: string | undefined;
     score?: number;
     comments?: string | undefined;
@@ -48871,15 +44710,6 @@ export class ModuleNps implements IModuleNps {
     moduleId?: string | undefined;
     moduleName?: string | undefined;
     moduleType?: string | undefined;
-
-    constructor(data?: IModuleNps) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -48925,23 +44755,7 @@ export class ModuleNps implements IModuleNps {
     }
 }
 
-export interface IModuleNps {
-    id?: string | undefined;
-    score?: number;
-    comments?: string | undefined;
-    dismissed?: boolean;
-    created?: Date;
-    creatorId?: string | undefined;
-    creatorName?: string | undefined;
-    creatorImageUri?: string | undefined;
-    creatorJobTypeId?: string | undefined;
-    creatorJobTypeName?: string | undefined;
-    moduleId?: string | undefined;
-    moduleName?: string | undefined;
-    moduleType?: string | undefined;
-}
-
-export class Nps implements INps {
+export class Nps {
     id?: string | undefined;
     itemId?: string | undefined;
     score?: number;
@@ -48953,15 +44767,6 @@ export class Nps implements INps {
     creatorImageUri?: string | undefined;
     creatorJobTypeId?: string | undefined;
     creatorJobTypeName?: string | undefined;
-
-    constructor(data?: INps) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -49003,34 +44808,11 @@ export class Nps implements INps {
     }
 }
 
-export interface INps {
-    id?: string | undefined;
-    itemId?: string | undefined;
-    score?: number;
-    comments?: string | undefined;
-    dismissed?: boolean;
-    created?: Date;
-    creatorId?: string | undefined;
-    creatorName?: string | undefined;
-    creatorImageUri?: string | undefined;
-    creatorJobTypeId?: string | undefined;
-    creatorJobTypeName?: string | undefined;
-}
-
-export class CreateNpsSettings implements ICreateNpsSettings {
+export class CreateNpsSettings {
     moduleId!: string;
     comments?: string | undefined;
     score?: number;
     dismissed?: boolean;
-
-    constructor(data?: ICreateNpsSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -49058,28 +44840,9 @@ export class CreateNpsSettings implements ICreateNpsSettings {
     }
 }
 
-export interface ICreateNpsSettings {
-    moduleId: string;
-    comments?: string | undefined;
-    score?: number;
-    dismissed?: boolean;
-}
-
-export class ListOfModuleAttemptOfQuizResult implements IListOfModuleAttemptOfQuizResult {
+export class ListOfModuleAttemptOfQuizResult {
     totalItemCount!: number;
     items!: ModuleAttemptOfQuizResult[];
-
-    constructor(data?: IListOfModuleAttemptOfQuizResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -49111,17 +44874,8 @@ export class ListOfModuleAttemptOfQuizResult implements IListOfModuleAttemptOfQu
     }
 }
 
-export interface IListOfModuleAttemptOfQuizResult {
-    totalItemCount: number;
-    items: ModuleAttemptOfQuizResult[];
-}
-
-export class ModuleAttemptOfQuizResult extends ModuleAttempt implements IModuleAttemptOfQuizResult {
+export class ModuleAttemptOfQuizResult extends ModuleAttempt {
     result?: QuizResult | undefined;
-
-    constructor(data?: IModuleAttemptOfQuizResult) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -49145,22 +44899,9 @@ export class ModuleAttemptOfQuizResult extends ModuleAttempt implements IModuleA
     }
 }
 
-export interface IModuleAttemptOfQuizResult extends IModuleAttempt {
-    result?: QuizResult | undefined;
-}
-
-export class QuizResult implements IQuizResult {
+export class QuizResult {
     sections?: QuizSectionResult[] | undefined;
     submitted?: boolean;
-
-    constructor(data?: IQuizResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -49192,23 +44933,9 @@ export class QuizResult implements IQuizResult {
     }
 }
 
-export interface IQuizResult {
-    sections?: QuizSectionResult[] | undefined;
-    submitted?: boolean;
-}
-
-export class QuizSectionResult implements IQuizSectionResult {
+export class QuizSectionResult {
     index?: number;
     questions?: QuizQuestionResult[] | undefined;
-
-    constructor(data?: IQuizSectionResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -49240,23 +44967,9 @@ export class QuizSectionResult implements IQuizSectionResult {
     }
 }
 
-export interface IQuizSectionResult {
-    index?: number;
-    questions?: QuizQuestionResult[] | undefined;
-}
-
-export class QuizQuestionResult implements IQuizQuestionResult {
+export class QuizQuestionResult {
     index?: number;
     answers?: number[] | undefined;
-
-    constructor(data?: IQuizQuestionResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -49288,28 +45001,11 @@ export class QuizQuestionResult implements IQuizQuestionResult {
     }
 }
 
-export interface IQuizQuestionResult {
-    index?: number;
-    answers?: number[] | undefined;
-}
-
-export class CreateModuleAttemptSettingsOfQuizResult implements ICreateModuleAttemptSettingsOfQuizResult {
+export class CreateModuleAttemptSettingsOfQuizResult {
     /** Id of the actor of ActorType being assessed */
     actorId!: string;
     moduleContentId!: string;
     result!: QuizResult;
-
-    constructor(data?: ICreateModuleAttemptSettingsOfQuizResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.result = new QuizResult();
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -49335,28 +45031,9 @@ export class CreateModuleAttemptSettingsOfQuizResult implements ICreateModuleAtt
     }
 }
 
-export interface ICreateModuleAttemptSettingsOfQuizResult {
-    /** Id of the actor of ActorType being assessed */
-    actorId: string;
-    moduleContentId: string;
-    result: QuizResult;
-}
-
-export class UpdateModuleAttemptSettingsOfQuizResult implements IUpdateModuleAttemptSettingsOfQuizResult {
+export class UpdateModuleAttemptSettingsOfQuizResult {
     result!: QuizResult;
     version?: number;
-
-    constructor(data?: IUpdateModuleAttemptSettingsOfQuizResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.result = new QuizResult();
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -49380,26 +45057,9 @@ export class UpdateModuleAttemptSettingsOfQuizResult implements IUpdateModuleAtt
     }
 }
 
-export interface IUpdateModuleAttemptSettingsOfQuizResult {
-    result: QuizResult;
-    version?: number;
-}
-
-export class ListOfModuleContentOfQuizSettings implements IListOfModuleContentOfQuizSettings {
+export class ListOfModuleContentOfQuizSettings {
     totalItemCount!: number;
     items!: ModuleContentOfQuizSettings[];
-
-    constructor(data?: IListOfModuleContentOfQuizSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -49431,17 +45091,8 @@ export class ListOfModuleContentOfQuizSettings implements IListOfModuleContentOf
     }
 }
 
-export interface IListOfModuleContentOfQuizSettings {
-    totalItemCount: number;
-    items: ModuleContentOfQuizSettings[];
-}
-
-export class ModuleContentOfQuizSettings extends ModuleContent implements IModuleContentOfQuizSettings {
+export class ModuleContentOfQuizSettings extends ModuleContent {
     settings?: QuizSettings | undefined;
-
-    constructor(data?: IModuleContentOfQuizSettings) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -49465,28 +45116,12 @@ export class ModuleContentOfQuizSettings extends ModuleContent implements IModul
     }
 }
 
-export interface IModuleContentOfQuizSettings extends IModuleContent {
-    settings?: QuizSettings | undefined;
-}
-
-export class QuizSettings implements IQuizSettings {
+export class QuizSettings {
     sections!: QuizSection[];
     /** The percentage required to pass the module. */
     passScore!: number;
     /** If true, will cause the quiz to keep looping until participant passes all questions. */
     loop?: boolean;
-
-    constructor(data?: IQuizSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.sections = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -49520,26 +45155,9 @@ export class QuizSettings implements IQuizSettings {
     }
 }
 
-export interface IQuizSettings {
-    sections: QuizSection[];
-    /** The percentage required to pass the module. */
-    passScore: number;
-    /** If true, will cause the quiz to keep looping until participant passes all questions. */
-    loop?: boolean;
-}
-
-export class QuizSection implements IQuizSection {
+export class QuizSection {
     title?: string | undefined;
     questions?: QuizQuestion[] | undefined;
-
-    constructor(data?: IQuizSection) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -49571,24 +45189,10 @@ export class QuizSection implements IQuizSection {
     }
 }
 
-export interface IQuizSection {
-    title?: string | undefined;
-    questions?: QuizQuestion[] | undefined;
-}
-
-export class QuizQuestion implements IQuizQuestion {
+export class QuizQuestion {
     label?: string | undefined;
     body?: string | undefined;
     answers?: QuizAnswer[] | undefined;
-
-    constructor(data?: IQuizQuestion) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -49622,25 +45226,10 @@ export class QuizQuestion implements IQuizQuestion {
     }
 }
 
-export interface IQuizQuestion {
-    label?: string | undefined;
-    body?: string | undefined;
-    answers?: QuizAnswer[] | undefined;
-}
-
-export class QuizAnswer implements IQuizAnswer {
+export class QuizAnswer {
     label?: string | undefined;
     body?: string | undefined;
     correct?: boolean;
-
-    constructor(data?: IQuizAnswer) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -49666,27 +45255,9 @@ export class QuizAnswer implements IQuizAnswer {
     }
 }
 
-export interface IQuizAnswer {
-    label?: string | undefined;
-    body?: string | undefined;
-    correct?: boolean;
-}
-
-export class ModuleContentSettingsOfQuizSettings implements IModuleContentSettingsOfQuizSettings {
+export class ModuleContentSettingsOfQuizSettings {
     settings!: QuizSettings;
     files?: ModuleContentFileSettings[] | undefined;
-
-    constructor(data?: IModuleContentSettingsOfQuizSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.settings = new QuizSettings();
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -49718,17 +45289,8 @@ export class ModuleContentSettingsOfQuizSettings implements IModuleContentSettin
     }
 }
 
-export interface IModuleContentSettingsOfQuizSettings {
-    settings: QuizSettings;
-    files?: ModuleContentFileSettings[] | undefined;
-}
-
-export class CreateModuleContentSettingsOfQuizSettings extends ModuleContentSettingsOfQuizSettings implements ICreateModuleContentSettingsOfQuizSettings {
+export class CreateModuleContentSettingsOfQuizSettings extends ModuleContentSettingsOfQuizSettings {
     published?: boolean;
-
-    constructor(data?: ICreateModuleContentSettingsOfQuizSettings) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -49752,16 +45314,8 @@ export class CreateModuleContentSettingsOfQuizSettings extends ModuleContentSett
     }
 }
 
-export interface ICreateModuleContentSettingsOfQuizSettings extends IModuleContentSettingsOfQuizSettings {
-    published?: boolean;
-}
-
-export class UpdateModuleContentSettingsOfQuizSettings extends ModuleContentSettingsOfQuizSettings implements IUpdateModuleContentSettingsOfQuizSettings {
+export class UpdateModuleContentSettingsOfQuizSettings extends ModuleContentSettingsOfQuizSettings {
     version?: number;
-
-    constructor(data?: IUpdateModuleContentSettingsOfQuizSettings) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -49785,25 +45339,9 @@ export class UpdateModuleContentSettingsOfQuizSettings extends ModuleContentSett
     }
 }
 
-export interface IUpdateModuleContentSettingsOfQuizSettings extends IModuleContentSettingsOfQuizSettings {
-    version?: number;
-}
-
-export class ListOfModuleAttemptOfRevisionResult implements IListOfModuleAttemptOfRevisionResult {
+export class ListOfModuleAttemptOfRevisionResult {
     totalItemCount!: number;
     items!: ModuleAttemptOfRevisionResult[];
-
-    constructor(data?: IListOfModuleAttemptOfRevisionResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -49835,17 +45373,8 @@ export class ListOfModuleAttemptOfRevisionResult implements IListOfModuleAttempt
     }
 }
 
-export interface IListOfModuleAttemptOfRevisionResult {
-    totalItemCount: number;
-    items: ModuleAttemptOfRevisionResult[];
-}
-
-export class ModuleAttemptOfRevisionResult extends ModuleAttempt implements IModuleAttemptOfRevisionResult {
+export class ModuleAttemptOfRevisionResult extends ModuleAttempt {
     result?: RevisionResult | undefined;
-
-    constructor(data?: IModuleAttemptOfRevisionResult) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -49869,21 +45398,8 @@ export class ModuleAttemptOfRevisionResult extends ModuleAttempt implements IMod
     }
 }
 
-export interface IModuleAttemptOfRevisionResult extends IModuleAttempt {
-    result?: RevisionResult | undefined;
-}
-
-export class RevisionResult implements IRevisionResult {
+export class RevisionResult {
     topics?: RevisionTopicResult[] | undefined;
-
-    constructor(data?: IRevisionResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -49913,22 +45429,9 @@ export class RevisionResult implements IRevisionResult {
     }
 }
 
-export interface IRevisionResult {
-    topics?: RevisionTopicResult[] | undefined;
-}
-
-export class RevisionTopicResult implements IRevisionTopicResult {
+export class RevisionTopicResult {
     index?: number;
     attempts?: TopicAttempt[] | undefined;
-
-    constructor(data?: IRevisionTopicResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -49960,23 +45463,9 @@ export class RevisionTopicResult implements IRevisionTopicResult {
     }
 }
 
-export interface IRevisionTopicResult {
-    index?: number;
-    attempts?: TopicAttempt[] | undefined;
-}
-
-export class TopicAttempt implements ITopicAttempt {
+export class TopicAttempt {
     form?: TopicForm;
     correct?: boolean;
-
-    constructor(data?: ITopicAttempt) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -50000,11 +45489,6 @@ export class TopicAttempt implements ITopicAttempt {
     }
 }
 
-export interface ITopicAttempt {
-    form?: TopicForm;
-    correct?: boolean;
-}
-
 /** 0 = Flipcard 1 = TrueOrFalse 2 = MultipleChoices */
 export enum TopicForm {
     Flipcard = 0,
@@ -50012,23 +45496,11 @@ export enum TopicForm {
     MultipleChoices = 2,
 }
 
-export class CreateModuleAttemptSettingsOfRevisionResult implements ICreateModuleAttemptSettingsOfRevisionResult {
+export class CreateModuleAttemptSettingsOfRevisionResult {
     /** Id of the actor of ActorType being assessed */
     actorId!: string;
     moduleContentId!: string;
     result!: RevisionResult;
-
-    constructor(data?: ICreateModuleAttemptSettingsOfRevisionResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.result = new RevisionResult();
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -50054,28 +45526,9 @@ export class CreateModuleAttemptSettingsOfRevisionResult implements ICreateModul
     }
 }
 
-export interface ICreateModuleAttemptSettingsOfRevisionResult {
-    /** Id of the actor of ActorType being assessed */
-    actorId: string;
-    moduleContentId: string;
-    result: RevisionResult;
-}
-
-export class UpdateModuleAttemptSettingsOfRevisionResult implements IUpdateModuleAttemptSettingsOfRevisionResult {
+export class UpdateModuleAttemptSettingsOfRevisionResult {
     result!: RevisionResult;
     version?: number;
-
-    constructor(data?: IUpdateModuleAttemptSettingsOfRevisionResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.result = new RevisionResult();
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -50099,26 +45552,9 @@ export class UpdateModuleAttemptSettingsOfRevisionResult implements IUpdateModul
     }
 }
 
-export interface IUpdateModuleAttemptSettingsOfRevisionResult {
-    result: RevisionResult;
-    version?: number;
-}
-
-export class ListOfModuleContentOfRevisionSettings implements IListOfModuleContentOfRevisionSettings {
+export class ListOfModuleContentOfRevisionSettings {
     totalItemCount!: number;
     items!: ModuleContentOfRevisionSettings[];
-
-    constructor(data?: IListOfModuleContentOfRevisionSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -50150,17 +45586,8 @@ export class ListOfModuleContentOfRevisionSettings implements IListOfModuleConte
     }
 }
 
-export interface IListOfModuleContentOfRevisionSettings {
-    totalItemCount: number;
-    items: ModuleContentOfRevisionSettings[];
-}
-
-export class ModuleContentOfRevisionSettings extends ModuleContent implements IModuleContentOfRevisionSettings {
+export class ModuleContentOfRevisionSettings extends ModuleContent {
     settings?: RevisionSettings | undefined;
-
-    constructor(data?: IModuleContentOfRevisionSettings) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -50184,26 +45611,10 @@ export class ModuleContentOfRevisionSettings extends ModuleContent implements IM
     }
 }
 
-export interface IModuleContentOfRevisionSettings extends IModuleContent {
-    settings?: RevisionSettings | undefined;
-}
-
-export class RevisionSettings implements IRevisionSettings {
+export class RevisionSettings {
     topics!: Topic[];
     /** The percentage required to pass the module. */
     passScore!: number;
-
-    constructor(data?: IRevisionSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.topics = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -50235,25 +45646,10 @@ export class RevisionSettings implements IRevisionSettings {
     }
 }
 
-export interface IRevisionSettings {
-    topics: Topic[];
-    /** The percentage required to pass the module. */
-    passScore: number;
-}
-
-export class Topic implements ITopic {
+export class Topic {
     term!: string;
     definition!: string;
     hint?: string | undefined;
-
-    constructor(data?: ITopic) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -50279,27 +45675,9 @@ export class Topic implements ITopic {
     }
 }
 
-export interface ITopic {
-    term: string;
-    definition: string;
-    hint?: string | undefined;
-}
-
-export class ModuleContentSettingsOfRevisionSettings implements IModuleContentSettingsOfRevisionSettings {
+export class ModuleContentSettingsOfRevisionSettings {
     settings!: RevisionSettings;
     files?: ModuleContentFileSettings[] | undefined;
-
-    constructor(data?: IModuleContentSettingsOfRevisionSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.settings = new RevisionSettings();
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -50331,17 +45709,8 @@ export class ModuleContentSettingsOfRevisionSettings implements IModuleContentSe
     }
 }
 
-export interface IModuleContentSettingsOfRevisionSettings {
-    settings: RevisionSettings;
-    files?: ModuleContentFileSettings[] | undefined;
-}
-
-export class CreateModuleContentSettingsOfRevisionSettings extends ModuleContentSettingsOfRevisionSettings implements ICreateModuleContentSettingsOfRevisionSettings {
+export class CreateModuleContentSettingsOfRevisionSettings extends ModuleContentSettingsOfRevisionSettings {
     published?: boolean;
-
-    constructor(data?: ICreateModuleContentSettingsOfRevisionSettings) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -50365,16 +45734,8 @@ export class CreateModuleContentSettingsOfRevisionSettings extends ModuleContent
     }
 }
 
-export interface ICreateModuleContentSettingsOfRevisionSettings extends IModuleContentSettingsOfRevisionSettings {
-    published?: boolean;
-}
-
-export class UpdateModuleContentSettingsOfRevisionSettings extends ModuleContentSettingsOfRevisionSettings implements IUpdateModuleContentSettingsOfRevisionSettings {
+export class UpdateModuleContentSettingsOfRevisionSettings extends ModuleContentSettingsOfRevisionSettings {
     version?: number;
-
-    constructor(data?: IUpdateModuleContentSettingsOfRevisionSettings) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -50398,25 +45759,9 @@ export class UpdateModuleContentSettingsOfRevisionSettings extends ModuleContent
     }
 }
 
-export interface IUpdateModuleContentSettingsOfRevisionSettings extends IModuleContentSettingsOfRevisionSettings {
-    version?: number;
-}
-
-export class ListOfTrainingSession implements IListOfTrainingSession {
+export class ListOfTrainingSession {
     totalItemCount!: number;
     items!: TrainingSession[];
-
-    constructor(data?: IListOfTrainingSession) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -50448,12 +45793,7 @@ export class ListOfTrainingSession implements IListOfTrainingSession {
     }
 }
 
-export interface IListOfTrainingSession {
-    totalItemCount: number;
-    items: TrainingSession[];
-}
-
-export class TrainingSession implements ITrainingSession {
+export class TrainingSession {
     id?: string | undefined;
     groupId?: string | undefined;
     groupName?: string | undefined;
@@ -50466,15 +45806,6 @@ export class TrainingSession implements ITrainingSession {
     end?: Date | undefined;
     status?: TrainingSessionStatus;
     version?: number;
-
-    constructor(data?: ITrainingSession) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -50526,34 +45857,10 @@ export class TrainingSession implements ITrainingSession {
     }
 }
 
-export interface ITrainingSession {
-    id?: string | undefined;
-    groupId?: string | undefined;
-    groupName?: string | undefined;
-    organisationId?: string | undefined;
-    name?: string | undefined;
-    description?: string | undefined;
-    location?: Location;
-    modules?: ModuleInTrainingSession[] | undefined;
-    start?: Date | undefined;
-    end?: Date | undefined;
-    status?: TrainingSessionStatus;
-    version?: number;
-}
-
-export class ModuleInTrainingSession implements IModuleInTrainingSession {
+export class ModuleInTrainingSession {
     id?: string | undefined;
     name?: string | undefined;
     type?: string | undefined;
-
-    constructor(data?: IModuleInTrainingSession) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -50579,12 +45886,6 @@ export class ModuleInTrainingSession implements IModuleInTrainingSession {
     }
 }
 
-export interface IModuleInTrainingSession {
-    id?: string | undefined;
-    name?: string | undefined;
-    type?: string | undefined;
-}
-
 /** 0 = None 1 = NotStarted 2 = Started 3 = Complete */
 export enum TrainingSessionStatus {
     None = 0,
@@ -50593,7 +45894,7 @@ export enum TrainingSessionStatus {
     Complete = 3,
 }
 
-export class CreateTrainingSessionSettings implements ICreateTrainingSessionSettings {
+export class CreateTrainingSessionSettings {
     /** The organisation or team id of the training session */
     groupId!: string;
     name!: string;
@@ -50602,15 +45903,6 @@ export class CreateTrainingSessionSettings implements ICreateTrainingSessionSett
     end?: Date | undefined;
     location?: LocationBuilder | undefined;
     modules?: TrainingSessionModule[] | undefined;
-
-    constructor(data?: ICreateTrainingSessionSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -50652,28 +45944,8 @@ export class CreateTrainingSessionSettings implements ICreateTrainingSessionSett
     }
 }
 
-export interface ICreateTrainingSessionSettings {
-    /** The organisation or team id of the training session */
-    groupId: string;
-    name: string;
-    description?: string | undefined;
-    start?: Date | undefined;
-    end?: Date | undefined;
-    location?: LocationBuilder | undefined;
-    modules?: TrainingSessionModule[] | undefined;
-}
-
-export class TrainingSessionModule implements ITrainingSessionModule {
+export class TrainingSessionModule {
     id?: string | undefined;
-
-    constructor(data?: ITrainingSessionModule) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -50695,11 +45967,7 @@ export class TrainingSessionModule implements ITrainingSessionModule {
     }
 }
 
-export interface ITrainingSessionModule {
-    id?: string | undefined;
-}
-
-export class UpdateTrainingSessionSettings implements IUpdateTrainingSessionSettings {
+export class UpdateTrainingSessionSettings {
     name!: string;
     description?: string | undefined;
     start?: Date | undefined;
@@ -50708,15 +45976,6 @@ export class UpdateTrainingSessionSettings implements IUpdateTrainingSessionSett
     modules?: TrainingSessionModule[] | undefined;
     status?: TrainingSessionStatus;
     version?: number;
-
-    constructor(data?: IUpdateTrainingSessionSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -50760,32 +46019,9 @@ export class UpdateTrainingSessionSettings implements IUpdateTrainingSessionSett
     }
 }
 
-export interface IUpdateTrainingSessionSettings {
-    name: string;
-    description?: string | undefined;
-    start?: Date | undefined;
-    end?: Date | undefined;
-    location?: LocationBuilder | undefined;
-    modules?: TrainingSessionModule[] | undefined;
-    status?: TrainingSessionStatus;
-    version?: number;
-}
-
-export class ListOfModuleAttemptOfVideoResult implements IListOfModuleAttemptOfVideoResult {
+export class ListOfModuleAttemptOfVideoResult {
     totalItemCount!: number;
     items!: ModuleAttemptOfVideoResult[];
-
-    constructor(data?: IListOfModuleAttemptOfVideoResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -50817,17 +46053,8 @@ export class ListOfModuleAttemptOfVideoResult implements IListOfModuleAttemptOfV
     }
 }
 
-export interface IListOfModuleAttemptOfVideoResult {
-    totalItemCount: number;
-    items: ModuleAttemptOfVideoResult[];
-}
-
-export class ModuleAttemptOfVideoResult extends ModuleAttempt implements IModuleAttemptOfVideoResult {
+export class ModuleAttemptOfVideoResult extends ModuleAttempt {
     result?: VideoResult | undefined;
-
-    constructor(data?: IModuleAttemptOfVideoResult) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -50851,23 +46078,10 @@ export class ModuleAttemptOfVideoResult extends ModuleAttempt implements IModule
     }
 }
 
-export interface IModuleAttemptOfVideoResult extends IModuleAttempt {
-    result?: VideoResult | undefined;
-}
-
-export class VideoResult implements IVideoResult {
+export class VideoResult {
     position?: string;
     maxPosition?: string;
     duration?: string;
-
-    constructor(data?: IVideoResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -50893,29 +46107,11 @@ export class VideoResult implements IVideoResult {
     }
 }
 
-export interface IVideoResult {
-    position?: string;
-    maxPosition?: string;
-    duration?: string;
-}
-
-export class CreateModuleAttemptSettingsOfVideoResult implements ICreateModuleAttemptSettingsOfVideoResult {
+export class CreateModuleAttemptSettingsOfVideoResult {
     /** Id of the actor of ActorType being assessed */
     actorId!: string;
     moduleContentId!: string;
     result!: VideoResult;
-
-    constructor(data?: ICreateModuleAttemptSettingsOfVideoResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.result = new VideoResult();
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -50941,28 +46137,9 @@ export class CreateModuleAttemptSettingsOfVideoResult implements ICreateModuleAt
     }
 }
 
-export interface ICreateModuleAttemptSettingsOfVideoResult {
-    /** Id of the actor of ActorType being assessed */
-    actorId: string;
-    moduleContentId: string;
-    result: VideoResult;
-}
-
-export class UpdateModuleAttemptSettingsOfVideoResult implements IUpdateModuleAttemptSettingsOfVideoResult {
+export class UpdateModuleAttemptSettingsOfVideoResult {
     result!: VideoResult;
     version?: number;
-
-    constructor(data?: IUpdateModuleAttemptSettingsOfVideoResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.result = new VideoResult();
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -50986,26 +46163,9 @@ export class UpdateModuleAttemptSettingsOfVideoResult implements IUpdateModuleAt
     }
 }
 
-export interface IUpdateModuleAttemptSettingsOfVideoResult {
-    result: VideoResult;
-    version?: number;
-}
-
-export class ListOfModuleContentOfVideoSettings implements IListOfModuleContentOfVideoSettings {
+export class ListOfModuleContentOfVideoSettings {
     totalItemCount!: number;
     items!: ModuleContentOfVideoSettings[];
-
-    constructor(data?: IListOfModuleContentOfVideoSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -51037,17 +46197,8 @@ export class ListOfModuleContentOfVideoSettings implements IListOfModuleContentO
     }
 }
 
-export interface IListOfModuleContentOfVideoSettings {
-    totalItemCount: number;
-    items: ModuleContentOfVideoSettings[];
-}
-
-export class ModuleContentOfVideoSettings extends ModuleContent implements IModuleContentOfVideoSettings {
+export class ModuleContentOfVideoSettings extends ModuleContent {
     settings?: VideoSettings | undefined;
-
-    constructor(data?: IModuleContentOfVideoSettings) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -51071,25 +46222,12 @@ export class ModuleContentOfVideoSettings extends ModuleContent implements IModu
     }
 }
 
-export interface IModuleContentOfVideoSettings extends IModuleContent {
-    settings?: VideoSettings | undefined;
-}
-
-export class VideoSettings implements IVideoSettings {
+export class VideoSettings {
     type!: VideoType;
     /** A URI for the video. */
     source!: string;
     /** The duration of the video */
     duration?: string;
-
-    constructor(data?: IVideoSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -51115,14 +46253,6 @@ export class VideoSettings implements IVideoSettings {
     }
 }
 
-export interface IVideoSettings {
-    type: VideoType;
-    /** A URI for the video. */
-    source: string;
-    /** The duration of the video */
-    duration?: string;
-}
-
 /** 0 = None 1 = Vimeo 2 = Youtube 3 = Azure 4 = Wistia */
 export enum VideoType {
     None = 0,
@@ -51132,21 +46262,9 @@ export enum VideoType {
     Wistia = 4,
 }
 
-export class ModuleContentSettingsOfVideoSettings implements IModuleContentSettingsOfVideoSettings {
+export class ModuleContentSettingsOfVideoSettings {
     settings!: VideoSettings;
     files?: ModuleContentFileSettings[] | undefined;
-
-    constructor(data?: IModuleContentSettingsOfVideoSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.settings = new VideoSettings();
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -51178,17 +46296,8 @@ export class ModuleContentSettingsOfVideoSettings implements IModuleContentSetti
     }
 }
 
-export interface IModuleContentSettingsOfVideoSettings {
-    settings: VideoSettings;
-    files?: ModuleContentFileSettings[] | undefined;
-}
-
-export class CreateModuleContentSettingsOfVideoSettings extends ModuleContentSettingsOfVideoSettings implements ICreateModuleContentSettingsOfVideoSettings {
+export class CreateModuleContentSettingsOfVideoSettings extends ModuleContentSettingsOfVideoSettings {
     published?: boolean;
-
-    constructor(data?: ICreateModuleContentSettingsOfVideoSettings) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -51212,16 +46321,8 @@ export class CreateModuleContentSettingsOfVideoSettings extends ModuleContentSet
     }
 }
 
-export interface ICreateModuleContentSettingsOfVideoSettings extends IModuleContentSettingsOfVideoSettings {
-    published?: boolean;
-}
-
-export class UpdateModuleContentSettingsOfVideoSettings extends ModuleContentSettingsOfVideoSettings implements IUpdateModuleContentSettingsOfVideoSettings {
+export class UpdateModuleContentSettingsOfVideoSettings extends ModuleContentSettingsOfVideoSettings {
     version?: number;
-
-    constructor(data?: IUpdateModuleContentSettingsOfVideoSettings) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -51245,25 +46346,9 @@ export class UpdateModuleContentSettingsOfVideoSettings extends ModuleContentSet
     }
 }
 
-export interface IUpdateModuleContentSettingsOfVideoSettings extends IModuleContentSettingsOfVideoSettings {
-    version?: number;
-}
-
-export class ListOfModuleAttemptOfAssessmentResult implements IListOfModuleAttemptOfAssessmentResult {
+export class ListOfModuleAttemptOfAssessmentResult {
     totalItemCount!: number;
     items!: ModuleAttemptOfAssessmentResult[];
-
-    constructor(data?: IListOfModuleAttemptOfAssessmentResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -51295,17 +46380,8 @@ export class ListOfModuleAttemptOfAssessmentResult implements IListOfModuleAttem
     }
 }
 
-export interface IListOfModuleAttemptOfAssessmentResult {
-    totalItemCount: number;
-    items: ModuleAttemptOfAssessmentResult[];
-}
-
-export class ModuleAttemptOfAssessmentResult extends ModuleAttempt implements IModuleAttemptOfAssessmentResult {
+export class ModuleAttemptOfAssessmentResult extends ModuleAttempt {
     result?: AssessmentResult | undefined;
-
-    constructor(data?: IModuleAttemptOfAssessmentResult) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -51329,21 +46405,8 @@ export class ModuleAttemptOfAssessmentResult extends ModuleAttempt implements IM
     }
 }
 
-export interface IModuleAttemptOfAssessmentResult extends IModuleAttempt {
-    result?: AssessmentResult | undefined;
-}
-
-export class AssessmentResult implements IAssessmentResult {
+export class AssessmentResult {
     attempts?: AssessmentAttempt[] | undefined;
-
-    constructor(data?: IAssessmentResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -51373,25 +46436,12 @@ export class AssessmentResult implements IAssessmentResult {
     }
 }
 
-export interface IAssessmentResult {
-    attempts?: AssessmentAttempt[] | undefined;
-}
-
-export class AssessmentAttempt implements IAssessmentAttempt {
+export class AssessmentAttempt {
     id?: string | undefined;
     assessorId?: string | undefined;
     sections?: AssessmentSectionResult[] | undefined;
     performed?: Date;
     notes?: string | undefined;
-
-    constructor(data?: IAssessmentAttempt) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -51429,26 +46479,9 @@ export class AssessmentAttempt implements IAssessmentAttempt {
     }
 }
 
-export interface IAssessmentAttempt {
-    id?: string | undefined;
-    assessorId?: string | undefined;
-    sections?: AssessmentSectionResult[] | undefined;
-    performed?: Date;
-    notes?: string | undefined;
-}
-
-export class AssessmentSectionResult implements IAssessmentSectionResult {
+export class AssessmentSectionResult {
     index?: number;
     selectedCriteria?: number[] | undefined;
-
-    constructor(data?: IAssessmentSectionResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -51480,28 +46513,11 @@ export class AssessmentSectionResult implements IAssessmentSectionResult {
     }
 }
 
-export interface IAssessmentSectionResult {
-    index?: number;
-    selectedCriteria?: number[] | undefined;
-}
-
-export class CreateModuleAttemptSettingsOfAssessmentResult implements ICreateModuleAttemptSettingsOfAssessmentResult {
+export class CreateModuleAttemptSettingsOfAssessmentResult {
     /** Id of the actor of ActorType being assessed */
     actorId!: string;
     moduleContentId!: string;
     result!: AssessmentResult;
-
-    constructor(data?: ICreateModuleAttemptSettingsOfAssessmentResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.result = new AssessmentResult();
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -51527,28 +46543,9 @@ export class CreateModuleAttemptSettingsOfAssessmentResult implements ICreateMod
     }
 }
 
-export interface ICreateModuleAttemptSettingsOfAssessmentResult {
-    /** Id of the actor of ActorType being assessed */
-    actorId: string;
-    moduleContentId: string;
-    result: AssessmentResult;
-}
-
-export class UpdateModuleAttemptSettingsOfAssessmentResult implements IUpdateModuleAttemptSettingsOfAssessmentResult {
+export class UpdateModuleAttemptSettingsOfAssessmentResult {
     result!: AssessmentResult;
     version?: number;
-
-    constructor(data?: IUpdateModuleAttemptSettingsOfAssessmentResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.result = new AssessmentResult();
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -51572,26 +46569,9 @@ export class UpdateModuleAttemptSettingsOfAssessmentResult implements IUpdateMod
     }
 }
 
-export interface IUpdateModuleAttemptSettingsOfAssessmentResult {
-    result: AssessmentResult;
-    version?: number;
-}
-
-export class ListOfModuleContentOfAssessmentSettings implements IListOfModuleContentOfAssessmentSettings {
+export class ListOfModuleContentOfAssessmentSettings {
     totalItemCount!: number;
     items!: ModuleContentOfAssessmentSettings[];
-
-    constructor(data?: IListOfModuleContentOfAssessmentSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -51623,17 +46603,8 @@ export class ListOfModuleContentOfAssessmentSettings implements IListOfModuleCon
     }
 }
 
-export interface IListOfModuleContentOfAssessmentSettings {
-    totalItemCount: number;
-    items: ModuleContentOfAssessmentSettings[];
-}
-
-export class ModuleContentOfAssessmentSettings extends ModuleContent implements IModuleContentOfAssessmentSettings {
+export class ModuleContentOfAssessmentSettings extends ModuleContent {
     settings?: AssessmentSettings | undefined;
-
-    constructor(data?: IModuleContentOfAssessmentSettings) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -51657,11 +46628,7 @@ export class ModuleContentOfAssessmentSettings extends ModuleContent implements 
     }
 }
 
-export interface IModuleContentOfAssessmentSettings extends IModuleContent {
-    settings?: AssessmentSettings | undefined;
-}
-
-export class AssessmentSettings implements IAssessmentSettings {
+export class AssessmentSettings {
     /** The number of times the assessment must be passed for the module to be considered passed. */
     requiredPasses!: number;
     /** The number of times the assessment must be passed, after the initial pass, for the module to be considered passed. */
@@ -51669,18 +46636,6 @@ export class AssessmentSettings implements IAssessmentSettings {
     /** The percentage required to pass the assessment. */
     passScore!: number;
     sections!: AssessmentSection[];
-
-    constructor(data?: IAssessmentSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.sections = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -51716,31 +46671,9 @@ export class AssessmentSettings implements IAssessmentSettings {
     }
 }
 
-export interface IAssessmentSettings {
-    /** The number of times the assessment must be passed for the module to be considered passed. */
-    requiredPasses: number;
-    /** The number of times the assessment must be passed, after the initial pass, for the module to be considered passed. */
-    subsequentRequiredPasses?: number | undefined;
-    /** The percentage required to pass the assessment. */
-    passScore: number;
-    sections: AssessmentSection[];
-}
-
-export class AssessmentSection implements IAssessmentSection {
+export class AssessmentSection {
     title?: string | undefined;
     criteria!: Criterion[];
-
-    constructor(data?: IAssessmentSection) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.criteria = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -51772,22 +46705,8 @@ export class AssessmentSection implements IAssessmentSection {
     }
 }
 
-export interface IAssessmentSection {
-    title?: string | undefined;
-    criteria: Criterion[];
-}
-
-export class Criterion implements ICriterion {
+export class Criterion {
     body!: string;
-
-    constructor(data?: ICriterion) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -51809,25 +46728,9 @@ export class Criterion implements ICriterion {
     }
 }
 
-export interface ICriterion {
-    body: string;
-}
-
-export class ModuleContentSettingsOfAssessmentSettings implements IModuleContentSettingsOfAssessmentSettings {
+export class ModuleContentSettingsOfAssessmentSettings {
     settings!: AssessmentSettings;
     files?: ModuleContentFileSettings[] | undefined;
-
-    constructor(data?: IModuleContentSettingsOfAssessmentSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.settings = new AssessmentSettings();
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -51859,17 +46762,8 @@ export class ModuleContentSettingsOfAssessmentSettings implements IModuleContent
     }
 }
 
-export interface IModuleContentSettingsOfAssessmentSettings {
-    settings: AssessmentSettings;
-    files?: ModuleContentFileSettings[] | undefined;
-}
-
-export class CreateModuleContentSettingsOfAssessmentSettings extends ModuleContentSettingsOfAssessmentSettings implements ICreateModuleContentSettingsOfAssessmentSettings {
+export class CreateModuleContentSettingsOfAssessmentSettings extends ModuleContentSettingsOfAssessmentSettings {
     published?: boolean;
-
-    constructor(data?: ICreateModuleContentSettingsOfAssessmentSettings) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -51893,16 +46787,8 @@ export class CreateModuleContentSettingsOfAssessmentSettings extends ModuleConte
     }
 }
 
-export interface ICreateModuleContentSettingsOfAssessmentSettings extends IModuleContentSettingsOfAssessmentSettings {
-    published?: boolean;
-}
-
-export class UpdateModuleContentSettingsOfAssessmentSettings extends ModuleContentSettingsOfAssessmentSettings implements IUpdateModuleContentSettingsOfAssessmentSettings {
+export class UpdateModuleContentSettingsOfAssessmentSettings extends ModuleContentSettingsOfAssessmentSettings {
     version?: number;
-
-    constructor(data?: IUpdateModuleContentSettingsOfAssessmentSettings) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -51926,25 +46812,9 @@ export class UpdateModuleContentSettingsOfAssessmentSettings extends ModuleConte
     }
 }
 
-export interface IUpdateModuleContentSettingsOfAssessmentSettings extends IModuleContentSettingsOfAssessmentSettings {
-    version?: number;
-}
-
-export class ListOfAssessmentSubAttempt implements IListOfAssessmentSubAttempt {
+export class ListOfAssessmentSubAttempt {
     totalItemCount!: number;
     items!: AssessmentSubAttempt[];
-
-    constructor(data?: IListOfAssessmentSubAttempt) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -51976,12 +46846,7 @@ export class ListOfAssessmentSubAttempt implements IListOfAssessmentSubAttempt {
     }
 }
 
-export interface IListOfAssessmentSubAttempt {
-    totalItemCount: number;
-    items: AssessmentSubAttempt[];
-}
-
-export class AssessmentSubAttempt implements IAssessmentSubAttempt {
+export class AssessmentSubAttempt {
     id?: string | undefined;
     attemptId?: string | undefined;
     actorId?: string | undefined;
@@ -52004,15 +46869,6 @@ export class AssessmentSubAttempt implements IAssessmentSubAttempt {
     classIds?: string[] | undefined;
     trainingSessionId?: string | undefined;
     trainingSessionModuleAttemptId?: string | undefined;
-
-    constructor(data?: IAssessmentSubAttempt) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -52092,32 +46948,7 @@ export class AssessmentSubAttempt implements IAssessmentSubAttempt {
     }
 }
 
-export interface IAssessmentSubAttempt {
-    id?: string | undefined;
-    attemptId?: string | undefined;
-    actorId?: string | undefined;
-    actorName?: string | undefined;
-    actorType?: ActorType;
-    assessorId?: string | undefined;
-    assessorName?: string | undefined;
-    sections?: AssessmentSectionResult[] | undefined;
-    created?: Date;
-    modified?: Date;
-    performed?: Date;
-    notes?: string | undefined;
-    assessmentId?: string | undefined;
-    assessmentName?: string | undefined;
-    assessmentContentId?: string | undefined;
-    passScore?: number;
-    score?: number;
-    passed?: boolean;
-    publisherId?: string | undefined;
-    classIds?: string[] | undefined;
-    trainingSessionId?: string | undefined;
-    trainingSessionModuleAttemptId?: string | undefined;
-}
-
-export class CreateAssessmentSubAttemptSettings implements ICreateAssessmentSubAttemptSettings {
+export class CreateAssessmentSubAttemptSettings {
     /** Id of the actor of ActorType being assessed */
     actorId!: string;
     assessorId!: string;
@@ -52126,18 +46957,6 @@ export class CreateAssessmentSubAttemptSettings implements ICreateAssessmentSubA
     sections!: AssessmentSectionResult[];
     performed!: Date;
     notes?: string | undefined;
-
-    constructor(data?: ICreateAssessmentSubAttemptSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.sections = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -52179,35 +46998,12 @@ export class CreateAssessmentSubAttemptSettings implements ICreateAssessmentSubA
     }
 }
 
-export interface ICreateAssessmentSubAttemptSettings {
-    /** Id of the actor of ActorType being assessed */
-    actorId: string;
-    assessorId: string;
-    moduleId: string;
-    moduleContentId: string;
-    sections: AssessmentSectionResult[];
-    performed: Date;
-    notes?: string | undefined;
-}
-
-export class UpdateAssessmentSubAttemptSettings implements IUpdateAssessmentSubAttemptSettings {
+export class UpdateAssessmentSubAttemptSettings {
     assessorId!: string;
     sections!: AssessmentSectionResult[];
     performed!: Date;
     notes?: string | undefined;
     version?: number;
-
-    constructor(data?: IUpdateAssessmentSubAttemptSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.sections = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -52245,15 +47041,7 @@ export class UpdateAssessmentSubAttemptSettings implements IUpdateAssessmentSubA
     }
 }
 
-export interface IUpdateAssessmentSubAttemptSettings {
-    assessorId: string;
-    sections: AssessmentSectionResult[];
-    performed: Date;
-    notes?: string | undefined;
-    version?: number;
-}
-
-export class AuthenticationSettings implements IAuthenticationSettings {
+export class AuthenticationSettings {
     method?: AuthenticationMethod;
     email!: string;
     /** This will be the password if using password to login, or the one-time passcode if using one-time passcode
@@ -52261,19 +47049,6 @@ to login. */
     password?: string | undefined;
     /** Optional 2FA code. */
     twoFactorAuthenticationCode?: string | undefined;
-
-    constructor(data?: IAuthenticationSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.method = AuthenticationMethod.Password;
-            this.password = "";
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -52301,30 +47076,16 @@ to login. */
     }
 }
 
-export interface IAuthenticationSettings {
-    method?: AuthenticationMethod;
-    email: string;
-    /** This will be the password if using password to login, or the one-time passcode if using one-time passcode
-to login. */
-    password?: string | undefined;
-    /** Optional 2FA code. */
-    twoFactorAuthenticationCode?: string | undefined;
-}
-
 /** 0 = Password 1 = OneTimePasscode */
 export enum AuthenticationMethod {
     Password = 0,
     OneTimePasscode = 1,
 }
 
-export class ChallengeToken extends Token implements IChallengeToken {
+export class ChallengeToken extends Token {
     success?: boolean;
     twoFactorAuthenticationChallenge?: TwoFactorAuthenticationType;
     rateLimit?: string;
-
-    constructor(data?: IChallengeToken) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -52352,12 +47113,6 @@ export class ChallengeToken extends Token implements IChallengeToken {
     }
 }
 
-export interface IChallengeToken extends IToken {
-    success?: boolean;
-    twoFactorAuthenticationChallenge?: TwoFactorAuthenticationType;
-    rateLimit?: string;
-}
-
 /** 0 = None 1 = Sms 2 = Email */
 export enum TwoFactorAuthenticationType {
     None = 0,
@@ -52365,7 +47120,7 @@ export enum TwoFactorAuthenticationType {
     Email = 2,
 }
 
-export class Identity implements IIdentity {
+export class Identity {
     id?: string | undefined;
     type?: IdentityType;
     name?: string | undefined;
@@ -52374,15 +47129,6 @@ export class Identity implements IIdentity {
     imageUri?: string | undefined;
     groups?: IdentityGroup[] | undefined;
     impersonatorId?: string | undefined;
-
-    constructor(data?: IIdentity) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -52426,33 +47172,13 @@ export class Identity implements IIdentity {
     }
 }
 
-export interface IIdentity {
-    id?: string | undefined;
-    type?: IdentityType;
-    name?: string | undefined;
-    email?: string | undefined;
-    description?: string | undefined;
-    imageUri?: string | undefined;
-    groups?: IdentityGroup[] | undefined;
-    impersonatorId?: string | undefined;
-}
-
-export class IdentityGroup implements IIdentityGroup {
+export class IdentityGroup {
     groupId?: string | undefined;
     groupType?: string | undefined;
     parentGroups?: GroupIdAndType[] | undefined;
     displayId?: string | undefined;
     labelIds?: string[] | undefined;
     roles?: string[] | undefined;
-
-    constructor(data?: IIdentityGroup) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -52508,27 +47234,9 @@ export class IdentityGroup implements IIdentityGroup {
     }
 }
 
-export interface IIdentityGroup {
-    groupId?: string | undefined;
-    groupType?: string | undefined;
-    parentGroups?: GroupIdAndType[] | undefined;
-    displayId?: string | undefined;
-    labelIds?: string[] | undefined;
-    roles?: string[] | undefined;
-}
-
-export class GroupIdAndType implements IGroupIdAndType {
+export class GroupIdAndType {
     type?: string | undefined;
     id?: string | undefined;
-
-    constructor(data?: IGroupIdAndType) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -52552,24 +47260,10 @@ export class GroupIdAndType implements IGroupIdAndType {
     }
 }
 
-export interface IGroupIdAndType {
-    type?: string | undefined;
-    id?: string | undefined;
-}
-
-export class CommunicationPreferences implements ICommunicationPreferences {
+export class CommunicationPreferences {
     userId?: string | undefined;
     emails?: EmailPreference[] | undefined;
     version?: number;
-
-    constructor(data?: ICommunicationPreferences) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -52603,24 +47297,9 @@ export class CommunicationPreferences implements ICommunicationPreferences {
     }
 }
 
-export interface ICommunicationPreferences {
-    userId?: string | undefined;
-    emails?: EmailPreference[] | undefined;
-    version?: number;
-}
-
-export class EmailPreference2 implements IEmailPreference2 {
+export class EmailPreference2 {
     type?: string | undefined;
     ignore?: boolean;
-
-    constructor(data?: IEmailPreference2) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -52644,18 +47323,9 @@ export class EmailPreference2 implements IEmailPreference2 {
     }
 }
 
-export interface IEmailPreference2 {
-    type?: string | undefined;
-    ignore?: boolean;
-}
-
-export class EmailPreference extends EmailPreference2 implements IEmailPreference {
+export class EmailPreference extends EmailPreference2 {
     category?: string | undefined;
     reason?: string | undefined;
-
-    constructor(data?: IEmailPreference) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -52681,23 +47351,9 @@ export class EmailPreference extends EmailPreference2 implements IEmailPreferenc
     }
 }
 
-export interface IEmailPreference extends IEmailPreference2 {
-    category?: string | undefined;
-    reason?: string | undefined;
-}
-
-export class UpdateCommunicationPreferencesSettings implements IUpdateCommunicationPreferencesSettings {
+export class UpdateCommunicationPreferencesSettings {
     emails?: EmailPreference2[] | undefined;
     version?: number;
-
-    constructor(data?: IUpdateCommunicationPreferencesSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -52729,23 +47385,9 @@ export class UpdateCommunicationPreferencesSettings implements IUpdateCommunicat
     }
 }
 
-export interface IUpdateCommunicationPreferencesSettings {
-    emails?: EmailPreference2[] | undefined;
-    version?: number;
-}
-
-export class UnsubscribeToken implements IUnsubscribeToken {
+export class UnsubscribeToken {
     userId?: string | undefined;
     emailType?: string | undefined;
-
-    constructor(data?: IUnsubscribeToken) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -52769,22 +47411,8 @@ export class UnsubscribeToken implements IUnsubscribeToken {
     }
 }
 
-export interface IUnsubscribeToken {
-    userId?: string | undefined;
-    emailType?: string | undefined;
-}
-
-export class EmailSettings implements IEmailSettings {
+export class EmailSettings {
     email!: string;
-
-    constructor(data?: IEmailSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -52806,25 +47434,9 @@ export class EmailSettings implements IEmailSettings {
     }
 }
 
-export interface IEmailSettings {
-    email: string;
-}
-
-export class ListOfGroupComment implements IListOfGroupComment {
+export class ListOfGroupComment {
     totalItemCount!: number;
     items!: GroupComment[];
-
-    constructor(data?: IListOfGroupComment) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -52856,17 +47468,8 @@ export class ListOfGroupComment implements IListOfGroupComment {
     }
 }
 
-export interface IListOfGroupComment {
-    totalItemCount: number;
-    items: GroupComment[];
-}
-
-export class GroupComment extends Comment implements IGroupComment {
+export class GroupComment extends Comment {
     groupName?: string | undefined;
-
-    constructor(data?: IGroupComment) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -52890,26 +47493,13 @@ export class GroupComment extends Comment implements IGroupComment {
     }
 }
 
-export interface IGroupComment extends IComment {
-    groupName?: string | undefined;
-}
-
-export class Group implements IGroup {
+export class Group {
     id?: string | undefined;
     name?: string | undefined;
     description?: string | undefined;
     type?: string | undefined;
     organisationId?: string | undefined;
     teamId?: string | undefined;
-
-    constructor(data?: IGroup) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -52941,30 +47531,9 @@ export class Group implements IGroup {
     }
 }
 
-export interface IGroup {
-    id?: string | undefined;
-    name?: string | undefined;
-    description?: string | undefined;
-    type?: string | undefined;
-    organisationId?: string | undefined;
-    teamId?: string | undefined;
-}
-
-export class ListOfGroupFile implements IListOfGroupFile {
+export class ListOfGroupFile {
     totalItemCount!: number;
     items!: GroupFile[];
-
-    constructor(data?: IListOfGroupFile) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -52996,17 +47565,8 @@ export class ListOfGroupFile implements IListOfGroupFile {
     }
 }
 
-export interface IListOfGroupFile {
-    totalItemCount: number;
-    items: GroupFile[];
-}
-
-export class GroupFile extends File implements IGroupFile {
+export class GroupFile extends File {
     groupName?: string | undefined;
-
-    constructor(data?: IGroupFile) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -53030,25 +47590,9 @@ export class GroupFile extends File implements IGroupFile {
     }
 }
 
-export interface IGroupFile extends IFile {
-    groupName?: string | undefined;
-}
-
-export class ListOfJobType implements IListOfJobType {
+export class ListOfJobType {
     totalItemCount!: number;
     items!: JobType[];
-
-    constructor(data?: IListOfJobType) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -53080,25 +47624,11 @@ export class ListOfJobType implements IListOfJobType {
     }
 }
 
-export interface IListOfJobType {
-    totalItemCount: number;
-    items: JobType[];
-}
-
-export class JobType implements IJobType {
+export class JobType {
     id?: string | undefined;
     name?: string | undefined;
     category?: string | undefined;
     version?: number;
-
-    constructor(data?: IJobType) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -53126,25 +47656,9 @@ export class JobType implements IJobType {
     }
 }
 
-export interface IJobType {
-    id?: string | undefined;
-    name?: string | undefined;
-    category?: string | undefined;
-    version?: number;
-}
-
-export class CreateJobTypeSettings implements ICreateJobTypeSettings {
+export class CreateJobTypeSettings {
     name!: string;
     category?: string | undefined;
-
-    constructor(data?: ICreateJobTypeSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -53168,24 +47682,10 @@ export class CreateJobTypeSettings implements ICreateJobTypeSettings {
     }
 }
 
-export interface ICreateJobTypeSettings {
-    name: string;
-    category?: string | undefined;
-}
-
-export class UpdateJobTypeSettings implements IUpdateJobTypeSettings {
+export class UpdateJobTypeSettings {
     name!: string;
     category?: string | undefined;
     version?: number;
-
-    constructor(data?: IUpdateJobTypeSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -53211,27 +47711,9 @@ export class UpdateJobTypeSettings implements IUpdateJobTypeSettings {
     }
 }
 
-export interface IUpdateJobTypeSettings {
-    name: string;
-    category?: string | undefined;
-    version?: number;
-}
-
-export class ListOfLabel implements IListOfLabel {
+export class ListOfLabel {
     totalItemCount!: number;
     items!: Label[];
-
-    constructor(data?: IListOfLabel) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -53263,12 +47745,7 @@ export class ListOfLabel implements IListOfLabel {
     }
 }
 
-export interface IListOfLabel {
-    totalItemCount: number;
-    items: Label[];
-}
-
-export class Label implements ILabel {
+export class Label {
     id?: string | undefined;
     version?: number;
     groupId?: string | undefined;
@@ -53277,15 +47754,6 @@ export class Label implements ILabel {
     name?: string | undefined;
     colour?: Colour;
     inactive?: boolean;
-
-    constructor(data?: ILabel) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -53321,31 +47789,11 @@ export class Label implements ILabel {
     }
 }
 
-export interface ILabel {
-    id?: string | undefined;
-    version?: number;
-    groupId?: string | undefined;
-    groupType?: string | undefined;
-    groupName?: string | undefined;
-    name?: string | undefined;
-    colour?: Colour;
-    inactive?: boolean;
-}
-
-export class Colour implements IColour {
+export class Colour {
     red?: number;
     green?: number;
     blue?: number;
     alpha?: number;
-
-    constructor(data?: IColour) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -53373,26 +47821,10 @@ export class Colour implements IColour {
     }
 }
 
-export interface IColour {
-    red?: number;
-    green?: number;
-    blue?: number;
-    alpha?: number;
-}
-
-export class CreateLabelSettings implements ICreateLabelSettings {
+export class CreateLabelSettings {
     groupId!: string;
     name!: string;
     colour?: Colour;
-
-    constructor(data?: ICreateLabelSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -53418,26 +47850,11 @@ export class CreateLabelSettings implements ICreateLabelSettings {
     }
 }
 
-export interface ICreateLabelSettings {
-    groupId: string;
-    name: string;
-    colour?: Colour;
-}
-
-export class UpdateLabelSettings implements IUpdateLabelSettings {
+export class UpdateLabelSettings {
     name!: string;
     colour?: Colour;
     inactive?: boolean;
     version?: number;
-
-    constructor(data?: IUpdateLabelSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -53465,28 +47882,9 @@ export class UpdateLabelSettings implements IUpdateLabelSettings {
     }
 }
 
-export interface IUpdateLabelSettings {
-    name: string;
-    colour?: Colour;
-    inactive?: boolean;
-    version?: number;
-}
-
-export class ListOfMember implements IListOfMember {
+export class ListOfMember {
     totalItemCount!: number;
     items!: Member[];
-
-    constructor(data?: IListOfMember) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -53518,12 +47916,7 @@ export class ListOfMember implements IListOfMember {
     }
 }
 
-export interface IListOfMember {
-    totalItemCount: number;
-    items: Member[];
-}
-
-export class Member implements IMember {
+export class Member {
     id?: string | undefined;
     groupId?: string | undefined;
     groupType?: string | undefined;
@@ -53549,15 +47942,6 @@ export class Member implements IMember {
     created?: Date;
     modified?: Date;
     joined?: Date;
-
-    constructor(data?: IMember) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -53659,48 +48043,11 @@ export class Member implements IMember {
     }
 }
 
-export interface IMember {
-    id?: string | undefined;
-    groupId?: string | undefined;
-    groupType?: string | undefined;
-    groupName?: string | undefined;
-    parentGroups?: GroupIdAndType[] | undefined;
-    templateId?: string | undefined;
-    templateParentIds?: string[] | undefined;
-    userId?: string | undefined;
-    userName?: string | undefined;
-    userImageUri?: string | undefined;
-    userEmail?: string | undefined;
-    userJobTypeId?: string | undefined;
-    userJobTypeName?: string | undefined;
-    userJobTypeCategory?: string | undefined;
-    userQualifications?: string | undefined;
-    userActivated?: boolean;
-    userLastActive?: Date | undefined;
-    displayId?: string | undefined;
-    status?: MemberStatus;
-    roles?: string[] | undefined;
-    labelIds?: string[] | undefined;
-    version?: number;
-    created?: Date;
-    modified?: Date;
-    joined?: Date;
-}
-
-export class MemberHistory implements IMemberHistory {
+export class MemberHistory {
     id?: string | undefined;
     userId?: string | undefined;
     status?: MemberStatus;
     roles?: string[] | undefined;
-
-    constructor(data?: IMemberHistory) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -53736,28 +48083,12 @@ export class MemberHistory implements IMemberHistory {
     }
 }
 
-export interface IMemberHistory {
-    id?: string | undefined;
-    userId?: string | undefined;
-    status?: MemberStatus;
-    roles?: string[] | undefined;
-}
-
-export class AddGroupMemberSettings implements IAddGroupMemberSettings {
+export class AddGroupMemberSettings {
     displayId?: string | undefined;
     additionalRoles?: string[] | undefined;
     labelIds?: string[] | undefined;
     notify?: boolean;
     message?: string | undefined;
-
-    constructor(data?: IAddGroupMemberSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -53803,27 +48134,10 @@ export class AddGroupMemberSettings implements IAddGroupMemberSettings {
     }
 }
 
-export interface IAddGroupMemberSettings {
+export class UpdateGroupMemberSettings {
     displayId?: string | undefined;
     additionalRoles?: string[] | undefined;
     labelIds?: string[] | undefined;
-    notify?: boolean;
-    message?: string | undefined;
-}
-
-export class UpdateGroupMemberSettings implements IUpdateGroupMemberSettings {
-    displayId?: string | undefined;
-    additionalRoles?: string[] | undefined;
-    labelIds?: string[] | undefined;
-
-    constructor(data?: IUpdateGroupMemberSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -53865,27 +48179,9 @@ export class UpdateGroupMemberSettings implements IUpdateGroupMemberSettings {
     }
 }
 
-export interface IUpdateGroupMemberSettings {
-    displayId?: string | undefined;
-    additionalRoles?: string[] | undefined;
-    labelIds?: string[] | undefined;
-}
-
-export class ListOfOrganisationAccessToken implements IListOfOrganisationAccessToken {
+export class ListOfOrganisationAccessToken {
     totalItemCount!: number;
     items!: OrganisationAccessToken[];
-
-    constructor(data?: IListOfOrganisationAccessToken) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -53917,12 +48213,7 @@ export class ListOfOrganisationAccessToken implements IListOfOrganisationAccessT
     }
 }
 
-export interface IListOfOrganisationAccessToken {
-    totalItemCount: number;
-    items: OrganisationAccessToken[];
-}
-
-export class OrganisationAccessToken implements IOrganisationAccessToken {
+export class OrganisationAccessToken {
     id?: string | undefined;
     name?: string | undefined;
     organisationId?: string | undefined;
@@ -53933,15 +48224,6 @@ export class OrganisationAccessToken implements IOrganisationAccessToken {
     lastUsed?: Date | undefined;
     /** Only available at time of creation */
     token?: string | undefined;
-
-    constructor(data?: IOrganisationAccessToken) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -53987,35 +48269,10 @@ export class OrganisationAccessToken implements IOrganisationAccessToken {
     }
 }
 
-export interface IOrganisationAccessToken {
-    id?: string | undefined;
-    name?: string | undefined;
-    organisationId?: string | undefined;
-    roles?: string[] | undefined;
-    created?: Date;
-    creatorId?: string | undefined;
-    creatorName?: string | undefined;
-    lastUsed?: Date | undefined;
-    /** Only available at time of creation */
-    token?: string | undefined;
-}
-
-export class CreateOrganisationAccessTokenSettings implements ICreateOrganisationAccessTokenSettings {
+export class CreateOrganisationAccessTokenSettings {
     name!: string;
     organisationId!: string;
     roles!: string[];
-
-    constructor(data?: ICreateOrganisationAccessTokenSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.roles = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -54049,27 +48306,9 @@ export class CreateOrganisationAccessTokenSettings implements ICreateOrganisatio
     }
 }
 
-export interface ICreateOrganisationAccessTokenSettings {
-    name: string;
-    organisationId: string;
-    roles: string[];
-}
-
-export class ListOfOrganisation implements IListOfOrganisation {
+export class ListOfOrganisation {
     totalItemCount!: number;
     items!: Organisation[];
-
-    constructor(data?: IListOfOrganisation) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -54101,12 +48340,7 @@ export class ListOfOrganisation implements IListOfOrganisation {
     }
 }
 
-export interface IListOfOrganisation {
-    totalItemCount: number;
-    items: Organisation[];
-}
-
-export class Organisation implements IOrganisation {
+export class Organisation {
     id?: string | undefined;
     name?: string | undefined;
     shortName?: string | undefined;
@@ -54126,15 +48360,6 @@ export class Organisation implements IOrganisation {
     publishingApproved?: boolean;
     shifts?: Shift[] | undefined;
     version?: number;
-
-    constructor(data?: IOrganisation) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -54216,40 +48441,9 @@ export class Organisation implements IOrganisation {
     }
 }
 
-export interface IOrganisation {
-    id?: string | undefined;
-    name?: string | undefined;
-    shortName?: string | undefined;
-    alternativeNames?: string[] | undefined;
-    description?: string | undefined;
-    contactEmail?: string | undefined;
-    bannerUri?: string | undefined;
-    logoUri?: string | undefined;
-    location?: Location;
-    privacy?: PrivacyLevel;
-    website?: string | undefined;
-    cultureCode?: string | undefined;
-    timeZoneId?: string | undefined;
-    portalUri?: string | undefined;
-    colour?: Colour;
-    registrationWhitelist?: string[] | undefined;
-    publishingApproved?: boolean;
-    shifts?: Shift[] | undefined;
-    version?: number;
-}
-
-export class Shift implements IShift {
+export class Shift {
     start?: string;
     end?: string;
-
-    constructor(data?: IShift) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -54273,12 +48467,7 @@ export class Shift implements IShift {
     }
 }
 
-export interface IShift {
-    start?: string;
-    end?: string;
-}
-
-export class CreateOrganisationSettings implements ICreateOrganisationSettings {
+export class CreateOrganisationSettings {
     name!: string;
     shortName?: string | undefined;
     alternativeNames?: string[];
@@ -54295,15 +48484,6 @@ export class CreateOrganisationSettings implements ICreateOrganisationSettings {
     privacy?: PrivacyLevel;
     registrationWhitelist?: string[] | undefined;
     shifts?: Shift[] | undefined;
-
-    constructor(data?: ICreateOrganisationSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -54379,26 +48559,7 @@ export class CreateOrganisationSettings implements ICreateOrganisationSettings {
     }
 }
 
-export interface ICreateOrganisationSettings {
-    name: string;
-    shortName?: string | undefined;
-    alternativeNames?: string[];
-    description?: string | undefined;
-    contactEmail?: string | undefined;
-    bannerUri?: string | undefined;
-    logoUri?: string | undefined;
-    colour?: Colour;
-    location?: LocationBuilder | undefined;
-    website?: string | undefined;
-    portalUri?: string | undefined;
-    cultureCode?: string | undefined;
-    timeZoneId?: string | undefined;
-    privacy?: PrivacyLevel;
-    registrationWhitelist?: string[] | undefined;
-    shifts?: Shift[] | undefined;
-}
-
-export class UpdateOrganisationSettings implements IUpdateOrganisationSettings {
+export class UpdateOrganisationSettings {
     name!: string;
     shortName?: string | undefined;
     alternativeNames?: string[];
@@ -54416,15 +48577,6 @@ export class UpdateOrganisationSettings implements IUpdateOrganisationSettings {
     registrationWhitelist?: string[] | undefined;
     shifts?: Shift[] | undefined;
     version?: number;
-
-    constructor(data?: IUpdateOrganisationSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -54502,39 +48654,10 @@ export class UpdateOrganisationSettings implements IUpdateOrganisationSettings {
     }
 }
 
-export interface IUpdateOrganisationSettings {
-    name: string;
-    shortName?: string | undefined;
-    alternativeNames?: string[];
-    description?: string | undefined;
-    contactEmail?: string | undefined;
-    bannerUri?: string | undefined;
-    logoUri?: string | undefined;
-    colour?: Colour;
-    location?: LocationBuilder | undefined;
-    website?: string | undefined;
-    portalUri?: string | undefined;
-    privacy?: PrivacyLevel;
-    timeZoneId?: string | undefined;
-    cultureCode?: string | undefined;
-    registrationWhitelist?: string[] | undefined;
-    shifts?: Shift[] | undefined;
-    version?: number;
-}
-
-export class Password implements IPassword {
+export class Password {
     version?: number;
     exists?: boolean;
     twoFactorAuthentication?: TwoFactorAuthenticationType;
-
-    constructor(data?: IPassword) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -54560,24 +48683,9 @@ export class Password implements IPassword {
     }
 }
 
-export interface IPassword {
-    version?: number;
-    exists?: boolean;
-    twoFactorAuthentication?: TwoFactorAuthenticationType;
-}
-
-export class UpdatePasswordSettings implements IUpdatePasswordSettings {
+export class UpdatePasswordSettings {
     password!: string;
     version?: number;
-
-    constructor(data?: IUpdatePasswordSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -54601,23 +48709,9 @@ export class UpdatePasswordSettings implements IUpdatePasswordSettings {
     }
 }
 
-export interface IUpdatePasswordSettings {
-    password: string;
-    version?: number;
-}
-
-export class UpdateTwoFactorAuthenticationSettings implements IUpdateTwoFactorAuthenticationSettings {
+export class UpdateTwoFactorAuthenticationSettings {
     type?: TwoFactorAuthenticationType;
     userVersion?: number;
-
-    constructor(data?: IUpdateTwoFactorAuthenticationSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -54641,22 +48735,8 @@ export class UpdateTwoFactorAuthenticationSettings implements IUpdateTwoFactorAu
     }
 }
 
-export interface IUpdateTwoFactorAuthenticationSettings {
-    type?: TwoFactorAuthenticationType;
-    userVersion?: number;
-}
-
-export class RequestResetPasswordSettings implements IRequestResetPasswordSettings {
+export class RequestResetPasswordSettings {
     email!: string;
-
-    constructor(data?: IRequestResetPasswordSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -54678,22 +48758,9 @@ export class RequestResetPasswordSettings implements IRequestResetPasswordSettin
     }
 }
 
-export interface IRequestResetPasswordSettings {
-    email: string;
-}
-
-export class ResetPasswordSettings implements IResetPasswordSettings {
+export class ResetPasswordSettings {
     token!: string;
     password!: string;
-
-    constructor(data?: IResetPasswordSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -54717,26 +48784,9 @@ export class ResetPasswordSettings implements IResetPasswordSettings {
     }
 }
 
-export interface IResetPasswordSettings {
-    token: string;
-    password: string;
-}
-
-export class ListOfRole implements IListOfRole {
+export class ListOfRole {
     totalItemCount!: number;
     items!: Role[];
-
-    constructor(data?: IListOfRole) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -54768,27 +48818,13 @@ export class ListOfRole implements IListOfRole {
     }
 }
 
-export interface IListOfRole {
-    totalItemCount: number;
-    items: Role[];
-}
-
-export class Role implements IRole {
+export class Role {
     name?: string | undefined;
     groupType?: string | undefined;
     owner?: boolean;
     default?: boolean;
     fallback?: boolean;
     description?: string | undefined;
-
-    constructor(data?: IRole) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -54820,30 +48856,9 @@ export class Role implements IRole {
     }
 }
 
-export interface IRole {
-    name?: string | undefined;
-    groupType?: string | undefined;
-    owner?: boolean;
-    default?: boolean;
-    fallback?: boolean;
-    description?: string | undefined;
-}
-
-export class ListOfTeam implements IListOfTeam {
+export class ListOfTeam {
     totalItemCount!: number;
     items!: Team[];
-
-    constructor(data?: IListOfTeam) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -54875,12 +48890,7 @@ export class ListOfTeam implements IListOfTeam {
     }
 }
 
-export interface IListOfTeam {
-    totalItemCount: number;
-    items: Team[];
-}
-
-export class Team implements ITeam {
+export class Team {
     id?: string | undefined;
     shortName?: string | undefined;
     alternativeNames?: string[] | undefined;
@@ -54894,15 +48904,6 @@ export class Team implements ITeam {
     organisationLogoUri?: string | undefined;
     organisationPrivacy?: PrivacyLevel;
     version?: number;
-
-    constructor(data?: ITeam) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -54964,23 +48965,7 @@ export class Team implements ITeam {
     }
 }
 
-export interface ITeam {
-    id?: string | undefined;
-    shortName?: string | undefined;
-    alternativeNames?: string[] | undefined;
-    name?: string | undefined;
-    description?: string | undefined;
-    bannerUri?: string | undefined;
-    privacy?: PrivacyLevel;
-    tags?: string[] | undefined;
-    organisationId?: string | undefined;
-    organisationName?: string | undefined;
-    organisationLogoUri?: string | undefined;
-    organisationPrivacy?: PrivacyLevel;
-    version?: number;
-}
-
-export class CreateTeamSettings implements ICreateTeamSettings {
+export class CreateTeamSettings {
     organisationId!: string;
     name!: string;
     shortName?: string | undefined;
@@ -54989,15 +48974,6 @@ export class CreateTeamSettings implements ICreateTeamSettings {
     bannerUri?: string | undefined;
     privacy?: PrivacyLevel;
     tags?: string[] | undefined;
-
-    constructor(data?: ICreateTeamSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -55049,18 +49025,7 @@ export class CreateTeamSettings implements ICreateTeamSettings {
     }
 }
 
-export interface ICreateTeamSettings {
-    organisationId: string;
-    name: string;
-    shortName?: string | undefined;
-    alternativeNames?: string[];
-    description?: string | undefined;
-    bannerUri?: string | undefined;
-    privacy?: PrivacyLevel;
-    tags?: string[] | undefined;
-}
-
-export class UpdateTeamSettings implements IUpdateTeamSettings {
+export class UpdateTeamSettings {
     name!: string;
     shortName?: string | undefined;
     alternativeNames?: string[];
@@ -55069,15 +49034,6 @@ export class UpdateTeamSettings implements IUpdateTeamSettings {
     privacy?: PrivacyLevel;
     tags?: string[] | undefined;
     version?: number;
-
-    constructor(data?: IUpdateTeamSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -55129,32 +49085,9 @@ export class UpdateTeamSettings implements IUpdateTeamSettings {
     }
 }
 
-export interface IUpdateTeamSettings {
-    name: string;
-    shortName?: string | undefined;
-    alternativeNames?: string[];
-    description?: string | undefined;
-    bannerUri?: string | undefined;
-    privacy?: PrivacyLevel;
-    tags?: string[] | undefined;
-    version?: number;
-}
-
-export class ListOfUserActivity implements IListOfUserActivity {
+export class ListOfUserActivity {
     totalItemCount!: number;
     items!: UserActivity[];
-
-    constructor(data?: IListOfUserActivity) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -55186,12 +49119,7 @@ export class ListOfUserActivity implements IListOfUserActivity {
     }
 }
 
-export interface IListOfUserActivity {
-    totalItemCount: number;
-    items: UserActivity[];
-}
-
-export class UserActivity implements IUserActivity {
+export class UserActivity {
     id?: string | undefined;
     trackId?: string | undefined;
     activityType?: UserActivityType;
@@ -55201,15 +49129,6 @@ export class UserActivity implements IUserActivity {
     payload?: any | undefined;
     created?: Date;
     modified?: Date;
-
-    constructor(data?: IUserActivity) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -55247,18 +49166,6 @@ export class UserActivity implements IUserActivity {
     }
 }
 
-export interface IUserActivity {
-    id?: string | undefined;
-    trackId?: string | undefined;
-    activityType?: UserActivityType;
-    userId?: string | undefined;
-    creatorId?: string | undefined;
-    creatorType?: IdentityType;
-    payload?: any | undefined;
-    created?: Date;
-    modified?: Date;
-}
-
 export enum UserActivityType {
     Unknown = "Unknown",
     Joined = "Joined",
@@ -55270,21 +49177,9 @@ export enum UserActivityType {
     SurveyResponse = "SurveyResponse",
 }
 
-export class ListOfUser implements IListOfUser {
+export class ListOfUser {
     totalItemCount!: number;
     items!: User[];
-
-    constructor(data?: IListOfUser) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.items = [];
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -55316,12 +49211,7 @@ export class ListOfUser implements IListOfUser {
     }
 }
 
-export interface IListOfUser {
-    totalItemCount: number;
-    items: User[];
-}
-
-export class User implements IUser {
+export class User {
     id?: string | undefined;
     name?: string | undefined;
     alternativeNames?: string[] | undefined;
@@ -55333,15 +49223,6 @@ export class User implements IUser {
     jobTypeCategory?: string | undefined;
     verified?: boolean;
     version?: number;
-
-    constructor(data?: IUser) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -55391,36 +49272,13 @@ export class User implements IUser {
     }
 }
 
-export interface IUser {
-    id?: string | undefined;
-    name?: string | undefined;
-    alternativeNames?: string[] | undefined;
-    imageUri?: string | undefined;
-    description?: string | undefined;
-    qualifications?: string | undefined;
-    jobTypeId?: string | undefined;
-    jobTypeName?: string | undefined;
-    jobTypeCategory?: string | undefined;
-    verified?: boolean;
-    version?: number;
-}
-
-export class CreateUserSettings implements ICreateUserSettings {
+export class CreateUserSettings {
     name!: string;
     alternativeNames?: string[] | undefined;
     email!: string;
     password!: string;
     reCaptchaResponse?: string | undefined;
     redirect?: string | undefined;
-
-    constructor(data?: ICreateUserSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -55460,16 +49318,7 @@ export class CreateUserSettings implements ICreateUserSettings {
     }
 }
 
-export interface ICreateUserSettings {
-    name: string;
-    alternativeNames?: string[] | undefined;
-    email: string;
-    password: string;
-    reCaptchaResponse?: string | undefined;
-    redirect?: string | undefined;
-}
-
-export class OnboardUserSettings implements IOnboardUserSettings {
+export class OnboardUserSettings {
     name?: string | undefined;
     email!: string;
     groupId!: string;
@@ -55479,15 +49328,6 @@ export class OnboardUserSettings implements IOnboardUserSettings {
     labelIds?: string[] | undefined;
     notify?: boolean;
     message?: string | undefined;
-
-    constructor(data?: IOnboardUserSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -55541,19 +49381,7 @@ export class OnboardUserSettings implements IOnboardUserSettings {
     }
 }
 
-export interface IOnboardUserSettings {
-    name?: string | undefined;
-    email: string;
-    groupId: string;
-    displayId?: string | undefined;
-    jobTypeId?: string | undefined;
-    additionalRoles?: string[] | undefined;
-    labelIds?: string[] | undefined;
-    notify?: boolean;
-    message?: string | undefined;
-}
-
-export class UpdateUserSettings implements IUpdateUserSettings {
+export class UpdateUserSettings {
     name!: string;
     alternativeNames?: string[];
     qualifications?: string | undefined;
@@ -55561,15 +49389,6 @@ export class UpdateUserSettings implements IUpdateUserSettings {
     jobTypeId?: string | undefined;
     imageUri?: string | undefined;
     version?: number;
-
-    constructor(data?: IUpdateUserSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -55611,28 +49430,9 @@ export class UpdateUserSettings implements IUpdateUserSettings {
     }
 }
 
-export interface IUpdateUserSettings {
-    name: string;
-    alternativeNames?: string[];
-    qualifications?: string | undefined;
-    description?: string | undefined;
-    jobTypeId?: string | undefined;
-    imageUri?: string | undefined;
-    version?: number;
-}
-
-export class MergeUserSettings implements IMergeUserSettings {
+export class MergeUserSettings {
     primaryUserId!: string;
     secondaryUserId!: string;
-
-    constructor(data?: IMergeUserSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -55656,24 +49456,10 @@ export class MergeUserSettings implements IMergeUserSettings {
     }
 }
 
-export interface IMergeUserSettings {
-    primaryUserId: string;
-    secondaryUserId: string;
-}
-
-export class SendWelcomeEmailSettings implements ISendWelcomeEmailSettings {
+export class SendWelcomeEmailSettings {
     groupId?: string | undefined;
     message?: string | undefined;
     redirect?: string | undefined;
-
-    constructor(data?: ISendWelcomeEmailSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -55699,26 +49485,11 @@ export class SendWelcomeEmailSettings implements ISendWelcomeEmailSettings {
     }
 }
 
-export interface ISendWelcomeEmailSettings {
-    groupId?: string | undefined;
-    message?: string | undefined;
-    redirect?: string | undefined;
-}
-
-export class UserEmails implements IUserEmails {
+export class UserEmails {
     id?: string | undefined;
     emails?: UserEmail[] | undefined;
     primaryEmail?: string | undefined;
     version?: number;
-
-    constructor(data?: IUserEmails) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -55754,25 +49525,9 @@ export class UserEmails implements IUserEmails {
     }
 }
 
-export interface IUserEmails {
-    id?: string | undefined;
-    emails?: UserEmail[] | undefined;
-    primaryEmail?: string | undefined;
-    version?: number;
-}
-
-export class UserEmail implements IUserEmail {
+export class UserEmail {
     email?: string | undefined;
     verified?: boolean;
-
-    constructor(data?: IUserEmail) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -55796,23 +49551,9 @@ export class UserEmail implements IUserEmail {
     }
 }
 
-export interface IUserEmail {
-    email?: string | undefined;
-    verified?: boolean;
-}
-
-export class UserEmailSettings implements IUserEmailSettings {
+export class UserEmailSettings {
     email!: string;
     version?: number;
-
-    constructor(data?: IUserEmailSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -55836,20 +49577,11 @@ export class UserEmailSettings implements IUserEmailSettings {
     }
 }
 
-export interface IUserEmailSettings {
-    email: string;
-    version?: number;
-}
-
-export class UserEmailVerificationToken extends Token implements IUserEmailVerificationToken {
+export class UserEmailVerificationToken extends Token {
     /** If is verifying the primary email. */
     primary?: boolean;
     /** If the email has been already been verified. */
     regression?: boolean;
-
-    constructor(data?: IUserEmailVerificationToken) {
-        super(data);
-    }
 
     init(_data?: any) {
         super.init(_data);
@@ -55875,27 +49607,11 @@ export class UserEmailVerificationToken extends Token implements IUserEmailVerif
     }
 }
 
-export interface IUserEmailVerificationToken extends IToken {
-    /** If is verifying the primary email. */
-    primary?: boolean;
-    /** If the email has been already been verified. */
-    regression?: boolean;
-}
-
-export class UserPhoneNumber implements IUserPhoneNumber {
+export class UserPhoneNumber {
     id?: string | undefined;
     number?: string | undefined;
     verified?: boolean;
     version?: number;
-
-    constructor(data?: IUserPhoneNumber) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -55923,25 +49639,9 @@ export class UserPhoneNumber implements IUserPhoneNumber {
     }
 }
 
-export interface IUserPhoneNumber {
-    id?: string | undefined;
-    number?: string | undefined;
-    verified?: boolean;
-    version?: number;
-}
-
-export class UpdateUserPhoneNumberSettings implements IUpdateUserPhoneNumberSettings {
+export class UpdateUserPhoneNumberSettings {
     userVersion?: number;
     phoneNumber?: string | undefined;
-
-    constructor(data?: IUpdateUserPhoneNumberSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -55965,23 +49665,9 @@ export class UpdateUserPhoneNumberSettings implements IUpdateUserPhoneNumberSett
     }
 }
 
-export interface IUpdateUserPhoneNumberSettings {
-    userVersion?: number;
-    phoneNumber?: string | undefined;
-}
-
-export class VerificationRequestResult implements IVerificationRequestResult {
+export class VerificationRequestResult {
     sent?: boolean;
     waitSeconds?: number;
-
-    constructor(data?: IVerificationRequestResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(_data?: any) {
         if (_data) {
@@ -56003,11 +49689,6 @@ export class VerificationRequestResult implements IVerificationRequestResult {
         data["waitSeconds"] = this.waitSeconds;
         return data;
     }
-}
-
-export interface IVerificationRequestResult {
-    sent?: boolean;
-    waitSeconds?: number;
 }
 
 export interface FileParameter {
