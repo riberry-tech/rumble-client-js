@@ -43770,16 +43770,16 @@ export class ProgramInCourse {
 export class SectionInCourse {
     name?: string | undefined;
     required?: boolean;
-    units?: any[] | undefined;
+    items?: any[] | undefined;
 
     init(_data?: any) {
         if (_data) {
             this.name = _data["name"];
             this.required = _data["required"];
-            if (Array.isArray(_data["units"])) {
-                this.units = [] as any;
-                for (let item of _data["units"])
-                    this.units!.push(item);
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(item);
             }
         }
     }
@@ -43795,10 +43795,10 @@ export class SectionInCourse {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
         data["required"] = this.required;
-        if (Array.isArray(this.units)) {
-            data["units"] = [];
-            for (let item of this.units)
-                data["units"].push(item);
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item);
         }
         return data;
     }
@@ -43809,7 +43809,7 @@ export class CertificateInCourse {
     name?: string | undefined;
     logoUri?: string | undefined;
     validityPeriod?: string;
-    moduleIds?: string[] | undefined;
+    items?: CertificateItemInCourse[] | undefined;
 
     init(_data?: any) {
         if (_data) {
@@ -43817,10 +43817,10 @@ export class CertificateInCourse {
             this.name = _data["name"];
             this.logoUri = _data["logoUri"];
             this.validityPeriod = _data["validityPeriod"];
-            if (Array.isArray(_data["moduleIds"])) {
-                this.moduleIds = [] as any;
-                for (let item of _data["moduleIds"])
-                    this.moduleIds!.push(item);
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(CertificateItemInCourse.fromJS(item));
             }
         }
     }
@@ -43838,13 +43838,44 @@ export class CertificateInCourse {
         data["name"] = this.name;
         data["logoUri"] = this.logoUri;
         data["validityPeriod"] = this.validityPeriod;
-        if (Array.isArray(this.moduleIds)) {
-            data["moduleIds"] = [];
-            for (let item of this.moduleIds)
-                data["moduleIds"].push(item);
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
         }
         return data;
     }
+}
+
+export class CertificateItemInCourse {
+    itemType?: CourseItemType;
+    itemId?: string | undefined;
+
+    init(_data?: any) {
+        if (_data) {
+            this.itemType = _data["itemType"];
+            this.itemId = _data["itemId"];
+        }
+    }
+
+    static fromJS(data: any): CertificateItemInCourse {
+        data = typeof data === 'object' ? data : {};
+        let result = new CertificateItemInCourse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["itemType"] = this.itemType;
+        data["itemId"] = this.itemId;
+        return data;
+    }
+}
+
+export enum CourseItemType {
+    Module = "Module",
+    Survey = "Survey",
 }
 
 export class ProcessReportInCourse {
@@ -43965,18 +43996,18 @@ export class CreateCourseSettings {
 
 export class CourseSection {
     name?: string | undefined;
-    units?: CourseUnit[] | undefined;
     required?: boolean;
+    items?: CourseItem[] | undefined;
 
     init(_data?: any) {
         if (_data) {
             this.name = _data["name"];
-            if (Array.isArray(_data["units"])) {
-                this.units = [] as any;
-                for (let item of _data["units"])
-                    this.units!.push(CourseUnit.fromJS(item));
-            }
             this.required = _data["required"];
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(CourseItem.fromJS(item));
+            }
         }
     }
 
@@ -43990,25 +44021,25 @@ export class CourseSection {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
-        if (Array.isArray(this.units)) {
-            data["units"] = [];
-            for (let item of this.units)
-                data["units"].push(item.toJSON());
-        }
         data["required"] = this.required;
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
         return data;
     }
 }
 
-export class CourseUnit {
-    unitType?: CourseUnitType;
+export class CourseItem {
+    itemType?: CourseItemType;
     id?: string | undefined;
     open?: boolean;
     certificateIds?: string[] | undefined;
 
     init(_data?: any) {
         if (_data) {
-            this.unitType = _data["unitType"];
+            this.itemType = _data["itemType"];
             this.id = _data["id"];
             this.open = _data["open"];
             if (Array.isArray(_data["certificateIds"])) {
@@ -44019,16 +44050,16 @@ export class CourseUnit {
         }
     }
 
-    static fromJS(data: any): CourseUnit {
+    static fromJS(data: any): CourseItem {
         data = typeof data === 'object' ? data : {};
-        let result = new CourseUnit();
+        let result = new CourseItem();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["unitType"] = this.unitType;
+        data["itemType"] = this.itemType;
         data["id"] = this.id;
         data["open"] = this.open;
         if (Array.isArray(this.certificateIds)) {
@@ -44038,11 +44069,6 @@ export class CourseUnit {
         }
         return data;
     }
-}
-
-export enum CourseUnitType {
-    Module = "Module",
-    Survey = "Survey",
 }
 
 export class UpdateCourseSettings {
@@ -44335,6 +44361,7 @@ export class CertificationInEnrolment {
     certificateName?: string | undefined;
     certificateLogoUri?: string | undefined;
     certificateModuleIds?: string[] | undefined;
+    certificateSurveyIds?: string[] | undefined;
     started?: Date | undefined;
     certified?: Date | undefined;
     expires?: Date | undefined;
@@ -44349,6 +44376,11 @@ export class CertificationInEnrolment {
                 this.certificateModuleIds = [] as any;
                 for (let item of _data["certificateModuleIds"])
                     this.certificateModuleIds!.push(item);
+            }
+            if (Array.isArray(_data["certificateSurveyIds"])) {
+                this.certificateSurveyIds = [] as any;
+                for (let item of _data["certificateSurveyIds"])
+                    this.certificateSurveyIds!.push(item);
             }
             this.started = _data["started"] ? new Date(_data["started"].toString()) : <any>undefined;
             this.certified = _data["certified"] ? new Date(_data["certified"].toString()) : <any>undefined;
@@ -44373,6 +44405,11 @@ export class CertificationInEnrolment {
             data["certificateModuleIds"] = [];
             for (let item of this.certificateModuleIds)
                 data["certificateModuleIds"].push(item);
+        }
+        if (Array.isArray(this.certificateSurveyIds)) {
+            data["certificateSurveyIds"] = [];
+            for (let item of this.certificateSurveyIds)
+                data["certificateSurveyIds"].push(item);
         }
         data["started"] = this.started ? this.started.toISOString() : <any>undefined;
         data["certified"] = this.certified ? this.certified.toISOString() : <any>undefined;
