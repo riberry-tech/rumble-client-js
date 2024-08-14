@@ -43848,13 +43848,13 @@ export class CertificateInCourse {
 }
 
 export class CertificateItemInCourse {
-    itemType?: CourseItemType;
-    itemId?: string | undefined;
+    type?: CourseItemType;
+    id?: string | undefined;
 
     init(_data?: any) {
         if (_data) {
-            this.itemType = _data["itemType"];
-            this.itemId = _data["itemId"];
+            this.type = _data["type"];
+            this.id = _data["id"];
         }
     }
 
@@ -43867,8 +43867,8 @@ export class CertificateItemInCourse {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["itemType"] = this.itemType;
-        data["itemId"] = this.itemId;
+        data["type"] = this.type;
+        data["id"] = this.id;
         return data;
     }
 }
@@ -44321,16 +44321,16 @@ export class Enrolment extends Enrolment2 {
 export class CourseSectionInEnrolment {
     name?: string | undefined;
     required?: boolean;
-    units?: any[] | undefined;
+    items?: any[] | undefined;
 
     init(_data?: any) {
         if (_data) {
             this.name = _data["name"];
             this.required = _data["required"];
-            if (Array.isArray(_data["units"])) {
-                this.units = [] as any;
-                for (let item of _data["units"])
-                    this.units!.push(item);
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(item);
             }
         }
     }
@@ -44346,10 +44346,10 @@ export class CourseSectionInEnrolment {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
         data["required"] = this.required;
-        if (Array.isArray(this.units)) {
-            data["units"] = [];
-            for (let item of this.units)
-                data["units"].push(item);
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item);
         }
         return data;
     }
