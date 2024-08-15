@@ -43770,7 +43770,7 @@ export class ProgramInCourse {
 export class SectionInCourse {
     name?: string | undefined;
     required?: boolean;
-    items?: any[] | undefined;
+    items?: ItemInCourse[] | undefined;
 
     init(_data?: any) {
         if (_data) {
@@ -43779,7 +43779,7 @@ export class SectionInCourse {
             if (Array.isArray(_data["items"])) {
                 this.items = [] as any;
                 for (let item of _data["items"])
-                    this.items!.push(item);
+                    this.items!.push(ItemInCourse.fromJS(item));
             }
         }
     }
@@ -43798,10 +43798,53 @@ export class SectionInCourse {
         if (Array.isArray(this.items)) {
             data["items"] = [];
             for (let item of this.items)
-                data["items"].push(item);
+                data["items"].push(item.toJSON());
         }
         return data;
     }
+}
+
+export class ItemInCourse {
+    category?: CourseItemCategory;
+    id?: string | undefined;
+    type?: string | undefined;
+    name?: string | undefined;
+    imageUri?: string | undefined;
+    open?: boolean;
+
+    init(_data?: any) {
+        if (_data) {
+            this.category = _data["category"];
+            this.id = _data["id"];
+            this.type = _data["type"];
+            this.name = _data["name"];
+            this.imageUri = _data["imageUri"];
+            this.open = _data["open"];
+        }
+    }
+
+    static fromJS(data: any): ItemInCourse {
+        data = typeof data === 'object' ? data : {};
+        let result = new ItemInCourse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["category"] = this.category;
+        data["id"] = this.id;
+        data["type"] = this.type;
+        data["name"] = this.name;
+        data["imageUri"] = this.imageUri;
+        data["open"] = this.open;
+        return data;
+    }
+}
+
+export enum CourseItemCategory {
+    Module = "Module",
+    Survey = "Survey",
 }
 
 export class CertificateInCourse {
@@ -43848,12 +43891,12 @@ export class CertificateInCourse {
 }
 
 export class CertificateItemInCourse {
-    type?: CourseItemType;
+    category?: CourseItemCategory;
     id?: string | undefined;
 
     init(_data?: any) {
         if (_data) {
-            this.type = _data["type"];
+            this.category = _data["category"];
             this.id = _data["id"];
         }
     }
@@ -43867,15 +43910,10 @@ export class CertificateItemInCourse {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
+        data["category"] = this.category;
         data["id"] = this.id;
         return data;
     }
-}
-
-export enum CourseItemType {
-    Module = "Module",
-    Survey = "Survey",
 }
 
 export class ProcessReportInCourse {
@@ -44032,14 +44070,14 @@ export class CourseSection {
 }
 
 export class CourseItem {
-    itemType?: CourseItemType;
+    category?: CourseItemCategory;
     id?: string | undefined;
     open?: boolean;
     certificateIds?: string[] | undefined;
 
     init(_data?: any) {
         if (_data) {
-            this.itemType = _data["itemType"];
+            this.category = _data["category"];
             this.id = _data["id"];
             this.open = _data["open"];
             if (Array.isArray(_data["certificateIds"])) {
@@ -44059,7 +44097,7 @@ export class CourseItem {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["itemType"] = this.itemType;
+        data["category"] = this.category;
         data["id"] = this.id;
         data["open"] = this.open;
         if (Array.isArray(this.certificateIds)) {
