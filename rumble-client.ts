@@ -4684,8 +4684,9 @@ export class ObservationClient {
      * @param from (optional) 
      * @param to (optional) 
      * @param anonymousUser (optional) 
+     * @param labelId (optional) 
      */
-    getAllForGroup(groupId: string, search: string | null | undefined, skip: number | undefined, take: number | undefined, definitionId: string | null | undefined, from: Date | null | undefined, to: Date | null | undefined, anonymousUser: boolean | null | undefined, cancelToken?: CancelToken | undefined): Promise<ListOfObservation> {
+    getAllForGroup(groupId: string, search: string | null | undefined, skip: number | undefined, take: number | undefined, definitionId: string | null | undefined, from: Date | null | undefined, to: Date | null | undefined, anonymousUser: boolean | null | undefined, labelId: string | null | undefined, cancelToken?: CancelToken | undefined): Promise<ListOfObservation> {
         let url_ = this.baseUrl + "/v1/Observation/Group/{groupId}?";
         if (groupId === undefined || groupId === null)
             throw new Error("The parameter 'groupId' must be defined.");
@@ -4708,6 +4709,8 @@ export class ObservationClient {
             url_ += "to=" + encodeURIComponent(to ? "" + to.toISOString() : "") + "&";
         if (anonymousUser !== undefined && anonymousUser !== null)
             url_ += "anonymousUser=" + encodeURIComponent("" + anonymousUser) + "&";
+        if (labelId !== undefined && labelId !== null)
+            url_ += "labelId=" + encodeURIComponent("" + labelId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: AxiosRequestConfig = {
@@ -37847,6 +37850,7 @@ export class Observation implements IObservation {
     groupId?: string | undefined;
     groupName?: string | undefined;
     groupType?: string | undefined;
+    labelIds?: string[] | undefined;
     organisationId?: string | undefined;
     observerId?: string | undefined;
     observerName?: string | undefined;
@@ -37878,6 +37882,11 @@ export class Observation implements IObservation {
             this.groupId = _data["groupId"];
             this.groupName = _data["groupName"];
             this.groupType = _data["groupType"];
+            if (Array.isArray(_data["labelIds"])) {
+                this.labelIds = [] as any;
+                for (let item of _data["labelIds"])
+                    this.labelIds!.push(item);
+            }
             this.organisationId = _data["organisationId"];
             this.observerId = _data["observerId"];
             this.observerName = _data["observerName"];
@@ -37909,6 +37918,11 @@ export class Observation implements IObservation {
         data["groupId"] = this.groupId;
         data["groupName"] = this.groupName;
         data["groupType"] = this.groupType;
+        if (Array.isArray(this.labelIds)) {
+            data["labelIds"] = [];
+            for (let item of this.labelIds)
+                data["labelIds"].push(item);
+        }
         data["organisationId"] = this.organisationId;
         data["observerId"] = this.observerId;
         data["observerName"] = this.observerName;
@@ -37929,6 +37943,7 @@ export interface IObservation {
     groupId?: string | undefined;
     groupName?: string | undefined;
     groupType?: string | undefined;
+    labelIds?: string[] | undefined;
     organisationId?: string | undefined;
     observerId?: string | undefined;
     observerName?: string | undefined;
@@ -38145,6 +38160,7 @@ export interface IListOfObservation {
 export class CreateObservationSettings implements ICreateObservationSettings {
     contentId!: string;
     groupId!: string;
+    labelIds?: string[] | undefined;
     observerId?: string | undefined;
     answers?: any[] | undefined;
     performed?: Date;
@@ -38162,6 +38178,11 @@ export class CreateObservationSettings implements ICreateObservationSettings {
         if (_data) {
             this.contentId = _data["contentId"];
             this.groupId = _data["groupId"];
+            if (Array.isArray(_data["labelIds"])) {
+                this.labelIds = [] as any;
+                for (let item of _data["labelIds"])
+                    this.labelIds!.push(item);
+            }
             this.observerId = _data["observerId"];
             if (Array.isArray(_data["answers"])) {
                 this.answers = [] as any;
@@ -38183,6 +38204,11 @@ export class CreateObservationSettings implements ICreateObservationSettings {
         data = typeof data === 'object' ? data : {};
         data["contentId"] = this.contentId;
         data["groupId"] = this.groupId;
+        if (Array.isArray(this.labelIds)) {
+            data["labelIds"] = [];
+            for (let item of this.labelIds)
+                data["labelIds"].push(item);
+        }
         data["observerId"] = this.observerId;
         if (Array.isArray(this.answers)) {
             data["answers"] = [];
@@ -38197,12 +38223,14 @@ export class CreateObservationSettings implements ICreateObservationSettings {
 export interface ICreateObservationSettings {
     contentId: string;
     groupId: string;
+    labelIds?: string[] | undefined;
     observerId?: string | undefined;
     answers?: any[] | undefined;
     performed?: Date;
 }
 
 export class UpdateObservationSettings implements IUpdateObservationSettings {
+    labelIds?: string[] | undefined;
     observerId?: string | undefined;
     answers?: any[] | undefined;
     performed?: Date;
@@ -38219,6 +38247,11 @@ export class UpdateObservationSettings implements IUpdateObservationSettings {
 
     init(_data?: any) {
         if (_data) {
+            if (Array.isArray(_data["labelIds"])) {
+                this.labelIds = [] as any;
+                for (let item of _data["labelIds"])
+                    this.labelIds!.push(item);
+            }
             this.observerId = _data["observerId"];
             if (Array.isArray(_data["answers"])) {
                 this.answers = [] as any;
@@ -38239,6 +38272,11 @@ export class UpdateObservationSettings implements IUpdateObservationSettings {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.labelIds)) {
+            data["labelIds"] = [];
+            for (let item of this.labelIds)
+                data["labelIds"].push(item);
+        }
         data["observerId"] = this.observerId;
         if (Array.isArray(this.answers)) {
             data["answers"] = [];
@@ -38252,6 +38290,7 @@ export class UpdateObservationSettings implements IUpdateObservationSettings {
 }
 
 export interface IUpdateObservationSettings {
+    labelIds?: string[] | undefined;
     observerId?: string | undefined;
     answers?: any[] | undefined;
     performed?: Date;
