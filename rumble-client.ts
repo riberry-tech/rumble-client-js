@@ -6707,13 +6707,17 @@ export class ObservationSettingsClient {
     }
 
     /**
+     * @param search (optional) 
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
-     * @param definitionId (optional) 
-     * @param organisationId (optional) 
      */
-    getAll(skip: number | undefined, take: number | undefined, definitionId: string | null | undefined, organisationId: string | null | undefined, cancelToken?: CancelToken | undefined): Promise<ListOfObservationSettings> {
-        let url_ = this.baseUrl + "/v1/ObservationSettings?";
+    getAllByDefinition(search: string | null | undefined, skip: number | undefined, take: number | undefined, definitionId: string, cancelToken?: CancelToken | undefined): Promise<ListOfObservationSettings> {
+        let url_ = this.baseUrl + "/v1/ObservationSettings/Definition/{definitionId}?";
+        if (definitionId === undefined || definitionId === null)
+            throw new Error("The parameter 'definitionId' must be defined.");
+        url_ = url_.replace("{definitionId}", encodeURIComponent("" + definitionId));
+        if (search !== undefined && search !== null)
+            url_ += "Search=" + encodeURIComponent("" + search) + "&";
         if (skip === null)
             throw new Error("The parameter 'skip' cannot be null.");
         else if (skip !== undefined)
@@ -6722,10 +6726,6 @@ export class ObservationSettingsClient {
             throw new Error("The parameter 'take' cannot be null.");
         else if (take !== undefined)
             url_ += "Take=" + encodeURIComponent("" + take) + "&";
-        if (definitionId !== undefined && definitionId !== null)
-            url_ += "definitionId=" + encodeURIComponent("" + definitionId) + "&";
-        if (organisationId !== undefined && organisationId !== null)
-            url_ += "organisationId=" + encodeURIComponent("" + organisationId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: AxiosRequestConfig = {
@@ -6744,11 +6744,11 @@ export class ObservationSettingsClient {
                 throw _error;
             }
         }).then((_response: AxiosResponse) => {
-            return this.processGetAll(_response);
+            return this.processGetAllByDefinition(_response);
         });
     }
 
-    protected processGetAll(response: AxiosResponse): Promise<ListOfObservationSettings> {
+    protected processGetAllByDefinition(response: AxiosResponse): Promise<ListOfObservationSettings> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -6792,18 +6792,20 @@ export class ObservationSettingsClient {
         return Promise.resolve<ListOfObservationSettings>(null as any);
     }
 
-    create(settings: CreateObservationSettingsSettings, cancelToken?: CancelToken | undefined): Promise<ObservationSettings> {
-        let url_ = this.baseUrl + "/v1/ObservationSettings";
+    getByOrganisation(definitionId: string, organisationId: string, cancelToken?: CancelToken | undefined): Promise<ObservationSettings> {
+        let url_ = this.baseUrl + "/v1/ObservationSettings/Definition/{definitionId}/Organisation/{organisationId}";
+        if (definitionId === undefined || definitionId === null)
+            throw new Error("The parameter 'definitionId' must be defined.");
+        url_ = url_.replace("{definitionId}", encodeURIComponent("" + definitionId));
+        if (organisationId === undefined || organisationId === null)
+            throw new Error("The parameter 'organisationId' must be defined.");
+        url_ = url_.replace("{organisationId}", encodeURIComponent("" + organisationId));
         url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(settings);
-
         let options_: AxiosRequestConfig = {
-            data: content_,
-            method: "POST",
+            method: "GET",
             url: url_,
             headers: {
-                "Content-Type": "application/json",
                 "Accept": "application/json"
             },
             cancelToken
@@ -6816,11 +6818,11 @@ export class ObservationSettingsClient {
                 throw _error;
             }
         }).then((_response: AxiosResponse) => {
-            return this.processCreate(_response);
+            return this.processGetByOrganisation(_response);
         });
     }
 
-    protected processCreate(response: AxiosResponse): Promise<ObservationSettings> {
+    protected processGetByOrganisation(response: AxiosResponse): Promise<ObservationSettings> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -7071,6 +7073,78 @@ export class ObservationSettingsClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         }
         return Promise.resolve<void>(null as any);
+    }
+
+    create(settings: CreateObservationSettingsSettings, cancelToken?: CancelToken | undefined): Promise<ObservationSettings> {
+        let url_ = this.baseUrl + "/v1/ObservationSettings";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(settings);
+
+        let options_: AxiosRequestConfig = {
+            data: content_,
+            method: "POST",
+            url: url_,
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processCreate(_response);
+        });
+    }
+
+    protected processCreate(response: AxiosResponse): Promise<ObservationSettings> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ObservationSettings.fromJS(resultData200);
+            return Promise.resolve<ObservationSettings>(result200);
+
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ObservationSettings>(null as any);
     }
 }
 
@@ -38160,10 +38234,10 @@ export interface IListOfObservation {
 export class CreateObservationSettings implements ICreateObservationSettings {
     contentId!: string;
     groupId!: string;
+    performed?: Date;
     labelIds?: string[] | undefined;
     observerId?: string | undefined;
     answers?: any[] | undefined;
-    performed?: Date;
 
     constructor(data?: ICreateObservationSettings) {
         if (data) {
@@ -38178,6 +38252,7 @@ export class CreateObservationSettings implements ICreateObservationSettings {
         if (_data) {
             this.contentId = _data["contentId"];
             this.groupId = _data["groupId"];
+            this.performed = _data["performed"] ? new Date(_data["performed"].toString()) : <any>undefined;
             if (Array.isArray(_data["labelIds"])) {
                 this.labelIds = [] as any;
                 for (let item of _data["labelIds"])
@@ -38189,7 +38264,6 @@ export class CreateObservationSettings implements ICreateObservationSettings {
                 for (let item of _data["answers"])
                     this.answers!.push(item);
             }
-            this.performed = _data["performed"] ? new Date(_data["performed"].toString()) : <any>undefined;
         }
     }
 
@@ -38204,6 +38278,7 @@ export class CreateObservationSettings implements ICreateObservationSettings {
         data = typeof data === 'object' ? data : {};
         data["contentId"] = this.contentId;
         data["groupId"] = this.groupId;
+        data["performed"] = this.performed ? this.performed.toISOString() : <any>undefined;
         if (Array.isArray(this.labelIds)) {
             data["labelIds"] = [];
             for (let item of this.labelIds)
@@ -38215,7 +38290,6 @@ export class CreateObservationSettings implements ICreateObservationSettings {
             for (let item of this.answers)
                 data["answers"].push(item);
         }
-        data["performed"] = this.performed ? this.performed.toISOString() : <any>undefined;
         return data;
     }
 }
@@ -38223,17 +38297,17 @@ export class CreateObservationSettings implements ICreateObservationSettings {
 export interface ICreateObservationSettings {
     contentId: string;
     groupId: string;
+    performed?: Date;
     labelIds?: string[] | undefined;
     observerId?: string | undefined;
     answers?: any[] | undefined;
-    performed?: Date;
 }
 
 export class UpdateObservationSettings implements IUpdateObservationSettings {
+    performed?: Date;
     labelIds?: string[] | undefined;
     observerId?: string | undefined;
     answers?: any[] | undefined;
-    performed?: Date;
     version!: number;
 
     constructor(data?: IUpdateObservationSettings) {
@@ -38247,6 +38321,7 @@ export class UpdateObservationSettings implements IUpdateObservationSettings {
 
     init(_data?: any) {
         if (_data) {
+            this.performed = _data["performed"] ? new Date(_data["performed"].toString()) : <any>undefined;
             if (Array.isArray(_data["labelIds"])) {
                 this.labelIds = [] as any;
                 for (let item of _data["labelIds"])
@@ -38258,7 +38333,6 @@ export class UpdateObservationSettings implements IUpdateObservationSettings {
                 for (let item of _data["answers"])
                     this.answers!.push(item);
             }
-            this.performed = _data["performed"] ? new Date(_data["performed"].toString()) : <any>undefined;
             this.version = _data["version"];
         }
     }
@@ -38272,6 +38346,7 @@ export class UpdateObservationSettings implements IUpdateObservationSettings {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["performed"] = this.performed ? this.performed.toISOString() : <any>undefined;
         if (Array.isArray(this.labelIds)) {
             data["labelIds"] = [];
             for (let item of this.labelIds)
@@ -38283,17 +38358,16 @@ export class UpdateObservationSettings implements IUpdateObservationSettings {
             for (let item of this.answers)
                 data["answers"].push(item);
         }
-        data["performed"] = this.performed ? this.performed.toISOString() : <any>undefined;
         data["version"] = this.version;
         return data;
     }
 }
 
 export interface IUpdateObservationSettings {
+    performed?: Date;
     labelIds?: string[] | undefined;
     observerId?: string | undefined;
     answers?: any[] | undefined;
-    performed?: Date;
     version: number;
 }
 
@@ -38388,6 +38462,8 @@ export class ObservationDefinition implements IObservationDefinition {
     id?: string | undefined;
     name?: string | undefined;
     description?: string | undefined;
+    performedDisplayOption?: ObservationDateTimeDisplayOption;
+    teamLabelsVisibility?: ObservationAttributeVisibility;
     publisherId?: string | undefined;
     publisherName?: string | undefined;
     published?: boolean;
@@ -38409,6 +38485,8 @@ export class ObservationDefinition implements IObservationDefinition {
             this.id = _data["id"];
             this.name = _data["name"];
             this.description = _data["description"];
+            this.performedDisplayOption = _data["performedDisplayOption"];
+            this.teamLabelsVisibility = _data["teamLabelsVisibility"];
             this.publisherId = _data["publisherId"];
             this.publisherName = _data["publisherName"];
             this.published = _data["published"];
@@ -38434,6 +38512,8 @@ export class ObservationDefinition implements IObservationDefinition {
         data["id"] = this.id;
         data["name"] = this.name;
         data["description"] = this.description;
+        data["performedDisplayOption"] = this.performedDisplayOption;
+        data["teamLabelsVisibility"] = this.teamLabelsVisibility;
         data["publisherId"] = this.publisherId;
         data["publisherName"] = this.publisherName;
         data["published"] = this.published;
@@ -38452,12 +38532,27 @@ export interface IObservationDefinition {
     id?: string | undefined;
     name?: string | undefined;
     description?: string | undefined;
+    performedDisplayOption?: ObservationDateTimeDisplayOption;
+    teamLabelsVisibility?: ObservationAttributeVisibility;
     publisherId?: string | undefined;
     publisherName?: string | undefined;
     published?: boolean;
     publishedContentId?: string | undefined;
     programs?: ProgramInObservationDefinition[] | undefined;
     version?: number;
+}
+
+/** 0 = DateTime 1 = Date */
+export enum ObservationDateTimeDisplayOption {
+    DateTime = 0,
+    Date = 1,
+}
+
+/** 0 = Hidden 1 = Optional 2 = Required */
+export enum ObservationAttributeVisibility {
+    Hidden = 0,
+    Optional = 1,
+    Required = 2,
 }
 
 export class ProgramInObservationDefinition implements IProgramInObservationDefinition {
@@ -38503,7 +38598,9 @@ export interface IProgramInObservationDefinition {
 export class CreateObservationDefinitionSettings implements ICreateObservationDefinitionSettings {
     publisherId!: string;
     name!: string;
-    description!: string;
+    description?: string | undefined;
+    performedDisplayOption?: ObservationDateTimeDisplayOption;
+    teamLabelsVisibility?: ObservationAttributeVisibility;
 
     constructor(data?: ICreateObservationDefinitionSettings) {
         if (data) {
@@ -38519,6 +38616,8 @@ export class CreateObservationDefinitionSettings implements ICreateObservationDe
             this.publisherId = _data["publisherId"];
             this.name = _data["name"];
             this.description = _data["description"];
+            this.performedDisplayOption = _data["performedDisplayOption"];
+            this.teamLabelsVisibility = _data["teamLabelsVisibility"];
         }
     }
 
@@ -38534,6 +38633,8 @@ export class CreateObservationDefinitionSettings implements ICreateObservationDe
         data["publisherId"] = this.publisherId;
         data["name"] = this.name;
         data["description"] = this.description;
+        data["performedDisplayOption"] = this.performedDisplayOption;
+        data["teamLabelsVisibility"] = this.teamLabelsVisibility;
         return data;
     }
 }
@@ -38541,12 +38642,16 @@ export class CreateObservationDefinitionSettings implements ICreateObservationDe
 export interface ICreateObservationDefinitionSettings {
     publisherId: string;
     name: string;
-    description: string;
+    description?: string | undefined;
+    performedDisplayOption?: ObservationDateTimeDisplayOption;
+    teamLabelsVisibility?: ObservationAttributeVisibility;
 }
 
 export class UpdateObservationDefinitionSettings implements IUpdateObservationDefinitionSettings {
     name!: string;
-    description!: string;
+    description?: string | undefined;
+    performedDisplayOption?: ObservationDateTimeDisplayOption;
+    teamLabelsVisibility?: ObservationAttributeVisibility;
     version!: number;
 
     constructor(data?: IUpdateObservationDefinitionSettings) {
@@ -38562,6 +38667,8 @@ export class UpdateObservationDefinitionSettings implements IUpdateObservationDe
         if (_data) {
             this.name = _data["name"];
             this.description = _data["description"];
+            this.performedDisplayOption = _data["performedDisplayOption"];
+            this.teamLabelsVisibility = _data["teamLabelsVisibility"];
             this.version = _data["version"];
         }
     }
@@ -38577,6 +38684,8 @@ export class UpdateObservationDefinitionSettings implements IUpdateObservationDe
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
         data["description"] = this.description;
+        data["performedDisplayOption"] = this.performedDisplayOption;
+        data["teamLabelsVisibility"] = this.teamLabelsVisibility;
         data["version"] = this.version;
         return data;
     }
@@ -38584,7 +38693,9 @@ export class UpdateObservationDefinitionSettings implements IUpdateObservationDe
 
 export interface IUpdateObservationDefinitionSettings {
     name: string;
-    description: string;
+    description?: string | undefined;
+    performedDisplayOption?: ObservationDateTimeDisplayOption;
+    teamLabelsVisibility?: ObservationAttributeVisibility;
     version: number;
 }
 
@@ -39051,7 +39162,9 @@ export class ObservationSettings implements IObservationSettings {
     organisationId?: string | undefined;
     definitionId?: string | undefined;
     publisherId?: string | undefined;
-    privacy?: PrivacyLevel;
+    privacy?: ObservationPrivacyLevel | undefined;
+    created?: Date;
+    modified?: Date;
     version?: number;
 
     constructor(data?: IObservationSettings) {
@@ -39070,6 +39183,8 @@ export class ObservationSettings implements IObservationSettings {
             this.definitionId = _data["definitionId"];
             this.publisherId = _data["publisherId"];
             this.privacy = _data["privacy"];
+            this.created = _data["created"] ? new Date(_data["created"].toString()) : <any>undefined;
+            this.modified = _data["modified"] ? new Date(_data["modified"].toString()) : <any>undefined;
             this.version = _data["version"];
         }
     }
@@ -39088,6 +39203,8 @@ export class ObservationSettings implements IObservationSettings {
         data["definitionId"] = this.definitionId;
         data["publisherId"] = this.publisherId;
         data["privacy"] = this.privacy;
+        data["created"] = this.created ? this.created.toISOString() : <any>undefined;
+        data["modified"] = this.modified ? this.modified.toISOString() : <any>undefined;
         data["version"] = this.version;
         return data;
     }
@@ -39098,21 +39215,22 @@ export interface IObservationSettings {
     organisationId?: string | undefined;
     definitionId?: string | undefined;
     publisherId?: string | undefined;
-    privacy?: PrivacyLevel;
+    privacy?: ObservationPrivacyLevel | undefined;
+    created?: Date;
+    modified?: Date;
     version?: number;
 }
 
-/** 0 = Public 1 = Closed 2 = Secret */
-export enum PrivacyLevel {
-    Public = 0,
+/** 0 = Open 1 = Closed */
+export enum ObservationPrivacyLevel {
+    Open = 0,
     Closed = 1,
-    Secret = 2,
 }
 
 export class CreateObservationSettingsSettings implements ICreateObservationSettingsSettings {
     organisationId!: string;
     definitionId!: string;
-    privacy?: PrivacyLevel;
+    privacy?: ObservationPrivacyLevel | undefined;
 
     constructor(data?: ICreateObservationSettingsSettings) {
         if (data) {
@@ -39150,11 +39268,11 @@ export class CreateObservationSettingsSettings implements ICreateObservationSett
 export interface ICreateObservationSettingsSettings {
     organisationId: string;
     definitionId: string;
-    privacy?: PrivacyLevel;
+    privacy?: ObservationPrivacyLevel | undefined;
 }
 
 export class UpdateObservationSettingsSettings implements IUpdateObservationSettingsSettings {
-    privacy?: PrivacyLevel;
+    privacy?: ObservationPrivacyLevel | undefined;
     version?: number;
 
     constructor(data?: IUpdateObservationSettingsSettings) {
@@ -39189,7 +39307,7 @@ export class UpdateObservationSettingsSettings implements IUpdateObservationSett
 }
 
 export interface IUpdateObservationSettingsSettings {
-    privacy?: PrivacyLevel;
+    privacy?: ObservationPrivacyLevel | undefined;
     version?: number;
 }
 
@@ -54452,6 +54570,13 @@ export interface IOrganisation {
     publishingApproved?: boolean;
     shifts?: Shift[] | undefined;
     version?: number;
+}
+
+/** 0 = Public 1 = Closed 2 = Secret */
+export enum PrivacyLevel {
+    Public = 0,
+    Closed = 1,
+    Secret = 2,
 }
 
 export class Shift implements IShift {
