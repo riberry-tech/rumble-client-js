@@ -4879,19 +4879,19 @@ export class ObservationClient {
     }
 
     /**
-     * @param search (optional) 
      * @param skip (optional) 
      * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
      * @param from (optional) 
      * @param to (optional) 
+     * @param definitionId (optional) 
+     * @param ignoreObservers (optional) 
+     * @param ignoreParticipants (optional) 
      */
-    getAllForUser(userId: string, search: string | null | undefined, skip: number | undefined, take: number | undefined, from: Date | null | undefined, to: Date | null | undefined, cancelToken?: CancelToken | undefined): Promise<ListOfObservation> {
+    getAllForUser(userId: string, skip: number | undefined, take: number | undefined, from: Date | null | undefined, to: Date | null | undefined, definitionId: string | null | undefined, ignoreObservers: boolean | undefined, ignoreParticipants: boolean | undefined, cancelToken?: CancelToken | undefined): Promise<ListOfObservation> {
         let url_ = this.baseUrl + "/v1/Observation/User/{userId}?";
         if (userId === undefined || userId === null)
             throw new Error("The parameter 'userId' must be defined.");
         url_ = url_.replace("{userId}", encodeURIComponent("" + userId));
-        if (search !== undefined && search !== null)
-            url_ += "Search=" + encodeURIComponent("" + search) + "&";
         if (skip === null)
             throw new Error("The parameter 'skip' cannot be null.");
         else if (skip !== undefined)
@@ -4904,6 +4904,16 @@ export class ObservationClient {
             url_ += "from=" + encodeURIComponent(from ? "" + from.toISOString() : "") + "&";
         if (to !== undefined && to !== null)
             url_ += "to=" + encodeURIComponent(to ? "" + to.toISOString() : "") + "&";
+        if (definitionId !== undefined && definitionId !== null)
+            url_ += "definitionId=" + encodeURIComponent("" + definitionId) + "&";
+        if (ignoreObservers === null)
+            throw new Error("The parameter 'ignoreObservers' cannot be null.");
+        else if (ignoreObservers !== undefined)
+            url_ += "ignoreObservers=" + encodeURIComponent("" + ignoreObservers) + "&";
+        if (ignoreParticipants === null)
+            throw new Error("The parameter 'ignoreParticipants' cannot be null.");
+        else if (ignoreParticipants !== undefined)
+            url_ += "ignoreParticipants=" + encodeURIComponent("" + ignoreParticipants) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: AxiosRequestConfig = {
