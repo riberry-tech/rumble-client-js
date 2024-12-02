@@ -3169,6 +3169,700 @@ export class ProjectionClient {
     }
 }
 
+export class NotebookClient {
+    private instance: AxiosInstance;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(baseUrl?: string, instance?: AxiosInstance) {
+
+        this.instance = instance ? instance : axios.create();
+
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+
+    }
+
+    get(ownerType: NotebookOwnerType, ownerId: string, cancelToken?: CancelToken | undefined): Promise<Notebook> {
+        let url_ = this.baseUrl + "/v1/Notebook/{ownerType}/{ownerId}";
+        if (ownerType === undefined || ownerType === null)
+            throw new Error("The parameter 'ownerType' must be defined.");
+        url_ = url_.replace("{ownerType}", encodeURIComponent("" + ownerType));
+        if (ownerId === undefined || ownerId === null)
+            throw new Error("The parameter 'ownerId' must be defined.");
+        url_ = url_.replace("{ownerId}", encodeURIComponent("" + ownerId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: AxiosRequestConfig = {
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processGet(_response);
+        });
+    }
+
+    protected processGet(response: AxiosResponse): Promise<Notebook> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = Notebook.fromJS(resultData200);
+            return Promise.resolve<Notebook>(result200);
+
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<Notebook>(null as any);
+    }
+
+    create(ownerType: NotebookOwnerType | undefined, ownerId: string | undefined, cancelToken?: CancelToken | undefined): Promise<Notebook> {
+        let url_ = this.baseUrl + "/v1/Notebook?";
+        if (ownerType === null)
+            throw new Error("The parameter 'ownerType' cannot be null.");
+        else if (ownerType !== undefined)
+            url_ += "OwnerType=" + encodeURIComponent("" + ownerType) + "&";
+        if (ownerId === null)
+            throw new Error("The parameter 'ownerId' cannot be null.");
+        else if (ownerId !== undefined)
+            url_ += "OwnerId=" + encodeURIComponent("" + ownerId) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: AxiosRequestConfig = {
+            method: "POST",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processCreate(_response);
+        });
+    }
+
+    protected processCreate(response: AxiosResponse): Promise<Notebook> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = Notebook.fromJS(resultData200);
+            return Promise.resolve<Notebook>(result200);
+
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<Notebook>(null as any);
+    }
+
+    update(notebookId: string, noteIds: string[] | undefined, version: number | undefined, cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/v1/Notebook/{notebookId}?";
+        if (notebookId === undefined || notebookId === null)
+            throw new Error("The parameter 'notebookId' must be defined.");
+        url_ = url_.replace("{notebookId}", encodeURIComponent("" + notebookId));
+        if (noteIds === null)
+            throw new Error("The parameter 'noteIds' cannot be null.");
+        else if (noteIds !== undefined)
+            noteIds && noteIds.forEach(item => { url_ += "NoteIds=" + encodeURIComponent("" + item) + "&"; });
+        if (version === null)
+            throw new Error("The parameter 'version' cannot be null.");
+        else if (version !== undefined)
+            url_ += "Version=" + encodeURIComponent("" + version) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: AxiosRequestConfig = {
+            method: "PUT",
+            url: url_,
+            headers: {
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processUpdate(_response);
+        });
+    }
+
+    protected processUpdate(response: AxiosResponse): Promise<void> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 204) {
+            const _responseText = response.data;
+            return Promise.resolve<void>(null as any);
+
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<void>(null as any);
+    }
+
+    delete(notebookId: string, cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/v1/Notebook/{notebookId}";
+        if (notebookId === undefined || notebookId === null)
+            throw new Error("The parameter 'notebookId' must be defined.");
+        url_ = url_.replace("{notebookId}", encodeURIComponent("" + notebookId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: AxiosRequestConfig = {
+            method: "DELETE",
+            url: url_,
+            headers: {
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processDelete(_response);
+        });
+    }
+
+    protected processDelete(response: AxiosResponse): Promise<void> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 204) {
+            const _responseText = response.data;
+            return Promise.resolve<void>(null as any);
+
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<void>(null as any);
+    }
+}
+
+export class NoteClient {
+    private instance: AxiosInstance;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(baseUrl?: string, instance?: AxiosInstance) {
+
+        this.instance = instance ? instance : axios.create();
+
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+
+    }
+
+    get(noteId: string, cancelToken?: CancelToken | undefined): Promise<Note> {
+        let url_ = this.baseUrl + "/v1/Note/{noteId}";
+        if (noteId === undefined || noteId === null)
+            throw new Error("The parameter 'noteId' must be defined.");
+        url_ = url_.replace("{noteId}", encodeURIComponent("" + noteId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: AxiosRequestConfig = {
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processGet(_response);
+        });
+    }
+
+    protected processGet(response: AxiosResponse): Promise<Note> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = Note.fromJS(resultData200);
+            return Promise.resolve<Note>(result200);
+
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<Note>(null as any);
+    }
+
+    update(noteId: string, title: string | undefined, blocks: NoteBlock[] | undefined, version: number | undefined, cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/v1/Note/{noteId}?";
+        if (noteId === undefined || noteId === null)
+            throw new Error("The parameter 'noteId' must be defined.");
+        url_ = url_.replace("{noteId}", encodeURIComponent("" + noteId));
+        if (title === null)
+            throw new Error("The parameter 'title' cannot be null.");
+        else if (title !== undefined)
+            url_ += "Title=" + encodeURIComponent("" + title) + "&";
+        if (blocks === null)
+            throw new Error("The parameter 'blocks' cannot be null.");
+        else if (blocks !== undefined)
+            blocks && blocks.forEach((item, index) => {
+                for (let attr in item)
+        			if (item.hasOwnProperty(attr)) {
+        				url_ += "Blocks[" + index + "]." + attr + "=" + encodeURIComponent("" + (item as any)[attr]) + "&";
+        			}
+            });
+        if (version === null)
+            throw new Error("The parameter 'version' cannot be null.");
+        else if (version !== undefined)
+            url_ += "Version=" + encodeURIComponent("" + version) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: AxiosRequestConfig = {
+            method: "PUT",
+            url: url_,
+            headers: {
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processUpdate(_response);
+        });
+    }
+
+    protected processUpdate(response: AxiosResponse): Promise<void> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 204) {
+            const _responseText = response.data;
+            return Promise.resolve<void>(null as any);
+
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<void>(null as any);
+    }
+
+    delete(noteId: string, cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/v1/Note/{noteId}";
+        if (noteId === undefined || noteId === null)
+            throw new Error("The parameter 'noteId' must be defined.");
+        url_ = url_.replace("{noteId}", encodeURIComponent("" + noteId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: AxiosRequestConfig = {
+            method: "DELETE",
+            url: url_,
+            headers: {
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processDelete(_response);
+        });
+    }
+
+    protected processDelete(response: AxiosResponse): Promise<void> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 204) {
+            const _responseText = response.data;
+            return Promise.resolve<void>(null as any);
+
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<void>(null as any);
+    }
+
+    getAllForNotebook(notebookId: string, cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/v1/Note/Notebook/{notebookId}";
+        if (notebookId === undefined || notebookId === null)
+            throw new Error("The parameter 'notebookId' must be defined.");
+        url_ = url_.replace("{notebookId}", encodeURIComponent("" + notebookId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: AxiosRequestConfig = {
+            method: "GET",
+            url: url_,
+            headers: {
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processGetAllForNotebook(_response);
+        });
+    }
+
+    protected processGetAllForNotebook(response: AxiosResponse): Promise<void> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 204) {
+            const _responseText = response.data;
+            return Promise.resolve<void>(null as any);
+
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<void>(null as any);
+    }
+
+    create(notebookId: string | undefined, title: string | undefined, blocks: NoteBlock[] | undefined, cancelToken?: CancelToken | undefined): Promise<Note> {
+        let url_ = this.baseUrl + "/v1/Note?";
+        if (notebookId === null)
+            throw new Error("The parameter 'notebookId' cannot be null.");
+        else if (notebookId !== undefined)
+            url_ += "NotebookId=" + encodeURIComponent("" + notebookId) + "&";
+        if (title === null)
+            throw new Error("The parameter 'title' cannot be null.");
+        else if (title !== undefined)
+            url_ += "Title=" + encodeURIComponent("" + title) + "&";
+        if (blocks === null)
+            throw new Error("The parameter 'blocks' cannot be null.");
+        else if (blocks !== undefined)
+            blocks && blocks.forEach((item, index) => {
+                for (let attr in item)
+        			if (item.hasOwnProperty(attr)) {
+        				url_ += "Blocks[" + index + "]." + attr + "=" + encodeURIComponent("" + (item as any)[attr]) + "&";
+        			}
+            });
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: AxiosRequestConfig = {
+            method: "POST",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processCreate(_response);
+        });
+    }
+
+    protected processCreate(response: AxiosResponse): Promise<Note> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = Note.fromJS(resultData200);
+            return Promise.resolve<Note>(result200);
+
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<Note>(null as any);
+    }
+}
+
 export class NotificationClient {
     private instance: AxiosInstance;
     private baseUrl: string;
@@ -37205,6 +37899,227 @@ export enum ProjectionStatus {
     Running = 2,
     Completed = 3,
     Failed = -1,
+}
+
+export class Notebook implements INotebook {
+    id?: string | undefined;
+    ownerType?: NotebookOwnerType;
+    ownerId?: string | undefined;
+    notes?: NoteInNotebook[] | undefined;
+    created?: Date;
+    modified?: Date;
+    version?: number;
+
+    constructor(data?: INotebook) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.ownerType = _data["ownerType"];
+            this.ownerId = _data["ownerId"];
+            if (Array.isArray(_data["notes"])) {
+                this.notes = [] as any;
+                for (let item of _data["notes"])
+                    this.notes!.push(NoteInNotebook.fromJS(item));
+            }
+            this.created = _data["created"] ? new Date(_data["created"].toString()) : <any>undefined;
+            this.modified = _data["modified"] ? new Date(_data["modified"].toString()) : <any>undefined;
+            this.version = _data["version"];
+        }
+    }
+
+    static fromJS(data: any): Notebook {
+        data = typeof data === 'object' ? data : {};
+        let result = new Notebook();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["ownerType"] = this.ownerType;
+        data["ownerId"] = this.ownerId;
+        if (Array.isArray(this.notes)) {
+            data["notes"] = [];
+            for (let item of this.notes)
+                data["notes"].push(item.toJSON());
+        }
+        data["created"] = this.created ? this.created.toISOString() : <any>undefined;
+        data["modified"] = this.modified ? this.modified.toISOString() : <any>undefined;
+        data["version"] = this.version;
+        return data;
+    }
+}
+
+export interface INotebook {
+    id?: string | undefined;
+    ownerType?: NotebookOwnerType;
+    ownerId?: string | undefined;
+    notes?: NoteInNotebook[] | undefined;
+    created?: Date;
+    modified?: Date;
+    version?: number;
+}
+
+export enum NotebookOwnerType {
+    Unknown = "Unknown",
+    Group = "Group",
+}
+
+export class NoteInNotebook implements INoteInNotebook {
+    id?: string | undefined;
+    title?: string | undefined;
+    created?: Date;
+    modified?: Date;
+
+    constructor(data?: INoteInNotebook) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.title = _data["title"];
+            this.created = _data["created"] ? new Date(_data["created"].toString()) : <any>undefined;
+            this.modified = _data["modified"] ? new Date(_data["modified"].toString()) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): NoteInNotebook {
+        data = typeof data === 'object' ? data : {};
+        let result = new NoteInNotebook();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["title"] = this.title;
+        data["created"] = this.created ? this.created.toISOString() : <any>undefined;
+        data["modified"] = this.modified ? this.modified.toISOString() : <any>undefined;
+        return data;
+    }
+}
+
+export interface INoteInNotebook {
+    id?: string | undefined;
+    title?: string | undefined;
+    created?: Date;
+    modified?: Date;
+}
+
+export class Note implements INote {
+    id?: string | undefined;
+    title?: string | undefined;
+    blocks?: NoteBlock[] | undefined;
+    created?: Date;
+    modified?: Date;
+    version?: number;
+
+    constructor(data?: INote) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.title = _data["title"];
+            if (Array.isArray(_data["blocks"])) {
+                this.blocks = [] as any;
+                for (let item of _data["blocks"])
+                    this.blocks!.push(NoteBlock.fromJS(item));
+            }
+            this.created = _data["created"] ? new Date(_data["created"].toString()) : <any>undefined;
+            this.modified = _data["modified"] ? new Date(_data["modified"].toString()) : <any>undefined;
+            this.version = _data["version"];
+        }
+    }
+
+    static fromJS(data: any): Note {
+        data = typeof data === 'object' ? data : {};
+        let result = new Note();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["title"] = this.title;
+        if (Array.isArray(this.blocks)) {
+            data["blocks"] = [];
+            for (let item of this.blocks)
+                data["blocks"].push(item.toJSON());
+        }
+        data["created"] = this.created ? this.created.toISOString() : <any>undefined;
+        data["modified"] = this.modified ? this.modified.toISOString() : <any>undefined;
+        data["version"] = this.version;
+        return data;
+    }
+}
+
+export interface INote {
+    id?: string | undefined;
+    title?: string | undefined;
+    blocks?: NoteBlock[] | undefined;
+    created?: Date;
+    modified?: Date;
+    version?: number;
+}
+
+export class NoteBlock implements INoteBlock {
+    content?: string | undefined;
+
+    constructor(data?: INoteBlock) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.content = _data["content"];
+        }
+    }
+
+    static fromJS(data: any): NoteBlock {
+        data = typeof data === 'object' ? data : {};
+        let result = new NoteBlock();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["content"] = this.content;
+        return data;
+    }
+}
+
+export interface INoteBlock {
+    content?: string | undefined;
 }
 
 export class ListOfNotification implements IListOfNotification {
