@@ -3014,6 +3014,79 @@ export class PlatformClient {
         }
         return Promise.resolve<PlatformStatus>(null as any);
     }
+
+    ping( cancelToken?: CancelToken | undefined): Promise<FileResponse> {
+        let url_ = this.baseUrl + "/v1/Platform/Ping";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: AxiosRequestConfig = {
+            responseType: "blob",
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/octet-stream"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processPing(_response);
+        });
+    }
+
+    protected processPing(response: AxiosResponse): Promise<FileResponse> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers["content-disposition"] : undefined;
+            let fileNameMatch = contentDisposition ? /filename\*=(?:(\\?['"])(.*?)\1|(?:[^\s]+'.*?')?([^;\n]*))/g.exec(contentDisposition) : undefined;
+            let fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[3] || fileNameMatch[2] : undefined;
+            if (fileName) {
+                fileName = decodeURIComponent(fileName);
+            } else {
+                fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+                fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            }
+            return Promise.resolve({ fileName: fileName, status: status, data: new Blob([response.data], { type: response.headers["content-type"] }), headers: _headers });
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<FileResponse>(null as any);
+    }
 }
 
 export class ProjectionClient {
@@ -3256,22 +3329,18 @@ export class NotebookClient {
         return Promise.resolve<Notebook>(null as any);
     }
 
-    create(ownerType: NotebookOwnerType | undefined, ownerId: string | undefined, cancelToken?: CancelToken | undefined): Promise<Notebook> {
-        let url_ = this.baseUrl + "/v1/Notebook?";
-        if (ownerType === null)
-            throw new Error("The parameter 'ownerType' cannot be null.");
-        else if (ownerType !== undefined)
-            url_ += "OwnerType=" + encodeURIComponent("" + ownerType) + "&";
-        if (ownerId === null)
-            throw new Error("The parameter 'ownerId' cannot be null.");
-        else if (ownerId !== undefined)
-            url_ += "OwnerId=" + encodeURIComponent("" + ownerId) + "&";
+    create(settings: CreateNotebookSettings, cancelToken?: CancelToken | undefined): Promise<Notebook> {
+        let url_ = this.baseUrl + "/v1/Notebook";
         url_ = url_.replace(/[?&]$/, "");
 
+        const content_ = JSON.stringify(settings);
+
         let options_: AxiosRequestConfig = {
+            data: content_,
             method: "POST",
             url: url_,
             headers: {
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             },
             cancelToken
@@ -3332,25 +3401,21 @@ export class NotebookClient {
         return Promise.resolve<Notebook>(null as any);
     }
 
-    update(notebookId: string, noteIds: string[] | undefined, version: number | undefined, cancelToken?: CancelToken | undefined): Promise<void> {
-        let url_ = this.baseUrl + "/v1/Notebook/{notebookId}?";
+    update(notebookId: string, settings: UpdateNotebookSettings, cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/v1/Notebook/{notebookId}";
         if (notebookId === undefined || notebookId === null)
             throw new Error("The parameter 'notebookId' must be defined.");
         url_ = url_.replace("{notebookId}", encodeURIComponent("" + notebookId));
-        if (noteIds === null)
-            throw new Error("The parameter 'noteIds' cannot be null.");
-        else if (noteIds !== undefined)
-            noteIds && noteIds.forEach(item => { url_ += "NoteIds=" + encodeURIComponent("" + item) + "&"; });
-        if (version === null)
-            throw new Error("The parameter 'version' cannot be null.");
-        else if (version !== undefined)
-            url_ += "Version=" + encodeURIComponent("" + version) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
+        const content_ = JSON.stringify(settings);
+
         let options_: AxiosRequestConfig = {
+            data: content_,
             method: "PUT",
             url: url_,
             headers: {
+                "Content-Type": "application/json",
             },
             cancelToken
         };
@@ -3559,34 +3624,21 @@ export class NoteClient {
         return Promise.resolve<Note>(null as any);
     }
 
-    update(noteId: string, title: string | undefined, blocks: NoteBlock[] | undefined, version: number | undefined, cancelToken?: CancelToken | undefined): Promise<void> {
-        let url_ = this.baseUrl + "/v1/Note/{noteId}?";
+    update(noteId: string, settings: UpdateNoteSettings, cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/v1/Note/{noteId}";
         if (noteId === undefined || noteId === null)
             throw new Error("The parameter 'noteId' must be defined.");
         url_ = url_.replace("{noteId}", encodeURIComponent("" + noteId));
-        if (title === null)
-            throw new Error("The parameter 'title' cannot be null.");
-        else if (title !== undefined)
-            url_ += "Title=" + encodeURIComponent("" + title) + "&";
-        if (blocks === null)
-            throw new Error("The parameter 'blocks' cannot be null.");
-        else if (blocks !== undefined)
-            blocks && blocks.forEach((item, index) => {
-                for (let attr in item)
-        			if (item.hasOwnProperty(attr)) {
-        				url_ += "Blocks[" + index + "]." + attr + "=" + encodeURIComponent("" + (item as any)[attr]) + "&";
-        			}
-            });
-        if (version === null)
-            throw new Error("The parameter 'version' cannot be null.");
-        else if (version !== undefined)
-            url_ += "Version=" + encodeURIComponent("" + version) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
+        const content_ = JSON.stringify(settings);
+
         let options_: AxiosRequestConfig = {
+            data: content_,
             method: "PUT",
             url: url_,
             headers: {
+                "Content-Type": "application/json",
             },
             cancelToken
         };
@@ -3777,31 +3829,18 @@ export class NoteClient {
         return Promise.resolve<void>(null as any);
     }
 
-    create(notebookId: string | undefined, title: string | undefined, blocks: NoteBlock[] | undefined, cancelToken?: CancelToken | undefined): Promise<Note> {
-        let url_ = this.baseUrl + "/v1/Note?";
-        if (notebookId === null)
-            throw new Error("The parameter 'notebookId' cannot be null.");
-        else if (notebookId !== undefined)
-            url_ += "NotebookId=" + encodeURIComponent("" + notebookId) + "&";
-        if (title === null)
-            throw new Error("The parameter 'title' cannot be null.");
-        else if (title !== undefined)
-            url_ += "Title=" + encodeURIComponent("" + title) + "&";
-        if (blocks === null)
-            throw new Error("The parameter 'blocks' cannot be null.");
-        else if (blocks !== undefined)
-            blocks && blocks.forEach((item, index) => {
-                for (let attr in item)
-        			if (item.hasOwnProperty(attr)) {
-        				url_ += "Blocks[" + index + "]." + attr + "=" + encodeURIComponent("" + (item as any)[attr]) + "&";
-        			}
-            });
+    create(settings: CreateNoteSettings, cancelToken?: CancelToken | undefined): Promise<Note> {
+        let url_ = this.baseUrl + "/v1/Note";
         url_ = url_.replace(/[?&]$/, "");
 
+        const content_ = JSON.stringify(settings);
+
         let options_: AxiosRequestConfig = {
+            data: content_,
             method: "POST",
             url: url_,
             headers: {
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             },
             cancelToken
@@ -38022,6 +38061,94 @@ export interface INoteInNotebook {
     modified?: Date;
 }
 
+export class CreateNotebookSettings implements ICreateNotebookSettings {
+    ownerType?: NotebookOwnerType;
+    ownerId?: string | undefined;
+
+    constructor(data?: ICreateNotebookSettings) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.ownerType = _data["ownerType"];
+            this.ownerId = _data["ownerId"];
+        }
+    }
+
+    static fromJS(data: any): CreateNotebookSettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateNotebookSettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["ownerType"] = this.ownerType;
+        data["ownerId"] = this.ownerId;
+        return data;
+    }
+}
+
+export interface ICreateNotebookSettings {
+    ownerType?: NotebookOwnerType;
+    ownerId?: string | undefined;
+}
+
+export class UpdateNotebookSettings implements IUpdateNotebookSettings {
+    noteIds?: string[] | undefined;
+    version?: number;
+
+    constructor(data?: IUpdateNotebookSettings) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["noteIds"])) {
+                this.noteIds = [] as any;
+                for (let item of _data["noteIds"])
+                    this.noteIds!.push(item);
+            }
+            this.version = _data["version"];
+        }
+    }
+
+    static fromJS(data: any): UpdateNotebookSettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new UpdateNotebookSettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.noteIds)) {
+            data["noteIds"] = [];
+            for (let item of this.noteIds)
+                data["noteIds"].push(item);
+        }
+        data["version"] = this.version;
+        return data;
+    }
+}
+
+export interface IUpdateNotebookSettings {
+    noteIds?: string[] | undefined;
+    version?: number;
+}
+
 export class Note implements INote {
     id?: string | undefined;
     title?: string | undefined;
@@ -38120,6 +38247,110 @@ export class NoteBlock implements INoteBlock {
 
 export interface INoteBlock {
     content?: string | undefined;
+}
+
+export class CreateNoteSettings implements ICreateNoteSettings {
+    notebookId?: string | undefined;
+    title?: string | undefined;
+    blocks?: NoteBlock[] | undefined;
+
+    constructor(data?: ICreateNoteSettings) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.notebookId = _data["notebookId"];
+            this.title = _data["title"];
+            if (Array.isArray(_data["blocks"])) {
+                this.blocks = [] as any;
+                for (let item of _data["blocks"])
+                    this.blocks!.push(NoteBlock.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateNoteSettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateNoteSettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["notebookId"] = this.notebookId;
+        data["title"] = this.title;
+        if (Array.isArray(this.blocks)) {
+            data["blocks"] = [];
+            for (let item of this.blocks)
+                data["blocks"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface ICreateNoteSettings {
+    notebookId?: string | undefined;
+    title?: string | undefined;
+    blocks?: NoteBlock[] | undefined;
+}
+
+export class UpdateNoteSettings implements IUpdateNoteSettings {
+    title?: string | undefined;
+    blocks?: NoteBlock[] | undefined;
+    version?: number;
+
+    constructor(data?: IUpdateNoteSettings) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.title = _data["title"];
+            if (Array.isArray(_data["blocks"])) {
+                this.blocks = [] as any;
+                for (let item of _data["blocks"])
+                    this.blocks!.push(NoteBlock.fromJS(item));
+            }
+            this.version = _data["version"];
+        }
+    }
+
+    static fromJS(data: any): UpdateNoteSettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new UpdateNoteSettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["title"] = this.title;
+        if (Array.isArray(this.blocks)) {
+            data["blocks"] = [];
+            for (let item of this.blocks)
+                data["blocks"].push(item.toJSON());
+        }
+        data["version"] = this.version;
+        return data;
+    }
+}
+
+export interface IUpdateNoteSettings {
+    title?: string | undefined;
+    blocks?: NoteBlock[] | undefined;
+    version?: number;
 }
 
 export class ListOfNotification implements IListOfNotification {
