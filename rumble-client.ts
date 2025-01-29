@@ -3015,7 +3015,80 @@ export class PlatformClient {
         return Promise.resolve<PlatformStatus>(null as any);
     }
 
-    ping( cancelToken?: CancelToken | undefined): Promise<FileResponse> {
+    pingHEAD( cancelToken?: CancelToken | undefined): Promise<FileResponse> {
+        let url_ = this.baseUrl + "/v1/Platform/Ping";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: AxiosRequestConfig = {
+            responseType: "blob",
+            method: "HEAD",
+            url: url_,
+            headers: {
+                "Accept": "application/octet-stream"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processPingHEAD(_response);
+        });
+    }
+
+    protected processPingHEAD(response: AxiosResponse): Promise<FileResponse> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers["content-disposition"] : undefined;
+            let fileNameMatch = contentDisposition ? /filename\*=(?:(\\?['"])(.*?)\1|(?:[^\s]+'.*?')?([^;\n]*))/g.exec(contentDisposition) : undefined;
+            let fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[3] || fileNameMatch[2] : undefined;
+            if (fileName) {
+                fileName = decodeURIComponent(fileName);
+            } else {
+                fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+                fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            }
+            return Promise.resolve({ fileName: fileName, status: status, data: new Blob([response.data], { type: response.headers["content-type"] }), headers: _headers });
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<FileResponse>(null as any);
+    }
+
+    pingGET( cancelToken?: CancelToken | undefined): Promise<FileResponse> {
         let url_ = this.baseUrl + "/v1/Platform/Ping";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -3036,11 +3109,11 @@ export class PlatformClient {
                 throw _error;
             }
         }).then((_response: AxiosResponse) => {
-            return this.processPing(_response);
+            return this.processPingGET(_response);
         });
     }
 
-    protected processPing(response: AxiosResponse): Promise<FileResponse> {
+    protected processPingGET(response: AxiosResponse): Promise<FileResponse> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -3722,73 +3795,6 @@ export class NoteClient {
     }
 
     protected processDelete(response: AxiosResponse): Promise<void> {
-        const status = response.status;
-        let _headers: any = {};
-        if (response.headers && typeof response.headers === "object") {
-            for (let k in response.headers) {
-                if (response.headers.hasOwnProperty(k)) {
-                    _headers[k] = response.headers[k];
-                }
-            }
-        }
-        if (status === 204) {
-            const _responseText = response.data;
-            return Promise.resolve<void>(null as any);
-
-        } else if (status === 401) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-
-        } else if (status === 403) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-
-        } else if (status === 404) {
-            const _responseText = response.data;
-            return throwException("This resource could not be found.", status, _responseText, _headers);
-
-        } else if (status === 503) {
-            const _responseText = response.data;
-            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
-
-        } else if (status === 504) {
-            const _responseText = response.data;
-            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
-
-        } else if (status !== 200 && status !== 204) {
-            const _responseText = response.data;
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-        }
-        return Promise.resolve<void>(null as any);
-    }
-
-    getAllForNotebook(notebookId: string, cancelToken?: CancelToken | undefined): Promise<void> {
-        let url_ = this.baseUrl + "/v1/Note/Notebook/{notebookId}";
-        if (notebookId === undefined || notebookId === null)
-            throw new Error("The parameter 'notebookId' must be defined.");
-        url_ = url_.replace("{notebookId}", encodeURIComponent("" + notebookId));
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: AxiosRequestConfig = {
-            method: "GET",
-            url: url_,
-            headers: {
-            },
-            cancelToken
-        };
-
-        return this.instance.request(options_).catch((_error: any) => {
-            if (isAxiosError(_error) && _error.response) {
-                return _error.response;
-            } else {
-                throw _error;
-            }
-        }).then((_response: AxiosResponse) => {
-            return this.processGetAllForNotebook(_response);
-        });
-    }
-
-    protected processGetAllForNotebook(response: AxiosResponse): Promise<void> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -38152,7 +38158,7 @@ export interface IUpdateNotebookSettings {
 export class Note implements INote {
     id?: string | undefined;
     title?: string | undefined;
-    blocks?: NoteBlock[] | undefined;
+    blocks?: any[] | undefined;
     created?: Date;
     modified?: Date;
     version?: number;
@@ -38173,7 +38179,7 @@ export class Note implements INote {
             if (Array.isArray(_data["blocks"])) {
                 this.blocks = [] as any;
                 for (let item of _data["blocks"])
-                    this.blocks!.push(NoteBlock.fromJS(item));
+                    this.blocks!.push(item);
             }
             this.created = _data["created"] ? new Date(_data["created"].toString()) : <any>undefined;
             this.modified = _data["modified"] ? new Date(_data["modified"].toString()) : <any>undefined;
@@ -38195,7 +38201,7 @@ export class Note implements INote {
         if (Array.isArray(this.blocks)) {
             data["blocks"] = [];
             for (let item of this.blocks)
-                data["blocks"].push(item.toJSON());
+                data["blocks"].push(item);
         }
         data["created"] = this.created ? this.created.toISOString() : <any>undefined;
         data["modified"] = this.modified ? this.modified.toISOString() : <any>undefined;
@@ -38207,52 +38213,16 @@ export class Note implements INote {
 export interface INote {
     id?: string | undefined;
     title?: string | undefined;
-    blocks?: NoteBlock[] | undefined;
+    blocks?: any[] | undefined;
     created?: Date;
     modified?: Date;
     version?: number;
 }
 
-export class NoteBlock implements INoteBlock {
-    content?: string | undefined;
-
-    constructor(data?: INoteBlock) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.content = _data["content"];
-        }
-    }
-
-    static fromJS(data: any): NoteBlock {
-        data = typeof data === 'object' ? data : {};
-        let result = new NoteBlock();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["content"] = this.content;
-        return data;
-    }
-}
-
-export interface INoteBlock {
-    content?: string | undefined;
-}
-
 export class CreateNoteSettings implements ICreateNoteSettings {
     notebookId?: string | undefined;
-    title?: string | undefined;
-    blocks?: NoteBlock[] | undefined;
+    title!: string;
+    blocks!: any[];
 
     constructor(data?: ICreateNoteSettings) {
         if (data) {
@@ -38260,6 +38230,9 @@ export class CreateNoteSettings implements ICreateNoteSettings {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.blocks = [];
         }
     }
 
@@ -38270,7 +38243,7 @@ export class CreateNoteSettings implements ICreateNoteSettings {
             if (Array.isArray(_data["blocks"])) {
                 this.blocks = [] as any;
                 for (let item of _data["blocks"])
-                    this.blocks!.push(NoteBlock.fromJS(item));
+                    this.blocks!.push(item);
             }
         }
     }
@@ -38289,7 +38262,7 @@ export class CreateNoteSettings implements ICreateNoteSettings {
         if (Array.isArray(this.blocks)) {
             data["blocks"] = [];
             for (let item of this.blocks)
-                data["blocks"].push(item.toJSON());
+                data["blocks"].push(item);
         }
         return data;
     }
@@ -38297,13 +38270,13 @@ export class CreateNoteSettings implements ICreateNoteSettings {
 
 export interface ICreateNoteSettings {
     notebookId?: string | undefined;
-    title?: string | undefined;
-    blocks?: NoteBlock[] | undefined;
+    title: string;
+    blocks: any[];
 }
 
 export class UpdateNoteSettings implements IUpdateNoteSettings {
-    title?: string | undefined;
-    blocks?: NoteBlock[] | undefined;
+    title!: string;
+    blocks!: any[];
     version?: number;
 
     constructor(data?: IUpdateNoteSettings) {
@@ -38313,6 +38286,9 @@ export class UpdateNoteSettings implements IUpdateNoteSettings {
                     (<any>this)[property] = (<any>data)[property];
             }
         }
+        if (!data) {
+            this.blocks = [];
+        }
     }
 
     init(_data?: any) {
@@ -38321,7 +38297,7 @@ export class UpdateNoteSettings implements IUpdateNoteSettings {
             if (Array.isArray(_data["blocks"])) {
                 this.blocks = [] as any;
                 for (let item of _data["blocks"])
-                    this.blocks!.push(NoteBlock.fromJS(item));
+                    this.blocks!.push(item);
             }
             this.version = _data["version"];
         }
@@ -38340,7 +38316,7 @@ export class UpdateNoteSettings implements IUpdateNoteSettings {
         if (Array.isArray(this.blocks)) {
             data["blocks"] = [];
             for (let item of this.blocks)
-                data["blocks"].push(item.toJSON());
+                data["blocks"].push(item);
         }
         data["version"] = this.version;
         return data;
@@ -38348,8 +38324,8 @@ export class UpdateNoteSettings implements IUpdateNoteSettings {
 }
 
 export interface IUpdateNoteSettings {
-    title?: string | undefined;
-    blocks?: NoteBlock[] | undefined;
+    title: string;
+    blocks: any[];
     version?: number;
 }
 
