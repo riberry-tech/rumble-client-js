@@ -42600,6 +42600,7 @@ export interface IListOfProgram {
 export class Program implements IProgram {
     id?: string | undefined;
     name?: string | undefined;
+    description?: string | undefined;
     logoUri?: string | undefined;
     bannerUri?: string | undefined;
     publisherId?: string | undefined;
@@ -42622,6 +42623,7 @@ export class Program implements IProgram {
         if (_data) {
             this.id = _data["id"];
             this.name = _data["name"];
+            this.description = _data["description"];
             this.logoUri = _data["logoUri"];
             this.bannerUri = _data["bannerUri"];
             this.publisherId = _data["publisherId"];
@@ -42652,6 +42654,7 @@ export class Program implements IProgram {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["name"] = this.name;
+        data["description"] = this.description;
         data["logoUri"] = this.logoUri;
         data["bannerUri"] = this.bannerUri;
         data["publisherId"] = this.publisherId;
@@ -42675,6 +42678,7 @@ export class Program implements IProgram {
 export interface IProgram {
     id?: string | undefined;
     name?: string | undefined;
+    description?: string | undefined;
     logoUri?: string | undefined;
     bannerUri?: string | undefined;
     publisherId?: string | undefined;
@@ -42784,6 +42788,7 @@ export interface IProgramPhaseInProgram {
 export class CreateProgramSettings implements ICreateProgramSettings {
     publisherId!: string;
     name!: string;
+    description?: string | undefined;
     bannerUri?: string | undefined;
     logoUri?: string | undefined;
     resources?: ProgramResource[] | undefined;
@@ -42801,6 +42806,7 @@ export class CreateProgramSettings implements ICreateProgramSettings {
         if (_data) {
             this.publisherId = _data["publisherId"];
             this.name = _data["name"];
+            this.description = _data["description"];
             this.bannerUri = _data["bannerUri"];
             this.logoUri = _data["logoUri"];
             if (Array.isArray(_data["resources"])) {
@@ -42822,6 +42828,7 @@ export class CreateProgramSettings implements ICreateProgramSettings {
         data = typeof data === 'object' ? data : {};
         data["publisherId"] = this.publisherId;
         data["name"] = this.name;
+        data["description"] = this.description;
         data["bannerUri"] = this.bannerUri;
         data["logoUri"] = this.logoUri;
         if (Array.isArray(this.resources)) {
@@ -42836,6 +42843,7 @@ export class CreateProgramSettings implements ICreateProgramSettings {
 export interface ICreateProgramSettings {
     publisherId: string;
     name: string;
+    description?: string | undefined;
     bannerUri?: string | undefined;
     logoUri?: string | undefined;
     resources?: ProgramResource[] | undefined;
@@ -42843,6 +42851,7 @@ export interface ICreateProgramSettings {
 
 export class UpdateProgramSettings implements IUpdateProgramSettings {
     name!: string;
+    description?: string | undefined;
     bannerUri?: string | undefined;
     logoUri?: string | undefined;
     resources?: ProgramResource[] | undefined;
@@ -42860,6 +42869,7 @@ export class UpdateProgramSettings implements IUpdateProgramSettings {
     init(_data?: any) {
         if (_data) {
             this.name = _data["name"];
+            this.description = _data["description"];
             this.bannerUri = _data["bannerUri"];
             this.logoUri = _data["logoUri"];
             if (Array.isArray(_data["resources"])) {
@@ -42881,6 +42891,7 @@ export class UpdateProgramSettings implements IUpdateProgramSettings {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
+        data["description"] = this.description;
         data["bannerUri"] = this.bannerUri;
         data["logoUri"] = this.logoUri;
         if (Array.isArray(this.resources)) {
@@ -42895,6 +42906,7 @@ export class UpdateProgramSettings implements IUpdateProgramSettings {
 
 export interface IUpdateProgramSettings {
     name: string;
+    description?: string | undefined;
     bannerUri?: string | undefined;
     logoUri?: string | undefined;
     resources?: ProgramResource[] | undefined;
