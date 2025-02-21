@@ -5423,9 +5423,9 @@ export class ObservationClient {
      * @param from (optional) 
      * @param to (optional) 
      * @param anonymousUser (optional) 
-     * @param labelId (optional) 
+     * @param labelIds (optional) 
      */
-    getAllForGroup(groupId: string, search: string | null | undefined, skip: number | undefined, take: number | undefined, definitionId: string | null | undefined, from: Date | null | undefined, to: Date | null | undefined, anonymousUser: boolean | null | undefined, labelId: string | null | undefined, cancelToken?: CancelToken | undefined): Promise<ListOfObservation> {
+    getAllForGroup(groupId: string, search: string | null | undefined, skip: number | undefined, take: number | undefined, definitionId: string | null | undefined, from: Date | null | undefined, to: Date | null | undefined, anonymousUser: boolean | null | undefined, labelIds: string[] | null | undefined, cancelToken?: CancelToken | undefined): Promise<ListOfObservation> {
         let url_ = this.baseUrl + "/v1/Observation/Group/{groupId}?";
         if (groupId === undefined || groupId === null)
             throw new Error("The parameter 'groupId' must be defined.");
@@ -5448,8 +5448,8 @@ export class ObservationClient {
             url_ += "to=" + encodeURIComponent(to ? "" + to.toISOString() : "") + "&";
         if (anonymousUser !== undefined && anonymousUser !== null)
             url_ += "anonymousUser=" + encodeURIComponent("" + anonymousUser) + "&";
-        if (labelId !== undefined && labelId !== null)
-            url_ += "labelId=" + encodeURIComponent("" + labelId) + "&";
+        if (labelIds !== undefined && labelIds !== null)
+            labelIds && labelIds.forEach(item => { url_ += "labelIds=" + encodeURIComponent("" + item) + "&"; });
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: AxiosRequestConfig = {
