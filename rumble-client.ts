@@ -10,6 +10,164 @@
 
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, CancelToken } from 'axios';
 
+export class AiClient {
+    private instance: AxiosInstance;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(baseUrl?: string, instance?: AxiosInstance) {
+
+        this.instance = instance ? instance : axios.create();
+
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44379";
+
+    }
+
+    chat(settings: ChatSettings, cancelToken?: CancelToken | undefined): Promise<AiChatResponse> {
+        let url_ = this.baseUrl + "/v1/Ai/Chat";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(settings);
+
+        let options_: AxiosRequestConfig = {
+            data: content_,
+            method: "POST",
+            url: url_,
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processChat(_response);
+        });
+    }
+
+    protected processChat(response: AxiosResponse): Promise<AiChatResponse> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = AiChatResponse.fromJS(resultData200);
+            return Promise.resolve<AiChatResponse>(result200);
+
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<AiChatResponse>(null as any);
+    }
+
+    summary(settings: SummaryTextSettings, cancelToken?: CancelToken | undefined): Promise<AiChatResponse> {
+        let url_ = this.baseUrl + "/v1/Ai/Summary";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(settings);
+
+        let options_: AxiosRequestConfig = {
+            data: content_,
+            method: "POST",
+            url: url_,
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processSummary(_response);
+        });
+    }
+
+    protected processSummary(response: AxiosResponse): Promise<AiChatResponse> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = AiChatResponse.fromJS(resultData200);
+            return Promise.resolve<AiChatResponse>(result200);
+
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<AiChatResponse>(null as any);
+    }
+}
+
 export class EmailClient {
     private instance: AxiosInstance;
     private baseUrl: string;
@@ -36008,6 +36166,176 @@ export class UserPhoneNumberClient {
         }
         return Promise.resolve<void>(null as any);
     }
+}
+
+export class AiChatResponse implements IAiChatResponse {
+    success?: boolean;
+    content?: AiChatMessage[] | undefined;
+
+    constructor(data?: IAiChatResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            if (Array.isArray(_data["content"])) {
+                this.content = [] as any;
+                for (let item of _data["content"])
+                    this.content!.push(AiChatMessage.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): AiChatResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new AiChatResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        if (Array.isArray(this.content)) {
+            data["content"] = [];
+            for (let item of this.content)
+                data["content"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IAiChatResponse {
+    success?: boolean;
+    content?: AiChatMessage[] | undefined;
+}
+
+export class AiChatMessage implements IAiChatMessage {
+    type?: string | undefined;
+    text?: string | undefined;
+
+    constructor(data?: IAiChatMessage) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.type = _data["type"];
+            this.text = _data["text"];
+        }
+    }
+
+    static fromJS(data: any): AiChatMessage {
+        data = typeof data === 'object' ? data : {};
+        let result = new AiChatMessage();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["type"] = this.type;
+        data["text"] = this.text;
+        return data;
+    }
+}
+
+export interface IAiChatMessage {
+    type?: string | undefined;
+    text?: string | undefined;
+}
+
+export class ChatSettings implements IChatSettings {
+    text?: string | undefined;
+
+    constructor(data?: IChatSettings) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.text = _data["text"];
+        }
+    }
+
+    static fromJS(data: any): ChatSettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new ChatSettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["text"] = this.text;
+        return data;
+    }
+}
+
+export interface IChatSettings {
+    text?: string | undefined;
+}
+
+export class SummaryTextSettings implements ISummaryTextSettings {
+    type?: TextType;
+    text?: string | undefined;
+
+    constructor(data?: ISummaryTextSettings) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.type = _data["type"];
+            this.text = _data["text"];
+        }
+    }
+
+    static fromJS(data: any): SummaryTextSettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new SummaryTextSettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["type"] = this.type;
+        data["text"] = this.text;
+        return data;
+    }
+}
+
+export interface ISummaryTextSettings {
+    type?: TextType;
+    text?: string | undefined;
+}
+
+/** 0 = Text 1 = Markdown */
+export enum TextType {
+    Text = 0,
+    Markdown = 1,
 }
 
 export class ListOfEmail implements IListOfEmail {
