@@ -23,78 +23,6 @@ export class AiClient {
 
     }
 
-    chat(settings: ChatSettings, cancelToken?: CancelToken | undefined): Promise<AiChatResponse> {
-        let url_ = this.baseUrl + "/v1/Ai/Chat";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(settings);
-
-        let options_: AxiosRequestConfig = {
-            data: content_,
-            method: "POST",
-            url: url_,
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            cancelToken
-        };
-
-        return this.instance.request(options_).catch((_error: any) => {
-            if (isAxiosError(_error) && _error.response) {
-                return _error.response;
-            } else {
-                throw _error;
-            }
-        }).then((_response: AxiosResponse) => {
-            return this.processChat(_response);
-        });
-    }
-
-    protected processChat(response: AxiosResponse): Promise<AiChatResponse> {
-        const status = response.status;
-        let _headers: any = {};
-        if (response.headers && typeof response.headers === "object") {
-            for (let k in response.headers) {
-                if (response.headers.hasOwnProperty(k)) {
-                    _headers[k] = response.headers[k];
-                }
-            }
-        }
-        if (status === 200) {
-            const _responseText = response.data;
-            let result200: any = null;
-            let resultData200  = _responseText;
-            result200 = AiChatResponse.fromJS(resultData200);
-            return Promise.resolve<AiChatResponse>(result200);
-
-        } else if (status === 401) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-
-        } else if (status === 403) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-
-        } else if (status === 404) {
-            const _responseText = response.data;
-            return throwException("This resource could not be found.", status, _responseText, _headers);
-
-        } else if (status === 503) {
-            const _responseText = response.data;
-            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
-
-        } else if (status === 504) {
-            const _responseText = response.data;
-            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
-
-        } else if (status !== 200 && status !== 204) {
-            const _responseText = response.data;
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-        }
-        return Promise.resolve<AiChatResponse>(null as any);
-    }
-
     summary(settings: SummaryTextSettings, cancelToken?: CancelToken | undefined): Promise<AiChatResponse> {
         let url_ = this.baseUrl + "/v1/Ai/Summary";
         url_ = url_.replace(/[?&]$/, "");
@@ -165,6 +93,78 @@ export class AiClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         }
         return Promise.resolve<AiChatResponse>(null as any);
+    }
+
+    factCheck(settings: SummaryTextSettings, cancelToken?: CancelToken | undefined): Promise<FactCheck> {
+        let url_ = this.baseUrl + "/v1/Ai/FactCheck";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(settings);
+
+        let options_: AxiosRequestConfig = {
+            data: content_,
+            method: "POST",
+            url: url_,
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processFactCheck(_response);
+        });
+    }
+
+    protected processFactCheck(response: AxiosResponse): Promise<FactCheck> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = FactCheck.fromJS(resultData200);
+            return Promise.resolve<FactCheck>(result200);
+
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<FactCheck>(null as any);
     }
 }
 
@@ -36256,42 +36256,6 @@ export interface IAiChatMessage {
     text?: string | undefined;
 }
 
-export class ChatSettings implements IChatSettings {
-    text?: string | undefined;
-
-    constructor(data?: IChatSettings) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.text = _data["text"];
-        }
-    }
-
-    static fromJS(data: any): ChatSettings {
-        data = typeof data === 'object' ? data : {};
-        let result = new ChatSettings();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["text"] = this.text;
-        return data;
-    }
-}
-
-export interface IChatSettings {
-    text?: string | undefined;
-}
-
 export class SummaryTextSettings implements ISummaryTextSettings {
     type?: TextType;
     text?: string | undefined;
@@ -36336,6 +36300,82 @@ export interface ISummaryTextSettings {
 export enum TextType {
     Text = 0,
     Markdown = 1,
+}
+
+export class FactCheck implements IFactCheck {
+    success?: boolean;
+    errorMessage?: string | undefined;
+    confidence!: number;
+    explanation!: string;
+    challenges!: string[];
+    recommendedVerificationSources!: string[];
+
+    constructor(data?: IFactCheck) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.challenges = [];
+            this.recommendedVerificationSources = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.errorMessage = _data["errorMessage"];
+            this.confidence = _data["confidence"];
+            this.explanation = _data["explanation"];
+            if (Array.isArray(_data["challenges"])) {
+                this.challenges = [] as any;
+                for (let item of _data["challenges"])
+                    this.challenges!.push(item);
+            }
+            if (Array.isArray(_data["recommendedVerificationSources"])) {
+                this.recommendedVerificationSources = [] as any;
+                for (let item of _data["recommendedVerificationSources"])
+                    this.recommendedVerificationSources!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): FactCheck {
+        data = typeof data === 'object' ? data : {};
+        let result = new FactCheck();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["errorMessage"] = this.errorMessage;
+        data["confidence"] = this.confidence;
+        data["explanation"] = this.explanation;
+        if (Array.isArray(this.challenges)) {
+            data["challenges"] = [];
+            for (let item of this.challenges)
+                data["challenges"].push(item);
+        }
+        if (Array.isArray(this.recommendedVerificationSources)) {
+            data["recommendedVerificationSources"] = [];
+            for (let item of this.recommendedVerificationSources)
+                data["recommendedVerificationSources"].push(item);
+        }
+        return data;
+    }
+}
+
+export interface IFactCheck {
+    success?: boolean;
+    errorMessage?: string | undefined;
+    confidence: number;
+    explanation: string;
+    challenges: string[];
+    recommendedVerificationSources: string[];
 }
 
 export class ListOfEmail implements IListOfEmail {
