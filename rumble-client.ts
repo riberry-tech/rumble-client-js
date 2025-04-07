@@ -3473,7 +3473,7 @@ export class ProjectionClient {
     }
 }
 
-export class NotebookClient {
+export class NoteContentClient {
     private instance: AxiosInstance;
     private baseUrl: string;
     protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
@@ -3486,14 +3486,11 @@ export class NotebookClient {
 
     }
 
-    get(ownerType: NotebookOwnerType, ownerId: string, cancelToken?: CancelToken | undefined): Promise<Notebook> {
-        let url_ = this.baseUrl + "/v1/Notebook/{ownerType}/{ownerId}";
-        if (ownerType === undefined || ownerType === null)
-            throw new Error("The parameter 'ownerType' must be defined.");
-        url_ = url_.replace("{ownerType}", encodeURIComponent("" + ownerType));
-        if (ownerId === undefined || ownerId === null)
-            throw new Error("The parameter 'ownerId' must be defined.");
-        url_ = url_.replace("{ownerId}", encodeURIComponent("" + ownerId));
+    get(noteId: string, cancelToken?: CancelToken | undefined): Promise<NoteContent> {
+        let url_ = this.baseUrl + "/v1/NoteContent/{noteId}";
+        if (noteId === undefined || noteId === null)
+            throw new Error("The parameter 'noteId' must be defined.");
+        url_ = url_.replace("{noteId}", encodeURIComponent("" + noteId));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: AxiosRequestConfig = {
@@ -3516,7 +3513,7 @@ export class NotebookClient {
         });
     }
 
-    protected processGet(response: AxiosResponse): Promise<Notebook> {
+    protected processGet(response: AxiosResponse): Promise<NoteContent> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -3530,8 +3527,8 @@ export class NotebookClient {
             const _responseText = response.data;
             let result200: any = null;
             let resultData200  = _responseText;
-            result200 = Notebook.fromJS(resultData200);
-            return Promise.resolve<Notebook>(result200);
+            result200 = NoteContent.fromJS(resultData200);
+            return Promise.resolve<NoteContent>(result200);
 
         } else if (status === 401) {
             const _responseText = response.data;
@@ -3557,11 +3554,14 @@ export class NotebookClient {
             const _responseText = response.data;
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         }
-        return Promise.resolve<Notebook>(null as any);
+        return Promise.resolve<NoteContent>(null as any);
     }
 
-    create(settings: CreateNotebookSettings, cancelToken?: CancelToken | undefined): Promise<Notebook> {
-        let url_ = this.baseUrl + "/v1/Notebook";
+    createBlock(noteId: string, settings: AddNoteContentBlockSettings, cancelToken?: CancelToken | undefined): Promise<NoteContentBlockInNoteContent> {
+        let url_ = this.baseUrl + "/v1/NoteContent/{noteId}/Block";
+        if (noteId === undefined || noteId === null)
+            throw new Error("The parameter 'noteId' must be defined.");
+        url_ = url_.replace("{noteId}", encodeURIComponent("" + noteId));
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(settings);
@@ -3584,11 +3584,11 @@ export class NotebookClient {
                 throw _error;
             }
         }).then((_response: AxiosResponse) => {
-            return this.processCreate(_response);
+            return this.processCreateBlock(_response);
         });
     }
 
-    protected processCreate(response: AxiosResponse): Promise<Notebook> {
+    protected processCreateBlock(response: AxiosResponse): Promise<NoteContentBlockInNoteContent> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -3602,8 +3602,8 @@ export class NotebookClient {
             const _responseText = response.data;
             let result200: any = null;
             let resultData200  = _responseText;
-            result200 = Notebook.fromJS(resultData200);
-            return Promise.resolve<Notebook>(result200);
+            result200 = NoteContentBlockInNoteContent.fromJS(resultData200);
+            return Promise.resolve<NoteContentBlockInNoteContent>(result200);
 
         } else if (status === 401) {
             const _responseText = response.data;
@@ -3629,14 +3629,91 @@ export class NotebookClient {
             const _responseText = response.data;
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         }
-        return Promise.resolve<Notebook>(null as any);
+        return Promise.resolve<NoteContentBlockInNoteContent>(null as any);
     }
 
-    update(notebookId: string, settings: UpdateNotebookSettings, cancelToken?: CancelToken | undefined): Promise<void> {
-        let url_ = this.baseUrl + "/v1/Notebook/{notebookId}";
-        if (notebookId === undefined || notebookId === null)
-            throw new Error("The parameter 'notebookId' must be defined.");
-        url_ = url_.replace("{notebookId}", encodeURIComponent("" + notebookId));
+    getBlock(noteId: string, blockId: string, cancelToken?: CancelToken | undefined): Promise<NoteContentBlockInNoteContent> {
+        let url_ = this.baseUrl + "/v1/NoteContent/{noteId}/Block/{blockId}";
+        if (noteId === undefined || noteId === null)
+            throw new Error("The parameter 'noteId' must be defined.");
+        url_ = url_.replace("{noteId}", encodeURIComponent("" + noteId));
+        if (blockId === undefined || blockId === null)
+            throw new Error("The parameter 'blockId' must be defined.");
+        url_ = url_.replace("{blockId}", encodeURIComponent("" + blockId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: AxiosRequestConfig = {
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processGetBlock(_response);
+        });
+    }
+
+    protected processGetBlock(response: AxiosResponse): Promise<NoteContentBlockInNoteContent> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = NoteContentBlockInNoteContent.fromJS(resultData200);
+            return Promise.resolve<NoteContentBlockInNoteContent>(result200);
+
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<NoteContentBlockInNoteContent>(null as any);
+    }
+
+    updateBlock(noteId: string, blockId: string, settings: UpdateNoteContentBlockDataSettings, cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/v1/NoteContent/{noteId}/Block/{blockId}";
+        if (noteId === undefined || noteId === null)
+            throw new Error("The parameter 'noteId' must be defined.");
+        url_ = url_.replace("{noteId}", encodeURIComponent("" + noteId));
+        if (blockId === undefined || blockId === null)
+            throw new Error("The parameter 'blockId' must be defined.");
+        url_ = url_.replace("{blockId}", encodeURIComponent("" + blockId));
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(settings);
@@ -3658,11 +3735,11 @@ export class NotebookClient {
                 throw _error;
             }
         }).then((_response: AxiosResponse) => {
-            return this.processUpdate(_response);
+            return this.processUpdateBlock(_response);
         });
     }
 
-    protected processUpdate(response: AxiosResponse): Promise<void> {
+    protected processUpdateBlock(response: AxiosResponse): Promise<void> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -3703,11 +3780,18 @@ export class NotebookClient {
         return Promise.resolve<void>(null as any);
     }
 
-    delete(notebookId: string, cancelToken?: CancelToken | undefined): Promise<void> {
-        let url_ = this.baseUrl + "/v1/Notebook/{notebookId}";
-        if (notebookId === undefined || notebookId === null)
-            throw new Error("The parameter 'notebookId' must be defined.");
-        url_ = url_.replace("{notebookId}", encodeURIComponent("" + notebookId));
+    deleteBlock(noteId: string, blockId: string, version: number | undefined, cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/v1/NoteContent/{noteId}/Block/{blockId}?";
+        if (noteId === undefined || noteId === null)
+            throw new Error("The parameter 'noteId' must be defined.");
+        url_ = url_.replace("{noteId}", encodeURIComponent("" + noteId));
+        if (blockId === undefined || blockId === null)
+            throw new Error("The parameter 'blockId' must be defined.");
+        url_ = url_.replace("{blockId}", encodeURIComponent("" + blockId));
+        if (version === null)
+            throw new Error("The parameter 'version' cannot be null.");
+        else if (version !== undefined)
+            url_ += "version=" + encodeURIComponent("" + version) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: AxiosRequestConfig = {
@@ -3725,11 +3809,82 @@ export class NotebookClient {
                 throw _error;
             }
         }).then((_response: AxiosResponse) => {
-            return this.processDelete(_response);
+            return this.processDeleteBlock(_response);
         });
     }
 
-    protected processDelete(response: AxiosResponse): Promise<void> {
+    protected processDeleteBlock(response: AxiosResponse): Promise<void> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 204) {
+            const _responseText = response.data;
+            return Promise.resolve<void>(null as any);
+
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<void>(null as any);
+    }
+
+    reorderBlocks(noteId: string, settings: ReorderNoteContentBlocksSettings, cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/v1/NoteContent/{noteId}/ReorderBlocks";
+        if (noteId === undefined || noteId === null)
+            throw new Error("The parameter 'noteId' must be defined.");
+        url_ = url_.replace("{noteId}", encodeURIComponent("" + noteId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(settings);
+
+        let options_: AxiosRequestConfig = {
+            data: content_,
+            method: "PUT",
+            url: url_,
+            headers: {
+                "Content-Type": "application/json",
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processReorderBlocks(_response);
+        });
+    }
+
+    protected processReorderBlocks(response: AxiosResponse): Promise<void> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -3784,11 +3939,29 @@ export class NoteClient {
 
     }
 
-    get(noteId: string, cancelToken?: CancelToken | undefined): Promise<Note> {
-        let url_ = this.baseUrl + "/v1/Note/{noteId}";
-        if (noteId === undefined || noteId === null)
-            throw new Error("The parameter 'noteId' must be defined.");
-        url_ = url_.replace("{noteId}", encodeURIComponent("" + noteId));
+    /**
+     * @param search (optional) 
+     * @param skip (optional) 
+     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
+     * @param includeHidden (optional) 
+     */
+    getNotesForGroup(groupId: string, search: string | null | undefined, skip: number | undefined, take: number | undefined, includeHidden: boolean | null | undefined, cancelToken?: CancelToken | undefined): Promise<ListOfNote> {
+        let url_ = this.baseUrl + "/v1/Note/Group/{groupId}?";
+        if (groupId === undefined || groupId === null)
+            throw new Error("The parameter 'groupId' must be defined.");
+        url_ = url_.replace("{groupId}", encodeURIComponent("" + groupId));
+        if (search !== undefined && search !== null)
+            url_ += "Search=" + encodeURIComponent("" + search) + "&";
+        if (skip === null)
+            throw new Error("The parameter 'skip' cannot be null.");
+        else if (skip !== undefined)
+            url_ += "Skip=" + encodeURIComponent("" + skip) + "&";
+        if (take === null)
+            throw new Error("The parameter 'take' cannot be null.");
+        else if (take !== undefined)
+            url_ += "Take=" + encodeURIComponent("" + take) + "&";
+        if (includeHidden !== undefined && includeHidden !== null)
+            url_ += "includeHidden=" + encodeURIComponent("" + includeHidden) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: AxiosRequestConfig = {
@@ -3807,11 +3980,172 @@ export class NoteClient {
                 throw _error;
             }
         }).then((_response: AxiosResponse) => {
-            return this.processGet(_response);
+            return this.processGetNotesForGroup(_response);
         });
     }
 
-    protected processGet(response: AxiosResponse): Promise<Note> {
+    protected processGetNotesForGroup(response: AxiosResponse): Promise<ListOfNote> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ListOfNote.fromJS(resultData200);
+            return Promise.resolve<ListOfNote>(result200);
+
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ListOfNote>(null as any);
+    }
+
+    /**
+     * @param search (optional) 
+     * @param skip (optional) 
+     * @param take (optional) The number (0 - 1000 inclusive) of items to get from the API.
+     * @param includeHidden (optional) 
+     */
+    getNotesForUser(userId: string, search: string | null | undefined, skip: number | undefined, take: number | undefined, includeHidden: boolean | null | undefined, cancelToken?: CancelToken | undefined): Promise<ListOfNote> {
+        let url_ = this.baseUrl + "/v1/Note/User/{userId}?";
+        if (userId === undefined || userId === null)
+            throw new Error("The parameter 'userId' must be defined.");
+        url_ = url_.replace("{userId}", encodeURIComponent("" + userId));
+        if (search !== undefined && search !== null)
+            url_ += "Search=" + encodeURIComponent("" + search) + "&";
+        if (skip === null)
+            throw new Error("The parameter 'skip' cannot be null.");
+        else if (skip !== undefined)
+            url_ += "Skip=" + encodeURIComponent("" + skip) + "&";
+        if (take === null)
+            throw new Error("The parameter 'take' cannot be null.");
+        else if (take !== undefined)
+            url_ += "Take=" + encodeURIComponent("" + take) + "&";
+        if (includeHidden !== undefined && includeHidden !== null)
+            url_ += "includeHidden=" + encodeURIComponent("" + includeHidden) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: AxiosRequestConfig = {
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processGetNotesForUser(_response);
+        });
+    }
+
+    protected processGetNotesForUser(response: AxiosResponse): Promise<ListOfNote> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ListOfNote.fromJS(resultData200);
+            return Promise.resolve<ListOfNote>(result200);
+
+        } else if (status === 401) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 403) {
+            const _responseText = response.data;
+            return throwException("You are not permitted to view this.", status, _responseText, _headers);
+
+        } else if (status === 404) {
+            const _responseText = response.data;
+            return throwException("This resource could not be found.", status, _responseText, _headers);
+
+        } else if (status === 503) {
+            const _responseText = response.data;
+            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
+
+        } else if (status === 504) {
+            const _responseText = response.data;
+            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
+
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ListOfNote>(null as any);
+    }
+
+    create(settings: CreateNoteSettings, cancelToken?: CancelToken | undefined): Promise<Note> {
+        let url_ = this.baseUrl + "/v1/Note";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(settings);
+
+        let options_: AxiosRequestConfig = {
+            data: content_,
+            method: "POST",
+            url: url_,
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processCreate(_response);
+        });
+    }
+
+    protected processCreate(response: AxiosResponse): Promise<Note> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -3991,78 +4325,6 @@ export class NoteClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         }
         return Promise.resolve<void>(null as any);
-    }
-
-    create(settings: CreateNoteSettings, cancelToken?: CancelToken | undefined): Promise<Note> {
-        let url_ = this.baseUrl + "/v1/Note";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(settings);
-
-        let options_: AxiosRequestConfig = {
-            data: content_,
-            method: "POST",
-            url: url_,
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            cancelToken
-        };
-
-        return this.instance.request(options_).catch((_error: any) => {
-            if (isAxiosError(_error) && _error.response) {
-                return _error.response;
-            } else {
-                throw _error;
-            }
-        }).then((_response: AxiosResponse) => {
-            return this.processCreate(_response);
-        });
-    }
-
-    protected processCreate(response: AxiosResponse): Promise<Note> {
-        const status = response.status;
-        let _headers: any = {};
-        if (response.headers && typeof response.headers === "object") {
-            for (let k in response.headers) {
-                if (response.headers.hasOwnProperty(k)) {
-                    _headers[k] = response.headers[k];
-                }
-            }
-        }
-        if (status === 200) {
-            const _responseText = response.data;
-            let result200: any = null;
-            let resultData200  = _responseText;
-            result200 = Note.fromJS(resultData200);
-            return Promise.resolve<Note>(result200);
-
-        } else if (status === 401) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-
-        } else if (status === 403) {
-            const _responseText = response.data;
-            return throwException("You are not permitted to view this.", status, _responseText, _headers);
-
-        } else if (status === 404) {
-            const _responseText = response.data;
-            return throwException("This resource could not be found.", status, _responseText, _headers);
-
-        } else if (status === 503) {
-            const _responseText = response.data;
-            return throwException("Service unavailable. Please try again later.", status, _responseText, _headers);
-
-        } else if (status === 504) {
-            const _responseText = response.data;
-            return throwException("Request timed out. Please try again.", status, _responseText, _headers);
-
-        } else if (status !== 200 && status !== 204) {
-            const _responseText = response.data;
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-        }
-        return Promise.resolve<Note>(null as any);
     }
 }
 
@@ -38314,16 +38576,12 @@ export enum ProjectionStatus {
     Failed = -1,
 }
 
-export class Notebook implements INotebook {
+export class NoteContent implements INoteContent {
     id?: string | undefined;
-    ownerType?: NotebookOwnerType;
-    ownerId?: string | undefined;
-    notes?: NoteInNotebook[] | undefined;
-    created?: Date;
-    modified?: Date;
+    blocks?: NoteContentBlockInNoteContent[] | undefined;
     version?: number;
 
-    constructor(data?: INotebook) {
+    constructor(data?: INoteContent) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -38335,22 +38593,18 @@ export class Notebook implements INotebook {
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
-            this.ownerType = _data["ownerType"];
-            this.ownerId = _data["ownerId"];
-            if (Array.isArray(_data["notes"])) {
-                this.notes = [] as any;
-                for (let item of _data["notes"])
-                    this.notes!.push(NoteInNotebook.fromJS(item));
+            if (Array.isArray(_data["blocks"])) {
+                this.blocks = [] as any;
+                for (let item of _data["blocks"])
+                    this.blocks!.push(NoteContentBlockInNoteContent.fromJS(item));
             }
-            this.created = _data["created"] ? new Date(_data["created"].toString()) : <any>undefined;
-            this.modified = _data["modified"] ? new Date(_data["modified"].toString()) : <any>undefined;
             this.version = _data["version"];
         }
     }
 
-    static fromJS(data: any): Notebook {
+    static fromJS(data: any): NoteContent {
         data = typeof data === 'object' ? data : {};
-        let result = new Notebook();
+        let result = new NoteContent();
         result.init(data);
         return result;
     }
@@ -38358,42 +38612,30 @@ export class Notebook implements INotebook {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-        data["ownerType"] = this.ownerType;
-        data["ownerId"] = this.ownerId;
-        if (Array.isArray(this.notes)) {
-            data["notes"] = [];
-            for (let item of this.notes)
-                data["notes"].push(item.toJSON());
+        if (Array.isArray(this.blocks)) {
+            data["blocks"] = [];
+            for (let item of this.blocks)
+                data["blocks"].push(item.toJSON());
         }
-        data["created"] = this.created ? this.created.toISOString() : <any>undefined;
-        data["modified"] = this.modified ? this.modified.toISOString() : <any>undefined;
         data["version"] = this.version;
         return data;
     }
 }
 
-export interface INotebook {
+export interface INoteContent {
     id?: string | undefined;
-    ownerType?: NotebookOwnerType;
-    ownerId?: string | undefined;
-    notes?: NoteInNotebook[] | undefined;
-    created?: Date;
-    modified?: Date;
+    blocks?: NoteContentBlockInNoteContent[] | undefined;
     version?: number;
 }
 
-export enum NotebookOwnerType {
-    Unknown = "Unknown",
-    Group = "Group",
-}
-
-export class NoteInNotebook implements INoteInNotebook {
+export class NoteContentBlockInNoteContent implements INoteContentBlockInNoteContent {
     id?: string | undefined;
-    title?: string | undefined;
-    created?: Date;
+    data?: any | undefined;
     modified?: Date;
+    modifierId?: string | undefined;
+    revision?: number;
 
-    constructor(data?: INoteInNotebook) {
+    constructor(data?: INoteContentBlockInNoteContent) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -38405,15 +38647,16 @@ export class NoteInNotebook implements INoteInNotebook {
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
-            this.title = _data["title"];
-            this.created = _data["created"] ? new Date(_data["created"].toString()) : <any>undefined;
+            this.data = _data["data"];
             this.modified = _data["modified"] ? new Date(_data["modified"].toString()) : <any>undefined;
+            this.modifierId = _data["modifierId"];
+            this.revision = _data["revision"];
         }
     }
 
-    static fromJS(data: any): NoteInNotebook {
+    static fromJS(data: any): NoteContentBlockInNoteContent {
         data = typeof data === 'object' ? data : {};
-        let result = new NoteInNotebook();
+        let result = new NoteContentBlockInNoteContent();
         result.init(data);
         return result;
     }
@@ -38421,25 +38664,28 @@ export class NoteInNotebook implements INoteInNotebook {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-        data["title"] = this.title;
-        data["created"] = this.created ? this.created.toISOString() : <any>undefined;
+        data["data"] = this.data;
         data["modified"] = this.modified ? this.modified.toISOString() : <any>undefined;
+        data["modifierId"] = this.modifierId;
+        data["revision"] = this.revision;
         return data;
     }
 }
 
-export interface INoteInNotebook {
+export interface INoteContentBlockInNoteContent {
     id?: string | undefined;
-    title?: string | undefined;
-    created?: Date;
+    data?: any | undefined;
     modified?: Date;
+    modifierId?: string | undefined;
+    revision?: number;
 }
 
-export class CreateNotebookSettings implements ICreateNotebookSettings {
-    ownerType?: NotebookOwnerType;
-    ownerId?: string | undefined;
+export class AddNoteContentBlockSettings implements IAddNoteContentBlockSettings {
+    data?: any | undefined;
+    order?: number;
+    version?: number;
 
-    constructor(data?: ICreateNotebookSettings) {
+    constructor(data?: IAddNoteContentBlockSettings) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -38450,36 +38696,39 @@ export class CreateNotebookSettings implements ICreateNotebookSettings {
 
     init(_data?: any) {
         if (_data) {
-            this.ownerType = _data["ownerType"];
-            this.ownerId = _data["ownerId"];
+            this.data = _data["data"];
+            this.order = _data["order"];
+            this.version = _data["version"];
         }
     }
 
-    static fromJS(data: any): CreateNotebookSettings {
+    static fromJS(data: any): AddNoteContentBlockSettings {
         data = typeof data === 'object' ? data : {};
-        let result = new CreateNotebookSettings();
+        let result = new AddNoteContentBlockSettings();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["ownerType"] = this.ownerType;
-        data["ownerId"] = this.ownerId;
+        data["data"] = this.data;
+        data["order"] = this.order;
+        data["version"] = this.version;
         return data;
     }
 }
 
-export interface ICreateNotebookSettings {
-    ownerType?: NotebookOwnerType;
-    ownerId?: string | undefined;
+export interface IAddNoteContentBlockSettings {
+    data?: any | undefined;
+    order?: number;
+    version?: number;
 }
 
-export class UpdateNotebookSettings implements IUpdateNotebookSettings {
-    noteIds?: string[] | undefined;
+export class UpdateNoteContentBlockDataSettings implements IUpdateNoteContentBlockDataSettings {
+    data?: any | undefined;
     version?: number;
 
-    constructor(data?: IUpdateNotebookSettings) {
+    constructor(data?: IUpdateNoteContentBlockDataSettings) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -38490,43 +38739,138 @@ export class UpdateNotebookSettings implements IUpdateNotebookSettings {
 
     init(_data?: any) {
         if (_data) {
-            if (Array.isArray(_data["noteIds"])) {
-                this.noteIds = [] as any;
-                for (let item of _data["noteIds"])
-                    this.noteIds!.push(item);
+            this.data = _data["data"];
+            this.version = _data["version"];
+        }
+    }
+
+    static fromJS(data: any): UpdateNoteContentBlockDataSettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new UpdateNoteContentBlockDataSettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["data"] = this.data;
+        data["version"] = this.version;
+        return data;
+    }
+}
+
+export interface IUpdateNoteContentBlockDataSettings {
+    data?: any | undefined;
+    version?: number;
+}
+
+export class ReorderNoteContentBlocksSettings implements IReorderNoteContentBlocksSettings {
+    blockOrders?: { [key: string]: number; } | undefined;
+    version?: number;
+
+    constructor(data?: IReorderNoteContentBlocksSettings) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (_data["blockOrders"]) {
+                this.blockOrders = {} as any;
+                for (let key in _data["blockOrders"]) {
+                    if (_data["blockOrders"].hasOwnProperty(key))
+                        (<any>this.blockOrders)![key] = _data["blockOrders"][key];
+                }
             }
             this.version = _data["version"];
         }
     }
 
-    static fromJS(data: any): UpdateNotebookSettings {
+    static fromJS(data: any): ReorderNoteContentBlocksSettings {
         data = typeof data === 'object' ? data : {};
-        let result = new UpdateNotebookSettings();
+        let result = new ReorderNoteContentBlocksSettings();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.noteIds)) {
-            data["noteIds"] = [];
-            for (let item of this.noteIds)
-                data["noteIds"].push(item);
+        if (this.blockOrders) {
+            data["blockOrders"] = {};
+            for (let key in this.blockOrders) {
+                if (this.blockOrders.hasOwnProperty(key))
+                    (<any>data["blockOrders"])[key] = (<any>this.blockOrders)[key];
+            }
         }
         data["version"] = this.version;
         return data;
     }
 }
 
-export interface IUpdateNotebookSettings {
-    noteIds?: string[] | undefined;
+export interface IReorderNoteContentBlocksSettings {
+    blockOrders?: { [key: string]: number; } | undefined;
     version?: number;
+}
+
+export class ListOfNote implements IListOfNote {
+    totalItemCount!: number;
+    items!: Note[];
+
+    constructor(data?: IListOfNote) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.items = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.totalItemCount = _data["totalItemCount"];
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(Note.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ListOfNote {
+        data = typeof data === 'object' ? data : {};
+        let result = new ListOfNote();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["totalItemCount"] = this.totalItemCount;
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IListOfNote {
+    totalItemCount: number;
+    items: Note[];
 }
 
 export class Note implements INote {
     id?: string | undefined;
     title?: string | undefined;
-    blocks?: any[] | undefined;
+    hidden?: boolean;
     created?: Date;
     modified?: Date;
     version?: number;
@@ -38544,11 +38888,7 @@ export class Note implements INote {
         if (_data) {
             this.id = _data["id"];
             this.title = _data["title"];
-            if (Array.isArray(_data["blocks"])) {
-                this.blocks = [] as any;
-                for (let item of _data["blocks"])
-                    this.blocks!.push(item);
-            }
+            this.hidden = _data["hidden"];
             this.created = _data["created"] ? new Date(_data["created"].toString()) : <any>undefined;
             this.modified = _data["modified"] ? new Date(_data["modified"].toString()) : <any>undefined;
             this.version = _data["version"];
@@ -38566,11 +38906,7 @@ export class Note implements INote {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["title"] = this.title;
-        if (Array.isArray(this.blocks)) {
-            data["blocks"] = [];
-            for (let item of this.blocks)
-                data["blocks"].push(item);
-        }
+        data["hidden"] = this.hidden;
         data["created"] = this.created ? this.created.toISOString() : <any>undefined;
         data["modified"] = this.modified ? this.modified.toISOString() : <any>undefined;
         data["version"] = this.version;
@@ -38581,16 +38917,17 @@ export class Note implements INote {
 export interface INote {
     id?: string | undefined;
     title?: string | undefined;
-    blocks?: any[] | undefined;
+    hidden?: boolean;
     created?: Date;
     modified?: Date;
     version?: number;
 }
 
 export class CreateNoteSettings implements ICreateNoteSettings {
-    notebookId?: string | undefined;
+    ownerType?: NoteOwnerType;
+    ownerId?: string | undefined;
     title!: string;
-    blocks!: any[];
+    hidden?: boolean;
 
     constructor(data?: ICreateNoteSettings) {
         if (data) {
@@ -38599,20 +38936,14 @@ export class CreateNoteSettings implements ICreateNoteSettings {
                     (<any>this)[property] = (<any>data)[property];
             }
         }
-        if (!data) {
-            this.blocks = [];
-        }
     }
 
     init(_data?: any) {
         if (_data) {
-            this.notebookId = _data["notebookId"];
+            this.ownerType = _data["ownerType"];
+            this.ownerId = _data["ownerId"];
             this.title = _data["title"];
-            if (Array.isArray(_data["blocks"])) {
-                this.blocks = [] as any;
-                for (let item of _data["blocks"])
-                    this.blocks!.push(item);
-            }
+            this.hidden = _data["hidden"];
         }
     }
 
@@ -38625,26 +38956,30 @@ export class CreateNoteSettings implements ICreateNoteSettings {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["notebookId"] = this.notebookId;
+        data["ownerType"] = this.ownerType;
+        data["ownerId"] = this.ownerId;
         data["title"] = this.title;
-        if (Array.isArray(this.blocks)) {
-            data["blocks"] = [];
-            for (let item of this.blocks)
-                data["blocks"].push(item);
-        }
+        data["hidden"] = this.hidden;
         return data;
     }
 }
 
 export interface ICreateNoteSettings {
-    notebookId?: string | undefined;
+    ownerType?: NoteOwnerType;
+    ownerId?: string | undefined;
     title: string;
-    blocks: any[];
+    hidden?: boolean;
+}
+
+export enum NoteOwnerType {
+    Unknown = "Unknown",
+    Group = "Group",
+    User = "User",
 }
 
 export class UpdateNoteSettings implements IUpdateNoteSettings {
     title!: string;
-    blocks!: any[];
+    hidden?: boolean;
     version?: number;
 
     constructor(data?: IUpdateNoteSettings) {
@@ -38654,19 +38989,12 @@ export class UpdateNoteSettings implements IUpdateNoteSettings {
                     (<any>this)[property] = (<any>data)[property];
             }
         }
-        if (!data) {
-            this.blocks = [];
-        }
     }
 
     init(_data?: any) {
         if (_data) {
             this.title = _data["title"];
-            if (Array.isArray(_data["blocks"])) {
-                this.blocks = [] as any;
-                for (let item of _data["blocks"])
-                    this.blocks!.push(item);
-            }
+            this.hidden = _data["hidden"];
             this.version = _data["version"];
         }
     }
@@ -38681,11 +39009,7 @@ export class UpdateNoteSettings implements IUpdateNoteSettings {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["title"] = this.title;
-        if (Array.isArray(this.blocks)) {
-            data["blocks"] = [];
-            for (let item of this.blocks)
-                data["blocks"].push(item);
-        }
+        data["hidden"] = this.hidden;
         data["version"] = this.version;
         return data;
     }
@@ -38693,7 +39017,7 @@ export class UpdateNoteSettings implements IUpdateNoteSettings {
 
 export interface IUpdateNoteSettings {
     title: string;
-    blocks: any[];
+    hidden?: boolean;
     version?: number;
 }
 
