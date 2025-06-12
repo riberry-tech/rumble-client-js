@@ -1,6 +1,6 @@
 # Rumble Client
 
-[![Package Version](https://img.shields.io/badge/Version-1.3.38-green.svg)]()
+[![Package Version](https://img.shields.io/badge/Version-1.3.39-green.svg)]()
 [![API](https://img.shields.io/badge/API%20Version-1.14.13-green.svg)]()
 
 This is the TypeScript client for accessing the Rumble RESTful API.
